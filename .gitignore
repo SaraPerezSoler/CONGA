@@ -3,3 +3,5 @@
 *.class
 
 *.xtendbin
+*._trace
+*/bin/*
