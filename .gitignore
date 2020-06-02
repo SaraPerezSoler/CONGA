@@ -5,3 +5,12 @@
 *.xtendbin
 *._trace
 */bin/*
+ReverseEngineering/agent/*
+ReverseEngineering/Coffee-Shop/*
+ReverseEngineering/Demo/*
+ReverseEngineering/RoomReservation/*
+ReverseEngineering/viberSampleNutrition/*
+ReverseEngineering/viberSampleNutrition.bot
+ReverseEngineering/Coffee-Shop.bot
+ReverseEngineering/agent.bot
+ReverseEngineering/RoomReservation.bot
