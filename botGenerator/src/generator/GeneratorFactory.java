@@ -49,31 +49,22 @@ public interface GeneratorFactory extends EFactory {
 	UserInteraction createUserInteraction();
 
 	/**
-	 * Returns a new object of class '<em>Simple</em>'.
+	 * Returns a new object of class '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple</em>'.
+	 * @return a new object of class '<em>Entity</em>'.
 	 * @generated
 	 */
-	Simple createSimple();
+	Entity createEntity();
 
 	/**
-	 * Returns a new object of class '<em>Composite</em>'.
+	 * Returns a new object of class '<em>Language Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composite</em>'.
+	 * @return a new object of class '<em>Language Input</em>'.
 	 * @generated
 	 */
-	Composite createComposite();
-
-	/**
-	 * Returns a new object of class '<em>Simple Language Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Language Input</em>'.
-	 * @generated
-	 */
-	SimpleLanguageInput createSimpleLanguageInput();
+	LanguageInput createLanguageInput();
 
 	/**
 	 * Returns a new object of class '<em>Simple Input</em>'.
@@ -85,15 +76,6 @@ public interface GeneratorFactory extends EFactory {
 	SimpleInput createSimpleInput();
 
 	/**
-	 * Returns a new object of class '<em>Composite Language Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composite Language Input</em>'.
-	 * @generated
-	 */
-	CompositeLanguageInput createCompositeLanguageInput();
-
-	/**
 	 * Returns a new object of class '<em>Composite Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +83,15 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	CompositeInput createCompositeInput();
+
+	/**
+	 * Returns a new object of class '<em>Regex Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Regex Input</em>'.
+	 * @generated
+	 */
+	RegexInput createRegexInput();
 
 	/**
 	 * Returns a new object of class '<em>Literal</em>'.

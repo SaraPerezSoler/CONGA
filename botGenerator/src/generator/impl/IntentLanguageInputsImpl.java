@@ -3,9 +3,8 @@
 package generator.impl;
 
 import generator.GeneratorPackage;
+import generator.IntentInput;
 import generator.IntentLanguageInputs;
-import generator.TrainingPhrase;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -40,7 +39,7 @@ public class IntentLanguageInputsImpl extends WithLanguageImpl implements Intent
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TrainingPhrase> inputs;
+	protected EList<IntentInput> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,9 +66,9 @@ public class IntentLanguageInputsImpl extends WithLanguageImpl implements Intent
 	 * @generated
 	 */
 	@Override
-	public EList<TrainingPhrase> getInputs() {
+	public EList<IntentInput> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<TrainingPhrase>(TrainingPhrase.class, this, GeneratorPackage.INTENT_LANGUAGE_INPUTS__INPUTS);
+			inputs = new EObjectContainmentEList<IntentInput>(IntentInput.class, this, GeneratorPackage.INTENT_LANGUAGE_INPUTS__INPUTS);
 		}
 		return inputs;
 	}
@@ -113,7 +112,7 @@ public class IntentLanguageInputsImpl extends WithLanguageImpl implements Intent
 		switch (featureID) {
 			case GeneratorPackage.INTENT_LANGUAGE_INPUTS__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends TrainingPhrase>)newValue);
+				getInputs().addAll((Collection<? extends IntentInput>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

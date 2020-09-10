@@ -60,12 +60,11 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.BOT: return createBot();
 			case GeneratorPackage.BOT_INTERACTION: return createBotInteraction();
 			case GeneratorPackage.USER_INTERACTION: return createUserInteraction();
-			case GeneratorPackage.SIMPLE: return createSimple();
-			case GeneratorPackage.COMPOSITE: return createComposite();
-			case GeneratorPackage.SIMPLE_LANGUAGE_INPUT: return createSimpleLanguageInput();
+			case GeneratorPackage.ENTITY: return createEntity();
+			case GeneratorPackage.LANGUAGE_INPUT: return createLanguageInput();
 			case GeneratorPackage.SIMPLE_INPUT: return createSimpleInput();
-			case GeneratorPackage.COMPOSITE_LANGUAGE_INPUT: return createCompositeLanguageInput();
 			case GeneratorPackage.COMPOSITE_INPUT: return createCompositeInput();
+			case GeneratorPackage.REGEX_INPUT: return createRegexInput();
 			case GeneratorPackage.LITERAL: return createLiteral();
 			case GeneratorPackage.ENTITY_TOKEN: return createEntityToken();
 			case GeneratorPackage.PARAMETER_TOKEN: return createParameterToken();
@@ -173,9 +172,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public Simple createSimple() {
-		SimpleImpl simple = new SimpleImpl();
-		return simple;
+	public Entity createEntity() {
+		EntityImpl entity = new EntityImpl();
+		return entity;
 	}
 
 	/**
@@ -184,20 +183,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public Composite createComposite() {
-		CompositeImpl composite = new CompositeImpl();
-		return composite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public SimpleLanguageInput createSimpleLanguageInput() {
-		SimpleLanguageInputImpl simpleLanguageInput = new SimpleLanguageInputImpl();
-		return simpleLanguageInput;
+	public LanguageInput createLanguageInput() {
+		LanguageInputImpl languageInput = new LanguageInputImpl();
+		return languageInput;
 	}
 
 	/**
@@ -217,9 +205,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public CompositeLanguageInput createCompositeLanguageInput() {
-		CompositeLanguageInputImpl compositeLanguageInput = new CompositeLanguageInputImpl();
-		return compositeLanguageInput;
+	public CompositeInput createCompositeInput() {
+		CompositeInputImpl compositeInput = new CompositeInputImpl();
+		return compositeInput;
 	}
 
 	/**
@@ -228,9 +216,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public CompositeInput createCompositeInput() {
-		CompositeInputImpl compositeInput = new CompositeInputImpl();
-		return compositeInput;
+	public RegexInput createRegexInput() {
+		RegexInputImpl regexInput = new RegexInputImpl();
+		return regexInput;
 	}
 
 	/**

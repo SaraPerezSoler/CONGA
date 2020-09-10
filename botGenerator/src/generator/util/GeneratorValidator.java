@@ -100,18 +100,14 @@ public class GeneratorValidator extends EObjectValidator {
 				return validateWithLanguage((WithLanguage)value, diagnostics, context);
 			case GeneratorPackage.ENTITY:
 				return validateEntity((Entity)value, diagnostics, context);
-			case GeneratorPackage.SIMPLE:
-				return validateSimple((Simple)value, diagnostics, context);
-			case GeneratorPackage.COMPOSITE:
-				return validateComposite((Composite)value, diagnostics, context);
-			case GeneratorPackage.SIMPLE_LANGUAGE_INPUT:
-				return validateSimpleLanguageInput((SimpleLanguageInput)value, diagnostics, context);
+			case GeneratorPackage.LANGUAGE_INPUT:
+				return validateLanguageInput((LanguageInput)value, diagnostics, context);
+			case GeneratorPackage.ENTITY_INPUT:
+				return validateEntityInput((EntityInput)value, diagnostics, context);
 			case GeneratorPackage.SIMPLE_INPUT:
 				return validateSimpleInput((SimpleInput)value, diagnostics, context);
-			case GeneratorPackage.COMPOSITE_LANGUAGE_INPUT:
-				return validateCompositeLanguageInput((CompositeLanguageInput)value, diagnostics, context);
-			case GeneratorPackage.COMPOSITE_INPUT:
-				return validateCompositeInput((CompositeInput)value, diagnostics, context);
+			case GeneratorPackage.REGEX_INPUT:
+				return validateRegexInput((RegexInput)value, diagnostics, context);
 			case GeneratorPackage.TOKEN:
 				return validateToken((Token)value, diagnostics, context);
 			case GeneratorPackage.LITERAL:
@@ -128,6 +124,8 @@ public class GeneratorValidator extends EObjectValidator {
 				return validateIntent((Intent)value, diagnostics, context);
 			case GeneratorPackage.INTENT_LANGUAGE_INPUTS:
 				return validateIntentLanguageInputs((IntentLanguageInputs)value, diagnostics, context);
+			case GeneratorPackage.INTENT_INPUT:
+				return validateIntentInput((IntentInput)value, diagnostics, context);
 			case GeneratorPackage.TRAINING_PHRASE:
 				return validateTrainingPhrase((TrainingPhrase)value, diagnostics, context);
 			case GeneratorPackage.PARAMETER:
@@ -233,8 +231,8 @@ public class GeneratorValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSimple(Simple simple, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(simple, diagnostics, context);
+	public boolean validateLanguageInput(LanguageInput languageInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(languageInput, diagnostics, context);
 	}
 
 	/**
@@ -242,17 +240,8 @@ public class GeneratorValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateComposite(Composite composite, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(composite, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSimpleLanguageInput(SimpleLanguageInput simpleLanguageInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(simpleLanguageInput, diagnostics, context);
+	public boolean validateEntityInput(EntityInput entityInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(entityInput, diagnostics, context);
 	}
 
 	/**
@@ -264,60 +253,14 @@ public class GeneratorValidator extends EObjectValidator {
 		return validate_EveryDefaultConstraint(simpleInput, diagnostics, context);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateCompositeLanguageInput(CompositeLanguageInput compositeLanguageInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(compositeLanguageInput, diagnostics, context);
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompositeInput(CompositeInput compositeInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(compositeInput, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(compositeInput, diagnostics, context);
-		if (result || diagnostics != null) result &= validateCompositeInput_tokenComplexEntity(compositeInput, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the tokenComplexEntity constraint of '<em>Composite Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateCompositeInput_tokenComplexEntity(CompositeInput compositeInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "tokenComplexEntity", getObjectLabel(compositeInput, context) },
-						 new Object[] { compositeInput },
-						 context));
-			}
-			return false;
-		}
-		return true;
+	public boolean validateRegexInput(RegexInput regexInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(regexInput, diagnostics, context);
 	}
 
 	/**
@@ -390,6 +333,15 @@ public class GeneratorValidator extends EObjectValidator {
 	 */
 	public boolean validateIntentLanguageInputs(IntentLanguageInputs intentLanguageInputs, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(intentLanguageInputs, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateIntentInput(IntentInput intentInput, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(intentInput, diagnostics, context);
 	}
 
 	/**

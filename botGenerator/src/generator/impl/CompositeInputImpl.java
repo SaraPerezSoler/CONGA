@@ -9,14 +9,11 @@ import generator.Token;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,21 +25,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link generator.impl.CompositeInputImpl#getTokens <em>Tokens</em>}</li>
+ *   <li>{@link generator.impl.CompositeInputImpl#getExpresion <em>Expresion</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CompositeInputImpl extends MinimalEObjectImpl.Container implements CompositeInput {
+public class CompositeInputImpl extends EntityInputImpl implements CompositeInput {
 	/**
-	 * The cached value of the '{@link #getTokens() <em>Tokens</em>}' containment reference list.
+	 * The cached value of the '{@link #getExpresion() <em>Expresion</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTokens()
+	 * @see #getExpresion()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Token> tokens;
+	protected EList<Token> expresion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,11 +66,11 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public EList<Token> getTokens() {
-		if (tokens == null) {
-			tokens = new EObjectContainmentEList<Token>(Token.class, this, GeneratorPackage.COMPOSITE_INPUT__TOKENS);
+	public EList<Token> getExpresion() {
+		if (expresion == null) {
+			expresion = new EObjectContainmentEList<Token>(Token.class, this, GeneratorPackage.COMPOSITE_INPUT__EXPRESION);
 		}
-		return tokens;
+		return expresion;
 	}
 
 	/**
@@ -84,8 +81,8 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.COMPOSITE_INPUT__TOKENS:
-				return ((InternalEList<?>)getTokens()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.COMPOSITE_INPUT__EXPRESION:
+				return ((InternalEList<?>)getExpresion()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -98,8 +95,8 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.COMPOSITE_INPUT__TOKENS:
-				return getTokens();
+			case GeneratorPackage.COMPOSITE_INPUT__EXPRESION:
+				return getExpresion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -113,9 +110,9 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.COMPOSITE_INPUT__TOKENS:
-				getTokens().clear();
-				getTokens().addAll((Collection<? extends Token>)newValue);
+			case GeneratorPackage.COMPOSITE_INPUT__EXPRESION:
+				getExpresion().clear();
+				getExpresion().addAll((Collection<? extends Token>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,8 +126,8 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.COMPOSITE_INPUT__TOKENS:
-				getTokens().clear();
+			case GeneratorPackage.COMPOSITE_INPUT__EXPRESION:
+				getExpresion().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -144,8 +141,8 @@ public class CompositeInputImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.COMPOSITE_INPUT__TOKENS:
-				return tokens != null && !tokens.isEmpty();
+			case GeneratorPackage.COMPOSITE_INPUT__EXPRESION:
+				return expresion != null && !expresion.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

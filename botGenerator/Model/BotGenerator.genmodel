@@ -80,25 +80,23 @@
     <genClasses image="false" ecoreClass="BotGenerator.ecore#//WithLanguage">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//WithLanguage/language"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="BotGenerator.ecore#//Entity"/>
-    <genClasses ecoreClass="BotGenerator.ecore#//Simple">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//Simple/inputs"/>
+    <genClasses image="false" ecoreClass="BotGenerator.ecore#//Entity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//Entity/inputs"/>
     </genClasses>
-    <genClasses ecoreClass="BotGenerator.ecore#//Composite">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//Composite/inputs"/>
+    <genClasses ecoreClass="BotGenerator.ecore#//LanguageInput">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//LanguageInput/inputs"/>
     </genClasses>
-    <genClasses ecoreClass="BotGenerator.ecore#//SimpleLanguageInput">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//SimpleLanguageInput/inputs"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="BotGenerator.ecore#//EntityInput"/>
     <genClasses ecoreClass="BotGenerator.ecore#//SimpleInput">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//SimpleInput/values"/>
     </genClasses>
-    <genClasses ecoreClass="BotGenerator.ecore#//CompositeLanguageInput">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//CompositeLanguageInput/inputs"/>
-    </genClasses>
     <genClasses ecoreClass="BotGenerator.ecore#//CompositeInput">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//CompositeInput/tokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//CompositeInput/expresion"/>
     </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//RegexInput">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//RegexInput/expresion"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BotGenerator.ecore#//Input"/>
     <genClasses image="false" ecoreClass="BotGenerator.ecore#//Token"/>
     <genClasses ecoreClass="BotGenerator.ecore#//Literal">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Literal/text"/>
@@ -125,6 +123,7 @@
     <genClasses ecoreClass="BotGenerator.ecore#//IntentLanguageInputs">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//IntentLanguageInputs/inputs"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="BotGenerator.ecore#//IntentInput"/>
     <genClasses ecoreClass="BotGenerator.ecore#//TrainingPhrase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//TrainingPhrase/tokens"/>
     </genClasses>

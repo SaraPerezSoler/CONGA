@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
 public interface IntentLanguageInputs extends WithLanguage {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link generator.TrainingPhrase}.
+	 * The list contents are of type {@link generator.IntentInput}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -31,6 +31,6 @@ public interface IntentLanguageInputs extends WithLanguage {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<TrainingPhrase> getInputs();
+	EList<IntentInput> getInputs();
 
 } // IntentLanguageInputs

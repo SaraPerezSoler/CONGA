@@ -4,8 +4,6 @@ package generator;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Training Phrase</b></em>'.
@@ -22,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TrainingPhrase extends EObject {
+public interface TrainingPhrase extends IntentInput {
 	/**
 	 * Returns the value of the '<em><b>Tokens</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.Token}.

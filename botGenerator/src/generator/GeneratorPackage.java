@@ -372,13 +372,22 @@ public interface GeneratorPackage extends EPackage {
 	int ENTITY__NAME = ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__INPUTS = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Entity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+	int ENTITY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Entity</em>' class.
@@ -390,106 +399,14 @@ public interface GeneratorPackage extends EPackage {
 	int ENTITY_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.SimpleImpl <em>Simple</em>}' class.
+	 * The meta object id for the '{@link generator.impl.LanguageInputImpl <em>Language Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see generator.impl.SimpleImpl
-	 * @see generator.impl.GeneratorPackageImpl#getSimple()
+	 * @see generator.impl.LanguageInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageInput()
 	 * @generated
 	 */
-	int SIMPLE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE__NAME = ENTITY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE__INPUTS = ENTITY_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Simple</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Simple</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_OPERATION_COUNT = ENTITY_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.CompositeImpl <em>Composite</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.CompositeImpl
-	 * @see generator.impl.GeneratorPackageImpl#getComposite()
-	 * @generated
-	 */
-	int COMPOSITE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE__NAME = ENTITY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE__INPUTS = ENTITY_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Composite</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Composite</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_OPERATION_COUNT = ENTITY_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.SimpleLanguageInputImpl <em>Simple Language Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.SimpleLanguageInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getSimpleLanguageInput()
-	 * @generated
-	 */
-	int SIMPLE_LANGUAGE_INPUT = 9;
+	int LANGUAGE_INPUT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -498,7 +415,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_LANGUAGE_INPUT__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+	int LANGUAGE_INPUT__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -507,25 +424,81 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_LANGUAGE_INPUT__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
+	int LANGUAGE_INPUT__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Simple Language Input</em>' class.
+	 * The number of structural features of the '<em>Language Input</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_LANGUAGE_INPUT_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
+	int LANGUAGE_INPUT_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Simple Language Input</em>' class.
+	 * The number of operations of the '<em>Language Input</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_LANGUAGE_INPUT_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+	int LANGUAGE_INPUT_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.InputImpl <em>Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.InputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getInput()
+	 * @generated
+	 */
+	int INPUT = 12;
+
+	/**
+	 * The number of structural features of the '<em>Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.EntityInputImpl <em>Entity Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.EntityInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getEntityInput()
+	 * @generated
+	 */
+	int ENTITY_INPUT = 8;
+
+	/**
+	 * The number of structural features of the '<em>Entity Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_INPUT_FEATURE_COUNT = INPUT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Entity Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_INPUT_OPERATION_COUNT = INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.SimpleInputImpl <em>Simple Input</em>}' class.
@@ -535,7 +508,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getSimpleInput()
 	 * @generated
 	 */
-	int SIMPLE_INPUT = 10;
+	int SIMPLE_INPUT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -574,52 +547,6 @@ public interface GeneratorPackage extends EPackage {
 	int SIMPLE_INPUT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.CompositeLanguageInputImpl <em>Composite Language Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.CompositeLanguageInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getCompositeLanguageInput()
-	 * @generated
-	 */
-	int COMPOSITE_LANGUAGE_INPUT = 11;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_LANGUAGE_INPUT__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_LANGUAGE_INPUT__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Composite Language Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_LANGUAGE_INPUT_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Composite Language Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_LANGUAGE_INPUT_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link generator.impl.CompositeInputImpl <em>Composite Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -627,16 +554,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getCompositeInput()
 	 * @generated
 	 */
-	int COMPOSITE_INPUT = 12;
+	int COMPOSITE_INPUT = 10;
 
 	/**
-	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Expresion</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_INPUT__TOKENS = 0;
+	int COMPOSITE_INPUT__EXPRESION = ENTITY_INPUT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Composite Input</em>' class.
@@ -645,7 +572,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_INPUT_FEATURE_COUNT = 1;
+	int COMPOSITE_INPUT_FEATURE_COUNT = ENTITY_INPUT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Composite Input</em>' class.
@@ -654,7 +581,44 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_INPUT_OPERATION_COUNT = 0;
+	int COMPOSITE_INPUT_OPERATION_COUNT = ENTITY_INPUT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.RegexInputImpl <em>Regex Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.RegexInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getRegexInput()
+	 * @generated
+	 */
+	int REGEX_INPUT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Expresion</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_INPUT__EXPRESION = ENTITY_INPUT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Regex Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_INPUT_FEATURE_COUNT = ENTITY_INPUT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Regex Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGEX_INPUT_OPERATION_COUNT = ENTITY_INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.TokenImpl <em>Token</em>}' class.
@@ -998,6 +962,34 @@ public interface GeneratorPackage extends EPackage {
 	int INTENT_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.IntentInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
+	 * @generated
+	 */
+	int INTENT_INPUT = 21;
+
+	/**
+	 * The number of structural features of the '<em>Intent Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTENT_INPUT_FEATURE_COUNT = INPUT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Intent Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTENT_INPUT_OPERATION_COUNT = INPUT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link generator.impl.TrainingPhraseImpl <em>Training Phrase</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1005,7 +997,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTrainingPhrase()
 	 * @generated
 	 */
-	int TRAINING_PHRASE = 21;
+	int TRAINING_PHRASE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1014,7 +1006,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE__TOKENS = 0;
+	int TRAINING_PHRASE__TOKENS = INTENT_INPUT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Training Phrase</em>' class.
@@ -1023,7 +1015,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE_FEATURE_COUNT = 1;
+	int TRAINING_PHRASE_FEATURE_COUNT = INTENT_INPUT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Training Phrase</em>' class.
@@ -1032,7 +1024,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE_OPERATION_COUNT = 0;
+	int TRAINING_PHRASE_OPERATION_COUNT = INTENT_INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -1042,7 +1034,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 22;
+	int PARAMETER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1124,7 +1116,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getPromptLanguage()
 	 * @generated
 	 */
-	int PROMPT_LANGUAGE = 23;
+	int PROMPT_LANGUAGE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1170,7 +1162,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 24;
+	int ACTION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1207,7 +1199,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getImage()
 	 * @generated
 	 */
-	int IMAGE = 25;
+	int IMAGE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1262,7 +1254,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getText()
 	 * @generated
 	 */
-	int TEXT = 26;
+	int TEXT = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1308,7 +1300,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
 	 * @generated
 	 */
-	int TEXT_LANGUAGE_INPUT = 27;
+	int TEXT_LANGUAGE_INPUT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1354,7 +1346,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextInput()
 	 * @generated
 	 */
-	int TEXT_INPUT = 28;
+	int TEXT_INPUT = 29;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1391,7 +1383,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequest()
 	 * @generated
 	 */
-	int HTTP_REQUEST = 29;
+	int HTTP_REQUEST = 30;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1482,7 +1474,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPResponse()
 	 * @generated
 	 */
-	int HTTP_RESPONSE = 30;
+	int HTTP_RESPONSE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1537,7 +1529,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 31;
+	int KEY_VALUE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1583,7 +1575,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 32;
+	int DATA_TYPE = 33;
 
 	/**
 	 * The meta object id for the '{@link generator.Method <em>Method</em>}' enum.
@@ -1593,7 +1585,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 33;
+	int METHOD = 34;
 
 	/**
 	 * The meta object id for the '{@link generator.Language <em>Language</em>}' enum.
@@ -1603,7 +1595,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguage()
 	 * @generated
 	 */
-	int LANGUAGE = 34;
+	int LANGUAGE = 35;
 
 	/**
 	 * The meta object id for the '{@link generator.HTTPReturnType <em>HTTP Return Type</em>}' enum.
@@ -1613,7 +1605,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPReturnType()
 	 * @generated
 	 */
-	int HTTP_RETURN_TYPE = 35;
+	int HTTP_RETURN_TYPE = 36;
 
 	/**
 	 * The meta object id for the '{@link generator.DefaultEntity <em>Default Entity</em>}' enum.
@@ -1623,7 +1615,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDefaultEntity()
 	 * @generated
 	 */
-	int DEFAULT_ENTITY = 36;
+	int DEFAULT_ENTITY = 37;
 
 
 	/**
@@ -1840,67 +1832,46 @@ public interface GeneratorPackage extends EPackage {
 	EClass getEntity();
 
 	/**
-	 * Returns the meta object for class '{@link generator.Simple <em>Simple</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple</em>'.
-	 * @see generator.Simple
-	 * @generated
-	 */
-	EClass getSimple();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link generator.Simple#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.Entity#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.Simple#getInputs()
-	 * @see #getSimple()
+	 * @see generator.Entity#getInputs()
+	 * @see #getEntity()
 	 * @generated
 	 */
-	EReference getSimple_Inputs();
+	EReference getEntity_Inputs();
 
 	/**
-	 * Returns the meta object for class '{@link generator.Composite <em>Composite</em>}'.
+	 * Returns the meta object for class '{@link generator.LanguageInput <em>Language Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Composite</em>'.
-	 * @see generator.Composite
+	 * @return the meta object for class '<em>Language Input</em>'.
+	 * @see generator.LanguageInput
 	 * @generated
 	 */
-	EClass getComposite();
+	EClass getLanguageInput();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link generator.Composite#getInputs <em>Inputs</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.Composite#getInputs()
-	 * @see #getComposite()
-	 * @generated
-	 */
-	EReference getComposite_Inputs();
-
-	/**
-	 * Returns the meta object for class '{@link generator.SimpleLanguageInput <em>Simple Language Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Language Input</em>'.
-	 * @see generator.SimpleLanguageInput
-	 * @generated
-	 */
-	EClass getSimpleLanguageInput();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link generator.SimpleLanguageInput#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.LanguageInput#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.SimpleLanguageInput#getInputs()
-	 * @see #getSimpleLanguageInput()
+	 * @see generator.LanguageInput#getInputs()
+	 * @see #getLanguageInput()
 	 * @generated
 	 */
-	EReference getSimpleLanguageInput_Inputs();
+	EReference getLanguageInput_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link generator.EntityInput <em>Entity Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entity Input</em>'.
+	 * @see generator.EntityInput
+	 * @generated
+	 */
+	EClass getEntityInput();
 
 	/**
 	 * Returns the meta object for class '{@link generator.SimpleInput <em>Simple Input</em>}'.
@@ -1924,27 +1895,6 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getSimpleInput_Values();
 
 	/**
-	 * Returns the meta object for class '{@link generator.CompositeLanguageInput <em>Composite Language Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Composite Language Input</em>'.
-	 * @see generator.CompositeLanguageInput
-	 * @generated
-	 */
-	EClass getCompositeLanguageInput();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link generator.CompositeLanguageInput#getInputs <em>Inputs</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.CompositeLanguageInput#getInputs()
-	 * @see #getCompositeLanguageInput()
-	 * @generated
-	 */
-	EReference getCompositeLanguageInput_Inputs();
-
-	/**
 	 * Returns the meta object for class '{@link generator.CompositeInput <em>Composite Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1955,15 +1905,46 @@ public interface GeneratorPackage extends EPackage {
 	EClass getCompositeInput();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link generator.CompositeInput#getTokens <em>Tokens</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.CompositeInput#getExpresion <em>Expresion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Tokens</em>'.
-	 * @see generator.CompositeInput#getTokens()
+	 * @return the meta object for the containment reference list '<em>Expresion</em>'.
+	 * @see generator.CompositeInput#getExpresion()
 	 * @see #getCompositeInput()
 	 * @generated
 	 */
-	EReference getCompositeInput_Tokens();
+	EReference getCompositeInput_Expresion();
+
+	/**
+	 * Returns the meta object for class '{@link generator.RegexInput <em>Regex Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Regex Input</em>'.
+	 * @see generator.RegexInput
+	 * @generated
+	 */
+	EClass getRegexInput();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.RegexInput#getExpresion <em>Expresion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Expresion</em>'.
+	 * @see generator.RegexInput#getExpresion()
+	 * @see #getRegexInput()
+	 * @generated
+	 */
+	EAttribute getRegexInput_Expresion();
+
+	/**
+	 * Returns the meta object for class '{@link generator.Input <em>Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Input</em>'.
+	 * @see generator.Input
+	 * @generated
+	 */
+	EClass getInput();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Token <em>Token</em>}'.
@@ -2165,6 +2146,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getIntentLanguageInputs_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link generator.IntentInput <em>Intent Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Intent Input</em>'.
+	 * @see generator.IntentInput
+	 * @generated
+	 */
+	EClass getIntentInput();
 
 	/**
 	 * Returns the meta object for class '{@link generator.TrainingPhrase <em>Training Phrase</em>}'.
@@ -2766,14 +2757,22 @@ public interface GeneratorPackage extends EPackage {
 		EClass ENTITY = eINSTANCE.getEntity();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.SimpleImpl <em>Simple</em>}' class.
+		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.SimpleImpl
-		 * @see generator.impl.GeneratorPackageImpl#getSimple()
 		 * @generated
 		 */
-		EClass SIMPLE = eINSTANCE.getSimple();
+		EReference ENTITY__INPUTS = eINSTANCE.getEntity_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.LanguageInputImpl <em>Language Input</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.LanguageInputImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguageInput()
+		 * @generated
+		 */
+		EClass LANGUAGE_INPUT = eINSTANCE.getLanguageInput();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
@@ -2781,43 +2780,17 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE__INPUTS = eINSTANCE.getSimple_Inputs();
+		EReference LANGUAGE_INPUT__INPUTS = eINSTANCE.getLanguageInput_Inputs();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.CompositeImpl <em>Composite</em>}' class.
+		 * The meta object literal for the '{@link generator.impl.EntityInputImpl <em>Entity Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.CompositeImpl
-		 * @see generator.impl.GeneratorPackageImpl#getComposite()
+		 * @see generator.impl.EntityInputImpl
+		 * @see generator.impl.GeneratorPackageImpl#getEntityInput()
 		 * @generated
 		 */
-		EClass COMPOSITE = eINSTANCE.getComposite();
-
-		/**
-		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE__INPUTS = eINSTANCE.getComposite_Inputs();
-
-		/**
-		 * The meta object literal for the '{@link generator.impl.SimpleLanguageInputImpl <em>Simple Language Input</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see generator.impl.SimpleLanguageInputImpl
-		 * @see generator.impl.GeneratorPackageImpl#getSimpleLanguageInput()
-		 * @generated
-		 */
-		EClass SIMPLE_LANGUAGE_INPUT = eINSTANCE.getSimpleLanguageInput();
-
-		/**
-		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_LANGUAGE_INPUT__INPUTS = eINSTANCE.getSimpleLanguageInput_Inputs();
+		EClass ENTITY_INPUT = eINSTANCE.getEntityInput();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.SimpleInputImpl <em>Simple Input</em>}' class.
@@ -2838,24 +2811,6 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute SIMPLE_INPUT__VALUES = eINSTANCE.getSimpleInput_Values();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.CompositeLanguageInputImpl <em>Composite Language Input</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see generator.impl.CompositeLanguageInputImpl
-		 * @see generator.impl.GeneratorPackageImpl#getCompositeLanguageInput()
-		 * @generated
-		 */
-		EClass COMPOSITE_LANGUAGE_INPUT = eINSTANCE.getCompositeLanguageInput();
-
-		/**
-		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_LANGUAGE_INPUT__INPUTS = eINSTANCE.getCompositeLanguageInput_Inputs();
-
-		/**
 		 * The meta object literal for the '{@link generator.impl.CompositeInputImpl <em>Composite Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2866,12 +2821,40 @@ public interface GeneratorPackage extends EPackage {
 		EClass COMPOSITE_INPUT = eINSTANCE.getCompositeInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Tokens</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Expresion</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPOSITE_INPUT__TOKENS = eINSTANCE.getCompositeInput_Tokens();
+		EReference COMPOSITE_INPUT__EXPRESION = eINSTANCE.getCompositeInput_Expresion();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.RegexInputImpl <em>Regex Input</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.RegexInputImpl
+		 * @see generator.impl.GeneratorPackageImpl#getRegexInput()
+		 * @generated
+		 */
+		EClass REGEX_INPUT = eINSTANCE.getRegexInput();
+
+		/**
+		 * The meta object literal for the '<em><b>Expresion</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGEX_INPUT__EXPRESION = eINSTANCE.getRegexInput_Expresion();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.InputImpl <em>Input</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.InputImpl
+		 * @see generator.impl.GeneratorPackageImpl#getInput()
+		 * @generated
+		 */
+		EClass INPUT = eINSTANCE.getInput();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TokenImpl <em>Token</em>}' class.
@@ -3040,6 +3023,16 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INTENT_LANGUAGE_INPUTS__INPUTS = eINSTANCE.getIntentLanguageInputs_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.IntentInputImpl
+		 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
+		 * @generated
+		 */
+		EClass INTENT_INPUT = eINSTANCE.getIntentInput();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TrainingPhraseImpl <em>Training Phrase</em>}' class.

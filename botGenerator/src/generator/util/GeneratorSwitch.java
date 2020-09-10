@@ -112,26 +112,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.SIMPLE: {
-				Simple simple = (Simple)theEObject;
-				T result = caseSimple(simple);
-				if (result == null) result = caseEntity(simple);
-				if (result == null) result = caseElement(simple);
+			case GeneratorPackage.LANGUAGE_INPUT: {
+				LanguageInput languageInput = (LanguageInput)theEObject;
+				T result = caseLanguageInput(languageInput);
+				if (result == null) result = caseWithLanguage(languageInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.COMPOSITE: {
-				Composite composite = (Composite)theEObject;
-				T result = caseComposite(composite);
-				if (result == null) result = caseEntity(composite);
-				if (result == null) result = caseElement(composite);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.SIMPLE_LANGUAGE_INPUT: {
-				SimpleLanguageInput simpleLanguageInput = (SimpleLanguageInput)theEObject;
-				T result = caseSimpleLanguageInput(simpleLanguageInput);
-				if (result == null) result = caseWithLanguage(simpleLanguageInput);
+			case GeneratorPackage.ENTITY_INPUT: {
+				EntityInput entityInput = (EntityInput)theEObject;
+				T result = caseEntityInput(entityInput);
+				if (result == null) result = caseInput(entityInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -139,19 +130,31 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				SimpleInput simpleInput = (SimpleInput)theEObject;
 				T result = caseSimpleInput(simpleInput);
 				if (result == null) result = caseElement(simpleInput);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.COMPOSITE_LANGUAGE_INPUT: {
-				CompositeLanguageInput compositeLanguageInput = (CompositeLanguageInput)theEObject;
-				T result = caseCompositeLanguageInput(compositeLanguageInput);
-				if (result == null) result = caseWithLanguage(compositeLanguageInput);
+				if (result == null) result = caseEntityInput(simpleInput);
+				if (result == null) result = caseInput(simpleInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GeneratorPackage.COMPOSITE_INPUT: {
 				CompositeInput compositeInput = (CompositeInput)theEObject;
 				T result = caseCompositeInput(compositeInput);
+				if (result == null) result = caseEntityInput(compositeInput);
+				if (result == null) result = caseInput(compositeInput);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.REGEX_INPUT: {
+				RegexInput regexInput = (RegexInput)theEObject;
+				T result = caseRegexInput(regexInput);
+				if (result == null) result = caseEntityInput(regexInput);
+				if (result == null) result = caseIntentInput(regexInput);
+				if (result == null) result = caseInput(regexInput);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.INPUT: {
+				Input input = (Input)theEObject;
+				T result = caseInput(input);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -210,9 +213,18 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.INTENT_INPUT: {
+				IntentInput intentInput = (IntentInput)theEObject;
+				T result = caseIntentInput(intentInput);
+				if (result == null) result = caseInput(intentInput);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.TRAINING_PHRASE: {
 				TrainingPhrase trainingPhrase = (TrainingPhrase)theEObject;
 				T result = caseTrainingPhrase(trainingPhrase);
+				if (result == null) result = caseIntentInput(trainingPhrase);
+				if (result == null) result = caseInput(trainingPhrase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -398,47 +410,32 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Language Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Language Input</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSimple(Simple object) {
+	public T caseLanguageInput(LanguageInput object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composite</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Entity Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composite</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Entity Input</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseComposite(Composite object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Language Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Language Input</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleLanguageInput(SimpleLanguageInput object) {
+	public T caseEntityInput(EntityInput object) {
 		return null;
 	}
 
@@ -458,21 +455,6 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Composite Language Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composite Language Input</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCompositeLanguageInput(CompositeLanguageInput object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Composite Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -484,6 +466,36 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCompositeInput(CompositeInput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Regex Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Regex Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRegexInput(RegexInput object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInput(Input object) {
 		return null;
 	}
 
@@ -604,6 +616,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIntentLanguageInputs(IntentLanguageInputs object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Intent Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Intent Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntentInput(IntentInput object) {
 		return null;
 	}
 

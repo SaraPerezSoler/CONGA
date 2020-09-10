@@ -40,37 +40,28 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//Language"
         defaultValueLiteral="EMPTY"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true" eSuperTypes="#//Element"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Simple" eSuperTypes="#//Entity">
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//SimpleLanguageInput" containment="true"/>
+        upperBound="-1" eType="#//LanguageInput" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Composite" eSuperTypes="#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//CompositeLanguageInput" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleLanguageInput" eSuperTypes="#//WithLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageInput" eSuperTypes="#//WithLanguage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
-        eType="#//SimpleInput" containment="true"/>
+        eType="#//EntityInput" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleInput" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="EntityInput" abstract="true" eSuperTypes="#//Input"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleInput" eSuperTypes="#//Element #//EntityInput">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeLanguageInput" eSuperTypes="#//WithLanguage">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
-        eType="#//CompositeInput" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeInput">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="tokenComplexEntity"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="tokenComplexEntity" value="&#xA;&#x9;&#x9;&#x9;self.tokens->forAll(t| t.oclIsTypeOf(Literal) or t.oclIsTypeOf(EntityToken))"/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" lowerBound="1"
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeInput" eSuperTypes="#//EntityInput">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expresion" lowerBound="1"
         upperBound="-1" eType="#//Token" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RegexInput" eSuperTypes="#//EntityInput #//IntentInput">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expresion" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Input" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Token" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Token">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -103,9 +94,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntentLanguageInputs" eSuperTypes="#//WithLanguage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//TrainingPhrase" containment="true"/>
+        upperBound="-1" eType="#//IntentInput" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TrainingPhrase">
+  <eClassifiers xsi:type="ecore:EClass" name="IntentInput" abstract="true" eSuperTypes="#//Input"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TrainingPhrase" eSuperTypes="#//IntentInput">
     <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
         eType="#//Token" containment="true"/>
   </eClassifiers>
