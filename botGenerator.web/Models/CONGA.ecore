@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="congabase" nsURI="congabase" nsPrefix="congabase">
+  <eClassifiers xsi:type="ecore:EClass" name="CongaSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1"
+        eType="#//User" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projects" upperBound="-1"
+        eType="#//Project" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="questionnaire" lowerBound="1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Questionnaire" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nick" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projects" upperBound="-1"
+        eType="#//Project" eOpposite="#//Project/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//User"
+        eOpposite="#//User/projects"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="questionnaire" eType="#//UserAnswer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserAnswer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="answers" upperBound="-1"
+        eType="#//AQuestion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AQuestion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="question" lowerBound="1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Question"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selecteds" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass RecommenderQuestionnaire.ecore#//Option"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relevance" lowerBound="1"
+        eType="#//RelevanceLevel" defaultValueLiteral="RELEVANT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RelevanceLevel">
+    <eLiterals name="NOT_RELEVANT"/>
+    <eLiterals name="RELEVANT" value="1"/>
+    <eLiterals name="DOBLE" value="2"/>
+    <eLiterals name="CRITICAL_ONE" value="3"/>
+    <eLiterals name="CRITICAL_ALL" value="4"/>
+    <eLiterals name="CRITICAL" value="5"/>
+  </eClassifiers>
+</ecore:EPackage>

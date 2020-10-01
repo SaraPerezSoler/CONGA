@@ -1,0 +1,19 @@
+1. Crear el proyecto xtext marcando web (maven, fat jar)
+2. Modificar la gramatica
+3. Modificar mwe2: añadir las preferencias de websupport (framework y version)
+4. Ejecutar mwe2
+5. Para CodeMirror añadir en pom.xml las dependecias de codeMirror/ Para Ace este paso no es necesario, viene por defecto/ Para Orion es necesario descargar los ficheros manualmente
+	
+	<dependency>
+	    <groupId>org.webjars</groupId>
+	    <artifactId>codemirror</artifactId>
+	    <version>5.50.0</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.webjars.npm</groupId>
+	    <artifactId>codemirror</artifactId>
+	    <version>5.58.0</version>
+	</dependency>
+6. Codificar el registro del paquete del dsl
+7. Ejecutar

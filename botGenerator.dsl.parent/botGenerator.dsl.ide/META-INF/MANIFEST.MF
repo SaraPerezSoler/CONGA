@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: botGenerator.dsl.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: botGenerator.dsl.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: botGenerator.dsl.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: botGenerator.dsl,
+ botGenerator,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.xtext.botGenerator.ide.contentassist.antlr.internal,
+ org.xtext.botGenerator.ide.contentassist.antlr
