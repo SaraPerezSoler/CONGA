@@ -50,18 +50,16 @@ public class DialogflowGenerator {
   
   private CreateZip zip;
   
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  public Object doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final CreateZip zip) {
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<HTTPRequest> requests = IteratorExtensions.<HTTPRequest>toList(Iterators.<HTTPRequest>filter(resource.getAllContents(), HTTPRequest.class));
     String _name = bot.getName();
     String _plus = (_name + "/Dialogflow");
     this.path = _plus;
-    String _name_1 = bot.getName();
-    CreateZip _createZip = new CreateZip(DialogflowGenerator.uri, _name_1);
-    this.zip = _createZip;
+    this.zip = zip;
     fsa.generateFile((this.path + "/package.json"), "{\n \"version\": \"1.0.0\"\n}");
     InputStream packageValue = fsa.readBinaryFile((this.path + "/package.json"));
-    this.zip.addFile("package.json", packageValue);
+    zip.addFile("package.json", packageValue);
     boolean _isEmpty = requests.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
@@ -72,21 +70,21 @@ public class DialogflowGenerator {
       fsa.generateFile((this.path + "/agent.json"), this.agentJSON(bot, null));
     }
     InputStream agentValue = fsa.readBinaryFile((this.path + "/agent.json"));
-    this.zip.addFile("agent.json", agentValue);
+    zip.addFile("agent.json", agentValue);
     List<Entity> entities = IteratorExtensions.<Entity>toList(Iterators.<Entity>filter(resource.getAllContents(), Entity.class));
     for (final Entity entity : entities) {
       {
-        String _name_2 = entity.getName();
-        String _plus_1 = ((this.path + "/entities/") + _name_2);
+        String _name_1 = entity.getName();
+        String _plus_1 = ((this.path + "/entities/") + _name_1);
         String _plus_2 = (_plus_1 + ".json");
         fsa.generateFile(_plus_2, this.entityFile(entity));
-        String _name_3 = entity.getName();
-        String _plus_3 = ((this.path + "/entities/") + _name_3);
+        String _name_2 = entity.getName();
+        String _plus_3 = ((this.path + "/entities/") + _name_2);
         String _plus_4 = (_plus_3 + ".json");
         InputStream entityValue = fsa.readBinaryFile(_plus_4);
-        String _name_4 = entity.getName();
-        String _plus_5 = (_name_4 + ".json");
-        this.zip.addFileToFolder("entities", _plus_5, entityValue);
+        String _name_3 = entity.getName();
+        String _plus_5 = (_name_3 + ".json");
+        zip.addFileToFolder("entities", _plus_5, entityValue);
         Language lan = Language.ENGLISH;
         EList<LanguageInput> _inputs = entity.getInputs();
         for (final LanguageInput input : _inputs) {
@@ -97,27 +95,27 @@ public class DialogflowGenerator {
             if (_notEquals) {
               lan = input.getLanguage();
             }
-            String _name_5 = entity.getName();
-            String _plus_6 = ((this.path + "/entities/") + _name_5);
+            String _name_4 = entity.getName();
+            String _plus_6 = ((this.path + "/entities/") + _name_4);
             String _plus_7 = (_plus_6 + "_entries_");
             String _languageAbbreviation = this.languageAbbreviation(lan);
             String _plus_8 = (_plus_7 + _languageAbbreviation);
             String _plus_9 = (_plus_8 + ".json");
             fsa.generateFile(_plus_9, 
               this.entriesFile(input));
-            String _name_6 = entity.getName();
-            String _plus_10 = ((this.path + "/entities/") + _name_6);
+            String _name_5 = entity.getName();
+            String _plus_10 = ((this.path + "/entities/") + _name_5);
             String _plus_11 = (_plus_10 + "_entries_");
             String _languageAbbreviation_1 = this.languageAbbreviation(lan);
             String _plus_12 = (_plus_11 + _languageAbbreviation_1);
             String _plus_13 = (_plus_12 + ".json");
             InputStream entityLanValue = fsa.readBinaryFile(_plus_13);
-            String _name_7 = entity.getName();
-            String _plus_14 = (_name_7 + "_entries_");
+            String _name_6 = entity.getName();
+            String _plus_14 = (_name_6 + "_entries_");
             String _languageAbbreviation_2 = this.languageAbbreviation(lan);
             String _plus_15 = (_plus_14 + _languageAbbreviation_2);
             String _plus_16 = (_plus_15 + ".json");
-            this.zip.addFileToFolder("entities", _plus_16, entityLanValue);
+            zip.addFileToFolder("entities", _plus_16, entityLanValue);
           }
         }
       }
@@ -126,7 +124,8 @@ public class DialogflowGenerator {
     for (final UserInteraction transition : _flows) {
       this.createTransitionFiles(transition, "", fsa, bot);
     }
-    this.zip.close();
+    zip.close();
+    return null;
   }
   
   public void createTransitionFiles(final UserInteraction transition, final String prefix, final IFileSystemAccess2 fsa, final Bot bot) {

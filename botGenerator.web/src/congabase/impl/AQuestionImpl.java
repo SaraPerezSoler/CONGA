@@ -6,7 +6,9 @@ import congabase.AQuestion;
 import congabase.CongabasePackage;
 import congabase.RelevanceLevel;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
+import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -263,6 +266,36 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 		result.append(relevance);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public double getScore(Tool t) {
+		double value = 0;
+		for (Option opt : getSelecteds()) {
+			if (opt.getAcceptedTools().contains(t)) {
+				value += 1;
+			} else if (opt.getUnknown().contains(t)) {
+				value += 0.5;
+			}
+		}
+		if (this.getRelevance().equals(RelevanceLevel.NOT_RELEVANT)) {
+			return -1;
+		}
+		return value / getSelecteds().size();
+	}
+
+	@Override
+	public double getScore(String tool) {
+		List<Tool> tools = new ArrayList<>();
+		tools.addAll(getSelecteds().get(0).getAcceptedTools());
+		tools.addAll(getSelecteds().get(0).getRefusedTools());
+		tools.addAll(getSelecteds().get(0).getUnknown());
+		for (Tool t: tools) {
+			if (t.getName().equals(tool)) {
+				return getScore(t);
+			}
+		}
+		return 0;
 	}
 
 } //AQuestionImpl

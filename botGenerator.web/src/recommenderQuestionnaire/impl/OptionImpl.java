@@ -310,4 +310,34 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 		return result.toString();
 	}
 
+	@Override
+	public boolean isAccepted(String tool) {
+		for (Tool t: getAcceptedTools()) {
+			if (t.getName().equals(tool)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isRefused(String tool) {
+		for (Tool t: getRefusedTools()) {
+			if (t.getName().equals(tool)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isUnknow(String tool) {
+		for (Tool t: getUnknown()) {
+			if (t.getName().equals(tool)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 } //OptionImpl

@@ -51,11 +51,7 @@ import org.xtext.botGenerator.generator.DialogflowGenerator;
 public class RasaGenerator {
   private String path;
   
-  protected static String uri;
-  
-  private CreateZip zip;
-  
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final CreateZip zip) {
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<Intent> intents = IteratorExtensions.<Intent>toList(Iterators.<Intent>filter(resource.getAllContents(), Intent.class));
     List<Entity> entities = IteratorExtensions.<Entity>toList(Iterators.<Entity>filter(resource.getAllContents(), Entity.class));
@@ -66,46 +62,43 @@ public class RasaGenerator {
     for (final UserInteraction flow : _flows) {
       this.leafsU(flow, leafs);
     }
-    String _name = bot.getName();
-    CreateZip _createZip = new CreateZip(RasaGenerator.uri, _name);
-    this.zip = _createZip;
     EList<Language> _languages = bot.getLanguages();
     for (final Language lan : _languages) {
       {
-        String _name_1 = bot.getName();
-        String _plus = (_name_1 + "/Rasa");
+        String _name = bot.getName();
+        String _plus = (_name + "/Rasa");
         String _plus_1 = (_plus + "/");
         String _languageAbbreviation = this.languageAbbreviation(lan);
         String _plus_2 = (_plus_1 + _languageAbbreviation);
         this.path = _plus_2;
         fsa.generateFile((this.path + "/actions.py"), this.actions(intents, entities, actions, lan));
         InputStream actionValue = fsa.readBinaryFile((this.path + "/actions.py"));
-        this.zip.addFileToFolder(this.languageAbbreviation(lan), "actions.py", actionValue);
+        zip.addFileToFolder(this.languageAbbreviation(lan), "actions.py", actionValue);
         fsa.generateFile((this.path + "/config.yml"), this.config(lan));
         InputStream configValue = fsa.readBinaryFile((this.path + "/config.yml"));
-        this.zip.addFileToFolder(this.languageAbbreviation(lan), "config.yml", configValue);
+        zip.addFileToFolder(this.languageAbbreviation(lan), "config.yml", configValue);
         fsa.generateFile((this.path + "/credentials.yml"), this.credentials());
         InputStream credentialValue = fsa.readBinaryFile((this.path + "/credentials.yml"));
-        this.zip.addFileToFolder(this.languageAbbreviation(lan), "credentials.yml", credentialValue);
+        zip.addFileToFolder(this.languageAbbreviation(lan), "credentials.yml", credentialValue);
         fsa.generateFile((this.path + "/domain.yml"), this.domain(intents, parameters, actions, lan));
         InputStream domainValue = fsa.readBinaryFile((this.path + "/domain.yml"));
-        this.zip.addFileToFolder(this.languageAbbreviation(lan), "domain.yml", domainValue);
+        zip.addFileToFolder(this.languageAbbreviation(lan), "domain.yml", domainValue);
         fsa.generateFile((this.path + "/endpoints.yml"), this.endpoint());
         InputStream endpointsValue = fsa.readBinaryFile((this.path + "/endpoints.yml"));
-        this.zip.addFileToFolder(this.languageAbbreviation(lan), "endpoints.yml", endpointsValue);
+        zip.addFileToFolder(this.languageAbbreviation(lan), "endpoints.yml", endpointsValue);
         fsa.generateFile((this.path + "/data/nlu.md"), this.nlu(intents, entities, lan));
         InputStream nluValue = fsa.readBinaryFile((this.path + "/data/nlu.md"));
         String _languageAbbreviation_1 = this.languageAbbreviation(lan);
         String _plus_3 = (_languageAbbreviation_1 + "/data");
-        this.zip.addFileToFolder(_plus_3, "nlu.md", nluValue);
+        zip.addFileToFolder(_plus_3, "nlu.md", nluValue);
         fsa.generateFile((this.path + "/data/stories.md"), this.stories(leafs));
         InputStream storiesValue = fsa.readBinaryFile((this.path + "/data/stories.md"));
         String _languageAbbreviation_2 = this.languageAbbreviation(lan);
         String _plus_4 = (_languageAbbreviation_2 + "/data");
-        this.zip.addFileToFolder(_plus_4, "stories.md", storiesValue);
+        zip.addFileToFolder(_plus_4, "stories.md", storiesValue);
       }
     }
-    this.zip.close();
+    zip.close();
   }
   
   public String actionName(final Action action) {

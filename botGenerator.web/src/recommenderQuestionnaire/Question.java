@@ -2,6 +2,8 @@
  */
 package recommenderQuestionnaire;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -78,5 +80,9 @@ public interface Question extends WithName {
 	 * @generated
 	 */
 	EList<Option> getOptions();
+	
+	List<String> getOptionsString();
+
+	Option getOption(String opt);
 
 } // Question

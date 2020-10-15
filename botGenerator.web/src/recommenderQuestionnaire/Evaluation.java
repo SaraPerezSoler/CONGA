@@ -2,6 +2,10 @@
  */
 package recommenderQuestionnaire;
 
+import java.util.List;
+
+import generator.Bot;
+import recommenderQuestionnaire.evaluations.Evaluator;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,4 +18,10 @@ package recommenderQuestionnaire;
  * @generated
  */
 public interface Evaluation extends Question {
+
+	void setEvaluator(Evaluator ev);
+
+	List<Option> evaluate(Bot bot);
+
+	List<String> getOptionsString();
 } // Evaluation

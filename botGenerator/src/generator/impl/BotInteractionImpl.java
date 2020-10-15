@@ -59,6 +59,7 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	 * @ordered
 	 */
 	protected EList<UserInteraction> outcoming;
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,7 +88,16 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	@Override
 	public EList<Action> getActions() {
 		if (actions == null) {
-			actions = new EObjectResolvingEList<Action>(Action.class, this, GeneratorPackage.BOT_INTERACTION__ACTIONS);
+			actions = new EObjectResolvingEList<Action>(Action.class, this, GeneratorPackage.BOT_INTERACTION__ACTIONS){
+
+				private static final long serialVersionUID = 1L;
+
+				@Override
+	            protected boolean useEquals() {
+	                return true;
+	            }
+
+	        };
 		}
 		return actions;
 	}
@@ -143,7 +153,15 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	@Override
 	public EList<UserInteraction> getOutcoming() {
 		if (outcoming == null) {
-			outcoming = new EObjectContainmentWithInverseEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__OUTCOMING, GeneratorPackage.USER_INTERACTION__SRC);
+			outcoming = new EObjectContainmentWithInverseEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__OUTCOMING, GeneratorPackage.USER_INTERACTION__SRC){
+
+				private static final long serialVersionUID = 1L;
+
+				@Override
+	            protected boolean useEquals() {
+	                return true;
+	            }
+	        };
 		}
 		return outcoming;
 	}
@@ -277,5 +295,38 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getActions() == null) ? 0 : getActions().hashCode());
+		result = prime * result + ((getOutcoming() == null) ? 0 : getOutcoming().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BotInteractionImpl other = (BotInteractionImpl) obj;
+		if (getActions() == null) {
+			if (other.getActions() != null)
+				return false;
+		} else if (!getActions().equals(other.getActions()))
+			return false;
+		if (getOutcoming() == null) {
+			if (other.getOutcoming() != null)
+				return false;
+		} else if (!getOutcoming().equals(other.getOutcoming()))
+			return false;
+		return true;
+	}
+	
+	
 
 } //BotInteractionImpl

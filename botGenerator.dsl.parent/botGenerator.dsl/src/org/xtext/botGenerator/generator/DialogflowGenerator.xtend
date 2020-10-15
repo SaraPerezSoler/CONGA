@@ -5,8 +5,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import generator.Bot
 import generator.HTTPRequest
-import generator.Entity
-import java.util.List
 import generator.Token
 import generator.Literal
 import generator.EntityToken
@@ -27,20 +25,22 @@ import generator.RegexInput
 import generator.SimpleInput
 import generator.CompositeInput
 import generator.TrainingPhrase
+import generator.Entity
+import java.util.List
 
 class DialogflowGenerator {
 	String path;
 	protected static String uri;
 	CreateZip zip;
 	
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, CreateZip zip) {
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var requests = resource.allContents.filter(HTTPRequest).toList;
 		
 		path = bot.name + "/Dialogflow"
 		
 		
-		zip = new CreateZip(uri, bot.name)
+		this.zip = zip;
 		
 		fsa.generateFile(path + '/package.json', "{\n \"version\": \"1.0.0\"\n}")
 		var packageValue = fsa.readBinaryFile(path + '/package.json')

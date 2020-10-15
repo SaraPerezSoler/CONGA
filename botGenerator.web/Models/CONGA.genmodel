@@ -28,14 +28,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Project/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//Project/owner"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//Project/questionnaire"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Project/creationDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Project/modificationDate"/>
     </genClasses>
     <genClasses ecoreClass="CONGA.ecore#//UserAnswer">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//UserAnswer/answers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//UserAnswer/ranking"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//UserAnswer/date"/>
     </genClasses>
     <genClasses ecoreClass="CONGA.ecore#//AQuestion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//AQuestion/question"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//AQuestion/selecteds"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//AQuestion/relevance"/>
+    </genClasses>
+    <genClasses ecoreClass="CONGA.ecore#//ToolToDouble">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//ToolToDouble/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//ToolToDouble/value"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="RecommenderQuestionnaire" disposableProviderFactory="true"

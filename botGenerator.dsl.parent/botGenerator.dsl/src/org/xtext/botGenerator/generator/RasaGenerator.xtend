@@ -36,11 +36,9 @@ import generator.EntityInput
 class RasaGenerator {
 
 	String path;
-	protected static String uri;
-	CreateZip zip;
 
 
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, CreateZip zip) {
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var intents = resource.allContents.filter(Intent).toList;
 		var entities = resource.allContents.filter(Entity).toList;
@@ -52,7 +50,6 @@ class RasaGenerator {
 		}
 		
 		
-		zip = new CreateZip(uri, bot.name)
 		for (Language lan : bot.languages) {
 			path = bot.name + "/Rasa" + "/" + lan.languageAbbreviation
 			fsa.generateFile(path + '/actions.py', actions(intents, entities, actions, lan))

@@ -2,7 +2,9 @@
  */
 package recommenderQuestionnaire.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -270,6 +272,25 @@ public class QuestionImpl extends WithNameImpl implements Question {
 		result.append(multiresponse);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public List<String> getOptionsString() {
+		List<String> ret = new ArrayList<String>();
+		for (Option opt: getOptions()) {
+			ret.add(opt.getText());
+		}
+		return ret;
+	}
+
+	@Override
+	public Option getOption(String opt) {
+		for (Option option: getOptions()) {
+			if (option.getText().equals(opt)) {
+				return option;
+			}
+		}
+		return null;
 	}
 
 } //QuestionImpl

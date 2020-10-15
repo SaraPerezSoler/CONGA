@@ -90,5 +90,9 @@ public interface Option extends EObject {
 	 * @generated
 	 */
 	EList<Tool> getUnknown();
+	
+	boolean isAccepted(String tool);
+	boolean isRefused(String tool);
+	boolean isUnknow(String tool);
 
 } // Option

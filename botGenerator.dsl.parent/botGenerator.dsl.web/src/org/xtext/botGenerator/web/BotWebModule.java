@@ -5,23 +5,24 @@ package org.xtext.botGenerator.web;
 
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
+import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 
 import com.google.inject.Binder;
+
 
 /**
  * Use this class to register additional components to be used within the web application.
  */
 public class BotWebModule extends AbstractBotWebModule {
-	public FileResourceHandler bindIServerResourceHandler()  {
-		// your own impl here
-		FileResourceHandler handler = new FileResourceHandler();
-		return handler;
+	
+	
+	public void configure(Binder binder) {
+		binder.bind(IServerResourceHandler.class).to(FileResourceHandler.class);
+		binder.bind(IResourceBaseProvider.class).toInstance(
+				new ResourceBaseProviderImpl("."));
+		super.configure(binder);
 	}
 	
-	// only needed for FileResourceHandler
-	public void configureIResourceBaseProvider(Binder binder) {
-		binder.bind(IResourceBaseProvider.class).toInstance(
-		new ResourceBaseProviderImpl("."));
-	}
+	
 }

@@ -2,9 +2,14 @@
  */
 package recommenderQuestionnaire;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
+
+import recommenderQuestionnaire.evaluations.Evaluator;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,5 +52,19 @@ public interface Questionnaire extends EObject {
 	 * @generated
 	 */
 	EList<Question> getQuestions();
+
+	Question getQuestion(String questionName);
+
+	Evaluation getEvaluation(String name);
+
+	Tool createTool(String tool);
+
+	Evaluation createEvaluation(String name, String text, boolean multiresponse, List<String> options,
+			Map<String, List<String>> accepted, Map<String, List<String>> refused, Evaluator ev);
+
+	List<Evaluation> getEvaluations();
+	List<Question> getNOTEvaluations();
+
+	Tool getTool(String string);
 
 } // Questionnaire

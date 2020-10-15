@@ -11,6 +11,7 @@ import congabase.RelevanceLevel;
 import congabase.User;
 import congabase.UserAnswer;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -68,6 +69,13 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass toolToDoubleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum relevanceLevelEEnum = null;
 
 	/**
@@ -119,15 +127,15 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 
 		// Obtain or create and register interdependencies
 		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(RecommenderQuestionnairePackage.eNS_URI);
-		RecommenderQuestionnairePackageImpl theRecomenderquestionnairePackage = (RecommenderQuestionnairePackageImpl)(registeredPackage instanceof RecommenderQuestionnairePackageImpl ? registeredPackage : RecommenderQuestionnairePackage.eINSTANCE);
+		RecommenderQuestionnairePackageImpl theRecommenderQuestionnairePackage = (RecommenderQuestionnairePackageImpl)(registeredPackage instanceof RecommenderQuestionnairePackageImpl ? registeredPackage : RecommenderQuestionnairePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theCongabasePackage.createPackageContents();
-		theRecomenderquestionnairePackage.createPackageContents();
+		theRecommenderQuestionnairePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theCongabasePackage.initializePackageContents();
-		theRecomenderquestionnairePackage.initializePackageContents();
+		theRecommenderQuestionnairePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theCongabasePackage.freeze();
@@ -250,6 +258,24 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProject_CreationDate() {
+		return (EAttribute)projectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProject_ModificationDate() {
+		return (EAttribute)projectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUserAnswer() {
 		return userAnswerEClass;
 	}
@@ -261,6 +287,24 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 */
 	public EReference getUserAnswer_Answers() {
 		return (EReference)userAnswerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUserAnswer_Ranking() {
+		return (EReference)userAnswerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUserAnswer_Date() {
+		return (EAttribute)userAnswerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -297,6 +341,33 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 */
 	public EAttribute getAQuestion_Relevance() {
 		return (EAttribute)aQuestionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getToolToDouble() {
+		return toolToDoubleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getToolToDouble_Key() {
+		return (EReference)toolToDoubleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getToolToDouble_Value() {
+		return (EAttribute)toolToDoubleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -350,14 +421,22 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		createEAttribute(projectEClass, PROJECT__NAME);
 		createEReference(projectEClass, PROJECT__OWNER);
 		createEReference(projectEClass, PROJECT__QUESTIONNAIRE);
+		createEAttribute(projectEClass, PROJECT__CREATION_DATE);
+		createEAttribute(projectEClass, PROJECT__MODIFICATION_DATE);
 
 		userAnswerEClass = createEClass(USER_ANSWER);
 		createEReference(userAnswerEClass, USER_ANSWER__ANSWERS);
+		createEReference(userAnswerEClass, USER_ANSWER__RANKING);
+		createEAttribute(userAnswerEClass, USER_ANSWER__DATE);
 
 		aQuestionEClass = createEClass(AQUESTION);
 		createEReference(aQuestionEClass, AQUESTION__QUESTION);
 		createEReference(aQuestionEClass, AQUESTION__SELECTEDS);
 		createEAttribute(aQuestionEClass, AQUESTION__RELEVANCE);
+
+		toolToDoubleEClass = createEClass(TOOL_TO_DOUBLE);
+		createEReference(toolToDoubleEClass, TOOL_TO_DOUBLE__KEY);
+		createEAttribute(toolToDoubleEClass, TOOL_TO_DOUBLE__VALUE);
 
 		// Create enums
 		relevanceLevelEEnum = createEEnum(RELEVANCE_LEVEL);
@@ -387,7 +466,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		RecommenderQuestionnairePackage theRecomenderquestionnairePackage = (RecommenderQuestionnairePackage)EPackage.Registry.INSTANCE.getEPackage(RecommenderQuestionnairePackage.eNS_URI);
+		RecommenderQuestionnairePackage theRecommenderQuestionnairePackage = (RecommenderQuestionnairePackage)EPackage.Registry.INSTANCE.getEPackage(RecommenderQuestionnairePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -399,7 +478,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEClass(congaSystemEClass, CongaSystem.class, "CongaSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCongaSystem_Users(), this.getUser(), null, "users", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCongaSystem_Projects(), this.getProject(), null, "projects", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCongaSystem_Questionnaire(), theRecomenderquestionnairePackage.getQuestionnaire(), null, "questionnaire", null, 1, 1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCongaSystem_Questionnaire(), theRecommenderQuestionnairePackage.getQuestionnaire(), null, "questionnaire", null, 1, 1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUser_Nick(), ecorePackage.getEString(), "nick", null, 1, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -409,15 +488,23 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProject_Name(), ecorePackage.getEString(), "name", null, 1, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProject_Owner(), this.getUser(), this.getUser_Projects(), "owner", null, 1, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProject_Questionnaire(), this.getUserAnswer(), null, "questionnaire", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProject_Questionnaire(), this.getUserAnswer(), null, "questionnaire", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_CreationDate(), ecorePackage.getEDate(), "creationDate", null, 1, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProject_ModificationDate(), ecorePackage.getEDate(), "modificationDate", null, 1, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userAnswerEClass, UserAnswer.class, "UserAnswer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUserAnswer_Answers(), this.getAQuestion(), null, "answers", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserAnswer_Answers(), this.getAQuestion(), null, "answers", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserAnswer_Ranking(), this.getToolToDouble(), null, "ranking", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUserAnswer_Date(), ecorePackage.getEDate(), "date", null, 0, 1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aQuestionEClass, AQuestion.class, "AQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAQuestion_Question(), theRecomenderquestionnairePackage.getQuestion(), null, "question", null, 1, 1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAQuestion_Selecteds(), theRecomenderquestionnairePackage.getOption(), null, "selecteds", null, 1, -1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAQuestion_Relevance(), this.getRelevanceLevel(), "relevance", "RELEVANT", 1, 1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAQuestion_Question(), theRecommenderQuestionnairePackage.getQuestion(), null, "question", null, 1, 1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAQuestion_Selecteds(), theRecommenderQuestionnairePackage.getOption(), null, "selecteds", null, 0, -1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAQuestion_Relevance(), this.getRelevanceLevel(), "relevance", "Relevant", 1, 1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(toolToDoubleEClass, Map.Entry.class, "ToolToDouble", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getToolToDouble_Key(), theRecommenderQuestionnairePackage.getTool(), null, "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getToolToDouble_Value(), ecorePackage.getEDoubleObject(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(relevanceLevelEEnum, RelevanceLevel.class, "RelevanceLevel");

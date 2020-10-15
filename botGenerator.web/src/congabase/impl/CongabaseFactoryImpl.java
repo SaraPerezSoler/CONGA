@@ -4,6 +4,7 @@ package congabase.impl;
 
 import congabase.*;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,6 +64,7 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 			case CongabasePackage.PROJECT: return createProject();
 			case CongabasePackage.USER_ANSWER: return createUserAnswer();
 			case CongabasePackage.AQUESTION: return createAQuestion();
+			case CongabasePackage.TOOL_TO_DOUBLE: return (EObject)createToolToDouble();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -145,6 +148,17 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	public AQuestion createAQuestion() {
 		AQuestionImpl aQuestion = new AQuestionImpl();
 		return aQuestion;
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<Tool, Double> createToolToDouble() {
+		ToolToDoubleImpl toolToDouble = new ToolToDoubleImpl();
+		return toolToDouble;
 	}
 
 	/**

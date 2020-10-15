@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
+import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,14 +57,14 @@ public interface AQuestion extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Selecteds</em>' reference list.
 	 * @see congabase.CongabasePackage#getAQuestion_Selecteds()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Option> getSelecteds();
 
 	/**
 	 * Returns the value of the '<em><b>Relevance</b></em>' attribute.
-	 * The default value is <code>"RELEVANT"</code>.
+	 * The default value is <code>"Relevant"</code>.
 	 * The literals are from the enumeration {@link congabase.RelevanceLevel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,7 +72,7 @@ public interface AQuestion extends EObject {
 	 * @see congabase.RelevanceLevel
 	 * @see #setRelevance(RelevanceLevel)
 	 * @see congabase.CongabasePackage#getAQuestion_Relevance()
-	 * @model default="RELEVANT" required="true"
+	 * @model default="Relevant" required="true"
 	 * @generated
 	 */
 	RelevanceLevel getRelevance();
@@ -86,5 +87,8 @@ public interface AQuestion extends EObject {
 	 * @generated
 	 */
 	void setRelevance(RelevanceLevel value);
+
+	double getScore(Tool t);
+	double getScore(String tool);
 
 } // AQuestion

@@ -2,6 +2,7 @@
  */
 package congabase;
 
+import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link congabase.Project#getName <em>Name</em>}</li>
  *   <li>{@link congabase.Project#getOwner <em>Owner</em>}</li>
  *   <li>{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}</li>
+ *   <li>{@link congabase.Project#getCreationDate <em>Creation Date</em>}</li>
+ *   <li>{@link congabase.Project#getModificationDate <em>Modification Date</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getProject()
@@ -70,25 +73,69 @@ public interface Project extends EObject {
 	void setOwner(User value);
 
 	/**
-	 * Returns the value of the '<em><b>Questionnaire</b></em>' reference.
+	 * Returns the value of the '<em><b>Questionnaire</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Questionnaire</em>' reference.
+	 * @return the value of the '<em>Questionnaire</em>' containment reference.
 	 * @see #setQuestionnaire(UserAnswer)
 	 * @see congabase.CongabasePackage#getProject_Questionnaire()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	UserAnswer getQuestionnaire();
 
 	/**
-	 * Sets the value of the '{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}' reference.
+	 * Sets the value of the '{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Questionnaire</em>' reference.
+	 * @param value the new value of the '<em>Questionnaire</em>' containment reference.
 	 * @see #getQuestionnaire()
 	 * @generated
 	 */
 	void setQuestionnaire(UserAnswer value);
+
+	/**
+	 * Returns the value of the '<em><b>Creation Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Creation Date</em>' attribute.
+	 * @see #setCreationDate(Date)
+	 * @see congabase.CongabasePackage#getProject_CreationDate()
+	 * @model required="true"
+	 * @generated
+	 */
+	Date getCreationDate();
+
+	/**
+	 * Sets the value of the '{@link congabase.Project#getCreationDate <em>Creation Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Creation Date</em>' attribute.
+	 * @see #getCreationDate()
+	 * @generated
+	 */
+	void setCreationDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Modification Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Modification Date</em>' attribute.
+	 * @see #setModificationDate(Date)
+	 * @see congabase.CongabasePackage#getProject_ModificationDate()
+	 * @model required="true"
+	 * @generated
+	 */
+	Date getModificationDate();
+
+	/**
+	 * Sets the value of the '{@link congabase.Project#getModificationDate <em>Modification Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Modification Date</em>' attribute.
+	 * @see #getModificationDate()
+	 * @generated
+	 */
+	void setModificationDate(Date value);
 
 } // Project

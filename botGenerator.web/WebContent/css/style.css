@@ -1,0 +1,34 @@
+
+#xtext-editor {
+	display: block;
+	position: relative;
+	height: 600px;
+	width: 100%;
+	border: 1px solid #aaa;
+}
+
+
+#dirty-indicator {
+	display: inline;
+	color: #e8e8e8;
+	padding: 1px 8px 1px 8px;
+	border: 1px solid #ccc;
+	margin-left: 10px;
+}
+
+#dirty-indicator.dirty {
+	background-color: #88e;
+}
+
+#status {
+	display: inline;
+}
+
+.button-nav-margin{
+	margin-left: 0.5%; 
+}
+
+.button-nav-height{
+	height: 40px;
+}
+

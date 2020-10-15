@@ -7,6 +7,7 @@ import congabase.Project;
 import congabase.User;
 import congabase.UserAnswer;
 
+import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -27,6 +28,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link congabase.impl.ProjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link congabase.impl.ProjectImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link congabase.impl.ProjectImpl#getQuestionnaire <em>Questionnaire</em>}</li>
+ *   <li>{@link congabase.impl.ProjectImpl#getCreationDate <em>Creation Date</em>}</li>
+ *   <li>{@link congabase.impl.ProjectImpl#getModificationDate <em>Modification Date</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,7 +66,7 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	protected User owner;
 
 	/**
-	 * The cached value of the '{@link #getQuestionnaire() <em>Questionnaire</em>}' reference.
+	 * The cached value of the '{@link #getQuestionnaire() <em>Questionnaire</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getQuestionnaire()
@@ -71,6 +74,46 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @ordered
 	 */
 	protected UserAnswer questionnaire;
+
+	/**
+	 * The default value of the '{@link #getCreationDate() <em>Creation Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date CREATION_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCreationDate() <em>Creation Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date creationDate = CREATION_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getModificationDate() <em>Modification Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date MODIFICATION_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getModificationDate() <em>Modification Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date modificationDate = MODIFICATION_DATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,14 +221,6 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @generated
 	 */
 	public UserAnswer getQuestionnaire() {
-		if (questionnaire != null && questionnaire.eIsProxy()) {
-			InternalEObject oldQuestionnaire = (InternalEObject)questionnaire;
-			questionnaire = (UserAnswer)eResolveProxy(oldQuestionnaire);
-			if (questionnaire != oldQuestionnaire) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.PROJECT__QUESTIONNAIRE, oldQuestionnaire, questionnaire));
-			}
-		}
 		return questionnaire;
 	}
 
@@ -194,8 +229,14 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UserAnswer basicGetQuestionnaire() {
-		return questionnaire;
+	public NotificationChain basicSetQuestionnaire(UserAnswer newQuestionnaire, NotificationChain msgs) {
+		UserAnswer oldQuestionnaire = questionnaire;
+		questionnaire = newQuestionnaire;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CongabasePackage.PROJECT__QUESTIONNAIRE, oldQuestionnaire, newQuestionnaire);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -204,10 +245,59 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	 * @generated
 	 */
 	public void setQuestionnaire(UserAnswer newQuestionnaire) {
-		UserAnswer oldQuestionnaire = questionnaire;
-		questionnaire = newQuestionnaire;
+		if (newQuestionnaire != questionnaire) {
+			NotificationChain msgs = null;
+			if (questionnaire != null)
+				msgs = ((InternalEObject)questionnaire).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CongabasePackage.PROJECT__QUESTIONNAIRE, null, msgs);
+			if (newQuestionnaire != null)
+				msgs = ((InternalEObject)newQuestionnaire).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CongabasePackage.PROJECT__QUESTIONNAIRE, null, msgs);
+			msgs = basicSetQuestionnaire(newQuestionnaire, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.PROJECT__QUESTIONNAIRE, newQuestionnaire, newQuestionnaire));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCreationDate(Date newCreationDate) {
+		Date oldCreationDate = creationDate;
+		creationDate = newCreationDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.PROJECT__QUESTIONNAIRE, oldQuestionnaire, questionnaire));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.PROJECT__CREATION_DATE, oldCreationDate, creationDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date getModificationDate() {
+		return modificationDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setModificationDate(Date newModificationDate) {
+		Date oldModificationDate = modificationDate;
+		modificationDate = newModificationDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.PROJECT__MODIFICATION_DATE, oldModificationDate, modificationDate));
 	}
 
 	/**
@@ -236,6 +326,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 		switch (featureID) {
 			case CongabasePackage.PROJECT__OWNER:
 				return basicSetOwner(null, msgs);
+			case CongabasePackage.PROJECT__QUESTIONNAIRE:
+				return basicSetQuestionnaire(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -254,8 +346,11 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				if (resolve) return getOwner();
 				return basicGetOwner();
 			case CongabasePackage.PROJECT__QUESTIONNAIRE:
-				if (resolve) return getQuestionnaire();
-				return basicGetQuestionnaire();
+				return getQuestionnaire();
+			case CongabasePackage.PROJECT__CREATION_DATE:
+				return getCreationDate();
+			case CongabasePackage.PROJECT__MODIFICATION_DATE:
+				return getModificationDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -276,6 +371,12 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				return;
 			case CongabasePackage.PROJECT__QUESTIONNAIRE:
 				setQuestionnaire((UserAnswer)newValue);
+				return;
+			case CongabasePackage.PROJECT__CREATION_DATE:
+				setCreationDate((Date)newValue);
+				return;
+			case CongabasePackage.PROJECT__MODIFICATION_DATE:
+				setModificationDate((Date)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -298,6 +399,12 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 			case CongabasePackage.PROJECT__QUESTIONNAIRE:
 				setQuestionnaire((UserAnswer)null);
 				return;
+			case CongabasePackage.PROJECT__CREATION_DATE:
+				setCreationDate(CREATION_DATE_EDEFAULT);
+				return;
+			case CongabasePackage.PROJECT__MODIFICATION_DATE:
+				setModificationDate(MODIFICATION_DATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +423,10 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 				return owner != null;
 			case CongabasePackage.PROJECT__QUESTIONNAIRE:
 				return questionnaire != null;
+			case CongabasePackage.PROJECT__CREATION_DATE:
+				return CREATION_DATE_EDEFAULT == null ? creationDate != null : !CREATION_DATE_EDEFAULT.equals(creationDate);
+			case CongabasePackage.PROJECT__MODIFICATION_DATE:
+				return MODIFICATION_DATE_EDEFAULT == null ? modificationDate != null : !MODIFICATION_DATE_EDEFAULT.equals(modificationDate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -332,6 +443,10 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", creationDate: ");
+		result.append(creationDate);
+		result.append(", modificationDate: ");
+		result.append(modificationDate);
 		result.append(')');
 		return result.toString();
 	}

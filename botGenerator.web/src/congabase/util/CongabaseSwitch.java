@@ -4,10 +4,12 @@ package congabase.util;
 
 import congabase.*;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,6 +98,12 @@ public class CongabaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CongabasePackage.TOOL_TO_DOUBLE: {
+				@SuppressWarnings("unchecked") Map.Entry<Tool, Double> toolToDouble = (Map.Entry<Tool, Double>)theEObject;
+				T result = caseToolToDouble(toolToDouble);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -172,6 +180,21 @@ public class CongabaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAQuestion(AQuestion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tool To Double</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tool To Double</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseToolToDouble(Map.Entry<Tool, Double> object) {
 		return null;
 	}
 

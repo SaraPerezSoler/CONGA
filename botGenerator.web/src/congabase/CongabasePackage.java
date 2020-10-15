@@ -196,7 +196,7 @@ public interface CongabasePackage extends EPackage {
 	int PROJECT__OWNER = 1;
 
 	/**
-	 * The feature id for the '<em><b>Questionnaire</b></em>' reference.
+	 * The feature id for the '<em><b>Questionnaire</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -205,13 +205,31 @@ public interface CongabasePackage extends EPackage {
 	int PROJECT__QUESTIONNAIRE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Creation Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__CREATION_DATE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Modification Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__MODIFICATION_DATE = 4;
+
+	/**
 	 * The number of structural features of the '<em>Project</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROJECT_FEATURE_COUNT = 3;
+	int PROJECT_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Project</em>' class.
@@ -233,7 +251,7 @@ public interface CongabasePackage extends EPackage {
 	int USER_ANSWER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Answers</b></em>' reference list.
+	 * The feature id for the '<em><b>Answers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -242,13 +260,31 @@ public interface CongabasePackage extends EPackage {
 	int USER_ANSWER__ANSWERS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Ranking</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_ANSWER__RANKING = 1;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_ANSWER__DATE = 2;
+
+	/**
 	 * The number of structural features of the '<em>User Answer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_ANSWER_FEATURE_COUNT = 1;
+	int USER_ANSWER_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>User Answer</em>' class.
@@ -315,6 +351,52 @@ public interface CongabasePackage extends EPackage {
 	int AQUESTION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link congabase.impl.ToolToDoubleImpl <em>Tool To Double</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.impl.ToolToDoubleImpl
+	 * @see congabase.impl.CongabasePackageImpl#getToolToDouble()
+	 * @generated
+	 */
+	int TOOL_TO_DOUBLE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOOL_TO_DOUBLE__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOOL_TO_DOUBLE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Tool To Double</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOOL_TO_DOUBLE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Tool To Double</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOOL_TO_DOUBLE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link congabase.RelevanceLevel <em>Relevance Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -322,7 +404,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getRelevanceLevel()
 	 * @generated
 	 */
-	int RELEVANCE_LEVEL = 5;
+	int RELEVANCE_LEVEL = 6;
 
 
 	/**
@@ -444,15 +526,37 @@ public interface CongabasePackage extends EPackage {
 	EReference getProject_Owner();
 
 	/**
-	 * Returns the meta object for the reference '{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}'.
+	 * Returns the meta object for the containment reference '{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Questionnaire</em>'.
+	 * @return the meta object for the containment reference '<em>Questionnaire</em>'.
 	 * @see congabase.Project#getQuestionnaire()
 	 * @see #getProject()
 	 * @generated
 	 */
 	EReference getProject_Questionnaire();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Project#getCreationDate <em>Creation Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Creation Date</em>'.
+	 * @see congabase.Project#getCreationDate()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_CreationDate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Project#getModificationDate <em>Modification Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Modification Date</em>'.
+	 * @see congabase.Project#getModificationDate()
+	 * @see #getProject()
+	 * @generated
+	 */
+	EAttribute getProject_ModificationDate();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.UserAnswer <em>User Answer</em>}'.
@@ -465,15 +569,37 @@ public interface CongabasePackage extends EPackage {
 	EClass getUserAnswer();
 
 	/**
-	 * Returns the meta object for the reference list '{@link congabase.UserAnswer#getAnswers <em>Answers</em>}'.
+	 * Returns the meta object for the containment reference list '{@link congabase.UserAnswer#getAnswers <em>Answers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Answers</em>'.
+	 * @return the meta object for the containment reference list '<em>Answers</em>'.
 	 * @see congabase.UserAnswer#getAnswers()
 	 * @see #getUserAnswer()
 	 * @generated
 	 */
 	EReference getUserAnswer_Answers();
+
+	/**
+	 * Returns the meta object for the map '{@link congabase.UserAnswer#getRanking <em>Ranking</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Ranking</em>'.
+	 * @see congabase.UserAnswer#getRanking()
+	 * @see #getUserAnswer()
+	 * @generated
+	 */
+	EReference getUserAnswer_Ranking();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.UserAnswer#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see congabase.UserAnswer#getDate()
+	 * @see #getUserAnswer()
+	 * @generated
+	 */
+	EAttribute getUserAnswer_Date();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.AQuestion <em>AQuestion</em>}'.
@@ -517,6 +643,40 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAQuestion_Relevance();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Tool To Double</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tool To Double</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyType="recommenderQuestionnaire.Tool" keyRequired="true"
+	 *        valueDataType="org.eclipse.emf.ecore.EDoubleObject" valueRequired="true"
+	 * @generated
+	 */
+	EClass getToolToDouble();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getToolToDouble()
+	 * @generated
+	 */
+	EReference getToolToDouble_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getToolToDouble()
+	 * @generated
+	 */
+	EAttribute getToolToDouble_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link congabase.RelevanceLevel <em>Relevance Level</em>}'.
@@ -646,12 +806,28 @@ public interface CongabasePackage extends EPackage {
 		EReference PROJECT__OWNER = eINSTANCE.getProject_Owner();
 
 		/**
-		 * The meta object literal for the '<em><b>Questionnaire</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Questionnaire</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PROJECT__QUESTIONNAIRE = eINSTANCE.getProject_Questionnaire();
+
+		/**
+		 * The meta object literal for the '<em><b>Creation Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROJECT__CREATION_DATE = eINSTANCE.getProject_CreationDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Modification Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROJECT__MODIFICATION_DATE = eINSTANCE.getProject_ModificationDate();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.UserAnswerImpl <em>User Answer</em>}' class.
@@ -664,12 +840,28 @@ public interface CongabasePackage extends EPackage {
 		EClass USER_ANSWER = eINSTANCE.getUserAnswer();
 
 		/**
-		 * The meta object literal for the '<em><b>Answers</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Answers</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference USER_ANSWER__ANSWERS = eINSTANCE.getUserAnswer_Answers();
+
+		/**
+		 * The meta object literal for the '<em><b>Ranking</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USER_ANSWER__RANKING = eINSTANCE.getUserAnswer_Ranking();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_ANSWER__DATE = eINSTANCE.getUserAnswer_Date();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.AQuestionImpl <em>AQuestion</em>}' class.
@@ -704,6 +896,32 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AQUESTION__RELEVANCE = eINSTANCE.getAQuestion_Relevance();
+
+		/**
+		 * The meta object literal for the '{@link congabase.impl.ToolToDoubleImpl <em>Tool To Double</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.impl.ToolToDoubleImpl
+		 * @see congabase.impl.CongabasePackageImpl#getToolToDouble()
+		 * @generated
+		 */
+		EClass TOOL_TO_DOUBLE = eINSTANCE.getToolToDouble();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOOL_TO_DOUBLE__KEY = eINSTANCE.getToolToDouble_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOOL_TO_DOUBLE__VALUE = eINSTANCE.getToolToDouble_Value();
 
 		/**
 		 * The meta object literal for the '{@link congabase.RelevanceLevel <em>Relevance Level</em>}' enum.

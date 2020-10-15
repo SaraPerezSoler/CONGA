@@ -26,7 +26,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_RELEVANT(0, "NOT_RELEVANT", "NOT_RELEVANT"),
+	NOT_RELEVANT(0, "NOT_RELEVANT", "Not relevant"),
 
 	/**
 	 * The '<em><b>RELEVANT</b></em>' literal object.
@@ -36,7 +36,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RELEVANT(1, "RELEVANT", "RELEVANT"),
+	RELEVANT(1, "RELEVANT", "Relevant"),
 
 	/**
 	 * The '<em><b>DOBLE</b></em>' literal object.
@@ -46,7 +46,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DOBLE(2, "DOBLE", "DOBLE"),
+	DOBLE(2, "DOBLE", "Double relevant"),
 
 	/**
 	 * The '<em><b>CRITICAL ONE</b></em>' literal object.
@@ -56,7 +56,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CRITICAL_ONE(3, "CRITICAL_ONE", "CRITICAL_ONE"),
+	CRITICAL_ONE(3, "CRITICAL_ONE", "Critical (at least one option)"),
 
 	/**
 	 * The '<em><b>CRITICAL ALL</b></em>' literal object.
@@ -66,7 +66,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CRITICAL_ALL(4, "CRITICAL_ALL", "CRITICAL_ALL"),
+	CRITICAL_ALL(4, "CRITICAL_ALL", "Critical (all options)"),
 
 	/**
 	 * The '<em><b>CRITICAL</b></em>' literal object.
@@ -76,14 +76,14 @@ public enum RelevanceLevel implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CRITICAL(5, "CRITICAL", "CRITICAL");
+	CRITICAL(5, "CRITICAL", "Critical");
 
 	/**
 	 * The '<em><b>NOT RELEVANT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #NOT_RELEVANT
-	 * @model
+	 * @model literal="Not relevant"
 	 * @generated
 	 * @ordered
 	 */
@@ -94,7 +94,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #RELEVANT
-	 * @model
+	 * @model literal="Relevant"
 	 * @generated
 	 * @ordered
 	 */
@@ -105,7 +105,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #DOBLE
-	 * @model
+	 * @model literal="Double relevant"
 	 * @generated
 	 * @ordered
 	 */
@@ -116,7 +116,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #CRITICAL_ONE
-	 * @model
+	 * @model literal="Critical (at least one option)"
 	 * @generated
 	 * @ordered
 	 */
@@ -127,7 +127,7 @@ public enum RelevanceLevel implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #CRITICAL_ALL
-	 * @model
+	 * @model literal="Critical (all options)"
 	 * @generated
 	 * @ordered
 	 */
@@ -138,11 +138,22 @@ public enum RelevanceLevel implements Enumerator {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #CRITICAL
-	 * @model
+	 * @model literal="Critical"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int CRITICAL_VALUE = 5;
+	
+	private static final String[] MULTI_LEVEL = { RELEVANT.getLiteral(), NOT_RELEVANT.getLiteral(), DOBLE.getLiteral(),
+			CRITICAL_ONE.getLiteral(), CRITICAL_ALL.getLiteral() };
+	private static final String[] NOT_MULTI_LEVEL = { RELEVANT.getLiteral(), NOT_RELEVANT.getLiteral(), DOBLE.getLiteral(), CRITICAL.getLiteral() };
+	
+	public static String[] getLevelsString(boolean multi) {
+		if (multi) {
+			return MULTI_LEVEL;
+		}
+		return NOT_MULTI_LEVEL;
+	}
 
 	/**
 	 * An array of all the '<em><b>Relevance Level</b></em>' enumerators.

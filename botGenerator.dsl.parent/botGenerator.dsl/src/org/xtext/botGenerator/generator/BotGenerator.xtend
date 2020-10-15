@@ -12,7 +12,6 @@ import generator.RegexInput
 import generator.SimpleInput
 import generator.Intent
 import org.eclipse.core.resources.ResourcesPlugin
-import generator.Bot
 
 /**
  * Generates code from your model files on save.
@@ -36,13 +35,15 @@ class BotGenerator extends AbstractGenerator {
 		} else {
 			uri = newpath+"/";
 		}
-		DialogflowGenerator.uri = uri+resourceName+"/Dialogflow"
+		var dialogflowGeneratorUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Dialogflow"
+		var dialogflowZip = new CreateZip(dialogflowGeneratorUri, resourceName)
 		var dialogflow = new DialogflowGenerator()
-		dialogflow.doGenerate(resource, fsa, context)
+		dialogflow.doGenerate(resource, fsa, context, dialogflowZip)
 		
-		RasaGenerator.uri = uri+resourceName+"/Rasa"
+		var rasaUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Rasa"
+		var rasaZip = new CreateZip(rasaUri, resourceName)
 		var rasa = new RasaGenerator()
-	    rasa.doGenerate(resource, fsa, context)
+	    rasa.doGenerate(resource, fsa, context, rasaZip)
 	}
 
 	def static entityType(Entity entity) {

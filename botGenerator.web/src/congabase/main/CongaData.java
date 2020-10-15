@@ -6,9 +6,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,20 +27,31 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xtext.botGenerator.BotStandaloneSetup;
 import org.xtext.botGenerator.generator.BotGenerator;
 
 import com.google.inject.Injector;
 
+import botGenerator.web.xtextServlets.BotServlet;
+import congabase.AQuestion;
 import congabase.CongaSystem;
 import congabase.CongabaseFactory;
 import congabase.CongabasePackage;
 import congabase.Project;
+import congabase.RelevanceLevel;
 import congabase.User;
+import congabase.UserAnswer;
 import congabase.exception.FatalException;
+import congabase.plantUML.CreateFlowsDiagram;
+import congabase.plantUML.UML;
 import generator.Bot;
+import generator.Language;
+import recommenderQuestionnaire.Evaluation;
+import recommenderQuestionnaire.Option;
+import recommenderQuestionnaire.Question;
 import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
+import recommenderQuestionnaire.Tool;
+import recommenderQuestionnaire.evaluations.Evaluator;
 
 public class CongaData {
 
@@ -65,6 +86,11 @@ public class CongaData {
 
 	public static String getPath() {
 		return PATH;
+	}
+	
+	public static String[] supportedTools() {
+		String[] ret = {"Dialogflow", "Rasa"};
+		return ret;
 	}
 
 	public static CongaData getCongaData(ServletContext context) throws Exception {
@@ -103,11 +129,17 @@ public class CongaData {
 			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
 			resource.getContents().add(conga);
 			newUser("admin", "adminadmin");
-			Resource qresource = getResourceSet().getResource(URI.createFileURI(path +"/"+RECOMMENDER_FILE), true);
+			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
 			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
 			conga.setQuestionnaire(questionnaire);
 		}
-
+		Questionnaire questionnaire = conga.getQuestionnaire();
+		try {
+			Evaluator.loadEvaluators(questionnaire);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			throw new FatalException("Can not load the evaluators");
+		}
 		save();
 	}
 
@@ -120,7 +152,31 @@ public class CongaData {
 		}
 	}
 
-	public Project newProject(String name, User owner) throws IOException {
+	public void delProject(String userString, String project) {
+		User user = getUser(userString);
+		if (user == null) {
+			return;
+		}
+		Project p = user.get(project);
+		if (project == null) {
+			return;
+		}
+		
+		File botFile = new File(getProjectFilePath(p));
+		if (botFile.exists()) {
+			botFile.delete();
+		}
+		
+		File botFolder = new File(getProjectFolderPath(p));
+		if (botFolder.exists()) {
+			botFolder.delete();
+		}
+		user.getProjects().remove(p);
+		conga.getProjects().remove(p);
+		save();
+	}
+
+	public Project newProject(String name, User owner, String language) throws IOException {
 
 		if (owner.get(name) != null) {
 			return owner.get(name);
@@ -129,6 +185,8 @@ public class CongaData {
 		Project project = CongabaseFactory.eINSTANCE.createProject();
 		project.setName(name);
 		project.setOwner(owner);
+		project.setCreationDate(new Date());
+		project.setModificationDate(new Date());
 		conga.getProjects().add(project);
 
 		File botFolder = new File(getProjectFolderPath(project));
@@ -142,7 +200,7 @@ public class CongaData {
 		}
 		botFile.createNewFile();
 
-		File startFile = new File(PATH + "/example1.bot");
+		File startFile = new File(PATH + "/example2.bot");
 		InputStream in = new FileInputStream(startFile);
 		OutputStream out = new FileOutputStream(botFile);
 
@@ -154,17 +212,38 @@ public class CongaData {
 		}
 		in.close();
 		out.close();
-
-		Injector injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
-		XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
-		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		Resource resource = resourceSetXtext.getResource(URI.createURI(getProjectFilePath(project)), true);
+		
+		Resource resource = getProjectResource(project);
 		Bot bot = (Bot) resource.getContents().get(0);
 		bot.setName(name);
+		bot.getLanguages().clear();
+		bot.getLanguages().add(Language.get(language));
 		resource.save(null);
 
 		save();
 		return project;
+	}
+	
+	public Bot getBotProject (Project project) {
+		Resource resource = getProjectResource(project);
+		Bot bot = (Bot) resource.getContents().get(0);
+		return bot;
+	}
+	public Resource getProjectResource (Project project) {
+		Injector injector = BotServlet.getInjector();
+		XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
+		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		Resource resource = resourceSetXtext.getResource(URI.createURI(getProjectFilePath(project)), true);
+		return resource;
+	}
+
+
+	public Project newProject(String projectName, String userString, String language) throws IOException {
+		User user = getUser(userString);
+		if (user == null) {
+			return null;
+		}
+		return newProject(projectName, user, language);
 	}
 
 	public User newUser(String nick, String password) {
@@ -198,5 +277,166 @@ public class CongaData {
 
 	public User getUser(String user) {
 		return conga.getUser(user);
+	}
+
+	public boolean login(String user, String password) {
+		User u = getUser(user);
+		if (u != null) {
+			if (u.getPassword().equals(password)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String generateFlowImage(String userName, String projectName) {
+		Project p = getProject(userName, projectName);
+		if (p== null) {
+			return "";
+		}
+		return generateFlowImage(p);
+	}
+	
+	public String generateFlowImage(Project p) {
+		Bot bot = getBotProject(p);
+		String text = new CreateFlowsDiagram().createUML(bot.getFlows());
+		String path = getProjectFolderPath(p)+"/"+p.getName()+".txt";
+		File txt = UML.write(path, text);
+		File png = UML.getUML(txt);
+		return png.getAbsolutePath();
+	}
+
+	public List<Project> getProjects(String username) {
+		User user = getUser(username);
+		if (user == null) {
+			return new ArrayList<>();
+		}
+		return user.getProjects();
+	}
+
+	public void updateModified(Project project) {
+		project.setModificationDate(new Date());
+		save();
+	}
+	
+	public List<AQuestion> getEvaluations(String user, String projectString) {
+		Project project = getProject(user, projectString);
+		
+		if (project.getQuestionnaire()== null) {
+			createUserAnswer(project);
+		}
+		UserAnswer answers = project.getQuestionnaire();
+		List<AQuestion> ret = new ArrayList<>();
+		for (Evaluation ev: conga.getQuestionnaire().getEvaluations()) {
+			ret.add(answers.getAnswer(ev));
+		}
+		return ret;
+	}
+	
+	public List<AQuestion> getNOTEvaluations(String user, String projectString) {
+		Project project = getProject(user, projectString);
+		
+		if (project.getQuestionnaire()== null) {
+			createUserAnswer(project);
+		}
+		UserAnswer answers = project.getQuestionnaire();
+		List<AQuestion> ret = new ArrayList<>();
+		for (Question ev: conga.getQuestionnaire().getNOTEvaluations()) {
+			ret.add(answers.getAnswer(ev));
+		}
+		return ret;
+	}
+	public Map<String, List<AQuestion>> getAllQuestions(String user,String projectName){
+		Map<String, List<AQuestion>> ret = new HashMap<>();
+		ret.put("Evaluations", getEvaluations(user, projectName));
+		ret.put("Questions", getNOTEvaluations(user, projectName));
+		return ret;
+	}
+	public String[] getRelevantLevels(String questionName){
+		Question q = conga.getQuestionnaire().getQuestion(questionName);
+		return RelevanceLevel.getLevelsString(q.isMultiresponse());
+		
+	}
+
+	public void evaluateBot(Project project, Map<String, String> evaluationLevel) {
+		
+		Bot bot = getBotProject(project);
+		UserAnswer answers = null;
+		if (project.getQuestionnaire()!= null) {
+			answers = project.getQuestionnaire();
+		}else {
+			answers = CongabaseFactory.eINSTANCE.createUserAnswer();
+			project.setQuestionnaire(answers);
+		}
+		for (String ev: evaluationLevel.keySet()) {
+			Evaluation evaluation = (Evaluation) conga.getQuestionnaire().getQuestion(ev);
+			List<Option> ans = evaluation.evaluate(bot);
+			answerQuestion(evaluation, answers, ans, RelevanceLevel.get(evaluationLevel.get(ev)));
+		}
+		save();
+	}
+	
+	private void answerQuestion (Question question, UserAnswer answers, List<Option> options, RelevanceLevel level) {
+		AQuestion answer = answers.getAnswer(question);
+		if (answer == null) {
+			answer = CongabaseFactory.eINSTANCE.createAQuestion();
+			answer.setQuestion(question);
+			answers.getAnswers().add(answer);
+		}
+		answer.getSelecteds().clear();
+		answer.getSelecteds().addAll(options);
+		answer.setRelevance(level);
+	}
+	
+	public void createUserAnswer (Project project) {
+		if (project.getQuestionnaire()!= null) {
+			return;
+		}
+		UserAnswer answers = CongabaseFactory.eINSTANCE.createUserAnswer();
+		project.setQuestionnaire(answers);
+		for (Question q: conga.getQuestionnaire().getQuestions()) {
+			AQuestion aQuestion = CongabaseFactory.eINSTANCE.createAQuestion();
+			aQuestion.setQuestion(q);
+			answers.getAnswers().add(aQuestion);
+		}
+		save();
+	}
+
+	public void addAnswer(Project project, AQuestion question, List<String> optionsList, RelevanceLevel level) {
+		List<Option> options = new ArrayList<>();
+		for(String opt: optionsList) {
+			options.add(question.getQuestion().getOption(opt));
+		}
+		answerQuestion(question.getQuestion(), project.getQuestionnaire(), options, level);
+		save();
+		
+	}
+
+	public void calculateRanking(Project project) {
+		if (project.getQuestionnaire()!= null) {
+			project.getQuestionnaire().calculateRanking(conga.getQuestionnaire().getTools());
+			project.getQuestionnaire().setDate(new Date());
+		}
+		save();
+		
+	}
+	public Map<String, Double> getRanking(String user, String projectName){
+		Project p = getProject(user, projectName);
+		if (p.getQuestionnaire() == null) {
+			return new HashMap<>();
+		}
+		Map<String, Double> ret = new HashMap<>();
+		EMap<Tool, Double> ranking = p.getQuestionnaire().getRanking();
+		for (Tool t: ranking.keySet()) {
+			ret.put(t.getName(), ranking.get(t));
+		}
+		ret = ret.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+		return ret;
+	}
+	public String getWinner(Project project) {
+		 Map<String, Double> ranking = getRanking(project.getOwner().getNick(), project.getName());
+		 String tool = ranking.keySet().iterator().next();
+		 return tool + " ("+String.format("%.2f", ranking.get(tool)*100)+"%)";
 	}
 }

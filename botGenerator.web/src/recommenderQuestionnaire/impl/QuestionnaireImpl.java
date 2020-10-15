@@ -2,7 +2,10 @@
  */
 package recommenderQuestionnaire.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -16,10 +19,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import recommenderQuestionnaire.Evaluation;
+import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
 import recommenderQuestionnaire.Questionnaire;
+import recommenderQuestionnaire.RecommenderQuestionnaireFactory;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
+import recommenderQuestionnaire.evaluations.Evaluator;
 
 /**
  * <!-- begin-user-doc -->
@@ -185,5 +192,107 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+	public Question getQuestion(String questionName) {
+		for (Question q: getQuestions()) {
+			if (q.getName().equals(questionName) || q.getText().equals(questionName)) {
+				return q;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Evaluation getEvaluation(String name) {
+		for (Question q : getQuestions()) {
+			if (q instanceof Evaluation) {
+				if (((Evaluation) q).getName().equals(name)) {
+					return (Evaluation) q;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public Tool createTool(String toolName) {
+		Tool tool = getTool(toolName);
+		if (tool !=null) {
+			return tool;
+		}
+		tool = RecommenderQuestionnaireFactory.eINSTANCE.createTool();
+		tool.setName(toolName);
+		for (Question q : getQuestions()) {
+			for (Option a : q.getOptions()) {
+				tool.getUnknown().add(a);
+			}
+		}
+		getTools().add(tool);
+		return tool;
+	}
+	@Override
+	public Tool getTool(String string) {
+		for (Tool tool : getTools()) {
+			if (tool.getName().equalsIgnoreCase(string)) {
+				return tool;
+			}
+		}
+		return null;
+	}
+
+	public Evaluation createEvaluation(String evName, String evText, boolean multi, List<String> options,
+			Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Evaluator ev) {
+		
+		
+		Evaluation evaluation = getEvaluation(evName);
+		if (evaluation !=null) {
+			return evaluation;
+		}
+		evaluation = RecommenderQuestionnaireFactory.eINSTANCE.createEvaluation();
+		evaluation.setName(evName);
+		evaluation.setText(evText);
+		evaluation.setMultiresponse(multi);
+		evaluation.setEvaluator(ev);
+		for (String opt : options) {
+			Option a = RecommenderQuestionnaireFactory.eINSTANCE.createOption();
+			a.setText(opt);
+			List<String> acp = opt_tools_accepted.get(opt);
+			List<String> ref = opt_tools_refused.get(opt);
+			for (Tool tool : getTools()) {
+				if (acp != null && acp.contains(tool.getName())) {
+					a.getAcceptedTools().add(tool);
+				} else if (ref != null && ref.contains(tool.getName())) {
+					a.getRefusedTools().add(tool);
+				} else {
+					a.getUnknown().add(tool);
+				}
+			}
+			evaluation.getOptions().add(a);
+		}
+		getQuestions().add(evaluation);
+		return evaluation;
+	}
+
+	@Override
+	public List<Evaluation> getEvaluations() {
+		List<Evaluation> ev = new ArrayList<>();
+		for (Question q: getQuestions()) {
+			if (q instanceof Evaluation) {
+				ev.add((Evaluation) q);
+			}
+		}
+		return ev;
+	}
+
+	@Override
+	public List<Question> getNOTEvaluations() {
+		List<Question> ret = new ArrayList<>();
+		ret.addAll(getQuestions());
+		ret.removeAll(getEvaluations());
+		return ret;
+	}
+
 
 } //QuestionnaireImpl

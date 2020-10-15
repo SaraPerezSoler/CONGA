@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.xtext.botGenerator.generator.CreateZip;
 import org.xtext.botGenerator.generator.DialogflowGenerator;
 import org.xtext.botGenerator.generator.RasaGenerator;
 
@@ -50,12 +51,16 @@ public class BotGenerator extends AbstractGenerator {
     } else {
       uri = (BotGenerator.newpath + "/");
     }
-    DialogflowGenerator.uri = ((uri + resourceName) + "/Dialogflow");
+    String _replace = resource.getURI().devicePath().replace(resource.getURI().lastSegment(), "");
+    String dialogflowGeneratorUri = (_replace + "/Dialogflow");
+    CreateZip dialogflowZip = new CreateZip(dialogflowGeneratorUri, resourceName);
     DialogflowGenerator dialogflow = new DialogflowGenerator();
-    dialogflow.doGenerate(resource, fsa, context);
-    RasaGenerator.uri = ((uri + resourceName) + "/Rasa");
+    dialogflow.doGenerate(resource, fsa, context, dialogflowZip);
+    String _replace_1 = resource.getURI().devicePath().replace(resource.getURI().lastSegment(), "");
+    String rasaUri = (_replace_1 + "/Rasa");
+    CreateZip rasaZip = new CreateZip(rasaUri, resourceName);
     RasaGenerator rasa = new RasaGenerator();
-    rasa.doGenerate(resource, fsa, context);
+    rasa.doGenerate(resource, fsa, context, rasaZip);
   }
   
   public static int entityType(final Entity entity) {

@@ -74,4 +74,5 @@ public interface CongaSystem extends EObject {
 
 	User getUser(String user);
 
+
 } // CongaSystem
