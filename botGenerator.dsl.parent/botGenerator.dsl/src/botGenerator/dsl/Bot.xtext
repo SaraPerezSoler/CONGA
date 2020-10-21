@@ -70,7 +70,7 @@ Literal returns Literal:
 	 text=EString;
 
 EntityToken returns EntityToken:
-	"Token" '@'entity=[Entity|EString];
+	'Token' '@'entity=[Entity|EString];
 
 ParameterToken returns ParameterToken:
 	'['parameter=[Parameter|EString]']';
@@ -86,35 +86,52 @@ enum DefaultEntity returns DefaultEntity:
 
 EBoolean returns ecore::EBoolean:
 	'true' | 'false';
-
 Entity returns Entity:
-	'Entity' name=EString':'
-		(inputs+= LanguageInput)+	
+	SimpleEntity | ComplexEntity | RegexEntity
 	;
 
-LanguageInput returns LanguageInput: 
+SimpleEntity returns Entity:
+	'Entity' name=EString 'simple'':'
+		(inputs+= SLanguageInput)+	
+	;
+ComplexEntity returns Entity:
+	'Entity' name=EString 'composite'':'
+		(inputs+= CLanguageInput)+	
+	;
+RegexEntity returns Entity:
+	'Entity' name=EString 'regex'':'
+		(inputs+= RLanguageInput)+	
+	;
+
+SLanguageInput returns LanguageInput: 
 	('inputs' 'in' language=Language)? '{'
-		(inputs+=EntityInput (inputs+= EntityInput)* )
+		(inputs+=SimpleInput (inputs+= SimpleInput)* )
 	'}'
 ;
-EntityInput returns EntityInput:
-	RegexInput|CompositeInput|SimpleInput 
+CLanguageInput returns LanguageInput: 
+	('inputs' 'in' language=Language)? '{'
+		(inputs+=CompositeInput (inputs+= CompositeInput)* )
+	'}'
 ;
-
+RLanguageInput returns LanguageInput: 
+	('inputs' 'in' language=Language)? '{'
+		(inputs+=RegexInput (inputs+= RegexInput)* )
+	'}'
+;
 
 RegexInput returns RegexInput:
 	{RegexInput}
-	 "r"":"expresion=EString
+	'pattern'':' expresion=EString
 ;
 
 CompositeInput returns CompositeInput:
 	{CompositeInput}
-	 "c" ":"expresion+=(Literal | EntityToken)+
+	 expresion+=(Literal | EntityToken)+
 ;
 
 SimpleInput returns SimpleInput:
 	{SimpleInput}
-	 "s"":"name=EString ('synonyms'  values+=EString ( "," values+=EString)* )? ;
+	name=EString ('synonyms'  values+=EString ( "," values+=EString)* )? ;
 
 Text returns Text:
 	'text' 'response' name=EString':'

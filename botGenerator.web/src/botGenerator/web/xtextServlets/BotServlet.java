@@ -6,10 +6,12 @@ package botGenerator.web.xtextServlets;
 import com.google.inject.Injector;
 
 import congabase.main.CongaData;
+import generator.GeneratorPackage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
@@ -29,6 +31,7 @@ public class BotServlet extends XtextServlet {
 		super.init();
 		
 		this.disposableRegistry = getInjector().getInstance(DisposableRegistry.class);
+		
 		try {
 			CongaData.getCongaData(getServletContext());
 		} catch (Exception e) {
@@ -46,6 +49,10 @@ public class BotServlet extends XtextServlet {
 	public static Injector getInjector () {
 		if (injector == null) {
 			injector = new BotWebSetup().createInjectorAndDoEMFRegistration();
+		}
+		
+		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
+			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		}
 		return injector;
 	}

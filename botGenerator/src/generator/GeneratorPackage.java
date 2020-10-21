@@ -455,6 +455,26 @@ public interface GeneratorPackage extends EPackage {
 	int INPUT = 12;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.SimpleInputImpl <em>Simple Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.SimpleInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getSimpleInput()
+	 * @generated
+	 */
+	int SIMPLE_INPUT = 9;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.CompositeInputImpl <em>Composite Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.CompositeInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getCompositeInput()
+	 * @generated
+	 */
+	int COMPOSITE_INPUT = 10;
+
+	/**
 	 * The number of structural features of the '<em>Input</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -501,16 +521,6 @@ public interface GeneratorPackage extends EPackage {
 	int ENTITY_INPUT_OPERATION_COUNT = INPUT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.SimpleInputImpl <em>Simple Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.SimpleInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getSimpleInput()
-	 * @generated
-	 */
-	int SIMPLE_INPUT = 9;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,16 +555,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMPLE_INPUT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.CompositeInputImpl <em>Composite Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.CompositeInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getCompositeInput()
-	 * @generated
-	 */
-	int COMPOSITE_INPUT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Expresion</b></em>' containment reference list.
@@ -594,6 +594,96 @@ public interface GeneratorPackage extends EPackage {
 	int REGEX_INPUT = 11;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.TokenImpl <em>Token</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.TokenImpl
+	 * @see generator.impl.GeneratorPackageImpl#getToken()
+	 * @generated
+	 */
+	int TOKEN = 13;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.LiteralImpl <em>Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.LiteralImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLiteral()
+	 * @generated
+	 */
+	int LITERAL = 14;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.EntityTokenImpl <em>Entity Token</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.EntityTokenImpl
+	 * @see generator.impl.GeneratorPackageImpl#getEntityToken()
+	 * @generated
+	 */
+	int ENTITY_TOKEN = 15;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ParameterTokenImpl <em>Parameter Token</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ParameterTokenImpl
+	 * @see generator.impl.GeneratorPackageImpl#getParameterToken()
+	 * @generated
+	 */
+	int PARAMETER_TOKEN = 16;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ParameterReferenceTokenImpl <em>Parameter Reference Token</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ParameterReferenceTokenImpl
+	 * @see generator.impl.GeneratorPackageImpl#getParameterReferenceToken()
+	 * @generated
+	 */
+	int PARAMETER_REFERENCE_TOKEN = 17;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.HTTPRequestTokeImpl <em>HTTP Request Toke</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.HTTPRequestTokeImpl
+	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequestToke()
+	 * @generated
+	 */
+	int HTTP_REQUEST_TOKE = 18;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.IntentImpl <em>Intent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.IntentImpl
+	 * @see generator.impl.GeneratorPackageImpl#getIntent()
+	 * @generated
+	 */
+	int INTENT = 19;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.IntentLanguageInputsImpl <em>Intent Language Inputs</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.IntentLanguageInputsImpl
+	 * @see generator.impl.GeneratorPackageImpl#getIntentLanguageInputs()
+	 * @generated
+	 */
+	int INTENT_LANGUAGE_INPUTS = 20;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.IntentInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
+	 * @generated
+	 */
+	int INTENT_INPUT = 21;
+
+	/**
 	 * The feature id for the '<em><b>Expresion</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -621,16 +711,6 @@ public interface GeneratorPackage extends EPackage {
 	int REGEX_INPUT_OPERATION_COUNT = ENTITY_INPUT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.TokenImpl <em>Token</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.TokenImpl
-	 * @see generator.impl.GeneratorPackageImpl#getToken()
-	 * @generated
-	 */
-	int TOKEN = 13;
-
-	/**
 	 * The number of structural features of the '<em>Token</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -647,16 +727,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TOKEN_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.LiteralImpl <em>Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.LiteralImpl
-	 * @see generator.impl.GeneratorPackageImpl#getLiteral()
-	 * @generated
-	 */
-	int LITERAL = 14;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -686,16 +756,6 @@ public interface GeneratorPackage extends EPackage {
 	int LITERAL_OPERATION_COUNT = TOKEN_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.EntityTokenImpl <em>Entity Token</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.EntityTokenImpl
-	 * @see generator.impl.GeneratorPackageImpl#getEntityToken()
-	 * @generated
-	 */
-	int ENTITY_TOKEN = 15;
-
-	/**
 	 * The feature id for the '<em><b>Entity</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -723,16 +783,6 @@ public interface GeneratorPackage extends EPackage {
 	int ENTITY_TOKEN_OPERATION_COUNT = TOKEN_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.ParameterTokenImpl <em>Parameter Token</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.ParameterTokenImpl
-	 * @see generator.impl.GeneratorPackageImpl#getParameterToken()
-	 * @generated
-	 */
-	int PARAMETER_TOKEN = 16;
-
-	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -758,16 +808,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_TOKEN_OPERATION_COUNT = TOKEN_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.ParameterReferenceTokenImpl <em>Parameter Reference Token</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.ParameterReferenceTokenImpl
-	 * @see generator.impl.GeneratorPackageImpl#getParameterReferenceToken()
-	 * @generated
-	 */
-	int PARAMETER_REFERENCE_TOKEN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -806,16 +846,6 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_REFERENCE_TOKEN_OPERATION_COUNT = TOKEN_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.HTTPRequestTokeImpl <em>HTTP Request Toke</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.HTTPRequestTokeImpl
-	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequestToke()
-	 * @generated
-	 */
-	int HTTP_REQUEST_TOKE = 18;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -850,16 +880,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int HTTP_REQUEST_TOKE_OPERATION_COUNT = TOKEN_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.IntentImpl <em>Intent</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.IntentImpl
-	 * @see generator.impl.GeneratorPackageImpl#getIntent()
-	 * @generated
-	 */
-	int INTENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -916,16 +936,6 @@ public interface GeneratorPackage extends EPackage {
 	int INTENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.IntentLanguageInputsImpl <em>Intent Language Inputs</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.IntentLanguageInputsImpl
-	 * @see generator.impl.GeneratorPackageImpl#getIntentLanguageInputs()
-	 * @generated
-	 */
-	int INTENT_LANGUAGE_INPUTS = 20;
-
-	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -960,16 +970,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTENT_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.IntentInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
-	 * @generated
-	 */
-	int INTENT_INPUT = 21;
 
 	/**
 	 * The number of structural features of the '<em>Intent Input</em>' class.

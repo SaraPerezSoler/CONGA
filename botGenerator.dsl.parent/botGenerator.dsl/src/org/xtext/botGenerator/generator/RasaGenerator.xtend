@@ -32,13 +32,13 @@ import generator.SimpleInput
 import generator.RegexInput
 import generator.LanguageInput
 import generator.EntityInput
+import zipUtils.Zip
 
 class RasaGenerator {
 
 	String path;
 
-
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, CreateZip zip) {
+	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zip zip) {
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var intents = resource.allContents.filter(Intent).toList;
 		var entities = resource.allContents.filter(Entity).toList;
@@ -48,37 +48,43 @@ class RasaGenerator {
 		for (UserInteraction flow : bot.flows) {
 			leafsU(flow, leafs)
 		}
-		
-		
+
+		path = bot.name + "/Rasa"
+		fsa.generateFile(path + '/requirements.txt',
+			"tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
+		var requirements = fsa.readBinaryFile(path + '/requirements.txt')
+		zip.addFile("requirements.txt", requirements)
+
 		for (Language lan : bot.languages) {
+
 			path = bot.name + "/Rasa" + "/" + lan.languageAbbreviation
 			fsa.generateFile(path + '/actions.py', actions(intents, entities, actions, lan))
 			var actionValue = fsa.readBinaryFile(path + '/actions.py')
 			zip.addFileToFolder(lan.languageAbbreviation, "actions.py", actionValue)
-			
+
 			fsa.generateFile(path + '/config.yml', config(lan))
 			var configValue = fsa.readBinaryFile(path + '/config.yml')
 			zip.addFileToFolder(lan.languageAbbreviation, "config.yml", configValue)
-			
+
 			fsa.generateFile(path + '/credentials.yml', credentials)
 			var credentialValue = fsa.readBinaryFile(path + '/credentials.yml')
 			zip.addFileToFolder(lan.languageAbbreviation, "credentials.yml", credentialValue)
-			
+
 			fsa.generateFile(path + '/domain.yml', domain(intents, parameters, actions, lan))
 			var domainValue = fsa.readBinaryFile(path + '/domain.yml')
 			zip.addFileToFolder(lan.languageAbbreviation, "domain.yml", domainValue)
-			
+
 			fsa.generateFile(path + '/endpoints.yml', endpoint)
 			var endpointsValue = fsa.readBinaryFile(path + '/endpoints.yml')
 			zip.addFileToFolder(lan.languageAbbreviation, "endpoints.yml", endpointsValue)
-			
+
 			fsa.generateFile(path + '/data/nlu.md', nlu(intents, entities, lan))
 			var nluValue = fsa.readBinaryFile(path + '/data/nlu.md')
-			zip.addFileToFolder(lan.languageAbbreviation+"/data", "nlu.md", nluValue)
-			
+			zip.addFileToFolder(lan.languageAbbreviation + "/data", "nlu.md", nluValue)
+
 			fsa.generateFile(path + '/data/stories.md', stories(leafs))
 			var storiesValue = fsa.readBinaryFile(path + '/data/stories.md')
-			zip.addFileToFolder(lan.languageAbbreviation+"/data", "stories.md", storiesValue)
+			zip.addFileToFolder(lan.languageAbbreviation + "/data", "stories.md", storiesValue)
 		}
 		zip.close
 	}
@@ -246,58 +252,58 @@ class RasaGenerator {
 					def required_slots(tracker: Tracker) -> List[Text]:
 						"""A list of required slots that the form has to fill"""
 						«var coma =""»
-				return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.name.rasaValue}»"«ENDIF»«ENDFOR»]
-				«FOR param :intent.parameters»
-					
-						def validate_«param.name.getRasaValue»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
-							«IF param.entity !== null»
-								parseValue = «param.entity.name.rasaValue»_validate(value)
-							«ELSEIF param.defaultEntity === DefaultEntity.DATE»
-								parseValue = date_validate(value)
-							«ELSEIF param.defaultEntity === DefaultEntity.TIME»
-								parseValue = time_validate(value)
-							«ELSEIF param.defaultEntity === DefaultEntity.TEXT»
-								parseValue = value
-							«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
-								try:
-									parseValue = float (value)
-								except ValueError:
-									parseValue = None
-							«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
-								try:
-									parseValue = int (value)
-								except ValueError:
-									parseValue = None
-							«ENDIF»
-							if parseValue is None:
-								dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
-								return {'«param.name.getRasaValue»': None}
-							return {'«param.name.getRasaValue»': parseValue}
-				«ENDFOR»
+			return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.name.rasaValue}»"«ENDIF»«ENDFOR»]
+			«FOR param :intent.parameters»
 				
-					def slot_mappings(self):
-				
-						return {
-						      	«FOR param :intent.parameters»
-						      		"«param.name.rasaValue»": [self.from_entity(entity="«param.name.rasaValue»"),self.from_«param.paramType»()],
-						      	«ENDFOR»
-						      	}
-				def submit(
-				    self,
-				    dispatcher: CollectingDispatcher,
-				    tracker: Tracker,
-				    domain: Dict[Text, Any],
-				) -> List[Dict]:
-				   """Define what the form has to do
-				       after all required slots are filled"""
-				   return []
-				
-				class «intent.name.getRasaValue»Clean (Action):
-					def name(self) -> Text:
-						return "«intent.name.getRasaValue»_clean"
-					def run(self, dispatcher: CollectingDispatcher,
-							tracker: Tracker,
-							domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+					def validate_«param.name.getRasaValue»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
+						«IF param.entity !== null»
+							parseValue = «param.entity.name.rasaValue»_validate(value)
+						«ELSEIF param.defaultEntity === DefaultEntity.DATE»
+							parseValue = date_validate(value)
+						«ELSEIF param.defaultEntity === DefaultEntity.TIME»
+							parseValue = time_validate(value)
+						«ELSEIF param.defaultEntity === DefaultEntity.TEXT»
+							parseValue = value
+						«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
+							try:
+								parseValue = float (value)
+							except ValueError:
+								parseValue = None
+						«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
+							try:
+								parseValue = int (value)
+							except ValueError:
+								parseValue = None
+						«ENDIF»
+						if parseValue is None:
+							dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
+							return {'«param.name.getRasaValue»': None}
+						return {'«param.name.getRasaValue»': parseValue}
+			«ENDFOR»
+			
+				def slot_mappings(self):
+			
+					return {
+					      	«FOR param :intent.parameters»
+					      		"«param.name.rasaValue»": [self.from_entity(entity="«param.name.rasaValue»"),self.from_«param.paramType»()],
+					      	«ENDFOR»
+					      	}
+			def submit(
+			    self,
+			    dispatcher: CollectingDispatcher,
+			    tracker: Tracker,
+			    domain: Dict[Text, Any],
+			) -> List[Dict]:
+			   """Define what the form has to do
+			       after all required slots are filled"""
+			   return []
+			
+			class «intent.name.getRasaValue»Clean (Action):
+				def name(self) -> Text:
+					return "«intent.name.getRasaValue»_clean"
+				def run(self, dispatcher: CollectingDispatcher,
+						tracker: Tracker,
+						domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 				return [«FOR param :intent.parameters»SlotSet("«param.name.rasaValue»", None) «IF !DialogflowGenerator.isTheLast(intent.parameters, param)»,«ENDIF»«ENDFOR»]            
 			«ENDIF»
 		«ENDFOR»
@@ -368,7 +374,7 @@ class RasaGenerator {
 					if (token instanceof Literal) {
 						ret += "'" + token.text + "'"
 					} else if (token instanceof ParameterToken) {
-						ret += "tracker.get_slot(\"" + token.parameter.name.getRasaValue + "\")"
+						ret += "tracker.get_slot(\"" + token.parameter.paramName + "\")"
 					} else if (token instanceof HTTPRequestToke) {
 						if (token.type == HTTPReturnType.TEXT)
 							ret += "response.text"
@@ -401,12 +407,12 @@ class RasaGenerator {
 		
 		entities:
 		  «FOR parameter : parameters»
-		  	- «parameter.name.getRasaValue»
+		  	- «getParamName(parameter)»
 		  «ENDFOR»
 		
 		slots:
 		  «FOR parameter : parameters»
-		  	«parameter.name.getRasaValue»:
+		  	«parameter.paramName»:
 		  	  type: unfeaturized
 		  	  auto_fill: false
 		  «ENDFOR»
@@ -414,7 +420,7 @@ class RasaGenerator {
 		templates:
 		  «FOR parameter : parameters»
 		  	«IF parameter.isRequired && !parameter.prompts.isEmpty»
-		  		utter_ask_«parameter.name.getRasaValue»:
+		  		utter_ask_«parameter.paramName»:
 		  		«FOR prompt:parameter.prompts»
 		  			«IF prompt.language.equals(lan)»
 		  				«FOR text : prompt.prompts»	
@@ -422,7 +428,7 @@ class RasaGenerator {
 		  				«ENDFOR»
 		  			«ENDIF»
 		  		«ENDFOR»
-		  		utter_wrong_«parameter.name.getRasaValue»:
+		  		utter_wrong_«parameter.paramName»:
 		  		- text: "I can not understand the «parameter.name», please try again"
 		  	«ENDIF»
 		  «ENDFOR»
@@ -468,7 +474,7 @@ class RasaGenerator {
 			if (token instanceof Literal) {
 				ret += token.text + " "
 			} else if (token instanceof ParameterToken) {
-				ret += "{" + token.parameter.name.getRasaValue + "}" + " "
+				ret += "{" + token.parameter.paramName + "}" + " "
 			}
 		}
 		return ret;
@@ -540,14 +546,20 @@ class RasaGenerator {
 				ret += token.text + " "
 			} else if (token instanceof ParameterReferenceToken) {
 				if (BotGenerator.entityType(token.parameter.entity) == BotGenerator.SIMPLE) {
+				if (token.parameter.entity !== null){
 					ret +=
-						'[' + token.textReference + ']' + '{"entity": "' + token.parameter.entity.name +
-							'", "role": "' + token.parameter.name + '",  "value": }' +
-							getEntry(token.textReference, token.parameter.entity, lan) + " "
+					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +'"'+
+						'"value":'+ '"'+getEntry(token.textReference, token.parameter.entity, lan) +'" }' 
+				}
+				ret +=
+					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +
+						'" }' 
+						
+
 				} else {
 					ret +=
-						'[' + token.textReference + ']' + '{"entity": "' + token.parameter.entity.name +
-							'", "role": "' + token.parameter.name + '"}' + " "
+						'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +
+							'" }' + " "
 				}
 			}
 		}
@@ -576,6 +588,10 @@ class RasaGenerator {
 
 	def getRasaValue(String name) {
 		return name.replaceAll(" ", "_")
+	}
+
+	def getParamName(Parameter param) {
+		return (param.eContainer as Intent).name.rasaValue + "." + param.name.getRasaValue
 	}
 
 	def endpoint() '''
@@ -648,7 +664,7 @@ class RasaGenerator {
 		  min_ngram: 1
 		  max_ngram: 4
 		  - name: DIETClassifier
-		    epochs: 100
+		  epochs: 100
 		  - name: EntitySynonymMapper
 		  - name: ResponseSelector
 		    epochs: 100

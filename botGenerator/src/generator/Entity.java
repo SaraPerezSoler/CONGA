@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Entity extends Element {
+
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.LanguageInput}.

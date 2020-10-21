@@ -5,12 +5,7 @@ package org.xtext.botGenerator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import generator.GeneratorPackage;
-
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -25,8 +20,6 @@ public class BotStandaloneSetupGenerated implements ISetup {
 
 		Injector injector = createInjector();
 		register(injector);
-		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		return injector;
 	}
 	

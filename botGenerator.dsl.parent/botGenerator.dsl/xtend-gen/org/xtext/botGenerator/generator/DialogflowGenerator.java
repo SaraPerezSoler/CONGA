@@ -32,6 +32,7 @@ import generator.TrainingPhrase;
 import generator.UserInteraction;
 import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -40,7 +41,7 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.xtext.botGenerator.generator.BotGenerator;
-import org.xtext.botGenerator.generator.CreateZip;
+import zipUtils.Zip;
 
 @SuppressWarnings("all")
 public class DialogflowGenerator {
@@ -48,9 +49,9 @@ public class DialogflowGenerator {
   
   protected static String uri;
   
-  private CreateZip zip;
+  private Zip zip;
   
-  public Object doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final CreateZip zip) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<HTTPRequest> requests = IteratorExtensions.<HTTPRequest>toList(Iterators.<HTTPRequest>filter(resource.getAllContents(), HTTPRequest.class));
     String _name = bot.getName();
@@ -125,7 +126,6 @@ public class DialogflowGenerator {
       this.createTransitionFiles(transition, "", fsa, bot);
     }
     zip.close();
-    return null;
   }
   
   public void createTransitionFiles(final UserInteraction transition, final String prefix, final IFileSystemAccess2 fsa, final Bot bot) {
@@ -684,6 +684,9 @@ public class DialogflowGenerator {
     _builder.append(_languageAbbreviation, "  ");
     _builder.append("\",");
     _builder.newLineIfNotEmpty();
+    _builder.append("  ");
+    _builder.append("\"defaultTimezone\": \"Europe/Madrid\",");
+    _builder.newLine();
     {
       if ((request != null)) {
         _builder.append("  ");
@@ -1001,67 +1004,71 @@ public class DialogflowGenerator {
   public CharSequence entityFile(final Entity entity) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("{");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("\"name\": \"");
-    String _name = entity.getName();
-    _builder.append(_name, "\t\t");
+    _builder.append("\t");
+    _builder.append("\"id\": \"");
+    String _string = UUID.randomUUID().toString();
+    _builder.append(_string, "\t");
     _builder.append("\",");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
+    _builder.append("\t");
+    _builder.append("\"name\": \"");
+    String _name = entity.getName();
+    _builder.append(_name, "\t");
+    _builder.append("\",");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     _builder.append("\"isOverridable\": true,\t  ");
     _builder.newLine();
     {
       int _entityType = BotGenerator.entityType(entity);
       boolean _tripleEquals = (_entityType == BotGenerator.REGEX);
       if (_tripleEquals) {
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("\"isEnum\": false,");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("\"isRegexp\":true,");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("\"automatedExpansion\": true,");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("\"allowFuzzyExtraction\": false");
         _builder.newLine();
       } else {
         int _entityType_1 = BotGenerator.entityType(entity);
         boolean _tripleEquals_1 = (_entityType_1 == BotGenerator.SIMPLE);
         if (_tripleEquals_1) {
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"isEnum\": false,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"isRegexp\": false,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"automatedExpansion\": true,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"allowFuzzyExtraction\": true");
           _builder.newLine();
         } else {
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"isEnum\": true,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"isRegexp\": false,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"automatedExpansion\": false,");
           _builder.newLine();
-          _builder.append("\t\t");
+          _builder.append("\t");
           _builder.append("\"allowFuzzyExtraction\": false");
           _builder.newLine();
         }
       }
     }
-    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     return _builder;

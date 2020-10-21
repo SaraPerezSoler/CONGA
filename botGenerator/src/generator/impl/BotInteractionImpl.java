@@ -88,16 +88,7 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	@Override
 	public EList<Action> getActions() {
 		if (actions == null) {
-			actions = new EObjectResolvingEList<Action>(Action.class, this, GeneratorPackage.BOT_INTERACTION__ACTIONS){
-
-				private static final long serialVersionUID = 1L;
-
-				@Override
-	            protected boolean useEquals() {
-	                return true;
-	            }
-
-	        };
+			actions = new EObjectResolvingEList<Action>(Action.class, this, GeneratorPackage.BOT_INTERACTION__ACTIONS);
 		}
 		return actions;
 	}
@@ -153,15 +144,7 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	@Override
 	public EList<UserInteraction> getOutcoming() {
 		if (outcoming == null) {
-			outcoming = new EObjectContainmentWithInverseEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__OUTCOMING, GeneratorPackage.USER_INTERACTION__SRC){
-
-				private static final long serialVersionUID = 1L;
-
-				@Override
-	            protected boolean useEquals() {
-	                return true;
-	            }
-	        };
+			outcoming = new EObjectContainmentWithInverseEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__OUTCOMING, GeneratorPackage.USER_INTERACTION__SRC);
 		}
 		return outcoming;
 	}

@@ -1,4 +1,4 @@
-package org.xtext.botGenerator.generator;
+package zipUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -9,11 +9,11 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class CreateZip {
+public class Zip {
 	private FileOutputStream fos;
 	private ZipOutputStream zos;
 
-	public CreateZip(String path, String name) {
+	public Zip(String path, String name) {
 
 		try {
 			File file = new File(path);

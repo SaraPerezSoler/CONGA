@@ -11,6 +11,7 @@ import generator.Entity
 import generator.RegexInput
 import generator.SimpleInput
 import generator.Intent
+import zipUtils.Zip;
 import org.eclipse.core.resources.ResourcesPlugin
 
 /**
@@ -36,12 +37,12 @@ class BotGenerator extends AbstractGenerator {
 			uri = newpath+"/";
 		}
 		var dialogflowGeneratorUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Dialogflow"
-		var dialogflowZip = new CreateZip(dialogflowGeneratorUri, resourceName)
+		var dialogflowZip = new Zip(dialogflowGeneratorUri, resourceName)
 		var dialogflow = new DialogflowGenerator()
 		dialogflow.doGenerate(resource, fsa, context, dialogflowZip)
 		
 		var rasaUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Rasa"
-		var rasaZip = new CreateZip(rasaUri, resourceName)
+		var rasaZip = new Zip(rasaUri, resourceName)
 		var rasa = new RasaGenerator()
 	    rasa.doGenerate(resource, fsa, context, rasaZip)
 	}

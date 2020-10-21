@@ -27,13 +27,15 @@ import generator.CompositeInput
 import generator.TrainingPhrase
 import generator.Entity
 import java.util.List
+import java.util.UUID
+import zipUtils.Zip
 
 class DialogflowGenerator {
 	String path;
 	protected static String uri;
-	CreateZip zip;
+	Zip zip;
 	
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, CreateZip zip) {
+	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zip zip) {
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var requests = resource.allContents.filter(HTTPRequest).toList;
 		
@@ -265,6 +267,7 @@ class DialogflowGenerator {
 	def agentJSON(Bot bot, HTTPRequest request) '''
 		{
 		  "language": "«bot.languages.get(0).languageAbbreviation»",
+		  "defaultTimezone": "Europe/Madrid",
 		  «IF request !== null »
 		  	"webhook": {
 		  	  "url": "«returnText(request.URL)»",
@@ -395,26 +398,27 @@ class DialogflowGenerator {
 
 	def entityFile(Entity entity) '''
 		
-			{
-				"name": "«entity.name»",
-				"isOverridable": true,	  
-				«IF BotGenerator.entityType(entity) === BotGenerator.REGEX»
-				"isEnum": false,
-				"isRegexp":true,
-				"automatedExpansion": true,
-				"allowFuzzyExtraction": false
-				«ELSEIF BotGenerator.entityType(entity) === BotGenerator.SIMPLE»
-				"isEnum": false,
-				"isRegexp": false,
-				"automatedExpansion": true,
-				"allowFuzzyExtraction": true
-				«ELSE»
-				"isEnum": true,
-				"isRegexp": false,
-				"automatedExpansion": false,
-				"allowFuzzyExtraction": false
-				«ENDIF»
-			}
+		{
+			"id": "«UUID.randomUUID().toString»",
+			"name": "«entity.name»",
+			"isOverridable": true,	  
+			«IF BotGenerator.entityType(entity) === BotGenerator.REGEX»
+			"isEnum": false,
+			"isRegexp":true,
+			"automatedExpansion": true,
+			"allowFuzzyExtraction": false
+			«ELSEIF BotGenerator.entityType(entity) === BotGenerator.SIMPLE»
+			"isEnum": false,
+			"isRegexp": false,
+			"automatedExpansion": true,
+			"allowFuzzyExtraction": true
+			«ELSE»
+			"isEnum": true,
+			"isRegexp": false,
+			"automatedExpansion": false,
+			"allowFuzzyExtraction": false
+			«ENDIF»
+		}
 	'''
 
 

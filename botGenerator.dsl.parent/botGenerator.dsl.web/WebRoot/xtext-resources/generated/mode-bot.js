@@ -1,6 +1,6 @@
 define(["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 	var HighlightRules = function() {
-		var keywords = "Chatbot|Entity|FORM|Fallback|HTTP|HttpResponse|JSON|Token|URL|actions|ar|ba|basicAuth|bu|c|chatbot|cz|da|data|dataType|date|de|en|entities|entity|es|false|fi|float|flows|fr|get|gr|headers|hi|id|image|in|inputs|intents|isList|it|ja|ko|nl|no|number|pl|post|prompts|pt|r|request|required|response|ru|s|status_code|sv|synonyms|text|th|time|tr|true|uk|user|zh";
+		var keywords = "Chatbot|Entity|FORM|Fallback|HTTP|HttpResponse|JSON|Token|URL|actions|ar|ba|basicAuth|bu|chatbot|composite|cz|da|data|dataType|date|de|en|entities|entity|es|false|fi|float|flows|fr|get|gr|headers|hi|id|image|in|inputs|intents|isList|it|ja|ko|nl|no|number|pattern|pl|post|prompts|pt|regex|request|required|response|ru|simple|status_code|sv|synonyms|text|th|time|tr|true|uk|user|zh";
 		this.$rules = {
 			"start": [
 				{token: "comment", regex: "\\/\\/.*$"},

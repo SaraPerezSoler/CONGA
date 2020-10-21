@@ -72,8 +72,23 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				sequence_CompositeInput(context, (CompositeInput) semanticObject); 
 				return; 
 			case GeneratorPackage.ENTITY:
-				sequence_Entity(context, (Entity) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getComplexEntityRule()) {
+					sequence_ComplexEntity(context, (Entity) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getEntityRule()) {
+					sequence_ComplexEntity_RegexEntity_SimpleEntity(context, (Entity) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRegexEntityRule()) {
+					sequence_RegexEntity(context, (Entity) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSimpleEntityRule()) {
+					sequence_SimpleEntity(context, (Entity) semanticObject); 
+					return; 
+				}
+				else break;
 			case GeneratorPackage.ENTITY_TOKEN:
 				sequence_EntityToken(context, (EntityToken) semanticObject); 
 				return; 
@@ -106,8 +121,19 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case GeneratorPackage.LANGUAGE_INPUT:
-				sequence_LanguageInput(context, (LanguageInput) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getCLanguageInputRule()) {
+					sequence_CLanguageInput(context, (LanguageInput) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRLanguageInputRule()) {
+					sequence_RLanguageInput(context, (LanguageInput) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSLanguageInputRule()) {
+					sequence_SLanguageInput(context, (LanguageInput) semanticObject); 
+					return; 
+				}
+				else break;
 			case GeneratorPackage.LITERAL:
 				sequence_Literal(context, (Literal) semanticObject); 
 				return; 
@@ -193,7 +219,42 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     EntityInput returns CompositeInput
+	 *     CLanguageInput returns LanguageInput
+	 *
+	 * Constraint:
+	 *     (language=Language? inputs+=CompositeInput inputs+=CompositeInput*)
+	 */
+	protected void sequence_CLanguageInput(ISerializationContext context, LanguageInput semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ComplexEntity returns Entity
+	 *
+	 * Constraint:
+	 *     (name=EString inputs+=CLanguageInput+)
+	 */
+	protected void sequence_ComplexEntity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Entity returns Entity
+	 *
+	 * Constraint:
+	 *     ((name=EString inputs+=SLanguageInput+) | (name=EString inputs+=CLanguageInput+) | (name=EString inputs+=RLanguageInput+))
+	 */
+	protected void sequence_ComplexEntity_RegexEntity_SimpleEntity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     CompositeInput returns CompositeInput
 	 *
 	 * Constraint:
@@ -222,7 +283,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EntityToken returns EntityToken
 	 *
 	 * Constraint:
-	 *     entity=[Entity|EString]
+	 *     entity=[Entity|ID]
 	 */
 	protected void sequence_EntityToken(ISerializationContext context, EntityToken semanticObject) {
 		if (errorAcceptor != null) {
@@ -230,20 +291,8 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEntityTokenAccess().getEntityEntityEStringParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY, false));
+		feeder.accept(grammarAccess.getEntityTokenAccess().getEntityEntityIDTerminalRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY, false));
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Entity returns Entity
-	 *
-	 * Constraint:
-	 *     (name=EString inputs+=LanguageInput+)
-	 */
-	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -361,18 +410,6 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     LanguageInput returns LanguageInput
-	 *
-	 * Constraint:
-	 *     (language=Language? inputs+=EntityInput inputs+=EntityInput*)
-	 */
-	protected void sequence_LanguageInput(ISerializationContext context, LanguageInput semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Token returns Literal
 	 *     Literal returns Literal
 	 *
@@ -475,8 +512,31 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     RLanguageInput returns LanguageInput
+	 *
+	 * Constraint:
+	 *     (language=Language? inputs+=RegexInput inputs+=RegexInput*)
+	 */
+	protected void sequence_RLanguageInput(ISerializationContext context, LanguageInput semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RegexEntity returns Entity
+	 *
+	 * Constraint:
+	 *     (name=EString inputs+=RLanguageInput+)
+	 */
+	protected void sequence_RegexEntity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     IntentInput returns RegexInput
-	 *     EntityInput returns RegexInput
 	 *     RegexInput returns RegexInput
 	 *
 	 * Constraint:
@@ -495,7 +555,30 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     EntityInput returns SimpleInput
+	 *     SLanguageInput returns LanguageInput
+	 *
+	 * Constraint:
+	 *     (language=Language? inputs+=SimpleInput inputs+=SimpleInput*)
+	 */
+	protected void sequence_SLanguageInput(ISerializationContext context, LanguageInput semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     SimpleEntity returns Entity
+	 *
+	 * Constraint:
+	 *     (name=EString inputs+=SLanguageInput+)
+	 */
+	protected void sequence_SimpleEntity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     SimpleInput returns SimpleInput
 	 *
 	 * Constraint:
