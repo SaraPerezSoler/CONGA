@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Bot tool recomendation</title>
+<title>Bot tool recommendation</title>
 <link rel="stylesheet" type="text/css"
 	href="bootstrap\css\bootstrap.min.css" />
 <link href='https://fonts.googleapis.com/css?family=Atma'

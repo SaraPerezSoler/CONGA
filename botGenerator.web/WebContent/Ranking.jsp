@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Bot tool recommendation</title>
 <link href='https://fonts.googleapis.com/css?family=Atma'
 	rel='stylesheet'>
 <script
