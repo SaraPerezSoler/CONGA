@@ -277,9 +277,9 @@ public class BotValidator extends AbstractBotValidator {
         boolean _not = (!_contains);
         if (_not) {
           String _firstUpper = StringExtensions.toFirstUpper(lan.getLiteral().toLowerCase());
-          String _plus = ("The chatbot support the language " + _firstUpper);
+          String _plus = ("The chatbot supports " + _firstUpper);
           String _plus_1 = (_plus + 
-            " and this entity does not have a input in this language");
+            ", but this entity does not have an input in this language");
           this.warning(_plus_1, 
             GeneratorPackage.Literals.ELEMENT__NAME);
         }
@@ -339,9 +339,9 @@ public class BotValidator extends AbstractBotValidator {
       for (final Language lan : _languages) {
         if (((!intentLan.contains(lan)) && (Boolean.valueOf(intent.isFallbackIntent()) != Boolean.valueOf(true)))) {
           String _firstUpper = StringExtensions.toFirstUpper(lan.getLiteral().toLowerCase());
-          String _plus = ("The chatbot support the language " + _firstUpper);
+          String _plus = ("The chatbot supports " + _firstUpper);
           String _plus_1 = (_plus + 
-            " and this intent does not have a input in this language");
+            ", but this intent does not have an input in this language");
           this.warning(_plus_1, 
             GeneratorPackage.Literals.ELEMENT__NAME);
         }
@@ -434,9 +434,9 @@ public class BotValidator extends AbstractBotValidator {
           boolean _not_1 = (!_contains);
           if (_not_1) {
             String _firstUpper = StringExtensions.toFirstUpper(lan.getLiteral().toLowerCase());
-            String _plus = ("The chatbot support the language " + _firstUpper);
+            String _plus = ("The chatbot supports " + _firstUpper);
             String _plus_1 = (_plus + 
-              " and this parameter does not have a prompt in this language");
+              ", but this parameter does not have a prompt in this language");
             this.warning(_plus_1, 
               GeneratorPackage.Literals.ELEMENT__NAME);
           }
@@ -560,9 +560,9 @@ public class BotValidator extends AbstractBotValidator {
           boolean _not = (!_contains);
           if (_not) {
             String _firstUpper = StringExtensions.toFirstUpper(lan.getLiteral().toLowerCase());
-            String _plus = ("The chatbot support the language " + _firstUpper);
+            String _plus = ("The chatbot supports " + _firstUpper);
             String _plus_1 = (_plus + 
-              " and this text response does not have a input in this language");
+              ", but this text response does not have an input in this language");
             this.warning(_plus_1, 
               GeneratorPackage.Literals.ELEMENT__NAME);
           }
@@ -590,9 +590,9 @@ public class BotValidator extends AbstractBotValidator {
             boolean _not_1 = (!_contains_1);
             if (_not_1) {
               String _firstUpper_1 = StringExtensions.toFirstUpper(lan_1.getLiteral().toLowerCase());
-              String _plus_2 = ("The chatbot support the language " + _firstUpper_1);
+              String _plus_2 = ("The chatbot supports " + _firstUpper_1);
               String _plus_3 = (_plus_2 + 
-                " and this http response does not have a input in this language");
+                ",but this http response does not have an input in this language");
               this.warning(_plus_3, 
                 GeneratorPackage.Literals.ELEMENT__NAME);
             }

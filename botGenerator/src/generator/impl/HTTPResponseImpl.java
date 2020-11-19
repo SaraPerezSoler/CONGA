@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.HTTPRequest;
 import generator.HTTPResponse;
@@ -212,6 +213,28 @@ public class HTTPResponseImpl extends ActionImpl implements HTTPResponse {
 				return httpRequest != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HTTPResponse other = (HTTPResponseImpl) obj;
+		if (getHTTPRequest() == null) {
+			if (other.getHTTPRequest() != null)
+				return false;
+		} else if (!getHTTPRequest().isSimilarTo(other.getHTTPRequest()))
+			return false;
+		if (getInputs() == null) {
+			if (other.getInputs() != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
+			return false;
+		return true;
 	}
 
 } //HTTPResponseImpl

@@ -37,7 +37,7 @@ if (session == null) {
 					project</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
-						class="dropdown-item" href="#">Load from Dialogflow files</a>
+						class="dropdown-item" href="loadproject.jsp">Load from Dialogflow files</a>
 				</div></li>
 			<%
 				}

@@ -64,7 +64,7 @@ public class EndQuestionnaire extends HttpServlet {
 				}
 				String relevanceString = request.getParameter(name + "-Relevant");
 				RelevanceLevel level = RelevanceLevel.get(relevanceString);
-				if (level != RelevanceLevel.NOT_RELEVANT && optionsList.isEmpty()) {
+				if (level != RelevanceLevel.IRRELEVANT && optionsList.isEmpty()) {
 					// Enviar error!!! poner alerta
 				}
 

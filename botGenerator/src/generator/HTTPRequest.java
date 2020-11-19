@@ -144,4 +144,8 @@ public interface HTTPRequest extends Action {
 	 */
 	void setMethod(Method value);
 
+	void setBasicAuth(String username, String string);
+
+	void setHeader(String key, String value);
+
 } // HTTPRequest

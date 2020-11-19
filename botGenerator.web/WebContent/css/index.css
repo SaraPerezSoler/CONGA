@@ -81,7 +81,7 @@ html {
 
 .conga {
 	font-family: 'Atma';
-	font-size: 40px
+	font-size: 25px
 }
 .congaBig {
 	font-family: 'Atma';
@@ -131,4 +131,10 @@ html {
 
 .legend{
 	max-width: 40%;
+}
+.question-size{
+	font-size: 14px
+}
+.page-size{
+	font-size: 14px
 }

@@ -2,10 +2,13 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.DataType;
+import generator.GeneratorFactory;
 import generator.GeneratorPackage;
 import generator.HTTPRequest;
 import generator.KeyValue;
+import generator.Literal;
 import generator.Method;
 
 import java.util.Collection;
@@ -439,5 +442,66 @@ public class HTTPRequestImpl extends ActionImpl implements HTTPRequest {
 		result.append(')');
 		return result.toString();
 	}
+
+	@Override
+	public void setBasicAuth(String username, String string) {
+		KeyValue keyValue = GeneratorFactory.eINSTANCE.createKeyValue();
+		keyValue.setKey(username);
+		Literal lit = GeneratorFactory.eINSTANCE.createLiteral();
+		lit.setText(string);
+		keyValue.setValue(lit);
+		setBasicAuth(keyValue);
+	}
+
+	@Override
+	public void setHeader(String key, String value) {
+		KeyValue keyValue = GeneratorFactory.eINSTANCE.createKeyValue();
+		keyValue.setKey(key);
+		Literal lit = GeneratorFactory.eINSTANCE.createLiteral();
+		lit.setText(value);
+		keyValue.setValue(lit);
+		getHeaders().add(keyValue);
+		
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HTTPRequestImpl other = (HTTPRequestImpl) obj;
+		if (getBasicAuth() == null) {
+			if (other.getBasicAuth() != null)
+				return false;
+		} else if (getBasicAuth().isSimilarTo(other.getBasicAuth()))
+			return false;
+		if (getData() == null) {
+			if (other.getData() != null)
+				return false;
+		} else if (!isSimilar(getData(), other.getData()))
+			return false;
+		if (getDataType() != other.getDataType())
+			return false;
+		if (getHeaders() == null) {
+			if (other.getHeaders() != null)
+				return false;
+		} else if (!isSimilar(getHeaders(), other.getHeaders()))
+			return false;
+		if (getMethod() != other.getMethod())
+			return false;
+		if (getURL() == null) {
+			if (other.getURL() != null)
+				return false;
+		} else if (!getURL().equals(other.getURL()))
+			return false;
+		return true;
+	}
+
+
+	
+	
 
 } //HTTPRequestImpl

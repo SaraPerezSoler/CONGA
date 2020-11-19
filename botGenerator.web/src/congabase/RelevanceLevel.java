@@ -19,16 +19,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum RelevanceLevel implements Enumerator {
 	/**
-	 * The '<em><b>NOT RELEVANT</b></em>' literal object.
+	 * The '<em><b>IRRELEVANT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NOT_RELEVANT_VALUE
+	 * @see #IRRELEVANT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NOT_RELEVANT(0, "NOT_RELEVANT", "Not relevant"),
-
-	/**
+	IRRELEVANT(0, "IRRELEVANT", "Irrelevant"), /**
 	 * The '<em><b>RELEVANT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,15 +77,15 @@ public enum RelevanceLevel implements Enumerator {
 	CRITICAL(5, "CRITICAL", "Critical");
 
 	/**
-	 * The '<em><b>NOT RELEVANT</b></em>' literal value.
+	 * The '<em><b>IRRELEVANT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NOT_RELEVANT
-	 * @model literal="Not relevant"
+	 * @see #IRRELEVANT
+	 * @model literal="Irrelevant"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_RELEVANT_VALUE = 0;
+	public static final int IRRELEVANT_VALUE = 0;
 
 	/**
 	 * The '<em><b>RELEVANT</b></em>' literal value.
@@ -144,9 +142,9 @@ public enum RelevanceLevel implements Enumerator {
 	 */
 	public static final int CRITICAL_VALUE = 5;
 	
-	private static final String[] MULTI_LEVEL = { RELEVANT.getLiteral(), NOT_RELEVANT.getLiteral(), DOBLE.getLiteral(),
+	private static final String[] MULTI_LEVEL = { RELEVANT.getLiteral(), IRRELEVANT.getLiteral(), DOBLE.getLiteral(),
 			CRITICAL_ONE.getLiteral(), CRITICAL_ALL.getLiteral() };
-	private static final String[] NOT_MULTI_LEVEL = { RELEVANT.getLiteral(), NOT_RELEVANT.getLiteral(), DOBLE.getLiteral(), CRITICAL.getLiteral() };
+	private static final String[] NOT_MULTI_LEVEL = { RELEVANT.getLiteral(), IRRELEVANT.getLiteral(), DOBLE.getLiteral(), CRITICAL.getLiteral() };
 	
 	public static String[] getLevelsString(boolean multi) {
 		if (multi) {
@@ -163,7 +161,7 @@ public enum RelevanceLevel implements Enumerator {
 	 */
 	private static final RelevanceLevel[] VALUES_ARRAY =
 		new RelevanceLevel[] {
-			NOT_RELEVANT,
+			IRRELEVANT,
 			RELEVANT,
 			DOBLE,
 			CRITICAL_ONE,
@@ -225,7 +223,7 @@ public enum RelevanceLevel implements Enumerator {
 	 */
 	public static RelevanceLevel get(int value) {
 		switch (value) {
-			case NOT_RELEVANT_VALUE: return NOT_RELEVANT;
+			case IRRELEVANT_VALUE: return IRRELEVANT;
 			case RELEVANT_VALUE: return RELEVANT;
 			case DOBLE_VALUE: return DOBLE;
 			case CRITICAL_ONE_VALUE: return CRITICAL_ONE;

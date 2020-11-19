@@ -40,14 +40,14 @@
 		<jsp:include page="header.jsp" />
 		<div class="row justify-content-md-center box">
 			<nav aria-label="Page navigation example">
-				<ul class="pagination pagination-lg">
-					<li class="page-item"><a class="page-link" href="User.jsp">User Menu</a></li>
-					<li class="page-item"><a class="page-link" href="openProject?projectName=<%=projectName%>">Open bot</a></li>
-					<li class="page-item"><a class="page-link" href="Ranking.jsp?projectName=<%=projectName%>">Ranking</a></li>
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link page-size" href="User.jsp">User Menu</a></li>
+					<li class="page-item"><a class="page-link page-size" href="openProject?projectName=<%=projectName%>">Open bot</a></li>
+					<li class="page-item"><a class="page-link page-size" href="Ranking.jsp?projectName=<%=projectName%>">Ranking</a></li>
 					<li class="page-item active" aria-current="page"><span
-						class="page-link">Report tables<span class="sr-only">(current)</span>
+						class="page-link page-size">Report tables<span class="sr-only">(current)</span>
 					</span></li>
-					<li class="page-item"><a class="page-link" href="ReportDetails.jsp?projectName=<%=projectName%>">Report details</a></li>
+					<li class="page-item"><a class="page-link page-size" href="ReportDetails.jsp?projectName=<%=projectName%>">Report details</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -104,7 +104,7 @@
 											<td><div class="alert <%=level%>" role="alert">-
 												</div></td>
 											<%}else{ %>
-											<td><div class="alert <%=level%>" role="alert"><%=score%>%
+											<td><div class="alert <%=level%>" role="alert"><%=df2.format(score)%>%
 												</div></td>
 											<%
 											}}

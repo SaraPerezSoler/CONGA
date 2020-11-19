@@ -14,5 +14,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Token extends EObject {
+public interface Token extends EObject, Comparable {
 } // Token

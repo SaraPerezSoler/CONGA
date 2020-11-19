@@ -17,3 +17,5 @@
 	</dependency>
 6. Codificar el registro del paquete del dsl
 7. Ejecutar
+
+/DEFAULT_ARTIFACT

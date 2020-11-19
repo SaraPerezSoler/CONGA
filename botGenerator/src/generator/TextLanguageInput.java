@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface TextLanguageInput extends WithLanguage {
+public interface TextLanguageInput extends WithLanguage, Comparable{
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.TextInput}.

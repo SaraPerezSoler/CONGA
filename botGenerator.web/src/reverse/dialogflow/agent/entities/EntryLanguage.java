@@ -4,14 +4,17 @@ import java.util.List;
 
 public class EntryLanguage {
 
-	private String Language;
+	private String language;
 	private List<Entry> entries;
 	
 	public String getLanguage() {
-		return Language;
+		if (language == null) {
+			language = "";
+		}
+		return language;
 	}
 	public void setLanguage(String language) {
-		Language = language;
+		language = language;
 	}
 	public List<Entry> getEntries() {
 		return entries;

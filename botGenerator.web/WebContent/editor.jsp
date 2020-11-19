@@ -61,6 +61,11 @@
 												.saveResource();
 										location.reload()
 									});
+							$("#format-button").click(
+									function() {
+										documents = editor.xtextServices
+												.format();
+									});
 
 							$("#change-resource")
 									.change(
@@ -120,16 +125,26 @@
 	CongaData conga = CongaData.getCongaData(getServletContext());
 	%>
 	<div class="container">
-		<jsp:include page="header.jsp" />
+		<jsp:include page="header2.jsp" />
 		<nav class="navbar navbar-light" style="background-color: #FFFFFF;">
 			<div class="form-inline" style="width: 100%">
 				<button id="save-button"
-					class="btn btn-outline-secondary button-nav-margin button-nav-height">
+					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
 					<i class="fa fa-save" style="font-size: 20px"></i>
+				</button>
+				<a class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height dropdown-toggle" data-toggle="dropdown" href="#"
+				role="button" aria-haspopup="true" aria-expanded="false">New</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
+						class="dropdown-item" href="loadproject.jsp">Load from Dialogflow files</a>
+				</div>
+				<button id="format-button"
+					class="btn btn-outline-secondary  button-nav-size button-nav-margin button-nav-height">
+					Format
 				</button>
 				<div class="form-group button-nav-margin">
 					<select name="tool" id="tool"
-						class="form-control button-nav-height" style="width: 125px;">
+						class="form-control button-nav-size button-nav-height" style="width: 125px;">
 						<%
 							for (String tool : CongaData.supportedTools()) {
 						%>
@@ -139,7 +154,7 @@
 						%>
 					</select>
 					<button id="get-button"
-						class="btn btn-outline-secondary button-nav-height">
+						class="btn btn-outline-secondary button-nav-size button-nav-height">
 						<svg width="1em" height="1em" viewBox="0 0 16 16"
 							class="bi bi-download" fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg">
@@ -152,8 +167,8 @@
 				</div>
 				<a href="questionnaire1.jsp?projectName=<%=project.getName()%>"
 					id=""
-					class="btn btn-outline-secondary button-nav-margin button-nav-height">
-					Tool Recommender <svg width="1em" height="1em" viewBox="0 0 16 16"
+					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
+					Questionnaire <svg width="1em" height="1em" viewBox="0 0 16 16"
 						class="bi bi-question-octagon-fill" fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
   					<path fill-rule="evenodd"
@@ -164,8 +179,8 @@
 					if (project.getQuestionnaire() != null && project.getQuestionnaire().getDate() != null) {
 				%>
 				<a href="Ranking.jsp?projectName=<%=project.getName()%>"
-					class="btn btn-outline-secondary button-nav-margin button-nav-height">
-					Recommender Result <svg width="1em" height="1em"
+					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
+					Recommender <svg width="1em" height="1em"
 						viewBox="0 0 16 16" class="bi bi-eye" fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd"
@@ -178,9 +193,9 @@
 					} else {
 				%>
 				<button
-					class="btn btn-outline-secondary button-nav-margin button-nav-height"
+					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height"
 					disabled="disabled">
-					Recommender Result
+					Recommender
 					<svg width="1em" height="1em" viewBox="0 0 16 16"
 						class="bi bi-eye-slash" fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
@@ -222,14 +237,15 @@
 				</div>
 			</div>
 
-			<div class="col-5 align-self-center">
+			<div class="col-5">
+			<!-- <div class="col-5 align-self-center">  -->
 			<div class="row justify-content-end">
 				<img alt="Flow legend" class="align-self-end legend"
 						src="img/legend.png">
 			</div>
 				<div class="row justify-content-md-center">
 
-					<h3>
+					<h5>
 						Flow Diagram
 						<svg width="1em" height="1em" viewBox="0 0 16 16"
 							class="bi bi-diagram-3" fill="currentColor"
@@ -237,7 +253,7 @@
 	  				<path fill-rule="evenodd"
 								d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z" />
 				</svg>
-					</h3>
+					</h5>
 				</div>
 				<div class="row justify-content-md-center">
 					<img alt="Flow image" class="align-self-center image"

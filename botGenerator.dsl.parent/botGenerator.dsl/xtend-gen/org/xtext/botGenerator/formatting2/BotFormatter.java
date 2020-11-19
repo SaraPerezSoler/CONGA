@@ -6,18 +6,36 @@ package org.xtext.botGenerator.formatting2;
 import com.google.inject.Inject;
 import generator.Action;
 import generator.Bot;
+import generator.BotInteraction;
 import generator.Entity;
+import generator.EntityInput;
+import generator.GeneratorPackage;
+import generator.HTTPRequest;
+import generator.HTTPResponse;
+import generator.Image;
 import generator.Intent;
+import generator.IntentInput;
 import generator.IntentLanguageInputs;
+import generator.KeyValue;
+import generator.LanguageInput;
 import generator.Parameter;
+import generator.Text;
+import generator.TextInput;
+import generator.TextLanguageInput;
 import generator.UserInteraction;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.xtext.botGenerator.services.BotGrammarAccess;
 
 @SuppressWarnings("all")
@@ -27,6 +45,51 @@ public class BotFormatter extends AbstractFormatter2 {
   private BotGrammarAccess _botGrammarAccess;
   
   protected void _format(final Bot bot, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 2);
+    };
+    ISemanticRegion intents = document.prepend(this.textRegionExtensions.regionFor(bot).keyword("intents"), _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 2);
+    };
+    ISemanticRegion entities = document.prepend(this.textRegionExtensions.regionFor(bot).keyword("entities"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 2);
+    };
+    ISemanticRegion actions = document.prepend(this.textRegionExtensions.regionFor(bot).keyword("actions"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 2);
+    };
+    ISemanticRegion flowKeyWord = document.prepend(this.textRegionExtensions.regionFor(bot).keyword("flows"), _function_3);
+    List<ISemanticRegion> flows = this.textRegionExtensions.regionFor(bot).keywords("-");
+    final Consumer<ISemanticRegion> _function_4 = (ISemanticRegion f) -> {
+      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.prepend(f, _function_5);
+    };
+    flows.forEach(_function_4);
+    List<ISemanticRegion> dotComa = this.textRegionExtensions.allRegionsFor(bot).keywords(";");
+    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(intents, entities, _function_5);
+    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(entities, actions, _function_6);
+    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(actions, flowKeyWord, _function_7);
+    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(flowKeyWord, IterableExtensions.<ISemanticRegion>last(dotComa), _function_8);
+    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 5);
+    };
+    document.append(IterableExtensions.<ISemanticRegion>last(dotComa), _function_9);
     EList<Intent> _intents = bot.getIntents();
     for (final Intent intent : _intents) {
       document.<Intent>format(intent);
@@ -45,39 +108,339 @@ public class BotFormatter extends AbstractFormatter2 {
     }
   }
   
+  protected void _format(final UserInteraction flow, @Extension final IFormattableDocument document) {
+    BotInteraction _target = flow.getTarget();
+    boolean _tripleNotEquals = (_target != null);
+    if (_tripleNotEquals) {
+      ISemanticRegion open = this.textRegionExtensions.regionFor(flow.getTarget()).keyword("{");
+      ISemanticRegion close = this.textRegionExtensions.regionFor(flow.getTarget()).keyword("}");
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.append(open, _function);
+      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.prepend(close, _function_1);
+      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+        it.indent();
+      };
+      document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_2);
+      int _size = flow.getTarget().getOutcoming().size();
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        final Consumer<ISemanticRegion> _function_3 = (ISemanticRegion p) -> {
+          final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(p, _function_4);
+        };
+        this.textRegionExtensions.regionFor(flow.getTarget()).keywords("=>").forEach(_function_3);
+        EList<UserInteraction> _outcoming = flow.getTarget().getOutcoming();
+        for (final UserInteraction subFlow : _outcoming) {
+          document.<UserInteraction>format(subFlow);
+        }
+      }
+    }
+  }
+  
+  protected void _format(final Action action, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<Action>prepend(action, _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<Action>interior(action, _function_1);
+    if ((action instanceof Text)) {
+      EList<TextLanguageInput> _inputs = ((Text) action).getInputs();
+      for (final TextLanguageInput textLanInput : _inputs) {
+        document.<TextLanguageInput>format(textLanInput);
+      }
+    } else {
+      if ((action instanceof Image)) {
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        document.prepend(this.textRegionExtensions.regionFor(((Image) action)).keyword("URL"), _function_2);
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        document.prepend(this.textRegionExtensions.regionFor(((Image) action)).keyword("caption"), _function_3);
+      } else {
+        if ((action instanceof HTTPRequest)) {
+          final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("URL"), _function_4);
+          final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("basicAuth"), _function_5);
+          final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("headers"), _function_6);
+          int _size = ((HTTPRequest) action).getHeaders().size();
+          boolean _greaterThan = (_size > 1);
+          if (_greaterThan) {
+            EList<KeyValue> _headers = ((HTTPRequest) action).getHeaders();
+            for (final KeyValue keyValue : _headers) {
+              final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+                it.newLine();
+              };
+              document.prepend(this.textRegionExtensions.regionFor(keyValue).feature(GeneratorPackage.Literals.KEY_VALUE__KEY), _function_7);
+            }
+            boolean _isEmpty = ((HTTPRequest) action).getData().isEmpty();
+            if (_isEmpty) {
+              final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+                it.indent();
+              };
+              document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("headers"), 
+                IterableExtensions.<ISemanticRegion>last(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keywords(";")), _function_8);
+            } else {
+              final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
+                it.indent();
+              };
+              document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("headers"), 
+                this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("data"), _function_9);
+            }
+          }
+          final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("data"), _function_10);
+          int _size_1 = ((HTTPRequest) action).getData().size();
+          boolean _greaterThan_1 = (_size_1 > 1);
+          if (_greaterThan_1) {
+            EList<KeyValue> _data = ((HTTPRequest) action).getData();
+            for (final KeyValue keyValue_1 : _data) {
+              final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
+                it.newLine();
+              };
+              document.prepend(this.textRegionExtensions.regionFor(keyValue_1).feature(GeneratorPackage.Literals.KEY_VALUE__KEY), _function_11);
+            }
+            boolean _isEmpty_1 = this.textRegionExtensions.regionFor(((HTTPRequest) action)).keywords("dataType").isEmpty();
+            boolean _not = (!_isEmpty_1);
+            if (_not) {
+              final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
+                it.indent();
+              };
+              document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("data"), 
+                this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("dataType"), _function_12);
+            } else {
+              final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
+                it.indent();
+              };
+              document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("data"), 
+                IterableExtensions.<ISemanticRegion>last(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keywords(";")), _function_13);
+            }
+          }
+          final Procedure1<IHiddenRegionFormatter> _function_14 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          document.prepend(this.textRegionExtensions.regionFor(((HTTPRequest) action)).keyword("dataType"), _function_14);
+        } else {
+          if ((action instanceof HTTPResponse)) {
+            final Procedure1<IHiddenRegionFormatter> _function_15 = (IHiddenRegionFormatter it) -> {
+              it.newLine();
+            };
+            document.prepend(this.textRegionExtensions.regionFor(((HTTPResponse) action)).keyword("Request"), _function_15);
+            EList<TextLanguageInput> _inputs_1 = ((HTTPResponse) action).getInputs();
+            for (final TextLanguageInput textLanInput_1 : _inputs_1) {
+              document.<TextLanguageInput>format(textLanInput_1);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  protected void _format(final TextLanguageInput textLanInput, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<TextLanguageInput>prepend(textLanInput, _function);
+    ISemanticRegion open = this.textRegionExtensions.regionFor(textLanInput).keyword("{");
+    ISemanticRegion close = this.textRegionExtensions.regionFor(textLanInput).keyword("}");
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(open, _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(close, _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_3);
+    EList<TextInput> _inputs = textLanInput.getInputs();
+    for (final TextInput textInput : _inputs) {
+      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<TextInput>prepend(textInput, _function_4);
+    }
+  }
+  
   protected void _format(final Intent intent, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(2, 2, 2);
+    };
+    document.<Intent>prepend(intent, _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<Intent>interior(intent, _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(this.textRegionExtensions.regionFor(intent).feature(GeneratorPackage.Literals.ELEMENT__NAME), _function_2);
     EList<IntentLanguageInputs> _inputs = intent.getInputs();
     for (final IntentLanguageInputs intentLanguageInputs : _inputs) {
       document.<IntentLanguageInputs>format(intentLanguageInputs);
     }
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(this.textRegionExtensions.regionFor(intent).keyword("parameters"), _function_3);
+    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(intent).keyword("parameters"), this.textRegionExtensions.regionFor(IterableExtensions.<Parameter>last(intent.getParameters())).keyword(";"), _function_4);
     EList<Parameter> _parameters = intent.getParameters();
     for (final Parameter parameter : _parameters) {
       document.<Parameter>format(parameter);
     }
   }
   
-  public void format(final Object bot, final IFormattableDocument document) {
-    if (bot instanceof XtextResource) {
-      _format((XtextResource)bot, document);
+  protected void _format(final Entity entity, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<Entity>prepend(entity, _function);
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(this.textRegionExtensions.regionFor(entity).keyword(":"), _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<Entity>interior(entity, _function_2);
+    EList<LanguageInput> _inputs = entity.getInputs();
+    for (final LanguageInput lanInput : _inputs) {
+      document.<LanguageInput>format(lanInput);
+    }
+  }
+  
+  protected void _format(final LanguageInput lanInput, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<LanguageInput>prepend(lanInput, _function);
+    ISemanticRegion open = this.textRegionExtensions.regionFor(lanInput).keyword("{");
+    ISemanticRegion close = this.textRegionExtensions.regionFor(lanInput).keyword("}");
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(open, _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(close, _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_3);
+    EList<EntityInput> _inputs = lanInput.getInputs();
+    for (final EntityInput entry : _inputs) {
+      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<EntityInput>prepend(entry, _function_4);
+    }
+  }
+  
+  protected void _format(final Parameter parameter, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.<Parameter>prepend(parameter, _function);
+  }
+  
+  protected void _format(final IntentLanguageInputs intentInput, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(this.textRegionExtensions.regionFor(intentInput).keyword("inputs"), _function);
+    ISemanticRegion open = this.textRegionExtensions.regionFor(intentInput).keyword("{");
+    ISemanticRegion close = this.textRegionExtensions.regionFor(intentInput).keyword("}");
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.append(open, _function_1);
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
+    };
+    document.prepend(close, _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      it.indent();
+    };
+    document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_3);
+    EList<IntentInput> _inputs = intentInput.getInputs();
+    for (final IntentInput input : _inputs) {
+      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+        it.newLine();
+      };
+      document.<IntentInput>prepend(input, _function_4);
+    }
+  }
+  
+  public void format(final Object action, final IFormattableDocument document) {
+    if (action instanceof XtextResource) {
+      _format((XtextResource)action, document);
       return;
-    } else if (bot instanceof Bot) {
-      _format((Bot)bot, document);
+    } else if (action instanceof Action) {
+      _format((Action)action, document);
       return;
-    } else if (bot instanceof Intent) {
-      _format((Intent)bot, document);
+    } else if (action instanceof Bot) {
+      _format((Bot)action, document);
       return;
-    } else if (bot instanceof EObject) {
-      _format((EObject)bot, document);
+    } else if (action instanceof Entity) {
+      _format((Entity)action, document);
       return;
-    } else if (bot == null) {
+    } else if (action instanceof Intent) {
+      _format((Intent)action, document);
+      return;
+    } else if (action instanceof IntentLanguageInputs) {
+      _format((IntentLanguageInputs)action, document);
+      return;
+    } else if (action instanceof LanguageInput) {
+      _format((LanguageInput)action, document);
+      return;
+    } else if (action instanceof Parameter) {
+      _format((Parameter)action, document);
+      return;
+    } else if (action instanceof TextLanguageInput) {
+      _format((TextLanguageInput)action, document);
+      return;
+    } else if (action instanceof UserInteraction) {
+      _format((UserInteraction)action, document);
+      return;
+    } else if (action instanceof EObject) {
+      _format((EObject)action, document);
+      return;
+    } else if (action == null) {
       _format((Void)null, document);
       return;
-    } else if (bot != null) {
-      _format(bot, document);
+    } else if (action != null) {
+      _format(action, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(bot, document).toString());
+        Arrays.<Object>asList(action, document).toString());
     }
   }
 }

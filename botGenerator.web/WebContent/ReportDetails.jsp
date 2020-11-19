@@ -40,13 +40,13 @@
 		<jsp:include page="header.jsp" />
 		<div class="row justify-content-md-center box">
 			<nav aria-label="Page navigation example">
-				<ul class="pagination pagination-lg">
-					<li class="page-item"><a class="page-link" href="User.jsp">User Menu</a></li>
-					<li class="page-item"><a class="page-link" href="openProject?projectName=<%=projectName%>">Open bot</a></li>
-					<li class="page-item"><a class="page-link" href="Ranking.jsp?projectName=<%=projectName%>">Ranking</a></li>
-					<li class="page-item"><a class="page-link" href="ReportTables.jsp?projectName=<%=projectName%>">Report tables</a></li>
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link page-size" href="User.jsp">User Menu</a></li>
+					<li class="page-item"><a class="page-link page-size" href="openProject?projectName=<%=projectName%>">Open bot</a></li>
+					<li class="page-item"><a class="page-link page-size" href="Ranking.jsp?projectName=<%=projectName%>">Ranking</a></li>
+					<li class="page-item"><a class="page-link page-size" href="ReportTables.jsp?projectName=<%=projectName%>">Report tables</a></li>
 					<li class="page-item active" aria-current="page"><span
-						class="page-link">Report details<span class="sr-only">(current)</span>
+						class="page-link page-size">Report details<span class="sr-only">(current)</span>
 					</span></li>
 				</ul>
 			</nav>

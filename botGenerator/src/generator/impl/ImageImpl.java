@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Image;
 
@@ -215,6 +216,28 @@ public class ImageImpl extends ActionImpl implements Image {
 		result.append(caption);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Image other = (ImageImpl) obj;
+		if (getCaption() == null) {
+			if (other.getCaption() != null)
+				return false;
+		} else if (!getCaption().equals(other.getCaption()))
+			return false;
+		if (getURL() == null) {
+			if (other.getURL() != null)
+				return false;
+		} else if (!getURL().equals(other.getURL()))
+			return false;
+		return true;
 	}
 
 } //ImageImpl

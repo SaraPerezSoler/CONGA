@@ -53,6 +53,7 @@ public class RasaGenerator {
   private String path;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
+    String resourceName = resource.getURI().lastSegment().substring(0, resource.getURI().lastSegment().indexOf("."));
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<Intent> intents = IteratorExtensions.<Intent>toList(Iterators.<Intent>filter(resource.getAllContents(), Intent.class));
     List<Entity> entities = IteratorExtensions.<Entity>toList(Iterators.<Entity>filter(resource.getAllContents(), Entity.class));
@@ -63,9 +64,7 @@ public class RasaGenerator {
     for (final UserInteraction flow : _flows) {
       this.leafsU(flow, leafs);
     }
-    String _name = bot.getName();
-    String _plus = (_name + "/Rasa");
-    this.path = _plus;
+    this.path = (resourceName + "/Rasa");
     fsa.generateFile((this.path + "/requirements.txt"), 
       "tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0");
     InputStream requirements = fsa.readBinaryFile((this.path + "/requirements.txt"));
@@ -73,12 +72,9 @@ public class RasaGenerator {
     EList<Language> _languages = bot.getLanguages();
     for (final Language lan : _languages) {
       {
-        String _name_1 = bot.getName();
-        String _plus_1 = (_name_1 + "/Rasa");
-        String _plus_2 = (_plus_1 + "/");
         String _languageAbbreviation = this.languageAbbreviation(lan);
-        String _plus_3 = (_plus_2 + _languageAbbreviation);
-        this.path = _plus_3;
+        String _plus = ((this.path + "/") + _languageAbbreviation);
+        this.path = _plus;
         fsa.generateFile((this.path + "/actions.py"), this.actions(intents, entities, actions, lan));
         InputStream actionValue = fsa.readBinaryFile((this.path + "/actions.py"));
         zip.addFileToFolder(this.languageAbbreviation(lan), "actions.py", actionValue);
@@ -97,13 +93,13 @@ public class RasaGenerator {
         fsa.generateFile((this.path + "/data/nlu.md"), this.nlu(intents, entities, lan));
         InputStream nluValue = fsa.readBinaryFile((this.path + "/data/nlu.md"));
         String _languageAbbreviation_1 = this.languageAbbreviation(lan);
-        String _plus_4 = (_languageAbbreviation_1 + "/data");
-        zip.addFileToFolder(_plus_4, "nlu.md", nluValue);
+        String _plus_1 = (_languageAbbreviation_1 + "/data");
+        zip.addFileToFolder(_plus_1, "nlu.md", nluValue);
         fsa.generateFile((this.path + "/data/stories.md"), this.stories(leafs));
         InputStream storiesValue = fsa.readBinaryFile((this.path + "/data/stories.md"));
         String _languageAbbreviation_2 = this.languageAbbreviation(lan);
-        String _plus_5 = (_languageAbbreviation_2 + "/data");
-        zip.addFileToFolder(_plus_5, "stories.md", storiesValue);
+        String _plus_2 = (_languageAbbreviation_2 + "/data");
+        zip.addFileToFolder(_plus_2, "stories.md", storiesValue);
       }
     }
     zip.close();

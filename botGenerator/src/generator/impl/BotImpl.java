@@ -4,6 +4,7 @@ package generator.impl;
 
 import generator.Action;
 import generator.Bot;
+import generator.Element;
 import generator.Entity;
 import generator.GeneratorPackage;
 import generator.Intent;
@@ -17,8 +18,9 @@ import java.util.List;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -319,6 +321,12 @@ public class BotImpl extends ElementImpl implements Bot {
 
 	@Override
 	public Entity getEntity(String dataType) {
+		if (dataType == null) {
+			return null;
+		}
+		if (dataType.startsWith("@")) {
+			dataType = dataType.replace("@", "");
+		}
 		for (Entity entity : getEntities()) {
 			if (entity.getName().equals(dataType)) {
 				return entity;
@@ -356,6 +364,20 @@ public class BotImpl extends ElementImpl implements Bot {
 			}
 		}
 		return actions;
+	}
+
+	@Override
+	public boolean containsElement(String name) {
+		TreeIterator<EObject> objs = eAllContents();
+		while (objs.hasNext()) {
+			EObject obj = objs.next();
+			if (obj instanceof Element) {
+				if (((Element)obj).getName().equals(name)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 } //BotImpl

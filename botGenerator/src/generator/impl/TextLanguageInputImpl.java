@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.TextInput;
 import generator.TextLanguageInput;
@@ -148,4 +149,22 @@ public class TextLanguageInputImpl extends WithLanguageImpl implements TextLangu
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TextLanguageInput other = (TextLanguageInputImpl) obj;
+		if (getInputs() == null) {
+			if (other.getInputs() != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
+			return false;
+		return true;
+	}
+
+	
 } //TextLanguageInputImpl

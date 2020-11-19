@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.TextInput;
 import generator.Token;
@@ -148,6 +149,23 @@ public class TextInputImpl extends MinimalEObjectImpl.Container implements TextI
 				return tokens != null && !tokens.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TextInput other = (TextInputImpl) obj;
+		if (getTokens() == null) {
+			if (other.getTokens() != null)
+				return false;
+		} else if (!isSimilar(getTokens(), other.getTokens()))
+			return false;
+		return true;
 	}
 
 } //TextInputImpl

@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Intent;
 import generator.IntentLanguageInputs;
@@ -269,5 +270,38 @@ public class IntentImpl extends ElementImpl implements Intent {
 		
 		return null;
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable other) {
+		if (this == other)
+			return true;
+		if (other == null)
+			return false;
+		if (!(other instanceof Intent)) {
+			return false;
+		}
+		Intent intent = (Intent) other;
+		if (isFallbackIntent() != intent.isFallbackIntent())
+			return false;
+		
+		if (getInputs() == null) {
+			if (intent.getInputs() != null)
+				return false;
+		} else {
+			if (!isSimilar(getInputs(), intent.getInputs())) {
+				return false;
+			}			
+		}
+		if (getParameters() == null) {
+			if (intent.getParameters() != null)
+				return false;
+		} else {
+			if (!isSimilar(getParameters(), intent.getParameters())) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 
 } //IntentImpl

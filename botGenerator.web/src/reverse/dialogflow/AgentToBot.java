@@ -50,7 +50,7 @@ public class AgentToBot {
 	private static final int TEXT_TYPE = 0;
 	private static final int IMAGE_TYPE = 3;
 
-	public Bot getBot(Agent agent) {
+	/*public Bot getBot(Agent agent) {
 		Bot bot = GeneratorFactory.eINSTANCE.createBot();
 
 		bot.setName(agent.getName());
@@ -75,12 +75,12 @@ public class AgentToBot {
 		}
 
 		return bot;
-	}
+	}*/
 
 	private UserInteraction getFlow(reverse.dialogflow.agent.intents.Intent intent, Agent agent, Bot bot) {
 		UserInteraction flow = getInteractionFlow(intent, bot);
 		for (Response responses : intent.getResponses()) {
-			for (Context context : responses.getAffectedContext()) {
+			for (Context context : responses.getAffectedContexts()) {
 				for (reverse.dialogflow.agent.intents.Intent followUp : agent.getIntents(context)) {
 					UserInteraction followUpInteraction = getFlow(followUp, agent, bot);
 					if (flow.getTarget() != null) {
@@ -301,7 +301,7 @@ public class AgentToBot {
 			for (reverse.dialogflow.agent.intents.TrainingPhrase phrase : usersays.getPhrases()) {
 				TrainingPhrase training = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 				for (Data data : phrase.getData()) {
-					if (data.isUserDefined()) {
+					if (data.isUserDefined() && !data.getMeta().equals("@sys.ignore")) {
 						Parameter param = ret.getParameter(data.getAlias());
 						ParameterReferenceToken reference = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 						reference.setTextReference(data.getText());

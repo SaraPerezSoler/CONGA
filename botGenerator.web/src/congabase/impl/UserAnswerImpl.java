@@ -281,7 +281,7 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 			int totalQuestions = getAnswers().size();
 			for (AQuestion ans : getAnswers()) {
 				double ansRaiting = ans.getScore(t);
-				if (ans.getRelevance() == RelevanceLevel.NOT_RELEVANT) {
+				if (ans.getRelevance() == RelevanceLevel.IRRELEVANT) {
 					totalQuestions--;
 					continue;
 				} else if (ans.getRelevance() == RelevanceLevel.CRITICAL_ALL

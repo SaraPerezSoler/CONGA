@@ -5,6 +5,9 @@ package generator.impl;
 import generator.EntityInput;
 import generator.GeneratorPackage;
 import generator.LanguageInput;
+import generator.RegexInput;
+import generator.SimpleInput;
+
 import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -141,6 +144,22 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 				return inputs != null && !inputs.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public EntityInput getInput(String name) {
+		for (EntityInput input: getInputs()) {
+			if (input instanceof SimpleInput) {
+				if (((SimpleInput)input).getName().equalsIgnoreCase(name)) {
+					return input;
+				}
+			}else if (input instanceof RegexInput) {
+				if (((RegexInput)input).getExpresion().equals(name)) {
+					return input;
+				}
+			}
+		}
+		return null;
 	}
 
 } //LanguageInputImpl

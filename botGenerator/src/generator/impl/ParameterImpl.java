@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.DefaultEntity;
 import generator.Entity;
 import generator.GeneratorPackage;
@@ -405,6 +406,37 @@ public class ParameterImpl extends ElementImpl implements Parameter {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Parameter))
+			return false;
+		Parameter other = (Parameter) obj;
+		if (!getName().equals(other.getName())) {
+			return false;
+		}
+		if (getDefaultEntity() != other.getDefaultEntity())
+			return false;
+		if (getEntity() == null) {
+			if (other.getEntity() != null)
+				return false;
+		} else if (!getEntity().equals(other.getEntity()))
+			return false;
+		if (isIsList() != other.isIsList())
+			return false;
+		if (getPrompts() == null) {
+			if (other.getPrompts() != null)
+				return false;
+		} else if (!isSimilar(getPrompts(), other.getPrompts()))
+			return false;
+		if (isRequired() != other.isRequired())
+			return false;
+		return true;
 	}
 
 } //ParameterImpl

@@ -46,7 +46,7 @@ public class GetFiles extends HttpServlet {
 		
 		File srcFile;
 		try {
-			srcFile = new File(CongaData.getCongaData(getServletContext()).getProjectFolderPath(project)+"/"+tool+"/"+project.getName()+".zip");
+			srcFile = new File(CongaData.getCongaData(getServletContext()).getProjectFolderPath(project)+"/gen"+"/"+tool+"/"+project.getName()+".zip");
 			if (!srcFile.exists()) {
 				resp.setContentType("text/plain");
 		        resp.getWriter().println("The file "+CongaData.getCongaData(getServletContext()).getProjectFolderPath(project)+"/"+tool+"/"+project.getName()+".zip doesn't exist");

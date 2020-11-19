@@ -45,19 +45,22 @@ public class BotGenerator extends AbstractGenerator {
     String uri = "";
     if (BotGenerator.isPlugin) {
       String workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
-      String _platformString = fsa.getURI("src-gen").toPlatformString(true);
-      String _plus = ((workspacePath + "/") + _platformString);
-      uri = _plus;
+      String srcPath = fsa.getURI("").toPlatformString(false);
+      uri = ((((workspacePath + "/") + srcPath) + "/") + resourceName);
     } else {
-      uri = (BotGenerator.newpath + "/");
+      if ((BotGenerator.newpath == null)) {
+        String _replace = resource.getURI().devicePath().replace(resource.getURI().lastSegment(), "");
+        String _plus = (_replace + "/gen");
+        uri = _plus;
+      } else {
+        uri = ((BotGenerator.newpath + "/") + resourceName);
+      }
     }
-    String _replace = resource.getURI().devicePath().replace(resource.getURI().lastSegment(), "");
-    String dialogflowGeneratorUri = (_replace + "/Dialogflow");
+    String dialogflowGeneratorUri = (uri + "/Dialogflow");
     Zip dialogflowZip = new Zip(dialogflowGeneratorUri, resourceName);
     DialogflowGenerator dialogflow = new DialogflowGenerator();
     dialogflow.doGenerate(resource, fsa, context, dialogflowZip);
-    String _replace_1 = resource.getURI().devicePath().replace(resource.getURI().lastSegment(), "");
-    String rasaUri = (_replace_1 + "/Rasa");
+    String rasaUri = (uri + "/Rasa");
     Zip rasaZip = new Zip(rasaUri, resourceName);
     RasaGenerator rasa = new RasaGenerator();
     rasa.doGenerate(resource, fsa, context, rasaZip);

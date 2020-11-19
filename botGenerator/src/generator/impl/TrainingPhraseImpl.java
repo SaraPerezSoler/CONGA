@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Token;
 import generator.TrainingPhrase;
@@ -146,5 +147,23 @@ public class TrainingPhraseImpl extends IntentInputImpl implements TrainingPhras
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrainingPhrase other = (TrainingPhrase) obj;
+		if (getTokens() == null) {
+			if (other.getTokens() != null)
+				return false;
+		} else if (!isSimilar(getTokens(), other.getTokens()))
+			return false;
+		return true;
+	}
+	
 
 } //TrainingPhraseImpl

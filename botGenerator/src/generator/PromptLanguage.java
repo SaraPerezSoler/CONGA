@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface PromptLanguage extends WithLanguage {
+public interface PromptLanguage extends WithLanguage, Comparable {
 	/**
 	 * Returns the value of the '<em><b>Prompts</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.

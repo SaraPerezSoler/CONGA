@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.KeyValue;
 import generator.Token;
@@ -244,5 +245,27 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
 		result.append(')');
 		return result.toString();
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		KeyValue other = (KeyValueImpl) obj;
+		if (getKey() == null) {
+			if (other.getKey() != null)
+				return false;
+		} else if (!getKey().equals(other.getKey()))
+			return false;
+		if (getValue() == null) {
+			if (other.getValue() != null)
+				return false;
+		} else if (!getValue().equals(other.getValue()))
+			return false;
+		return true;
+	}
+	
+	
 
 } //KeyValueImpl

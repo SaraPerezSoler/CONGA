@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.HTTPRequestToke;
 import generator.HTTPReturnType;
@@ -216,6 +217,25 @@ public class HTTPRequestTokeImpl extends TokenImpl implements HTTPRequestToke {
 		result.append(dataKey);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HTTPRequestToke other = (HTTPRequestTokeImpl) obj;
+		if (getDataKey() == null) {
+			if (other.getDataKey() != null)
+				return false;
+		} else if (!getDataKey().equals(other.getDataKey()))
+			return false;
+		if (getType() != other.getType())
+			return false;
+		return true;
 	}
 
 } //HTTPRequestTokeImpl

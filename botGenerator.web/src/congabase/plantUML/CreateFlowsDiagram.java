@@ -5,6 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.Inject;
+
+import botGenerator.web.xtextServlets.BotServlet;
 import generator.Action;
 import generator.BotInteraction;
 import generator.UserInteraction;
@@ -24,7 +34,16 @@ public class CreateFlowsDiagram {
 	private List<BotInteraction> printed = new ArrayList<BotInteraction>();
 	//private List<String> names = new ArrayList<>();
 	
-	public String createUML(List<UserInteraction> flows) {
+	public String createUML(Resource resource, List<UserInteraction> flows) {
+		IResourceValidator validator = BotServlet.getInjector().getInstance(IResourceValidator.class);
+		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+		if (!list.isEmpty()) {
+			for (Issue issue : list) {
+				if (issue.getSeverity() == Severity.ERROR) {
+					return START_CLASS_DIAGRAM + "[*]-->[*]"+END;
+				}
+			}
+		}
 		String cad = START_CLASS_DIAGRAM;
 		for (UserInteraction flow : flows) {
 			cad += printFlow(flow);
@@ -84,12 +103,14 @@ public class CreateFlowsDiagram {
 	}
 
 	private String stateName(BotInteraction interaction) {
+		
 		if (stateName.containsKey(interaction)) {
 			return stateName.get(interaction);
 		}
 		
 		int i = 0;
-		String name = interaction.getActions().get(0).getName();
+		String name = interaction.getActions().get(0).getName().replace(" ", "").replace("-", "");
+		
 		boolean flagContinue = false;
 		do {
 			if (!stateName.containsValue(name)) {
@@ -97,7 +118,7 @@ public class CreateFlowsDiagram {
 				flagContinue = true;
 			}else {
 				i++;
-				name = interaction.getActions().get(0).getName()+i;
+				name = name+i;
 			}
 		}while (flagContinue != true);
 		return name;

@@ -39,6 +39,7 @@ class RasaGenerator {
 	String path;
 
 	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zip zip) {
+		var resourceName = resource.URI.lastSegment.substring(0, resource.URI.lastSegment.indexOf("."));
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var intents = resource.allContents.filter(Intent).toList;
 		var entities = resource.allContents.filter(Entity).toList;
@@ -49,7 +50,7 @@ class RasaGenerator {
 			leafsU(flow, leafs)
 		}
 
-		path = bot.name + "/Rasa"
+		path = resourceName + "/Rasa"
 		fsa.generateFile(path + '/requirements.txt',
 			"tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
 		var requirements = fsa.readBinaryFile(path + '/requirements.txt')
@@ -57,7 +58,7 @@ class RasaGenerator {
 
 		for (Language lan : bot.languages) {
 
-			path = bot.name + "/Rasa" + "/" + lan.languageAbbreviation
+			path = path + '/'+lan.languageAbbreviation
 			fsa.generateFile(path + '/actions.py', actions(intents, entities, actions, lan))
 			var actionValue = fsa.readBinaryFile(path + '/actions.py')
 			zip.addFileToFolder(lan.languageAbbreviation, "actions.py", actionValue)

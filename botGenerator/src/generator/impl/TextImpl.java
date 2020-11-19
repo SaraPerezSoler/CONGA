@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Language;
 import generator.Text;
@@ -159,4 +160,22 @@ public class TextImpl extends ActionImpl implements Text {
 		return null;
 	}
 
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Text other = (TextImpl) obj;
+		if (getInputs() == null) {
+			if (other.getInputs() != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
+			return false;
+		return true;
+	}
+
+	
 } //TextImpl

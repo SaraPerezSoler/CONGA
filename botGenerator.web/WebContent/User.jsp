@@ -123,7 +123,7 @@
 					empty project</a>
 			</div>
 			<div class="col">
-				<a class="btn btn-secondary center-buttons">Load
+				<a href="loadproject.jsp" class="btn btn-secondary center-buttons">Load
 					project from Dialogflow files</a>
 			</div>
 		</div>

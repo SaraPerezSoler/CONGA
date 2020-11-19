@@ -42,7 +42,7 @@
 					<div class="row">
 						<div class="col box">
 							<div class="row ">
-								<div class="col-md-9">
+								<div class="col-md-9 question-size">
 									<%=question.getQuestion().getText()%>
 									<%
 										if (isMulti) {
@@ -72,6 +72,7 @@
 									<div class="form-check">
 										<%
 											int i = 0;
+											int n_cols = 3;
 												for (Option option : question.getQuestion().getOptions()) {
 													String checked = "";
 													if (question.getSelecteds().contains(option)){
@@ -79,7 +80,7 @@
 													}
 										%>
 										<%
-											if (i % 2 == 0) {
+											if (i % n_cols == 0) {
 										%>
 										<div class="row">
 											<%
@@ -100,11 +101,11 @@
 												<%
 													}
 												%>
-												<label class="form-check-label" for="<%=option.getText()%>"> <%=option.getText()%></label>
+												<label class="form-check-label question-size" for="<%=option.getText()%>"> <%=option.getText()%></label>
 
 											</div>
 											<%
-												if (i % 2 != 0) {
+												if (i % n_cols == n_cols-1 || question.getQuestion().getOptions().size()-1==i) {
 											%>
 										</div>
 										<%

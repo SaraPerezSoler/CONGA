@@ -508,7 +508,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 
 		// Initialize enums and add enum literals
 		initEEnum(relevanceLevelEEnum, RelevanceLevel.class, "RelevanceLevel");
-		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.NOT_RELEVANT);
+		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.IRRELEVANT);
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.RELEVANT);
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.DOBLE);
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.CRITICAL_ONE);

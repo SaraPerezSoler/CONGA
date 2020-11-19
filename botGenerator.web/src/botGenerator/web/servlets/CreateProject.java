@@ -42,7 +42,7 @@ public class CreateProject extends HttpServlet {
 			Project project = conga.newProject(projectName, userString, language.toUpperCase());
 			if (project != null) {
 				getServletContext().setAttribute("project", project);
-				request.getRequestDispatcher("User.jsp").forward(request, response);
+				request.getRequestDispatcher("editor.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

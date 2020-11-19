@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.Entity;
 import generator.EntityToken;
 import generator.GeneratorPackage;
@@ -155,4 +156,21 @@ public class EntityTokenImpl extends TokenImpl implements EntityToken {
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EntityToken other = (EntityToken) obj;
+		if (getEntity() == null) {
+			if (other.getEntity() != null)
+				return false;
+		} else if (!getEntity().equals(other.getEntity()))
+			return false;
+		return true;
+	}
+	
 } //EntityTokenImpl

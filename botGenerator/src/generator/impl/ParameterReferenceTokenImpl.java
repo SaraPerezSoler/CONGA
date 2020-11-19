@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Parameter;
 import generator.ParameterReferenceToken;
@@ -223,6 +224,28 @@ public class ParameterReferenceTokenImpl extends TokenImpl implements ParameterR
 		result.append(textReference);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ParameterReferenceToken other = (ParameterReferenceToken) obj;
+		if (getParameter() == null) {
+			if (other.getParameter() != null)
+				return false;
+		} else if (!getParameter().equals(other.getParameter()))
+			return false;
+		if (getTextReference() == null) {
+			if (other.getTextReference() != null)
+				return false;
+		} else if (!getTextReference().equals(other.getTextReference()))
+			return false;
+		return true;
 	}
 
 } //ParameterReferenceTokenImpl

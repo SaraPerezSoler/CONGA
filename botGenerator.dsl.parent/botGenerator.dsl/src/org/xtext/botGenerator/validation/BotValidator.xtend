@@ -222,8 +222,8 @@ class BotValidator extends AbstractBotValidator {
 			}
 			for (Language lan : container.languages) {
 				if (!entityLan.contains(lan)) {
-					warning("The chatbot support the language " + lan.literal.toLowerCase().toFirstUpper +
-						" and this entity does not have a input in this language",
+					warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+						", but this entity does not have an input in this language",
 						GeneratorPackage.Literals.ELEMENT__NAME)
 				}
 			}
@@ -268,8 +268,8 @@ class BotValidator extends AbstractBotValidator {
 			}
 			for (Language lan : container.languages) {
 				if (!intentLan.contains(lan) && intent.fallbackIntent !== true) {
-					warning("The chatbot support the language " + lan.literal.toLowerCase().toFirstUpper +
-						" and this intent does not have a input in this language",
+					warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+						", but this intent does not have an input in this language",
 						GeneratorPackage.Literals.ELEMENT__NAME)
 				}
 			}
@@ -339,8 +339,8 @@ class BotValidator extends AbstractBotValidator {
 			if (!param.prompts.empty) {
 				for (Language lan : container.languages) {
 					if (!paramLan.contains(lan)) {
-						warning("The chatbot support the language " + lan.literal.toLowerCase().toFirstUpper +
-							" and this parameter does not have a prompt in this language",
+						warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+							", but this parameter does not have a prompt in this language",
 							GeneratorPackage.Literals.ELEMENT__NAME)
 					}
 				}
@@ -433,8 +433,8 @@ class BotValidator extends AbstractBotValidator {
 				}
 				for (Language lan : bot.languages) {
 					if (!actionLan.contains(lan)) {
-						warning("The chatbot support the language " + lan.literal.toLowerCase().toFirstUpper +
-							" and this text response does not have a input in this language",
+						warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+							", but this text response does not have an input in this language",
 							GeneratorPackage.Literals.ELEMENT__NAME)
 					}
 				}
@@ -449,8 +449,8 @@ class BotValidator extends AbstractBotValidator {
 				}
 				for (Language lan : bot.languages) {
 					if (!actionLan.contains(lan)) {
-						warning("The chatbot support the language " + lan.literal.toLowerCase().toFirstUpper +
-							" and this http response does not have a input in this language",
+						warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+							",but this http response does not have an input in this language",
 							GeneratorPackage.Literals.ELEMENT__NAME)
 					}
 				}

@@ -32,16 +32,22 @@ class BotGenerator extends AbstractGenerator {
 		var uri = ""
 		if (isPlugin) {
 			var workspacePath = ResourcesPlugin.workspace.getRoot().location.toString()
-			uri = workspacePath + "/" + fsa.getURI("src-gen").toPlatformString(true);
+			var srcPath = fsa.getURI("").toPlatformString(false);
+			uri = workspacePath + "/" + srcPath+'/'+resourceName;
 		} else {
-			uri = newpath+"/";
+			if (newpath === null){
+				uri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+'/gen'
+			}else{
+				uri = newpath+"/"+resourceName;
+			}
+			
 		}
-		var dialogflowGeneratorUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Dialogflow"
+		var dialogflowGeneratorUri = uri+"/Dialogflow"
 		var dialogflowZip = new Zip(dialogflowGeneratorUri, resourceName)
 		var dialogflow = new DialogflowGenerator()
 		dialogflow.doGenerate(resource, fsa, context, dialogflowZip)
 		
-		var rasaUri = resource.URI.devicePath.replace(resource.URI.lastSegment, "")+"/Rasa"
+		var rasaUri = uri+"/Rasa"
 		var rasaZip = new Zip(rasaUri, resourceName)
 		var rasa = new RasaGenerator()
 	    rasa.doGenerate(resource, fsa, context, rasaZip)

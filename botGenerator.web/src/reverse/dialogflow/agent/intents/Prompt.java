@@ -4,6 +4,9 @@ public class Prompt{
 	private String lang;
 	private String value;
 	public String getLang() {
+		if (lang == null) {
+			lang ="";
+		}
 		return lang;
 	}
 	public void setLang(String lang) {

@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.RegexInput;
 import org.eclipse.emf.common.notify.Notification;
@@ -157,4 +158,20 @@ public class RegexInputImpl extends EntityInputImpl implements RegexInput {
 		return result.toString();
 	}
 
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegexInput other = (RegexInput) obj;
+		if (getExpresion() == null) {
+			if (other.getExpresion() != null)
+				return false;
+		} else if (!getExpresion().equals(other.getExpresion()))
+			return false;
+		return true;
+	}
 } //RegexInputImpl

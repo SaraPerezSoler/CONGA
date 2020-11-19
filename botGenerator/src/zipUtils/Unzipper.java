@@ -22,7 +22,7 @@ public class Unzipper {
 				return null;
 			}
 			String srcName = src.getName();
-			dest = new File(srcName.substring(0, srcName.indexOf(".") ));
+			dest = new File(srcName.substring(0, srcName.indexOf(".")));
 			if (dest.exists()) {
 				clean();
 			}
@@ -31,14 +31,20 @@ public class Unzipper {
 			ZipInputStream zis = new ZipInputStream(new FileInputStream(src));
 			ZipEntry zipEntry = zis.getNextEntry();
 			while (zipEntry != null) {
-				File newFile = newFile(dest, zipEntry);
-				FileOutputStream fos = new FileOutputStream(newFile);
-				int len;
-				while ((len = zis.read(buffer)) > 0) {
-					fos.write(buffer, 0, len);
-				}
-				fos.close();
-				zipEntry = zis.getNextEntry();
+					File newFile = newFile(dest, zipEntry);
+					//new File(newFile.getParent()).mkdirs();
+					FileOutputStream fos = new FileOutputStream(newFile);
+					int len;
+					int totalLen = 0;
+					while ((len = zis.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+						totalLen+=len;
+					}
+					fos.close();
+					zipEntry = zis.getNextEntry();
+					if (totalLen<=0) {
+						newFile.delete();
+					}
 			}
 			zis.closeEntry();
 			zis.close();
@@ -49,7 +55,7 @@ public class Unzipper {
 	}
 
 	public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
-		
+
 		File destFile = new File(destinationDir, zipEntry.getName());
 
 		String destDirPath = destinationDir.getCanonicalPath();

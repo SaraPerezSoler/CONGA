@@ -105,8 +105,19 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				sequence_Image(context, (Image) semanticObject); 
 				return; 
 			case GeneratorPackage.INTENT:
-				sequence_Intent(context, (Intent) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getIntent1Rule()) {
+					sequence_Intent1(context, (Intent) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getIntentRule()) {
+					sequence_Intent1_Intent2(context, (Intent) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getIntent2Rule()) {
+					sequence_Intent2(context, (Intent) semanticObject); 
+					return; 
+				}
+				else break;
 			case GeneratorPackage.INTENT_LANGUAGE_INPUTS:
 				sequence_IntentLanguageInputs(context, (IntentLanguageInputs) semanticObject); 
 				return; 
@@ -283,7 +294,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     EntityToken returns EntityToken
 	 *
 	 * Constraint:
-	 *     entity=[Entity|ID]
+	 *     entity=[Entity|EString]
 	 */
 	protected void sequence_EntityToken(ISerializationContext context, EntityToken semanticObject) {
 		if (errorAcceptor != null) {
@@ -291,7 +302,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEntityTokenAccess().getEntityEntityIDTerminalRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY, false));
+		feeder.accept(grammarAccess.getEntityTokenAccess().getEntityEntityEStringParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.ENTITY_TOKEN__ENTITY, false));
 		feeder.finish();
 	}
 	
@@ -347,19 +358,49 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Image returns Image
 	 *
 	 * Constraint:
-	 *     (name=EString URL=EString)
+	 *     (name=EString URL=EString caption=EString?)
 	 */
 	protected void sequence_Image(ISerializationContext context, Image semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.ELEMENT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.ELEMENT__NAME));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.IMAGE__URL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.IMAGE__URL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImageAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getImageAccess().getURLEStringParserRuleCall_6_0(), semanticObject.getURL());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Intent1 returns Intent
+	 *
+	 * Constraint:
+	 *     (name=EString fallbackIntent?='Fallback'?)
+	 */
+	protected void sequence_Intent1(ISerializationContext context, Intent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Intent returns Intent
+	 *
+	 * Constraint:
+	 *     (
+	 *         (name=EString fallbackIntent?='Fallback'? inputs+=IntentLanguageInputs* (parameters+=Parameter2* parameters+=Parameter)*) | 
+	 *         (name=EString fallbackIntent?='Fallback'?)
+	 *     )
+	 */
+	protected void sequence_Intent1_Intent2(ISerializationContext context, Intent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Intent2 returns Intent
+	 *
+	 * Constraint:
+	 *     (name=EString fallbackIntent?='Fallback'? inputs+=IntentLanguageInputs* (parameters+=Parameter2* parameters+=Parameter)*)
+	 */
+	protected void sequence_Intent2(ISerializationContext context, Intent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -371,18 +412,6 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (language=Language? inputs+=IntentInput inputs+=IntentInput*)
 	 */
 	protected void sequence_IntentLanguageInputs(ISerializationContext context, IntentLanguageInputs semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Intent returns Intent
-	 *
-	 * Constraint:
-	 *     (name=EString fallbackIntent?='Fallback'? inputs+=IntentLanguageInputs* (parameters+=Parameter2* parameters+=Parameter)*)
-	 */
-	protected void sequence_Intent(ISerializationContext context, Intent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

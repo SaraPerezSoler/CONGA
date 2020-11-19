@@ -23,19 +23,19 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
+import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.Tool;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>AQuestion</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>AQuestion</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link congabase.impl.AQuestionImpl#getQuestion <em>Question</em>}</li>
- *   <li>{@link congabase.impl.AQuestionImpl#getSelecteds <em>Selecteds</em>}</li>
- *   <li>{@link congabase.impl.AQuestionImpl#getRelevance <em>Relevance</em>}</li>
+ * <li>{@link congabase.impl.AQuestionImpl#getQuestion <em>Question</em>}</li>
+ * <li>{@link congabase.impl.AQuestionImpl#getSelecteds <em>Selecteds</em>}</li>
+ * <li>{@link congabase.impl.AQuestionImpl#getRelevance <em>Relevance</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,8 +43,8 @@ import recommenderQuestionnaire.Tool;
 public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQuestion {
 	/**
 	 * The cached value of the '{@link #getQuestion() <em>Question</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getQuestion()
 	 * @generated
 	 * @ordered
@@ -52,9 +52,9 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	protected Question question;
 
 	/**
-	 * The cached value of the '{@link #getSelecteds() <em>Selecteds</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSelecteds() <em>Selecteds</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getSelecteds()
 	 * @generated
 	 * @ordered
@@ -62,9 +62,9 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	protected EList<Option> selecteds;
 
 	/**
-	 * The default value of the '{@link #getRelevance() <em>Relevance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getRelevance() <em>Relevance</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRelevance()
 	 * @generated
 	 * @ordered
@@ -72,9 +72,9 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	protected static final RelevanceLevel RELEVANCE_EDEFAULT = RelevanceLevel.RELEVANT;
 
 	/**
-	 * The cached value of the '{@link #getRelevance() <em>Relevance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRelevance() <em>Relevance</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRelevance()
 	 * @generated
 	 * @ordered
@@ -82,8 +82,8 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	protected RelevanceLevel relevance = RELEVANCE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AQuestionImpl() {
@@ -91,8 +91,8 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -101,25 +101,26 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Question getQuestion() {
 		if (question != null && question.eIsProxy()) {
-			InternalEObject oldQuestion = (InternalEObject)question;
-			question = (Question)eResolveProxy(oldQuestion);
+			InternalEObject oldQuestion = (InternalEObject) question;
+			question = (Question) eResolveProxy(oldQuestion);
 			if (question != oldQuestion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.AQUESTION__QUESTION, oldQuestion, question));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.AQUESTION__QUESTION,
+							oldQuestion, question));
 			}
 		}
 		return question;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Question basicGetQuestion() {
@@ -127,20 +128,21 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setQuestion(Question newQuestion) {
 		Question oldQuestion = question;
 		question = newQuestion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.AQUESTION__QUESTION, oldQuestion, question));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.AQUESTION__QUESTION, oldQuestion,
+					question));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Option> getSelecteds() {
@@ -151,8 +153,8 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public RelevanceLevel getRelevance() {
@@ -160,106 +162,109 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setRelevance(RelevanceLevel newRelevance) {
 		RelevanceLevel oldRelevance = relevance;
 		relevance = newRelevance == null ? RELEVANCE_EDEFAULT : newRelevance;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.AQUESTION__RELEVANCE, oldRelevance, relevance));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.AQUESTION__RELEVANCE, oldRelevance,
+					relevance));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CongabasePackage.AQUESTION__QUESTION:
-				if (resolve) return getQuestion();
-				return basicGetQuestion();
-			case CongabasePackage.AQUESTION__SELECTEDS:
-				return getSelecteds();
-			case CongabasePackage.AQUESTION__RELEVANCE:
-				return getRelevance();
+		case CongabasePackage.AQUESTION__QUESTION:
+			if (resolve)
+				return getQuestion();
+			return basicGetQuestion();
+		case CongabasePackage.AQUESTION__SELECTEDS:
+			return getSelecteds();
+		case CongabasePackage.AQUESTION__RELEVANCE:
+			return getRelevance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CongabasePackage.AQUESTION__QUESTION:
-				setQuestion((Question)newValue);
-				return;
-			case CongabasePackage.AQUESTION__SELECTEDS:
-				getSelecteds().clear();
-				getSelecteds().addAll((Collection<? extends Option>)newValue);
-				return;
-			case CongabasePackage.AQUESTION__RELEVANCE:
-				setRelevance((RelevanceLevel)newValue);
-				return;
+		case CongabasePackage.AQUESTION__QUESTION:
+			setQuestion((Question) newValue);
+			return;
+		case CongabasePackage.AQUESTION__SELECTEDS:
+			getSelecteds().clear();
+			getSelecteds().addAll((Collection<? extends Option>) newValue);
+			return;
+		case CongabasePackage.AQUESTION__RELEVANCE:
+			setRelevance((RelevanceLevel) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.AQUESTION__QUESTION:
-				setQuestion((Question)null);
-				return;
-			case CongabasePackage.AQUESTION__SELECTEDS:
-				getSelecteds().clear();
-				return;
-			case CongabasePackage.AQUESTION__RELEVANCE:
-				setRelevance(RELEVANCE_EDEFAULT);
-				return;
+		case CongabasePackage.AQUESTION__QUESTION:
+			setQuestion((Question) null);
+			return;
+		case CongabasePackage.AQUESTION__SELECTEDS:
+			getSelecteds().clear();
+			return;
+		case CongabasePackage.AQUESTION__RELEVANCE:
+			setRelevance(RELEVANCE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.AQUESTION__QUESTION:
-				return question != null;
-			case CongabasePackage.AQUESTION__SELECTEDS:
-				return selecteds != null && !selecteds.isEmpty();
-			case CongabasePackage.AQUESTION__RELEVANCE:
-				return relevance != RELEVANCE_EDEFAULT;
+		case CongabasePackage.AQUESTION__QUESTION:
+			return question != null;
+		case CongabasePackage.AQUESTION__SELECTEDS:
+			return selecteds != null && !selecteds.isEmpty();
+		case CongabasePackage.AQUESTION__RELEVANCE:
+			return relevance != RELEVANCE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (relevance: ");
@@ -278,7 +283,7 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 				value += 0.5;
 			}
 		}
-		if (this.getRelevance().equals(RelevanceLevel.NOT_RELEVANT)) {
+		if (this.getRelevance().equals(RelevanceLevel.IRRELEVANT)) {
 			return -1;
 		}
 		return value / getSelecteds().size();
@@ -286,16 +291,17 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 
 	@Override
 	public double getScore(String tool) {
-		List<Tool> tools = new ArrayList<>();
-		tools.addAll(getSelecteds().get(0).getAcceptedTools());
-		tools.addAll(getSelecteds().get(0).getRefusedTools());
-		tools.addAll(getSelecteds().get(0).getUnknown());
-		for (Tool t: tools) {
-			if (t.getName().equals(tool)) {
-				return getScore(t);
+		if (this.getQuestion().eContainer() instanceof Questionnaire) {
+
+			List<Tool> tools = ((Questionnaire)this.getQuestion().eContainer()).getTools();
+
+			for (Tool t : tools) {
+				if (t.getName().equals(tool)) {
+					return getScore(t);
+				}
 			}
 		}
 		return 0;
 	}
 
-} //AQuestionImpl
+} // AQuestionImpl

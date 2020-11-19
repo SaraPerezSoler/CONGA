@@ -13,5 +13,5 @@ package generator;
  * @model abstract="true"
  * @generated
  */
-public interface Action extends Element {
+public interface Action extends Element, Comparable {
 } // Action

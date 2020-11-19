@@ -12,5 +12,5 @@ package generator;
  * @model abstract="true"
  * @generated
  */
-public interface IntentInput extends Input {
+public interface IntentInput extends Input, Comparable {
 } // IntentInput

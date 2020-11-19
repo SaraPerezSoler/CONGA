@@ -33,4 +33,6 @@ public interface LanguageInput extends WithLanguage {
 	 */
 	EList<EntityInput> getInputs();
 
+	EntityInput getInput(String name);
+
 } // LanguageInput

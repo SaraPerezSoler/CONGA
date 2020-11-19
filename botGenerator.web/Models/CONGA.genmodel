@@ -7,7 +7,7 @@
   <foreignModel>CONGA.ecore</foreignModel>
   <genPackages prefix="Congabase" disposableProviderFactory="true" ecorePackage="CONGA.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="CONGA.ecore#//RelevanceLevel">
-      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/NOT_RELEVANT"/>
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/IRRELEVANT"/>
       <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/RELEVANT"/>
       <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/DOBLE"/>
       <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/CRITICAL_ONE"/>

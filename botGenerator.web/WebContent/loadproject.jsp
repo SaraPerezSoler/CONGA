@@ -21,8 +21,8 @@
 </head>
 <body>
 	<%
-	String username = (String) session.getAttribute("user");
-	if (username == null){
+		String username = (String) session.getAttribute("user");
+	if (username == null) {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	%>
@@ -30,7 +30,8 @@
 		<jsp:include page="header.jsp" />
 		<div class="row formcenter">
 			<div class="col-12">
-				<form method="post" action="createProject">
+				<form method="post" method="post" action="loadFromDialogflow"
+					enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-6">
 							<div class="form-group">
@@ -41,23 +42,19 @@
 						</div>
 						<div class="col-6">
 							<div class="form-group">
-								<label>Language</label> <select name="language"
-									class="form-control form-control-sm">
-									<%
-										for (Language lan : Language.VALUES) {
-									%>
-									<option><%=lan.getLiteral().toLowerCase()%></option>
-									<%
-										}
-									%>
-								</select>
+								<label>Select the Dialogflow agent</label>
+								<div class="custom-file">
+									<input type="file" id="model-file" name="model-file"
+										class="custom-file-input" /> <label class="custom-file-label"
+										for="ecore-file">Choose file</label>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row ">
 						<div class="col justify-content-end">
 							<div class="form-group">
-								  <button type="submit" class="row-lg btn btn-secondary btn-lg">Create</button>
+								<button type="submit" class="row-lg btn btn-secondary btn-lg">Create</button>
 							</div>
 						</div>
 					</div>

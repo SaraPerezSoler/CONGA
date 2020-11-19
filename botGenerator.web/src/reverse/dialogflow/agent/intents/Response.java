@@ -3,17 +3,25 @@ package reverse.dialogflow.agent.intents;
 import java.util.ArrayList;
 import java.util.List;
 
+import generator.Action;
+import generator.Bot;
+import generator.Text;
+import reverse.dialogflow.agent.Agent;
+
 public class Response {
-	private List<Context> affectedContext = new ArrayList<Context>();
+	private List<Context> affectedContexts = new ArrayList<Context>();
 	private List<Parameter> parameters = new ArrayList<>();
 	private List<Message> messages = new ArrayList<>();
-
-	public List<Context> getAffectedContext() {
-		return affectedContext;
+	private int textCounter = 1;
+	private int imgCounter = 1;
+	
+	public List<Context> getAffectedContexts() {
+		return affectedContexts;
 	}
 
-	public void setAffectedContext(List<Context> affectedContext) {
-		this.affectedContext = affectedContext;
+
+	public void setAffectedContexts(List<Context> affectedContext) {
+		this.affectedContexts = affectedContext;
 	}
 
 	public List<Parameter> getParameters() {
@@ -30,6 +38,30 @@ public class Response {
 
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
+	}
+
+	public List<Action> getBotActions(generator.Intent intent, Bot bot, Agent agent) {
+		List<Action> ret = new ArrayList<>();
+		for (Message message: getMessages()) {
+			Action act = message.getBotAction(intent, textCounter, imgCounter, bot, agent);
+			if (act instanceof Text) {
+				textCounter++;
+			}else {
+				imgCounter++;
+			}
+			ret.add(act);
+		}
+		return ret;
+	}
+
+
+	public boolean containsAffextedContext(String contextName) {
+		for (Context context: getAffectedContexts()) {
+			if (context.getName().equals(contextName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

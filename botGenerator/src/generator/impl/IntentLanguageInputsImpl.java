@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.IntentInput;
 import generator.IntentLanguageInputs;
@@ -146,5 +147,27 @@ public class IntentLanguageInputsImpl extends WithLanguageImpl implements Intent
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof IntentLanguageInputs))
+			return false;
+		IntentLanguageInputs other = (IntentLanguageInputs) obj;
+		if (getLanguage() != other.getLanguage()) {
+			return false;
+		}
+		if (getInputs() == null) {
+			if (other.getInputs() != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
+			return false;
+		return true;
+	}
+
+
 
 } //IntentLanguageInputsImpl

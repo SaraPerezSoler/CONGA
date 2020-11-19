@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Literal;
 
@@ -159,6 +160,23 @@ public class LiteralImpl extends TokenImpl implements Literal {
 		result.append(text);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Literal other = (Literal) obj;
+		if (getText() == null) {
+			if (other.getText() != null)
+				return false;
+		} else if (!getText().equals(other.getText()))
+			return false;
+		return true;
 	}
 
 } //LiteralImpl

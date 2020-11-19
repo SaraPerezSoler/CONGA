@@ -856,5 +856,54 @@
 			"refused": [],
 			"unknown": []
 		}
+	},
+	
+	"NLPatternMachine": {
+		"Natural Language Processing (NLP)": {
+			"accepted": [
+				"Dialogflow",
+				"Rasa",
+				"Watson",
+				"Microsoft Bot Framework",
+				"Chatfuel",
+				"Xenioo",
+				"Lex",
+				"LUIS",
+				"SmartLoop"			
+			],
+			"refused": [
+				"FlowXO",
+				"Landb.io",
+				"Botkit",
+				"ChatterBot",
+				"Pandorabot"
+			],
+			"unknown": [
+				
+			]
+		},
+		"Pattern Matching": {
+			"accepted": [
+				"Dialogflow",
+				"Rasa",
+				"Watson",
+				"Microsoft Bot Framework",
+				"FlowXO",
+				"SmartLoop",
+				"Xenioo",
+				"LUIS",
+				"Botkit",
+				"Landb.io",
+				"Pandorabot"
+			],
+			"refused": [
+				"Chatfuel",
+				"Lex",
+				"ChatterBot"
+			],
+			"unknown": [
+				
+			]
+		}
 	}
 }

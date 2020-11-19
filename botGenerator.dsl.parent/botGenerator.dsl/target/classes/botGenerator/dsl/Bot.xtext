@@ -5,11 +5,11 @@ import "platform:/resource/botGenerator/Model/BotGenerator.ecore"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Bot returns Bot:
-	'Chatbot' name=EString 'language:' languages+=Language (','languages+=Language)*
+	'Chatbot' name=EString 'language'':' languages+=Language (','languages+=Language)*
 	
 		'intents'':' intents+=Intent ( intents+=Intent)*  
 		('entities'':'  entities+=Entity (entities+=Entity)*  )?
-		('actions' ':' actions+=Action (actions+=Action)*  )?
+		('actions'':'  actions+=Action (actions+=Action)*  )?
 		'flows'':' ('-'flows+=Transition';')+ ;
 
 
@@ -24,10 +24,18 @@ EString returns ecore::EString:
 	STRING | ID;
 
 Intent returns Intent:
+	Intent1 | Intent2
+;
+
+Intent2 returns Intent:
 	name=EString (fallbackIntent?='Fallback')? ':'
 		(inputs+=IntentLanguageInputs)*
-		('parameters:'  ((parameters+=Parameter2)* parameters+=Parameter )+)?
+		('parameters'':'  ((parameters+=Parameter2)* parameters+=Parameter )+)?
 	;
+Intent1 returns Intent:
+	name=EString (fallbackIntent?='Fallback')?
+	;
+	
 IntentLanguageInputs returns IntentLanguageInputs: 
 	'inputs' ('in' language=Language)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
 ;
@@ -70,7 +78,7 @@ Literal returns Literal:
 	 text=EString;
 
 EntityToken returns EntityToken:
-	'Token' '@'entity=[Entity|EString];
+	'@'entity=[Entity|EString];
 
 ParameterToken returns ParameterToken:
 	'['parameter=[Parameter|EString]']';
@@ -91,15 +99,15 @@ Entity returns Entity:
 	;
 
 SimpleEntity returns Entity:
-	'Entity' name=EString 'simple'':'
+	'Simple''entity' name=EString ':'
 		(inputs+= SLanguageInput)+	
 	;
 ComplexEntity returns Entity:
-	'Entity' name=EString 'composite'':'
+	'Composite''entity' name=EString ':'
 		(inputs+= CLanguageInput)+	
 	;
 RegexEntity returns Entity:
-	'Entity' name=EString 'regex'':'
+	'Regex''entity' name=EString ':'
 		(inputs+= RLanguageInput)+	
 	;
 
@@ -126,7 +134,7 @@ RegexInput returns RegexInput:
 
 CompositeInput returns CompositeInput:
 	{CompositeInput}
-	 expresion+=(Literal | EntityToken)+
+	'composite'':' expresion+=(Literal|EntityToken)+
 ;
 
 SimpleInput returns SimpleInput:
@@ -142,20 +150,21 @@ TextLanguageInput returns TextLanguageInput:
 ;
 
 HTTPResponse returns HTTPResponse:
-	'HttpResponse' name=EString ':'
-		'HttpRequest:' HTTPRequest=[HTTPRequest|EString]';'
+	'Response' name=EString ':'
+		'Request'':' HTTPRequest=[HTTPRequest|EString]';'
 		(inputs+=TextLanguageInputHttpResponse)+;
 		
 HTTPRequest returns HTTPRequest:
-	'HTTP''request' method=Method name=EString ':'
+	'Request' method=Method name=EString ':'
 		'URL'':' URL=EString ';'
 		('basicAuth'':' basicAuth=KeyValue';')?
-		('headers' ':' headers+=KeyValue ( "," headers+=KeyValue)* ';')?
-		('data' ':' data+=Data ( "," data+=Data)*';'  
-		 'dataType' ':' dataType=DataType';')?;
+		('headers'':'  headers+=KeyValue ( "," headers+=KeyValue)* ';')?
+		('data'':'  data+=Data ( "," data+=Data)*';'  
+		 'dataType'':'  dataType=DataType';')?;
 Image returns Image:
 	'image' 'response' name=EString':'
 		'URL'':' URL=EString
+		('caption'':' caption=EString)?
 ;
 
 TextLanguageInputHttpResponse returns TextLanguageInput:

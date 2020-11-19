@@ -97,4 +97,6 @@ public interface Bot extends Element {
 
 	List<Action> getActionStartWith(String name);
 
+	boolean containsElement(String name);
+
 } // Bot

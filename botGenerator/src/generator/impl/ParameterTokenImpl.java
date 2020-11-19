@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Parameter;
 import generator.ParameterToken;
@@ -155,4 +156,20 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ParameterToken other = (ParameterToken) obj;
+		if (getParameter() == null) {
+			if (other.getParameter() != null)
+				return false;
+		} else if (!getParameter().equals(other.getParameter()))
+			return false;
+		return true;
+	}
 } //ParameterTokenImpl

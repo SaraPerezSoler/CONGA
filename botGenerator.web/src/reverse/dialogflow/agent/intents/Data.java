@@ -18,6 +18,9 @@ public class Data {
 		this.userDefined = userDefined;
 	}
 	public String getAlias() {
+		if (alias == null) {
+			alias="";
+		}
 		return alias;
 	}
 	public void setAlias(String alias) {

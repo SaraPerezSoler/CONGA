@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 import javax.servlet.ServletContext;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -52,6 +54,8 @@ import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
+import reverse.dialogflow.ReadAgent;
+import reverse.dialogflow.agent.Agent;
 
 public class CongaData {
 
@@ -106,7 +110,7 @@ public class CongaData {
 			if (path != null) {
 				PATH = path;
 				congaData = new CongaData(PATH);
-				BotGenerator.newPath(PATH);
+				BotGenerator.setIsPlugin(false);
 
 			}
 		}
@@ -129,6 +133,7 @@ public class CongaData {
 			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
 			resource.getContents().add(conga);
 			newUser("admin", "adminadmin");
+			newUser("Sara", "friends");
 			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
 			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
 			conga.setQuestionnaire(questionnaire);
@@ -169,13 +174,33 @@ public class CongaData {
 		
 		File botFolder = new File(getProjectFolderPath(p));
 		if (botFolder.exists()) {
-			botFolder.delete();
+			deleteFolder(botFolder);
 		}
 		user.getProjects().remove(p);
 		conga.getProjects().remove(p);
 		save();
 	}
-
+	private void deleteFolder(File file) {
+		if (!file.exists()) {
+			return;
+		}
+		if (file.isDirectory()) {
+			for (File f: file.listFiles()) {
+				deleteFolder(f);
+			}
+		}
+		
+		file.delete();
+	}
+	
+	public Project newProject(String projectName, String userString, String language) throws IOException {
+		User user = getUser(userString);
+		if (user == null) {
+			return null;
+		}
+		return newProject(projectName, user, language);
+	}
+	
 	public Project newProject(String name, User owner, String language) throws IOException {
 
 		if (owner.get(name) != null) {
@@ -224,6 +249,16 @@ public class CongaData {
 		return project;
 	}
 	
+	public void loadBotFile(Project project, File file) throws IOException {
+		Resource resource = getProjectResource(project);
+		Agent agent = new ReadAgent().getAgent(file);
+		Bot bot = agent.getBot();
+		bot.setName(project.getName());
+		resource.getContents().clear();
+		resource.getContents().add(bot);
+		resource.save(null);
+	}
+	
 	public Bot getBotProject (Project project) {
 		Resource resource = getProjectResource(project);
 		Bot bot = (Bot) resource.getContents().get(0);
@@ -235,15 +270,6 @@ public class CongaData {
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = resourceSetXtext.getResource(URI.createURI(getProjectFilePath(project)), true);
 		return resource;
-	}
-
-
-	public Project newProject(String projectName, String userString, String language) throws IOException {
-		User user = getUser(userString);
-		if (user == null) {
-			return null;
-		}
-		return newProject(projectName, user, language);
 	}
 
 	public User newUser(String nick, String password) {
@@ -299,7 +325,8 @@ public class CongaData {
 	
 	public String generateFlowImage(Project p) {
 		Bot bot = getBotProject(p);
-		String text = new CreateFlowsDiagram().createUML(bot.getFlows());
+		Resource resource = getProjectResource(p);
+		String text = new CreateFlowsDiagram().createUML(resource, bot.getFlows());
 		String path = getProjectFolderPath(p)+"/"+p.getName()+".txt";
 		File txt = UML.write(path, text);
 		File png = UML.getUML(txt);
@@ -438,5 +465,16 @@ public class CongaData {
 		 Map<String, Double> ranking = getRanking(project.getOwner().getNick(), project.getName());
 		 String tool = ranking.keySet().iterator().next();
 		 return tool + " ("+String.format("%.2f", ranking.get(tool)*100)+"%)";
+	}
+
+	public int countObject(Project p) {
+		Resource resource = getProjectResource(p);
+		TreeIterator<EObject> objects = resource.getAllContents();
+		int count = 0;
+		while(objects.hasNext()) {
+			count++;
+			objects.next();
+		}
+		return count;
 	}
 }

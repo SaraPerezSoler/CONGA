@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.PromptLanguage;
 
@@ -143,6 +144,26 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 		result.append(prompts);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromptLanguage other = (PromptLanguage) obj;
+		if (getLanguage() != other.getLanguage()) {
+			return false;
+		}
+		if (getPrompts() == null) {
+			if (other.getPrompts() != null)
+				return false;
+		} else if (!prompts.equals(other.getPrompts()))
+			return false;
+		return true;
 	}
 
 } //PromptLanguageImpl

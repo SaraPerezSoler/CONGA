@@ -43,7 +43,7 @@
         eType="#//RelevanceLevel" defaultValueLiteral="Relevant"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RelevanceLevel">
-    <eLiterals name="NOT_RELEVANT" literal="Not relevant"/>
+    <eLiterals name="IRRELEVANT" literal="Irrelevant"/>
     <eLiterals name="RELEVANT" value="1" literal="Relevant"/>
     <eLiterals name="DOBLE" value="2" literal="Double relevant"/>
     <eLiterals name="CRITICAL_ONE" value="3" literal="Critical (at least one option)"/>

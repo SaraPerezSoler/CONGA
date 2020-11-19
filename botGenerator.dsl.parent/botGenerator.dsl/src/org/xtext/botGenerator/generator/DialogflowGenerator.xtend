@@ -36,10 +36,11 @@ class DialogflowGenerator {
 	Zip zip;
 	
 	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zip zip) {
+		var resourceName = resource.URI.lastSegment.substring(0, resource.URI.lastSegment.indexOf("."));
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var requests = resource.allContents.filter(HTTPRequest).toList;
 		
-		path = bot.name + "/Dialogflow"
+		path = resourceName + "/Dialogflow"
 		
 		
 		this.zip = zip;
@@ -168,6 +169,7 @@ class DialogflowGenerator {
 	def intentFile(UserInteraction transition, String prefix, Bot bot) '''
 		«var webhook =false»
 		{
+			"id": "«UUID.randomUUID().toString»",
 			"name": "«prefix + transition.intent.name»",
 			"auto": true,
 			«IF transition.src!==null»
@@ -192,6 +194,7 @@ class DialogflowGenerator {
 					"parameters": [
 						«FOR parameter : transition.intent.parameters»
 							{
+								"id": "«UUID.randomUUID().toString»",
 								"required": «parameter.required»,
 								"dataType": "«parameter.paramType()»",
 								"name": "«parameter.name»",
@@ -242,10 +245,10 @@ class DialogflowGenerator {
 										"condition": "",
 										"imageUrl": "«(action as Image).URL»"
 									}
+									«{coma=","; ""}»
 								«ELSEIF action instanceof HTTPRequest»
 									«{webhook=true; ""}»
 								«ENDIF»
-								«{coma=","; ""}»
 							«ENDFOR »
 							],
 							"defaultResponsePlatforms": {},
@@ -312,6 +315,7 @@ class DialogflowGenerator {
 		«FOR phrase : intent.inputs»
 		«IF phrase instanceof TrainingPhrase»
 			{
+			  "id": "«UUID.randomUUID().toString»",
 			  "data": [
 			«FOR token: phrase.tokens»
 				«IF token instanceof Literal»
