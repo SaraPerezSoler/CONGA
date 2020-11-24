@@ -50,7 +50,7 @@
 'in'=24
 'inputs'=23
 'intents'=15
-'isList'=32
+'isList'=31
 'it'=70
 'ja'=71
 'ko'=72
@@ -65,7 +65,7 @@
 'prompts'=33
 'pt'=76
 'request.'=39
-'required'=31
+'required'=32
 'response'=48
 'ru'=77
 'status_code'=62

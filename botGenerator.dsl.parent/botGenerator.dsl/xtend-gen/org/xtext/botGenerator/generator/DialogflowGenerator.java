@@ -491,7 +491,6 @@ public class DialogflowGenerator {
       boolean _tripleNotEquals_2 = (_target_1 != null);
       if (_tripleNotEquals_2) {
         _builder.append("\t\t\t\t");
-        _builder.append("\t");
         String coma = "";
         _builder.newLineIfNotEmpty();
         {
@@ -503,15 +502,12 @@ public class DialogflowGenerator {
                   EList<TextLanguageInput> _inputs = ((Text)action).getInputs();
                   for(final TextLanguageInput texLanguage : _inputs) {
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
-                    _builder.append(coma, "\t\t\t\t\t");
+                    _builder.append(coma, "\t\t\t\t");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     _builder.append("{");
                     _builder.newLine();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     _builder.append("\t");
                     _builder.append("\"type\": 0,");
                     _builder.newLine();
@@ -521,110 +517,94 @@ public class DialogflowGenerator {
                       if (_notEquals_1) {
                         _builder.append("\t\t\t\t");
                         _builder.append("\t");
-                        _builder.append("\t");
                         _builder.append("\"lang\": \"");
                         String _languageAbbreviation_2 = this.languageAbbreviation(texLanguage.getLanguage());
-                        _builder.append(_languageAbbreviation_2, "\t\t\t\t\t\t");
+                        _builder.append(_languageAbbreviation_2, "\t\t\t\t\t");
                         _builder.append("\",");
                         _builder.newLineIfNotEmpty();
                       } else {
                         _builder.append("\t\t\t\t");
                         _builder.append("\t");
-                        _builder.append("\t");
                         _builder.append("\"lang\": \"");
                         String _languageAbbreviation_3 = this.languageAbbreviation(bot.getLanguages().get(0));
-                        _builder.append(_languageAbbreviation_3, "\t\t\t\t\t\t");
+                        _builder.append(_languageAbbreviation_3, "\t\t\t\t\t");
                         _builder.append("\",");
                         _builder.newLineIfNotEmpty();
                       }
                     }
                     _builder.append("\t\t\t\t");
                     _builder.append("\t");
-                    _builder.append("\t");
                     _builder.append("\"condition\": \"\",");
                     _builder.newLine();
                     _builder.append("\t\t\t\t");
                     _builder.append("\t");
-                    _builder.append("\t");
                     _builder.append("\"speech\": [");
                     _builder.newLine();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     _builder.append("\t\t");
                     String _speechText = this.speechText(texLanguage);
-                    _builder.append(_speechText, "\t\t\t\t\t\t\t");
+                    _builder.append(_speechText, "\t\t\t\t\t\t");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     _builder.append("\t");
                     _builder.append("]");
                     _builder.newLine();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     _builder.append("}");
                     _builder.newLine();
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     String _xblockexpression = null;
                     {
                       coma = ",";
                       _xblockexpression = "";
                     }
-                    _builder.append(_xblockexpression, "\t\t\t\t\t");
+                    _builder.append(_xblockexpression, "\t\t\t\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
               } else {
                 if ((action instanceof Image)) {
                   _builder.append("\t\t\t\t");
-                  _builder.append("\t");
-                  _builder.append(coma, "\t\t\t\t\t");
+                  _builder.append(coma, "\t\t\t\t");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t\t\t");
-                  _builder.append("\t");
                   _builder.append("{");
                   _builder.newLine();
                   _builder.append("\t\t\t\t");
-                  _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("\"type\": 3,");
                   _builder.newLine();
                   _builder.append("\t\t\t\t");
                   _builder.append("\t");
-                  _builder.append("\t");
                   _builder.append("\"condition\": \"\",");
                   _builder.newLine();
                   _builder.append("\t\t\t\t");
                   _builder.append("\t");
-                  _builder.append("\t");
                   _builder.append("\"imageUrl\": \"");
                   String _uRL = ((Image) action).getURL();
-                  _builder.append(_uRL, "\t\t\t\t\t\t");
+                  _builder.append(_uRL, "\t\t\t\t\t");
                   _builder.append("\"");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t\t\t");
-                  _builder.append("\t");
                   _builder.append("}");
                   _builder.newLine();
                   _builder.append("\t\t\t\t");
-                  _builder.append("\t");
                   String _xblockexpression_1 = null;
                   {
                     coma = ",";
                     _xblockexpression_1 = "";
                   }
-                  _builder.append(_xblockexpression_1, "\t\t\t\t\t");
+                  _builder.append(_xblockexpression_1, "\t\t\t\t");
                   _builder.newLineIfNotEmpty();
                 } else {
                   if ((action instanceof HTTPRequest)) {
                     _builder.append("\t\t\t\t");
-                    _builder.append("\t");
                     String _xblockexpression_2 = null;
                     {
                       webhook = true;
                       _xblockexpression_2 = "";
                     }
-                    _builder.append(_xblockexpression_2, "\t\t\t\t\t");
+                    _builder.append(_xblockexpression_2, "\t\t\t\t");
                     _builder.newLineIfNotEmpty();
                   }
                 }
@@ -632,23 +612,20 @@ public class DialogflowGenerator {
             }
           }
         }
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("],");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("\"defaultResponsePlatforms\": {},");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("\"speech\": []");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
       }
     }
+    _builder.append("\t");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\"defaultResponsePlatforms\": {},");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\"speech\": []");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("],");
     _builder.newLine();

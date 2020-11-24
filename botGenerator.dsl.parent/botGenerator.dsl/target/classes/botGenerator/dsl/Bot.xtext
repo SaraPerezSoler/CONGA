@@ -62,9 +62,10 @@ TrainingPhrase returns TrainingPhrase:
 Parameter returns Parameter:
 	 name=EString':' 
 		'entity' (entity=[Entity|EString] | defaultEntity=DefaultEntity) 
+		(','isList?='isList')?
 		(',' required?='required')?
 		(','  (prompts+=PromptLanguage)+)?
-		(','isList?='isList')? ';';
+		 ';';
 
 Parameter2 returns Parameter:
 	 name=EString ',';

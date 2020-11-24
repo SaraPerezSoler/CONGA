@@ -1188,15 +1188,15 @@ ruleParameter returns [EObject current=null]
 			}
 			(
 				(
-					lv_required_6_0='required'
+					lv_isList_6_0='isList'
 					{
-						newLeafNode(lv_required_6_0, grammarAccess.getParameterAccess().getRequiredRequiredKeyword_4_1_0());
+						newLeafNode(lv_isList_6_0, grammarAccess.getParameterAccess().getIsListIsListKeyword_4_1_0());
 					}
 					{
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getParameterRule());
 						}
-						setWithLastConsumed($current, "required", lv_required_6_0 != null, "required");
+						setWithLastConsumed($current, "isList", lv_isList_6_0 != null, "isList");
 					}
 				)
 			)
@@ -1208,23 +1208,18 @@ ruleParameter returns [EObject current=null]
 			}
 			(
 				(
+					lv_required_8_0='required'
 					{
-						newCompositeNode(grammarAccess.getParameterAccess().getPromptsPromptLanguageParserRuleCall_5_1_0());
+						newLeafNode(lv_required_8_0, grammarAccess.getParameterAccess().getRequiredRequiredKeyword_5_1_0());
 					}
-					lv_prompts_8_0=rulePromptLanguage
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getParameterRule());
+							$current = createModelElement(grammarAccess.getParameterRule());
 						}
-						add(
-							$current,
-							"prompts",
-							lv_prompts_8_0,
-							"org.xtext.botGenerator.Bot.PromptLanguage");
-						afterParserOrEnumRuleCall();
+						setWithLastConsumed($current, "required", lv_required_8_0 != null, "required");
 					}
 				)
-			)+
+			)
 		)?
 		(
 			otherlv_9=','
@@ -1233,18 +1228,23 @@ ruleParameter returns [EObject current=null]
 			}
 			(
 				(
-					lv_isList_10_0='isList'
 					{
-						newLeafNode(lv_isList_10_0, grammarAccess.getParameterAccess().getIsListIsListKeyword_6_1_0());
+						newCompositeNode(grammarAccess.getParameterAccess().getPromptsPromptLanguageParserRuleCall_6_1_0());
 					}
+					lv_prompts_10_0=rulePromptLanguage
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getParameterRule());
+							$current = createModelElementForParent(grammarAccess.getParameterRule());
 						}
-						setWithLastConsumed($current, "isList", lv_isList_10_0 != null, "isList");
+						add(
+							$current,
+							"prompts",
+							lv_prompts_10_0,
+							"org.xtext.botGenerator.Bot.PromptLanguage");
+						afterParserOrEnumRuleCall();
 					}
 				)
-			)
+			)+
 		)?
 		otherlv_11=';'
 		{
