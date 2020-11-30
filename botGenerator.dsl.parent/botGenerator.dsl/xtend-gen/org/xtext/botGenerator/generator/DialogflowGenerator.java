@@ -51,7 +51,7 @@ public class DialogflowGenerator {
   
   private Zip zip;
   
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
+  public Object doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
     String resourceName = resource.getURI().lastSegment().substring(0, resource.getURI().lastSegment().indexOf("."));
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<HTTPRequest> requests = IteratorExtensions.<HTTPRequest>toList(Iterators.<HTTPRequest>filter(resource.getAllContents(), HTTPRequest.class));
@@ -125,6 +125,7 @@ public class DialogflowGenerator {
       this.createTransitionFiles(transition, "", fsa, bot);
     }
     zip.close();
+    return null;
   }
   
   public void createTransitionFiles(final UserInteraction transition, final String prefix, final IFileSystemAccess2 fsa, final Bot bot) {

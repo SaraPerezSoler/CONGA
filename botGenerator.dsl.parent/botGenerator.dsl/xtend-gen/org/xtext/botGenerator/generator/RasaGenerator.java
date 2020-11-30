@@ -52,7 +52,7 @@ import zipUtils.Zip;
 public class RasaGenerator {
   private String path;
   
-  public Object doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
+  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context, final Zip zip) {
     String resourceName = resource.getURI().lastSegment().substring(0, resource.getURI().lastSegment().indexOf("."));
     Bot bot = IteratorExtensions.<Bot>toList(Iterators.<Bot>filter(resource.getAllContents(), Bot.class)).get(0);
     List<Intent> intents = IteratorExtensions.<Intent>toList(Iterators.<Intent>filter(resource.getAllContents(), Intent.class));
@@ -103,7 +103,6 @@ public class RasaGenerator {
       }
     }
     zip.close();
-    return null;
   }
   
   public String actionName(final Action action) {
