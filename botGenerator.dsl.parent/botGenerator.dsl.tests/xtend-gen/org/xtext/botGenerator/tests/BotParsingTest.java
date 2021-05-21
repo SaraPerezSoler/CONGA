@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.xtext.botGenerator.tests.BotInjectorProvider;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(BotInjectorProvider.class)

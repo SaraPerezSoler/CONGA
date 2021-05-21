@@ -40,7 +40,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.xtext.botGenerator.generator.BotGenerator;
 import zipUtils.Zip;
 
 @SuppressWarnings("all")

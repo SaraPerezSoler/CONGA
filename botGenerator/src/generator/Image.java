@@ -18,9 +18,9 @@ package generator;
  *
  * @see generator.GeneratorPackage#getImage()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface Image extends Action {
+public interface Image extends Action, Comparable {
 	/**
 	 * Returns the value of the '<em><b>URL</b></em>' attribute.
 	 * <!-- begin-user-doc -->

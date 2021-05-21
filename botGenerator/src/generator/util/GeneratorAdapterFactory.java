@@ -176,6 +176,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createImageAdapter();
 			}
 			@Override
+			public Adapter caseEmpty(Empty object) {
+				return createEmptyAdapter();
+			}
+			@Override
 			public Adapter caseText(Text object) {
 				return createTextAdapter();
 			}
@@ -594,6 +598,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.Empty <em>Empty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.Empty
+	 * @generated
+	 */
+	public Adapter createEmptyAdapter() {
 		return null;
 	}
 

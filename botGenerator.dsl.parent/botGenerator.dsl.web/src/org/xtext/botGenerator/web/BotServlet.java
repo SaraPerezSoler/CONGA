@@ -4,11 +4,8 @@
 package org.xtext.botGenerator.web;
 
 import com.google.inject.Injector;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
@@ -17,10 +14,7 @@ import org.eclipse.xtext.web.servlet.XtextServlet;
  */
 @WebServlet(name = "XtextServices", urlPatterns = "/xtext-service/*")
 public class BotServlet extends XtextServlet {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 	DisposableRegistry disposableRegistry;
 	
 	public void init() throws ServletException {

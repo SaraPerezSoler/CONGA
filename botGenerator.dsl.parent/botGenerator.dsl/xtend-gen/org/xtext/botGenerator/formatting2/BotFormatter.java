@@ -294,22 +294,18 @@ public class BotFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<Intent>interior(intent, _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(intent).feature(GeneratorPackage.Literals.ELEMENT__NAME), _function_2);
     EList<IntentLanguageInputs> _inputs = intent.getInputs();
     for (final IntentLanguageInputs intentLanguageInputs : _inputs) {
       document.<IntentLanguageInputs>format(intentLanguageInputs);
     }
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.prepend(this.textRegionExtensions.regionFor(intent).keyword("parameters"), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+    document.prepend(this.textRegionExtensions.regionFor(intent).keyword("parameters"), _function_2);
+    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(intent).keyword("parameters"), this.textRegionExtensions.regionFor(IterableExtensions.<Parameter>last(intent.getParameters())).keyword(";"), _function_4);
+    document.<ISemanticRegion, ISemanticRegion>interior(this.textRegionExtensions.regionFor(intent).keyword("parameters"), this.textRegionExtensions.regionFor(IterableExtensions.<Parameter>last(intent.getParameters())).keyword(";"), _function_3);
     EList<Parameter> _parameters = intent.getParameters();
     for (final Parameter parameter : _parameters) {
       document.<Parameter>format(parameter);

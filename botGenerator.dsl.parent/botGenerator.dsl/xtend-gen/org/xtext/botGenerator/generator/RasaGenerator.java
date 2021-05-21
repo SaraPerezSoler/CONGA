@@ -44,8 +44,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.xtext.botGenerator.generator.BotGenerator;
-import org.xtext.botGenerator.generator.DialogflowGenerator;
 import zipUtils.Zip;
 
 @SuppressWarnings("all")

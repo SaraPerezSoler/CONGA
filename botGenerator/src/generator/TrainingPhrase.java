@@ -18,9 +18,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getTrainingPhrase()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface TrainingPhrase extends IntentInput {
+public interface TrainingPhrase extends IntentInput, Comparable {
 	/**
 	 * Returns the value of the '<em><b>Tokens</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.Token}.

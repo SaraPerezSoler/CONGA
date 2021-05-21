@@ -61,11 +61,9 @@
 												.saveResource();
 										location.reload()
 									});
-							$("#format-button").click(
-									function() {
-										documents = editor.xtextServices
-												.format();
-									});
+							$("#format-button").click(function() {
+								documents = editor.xtextServices.format();
+							});
 
 							$("#change-resource")
 									.change(
@@ -132,19 +130,22 @@
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
 					<i class="fa fa-save" style="font-size: 20px"></i>
 				</button>
-				<a class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height dropdown-toggle" data-toggle="dropdown" href="#"
-				role="button" aria-haspopup="true" aria-expanded="false">New</a>
+				<a
+					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height dropdown-toggle"
+					data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+					aria-expanded="false">New</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
-						class="dropdown-item" href="loadproject.jsp">Load from Dialogflow files</a>
+						class="dropdown-item" href="loadproject.jsp">Load from
+						Dialogflow files</a>
 				</div>
 				<button id="format-button"
 					class="btn btn-outline-secondary  button-nav-size button-nav-margin button-nav-height">
-					Format
-				</button>
+					Format</button>
 				<div class="form-group button-nav-margin">
 					<select name="tool" id="tool"
-						class="form-control button-nav-size button-nav-height" style="width: 125px;">
+						class="form-control button-nav-size button-nav-height"
+						style="width: 125px;">
 						<%
 							for (String tool : CongaData.supportedTools()) {
 						%>
@@ -180,8 +181,8 @@
 				%>
 				<a href="Ranking.jsp?projectName=<%=project.getName()%>"
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
-					Recommender <svg width="1em" height="1em"
-						viewBox="0 0 16 16" class="bi bi-eye" fill="currentColor"
+					Recommender <svg width="1em" height="1em" viewBox="0 0 16 16"
+						class="bi bi-eye" fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd"
 							d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z" />
@@ -238,11 +239,11 @@
 			</div>
 
 			<div class="col-5">
-			<!-- <div class="col-5 align-self-center">  -->
-			<div class="row justify-content-end">
-				<img alt="Flow legend" class="align-self-end legend"
+				<!-- <div class="col-5 align-self-center">  -->
+				<div class="row justify-content-end">
+					<img alt="Flow legend" class="align-self-end legend"
 						src="img/legend.png">
-			</div>
+				</div>
 				<div class="row justify-content-md-center">
 
 					<h5>

@@ -142,6 +142,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Image/URL"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Image/caption"/>
     </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//Empty"/>
     <genClasses ecoreClass="BotGenerator.ecore#//Text">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//Text/inputs"/>
     </genClasses>

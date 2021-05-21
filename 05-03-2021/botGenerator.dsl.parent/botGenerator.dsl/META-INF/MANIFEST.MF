@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: botGenerator.dsl
+Bundle-ManifestVersion: 2
+Bundle-Name: botGenerator.dsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: botGenerator.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: botGenerator,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.core.resources;bundle-version="3.13.800"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.xtext.botGenerator,
+ org.xtext.botGenerator.serializer,
+ org.xtext.botGenerator.formatting2,
+ org.xtext.botGenerator.services,
+ org.xtext.botGenerator.validation,
+ org.xtext.botGenerator.parser.antlr,
+ org.xtext.botGenerator.scoping,
+ org.xtext.botGenerator.parser.antlr.internal,
+ org.xtext.botGenerator.generator
+Import-Package: org.apache.log4j

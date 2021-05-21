@@ -10,7 +10,7 @@ package generator;
  *
  * @see generator.GeneratorPackage#getIntentInput()
  * @model abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface IntentInput extends Input, Comparable {
 } // IntentInput

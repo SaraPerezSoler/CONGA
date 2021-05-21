@@ -44,7 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class HTTPRequestImpl extends ActionImpl implements HTTPRequest {
+public class HTTPRequestImpl extends ActionImpl implements HTTPRequest{
 	/**
 	 * The default value of the '{@link #getURL() <em>URL</em>}' attribute.
 	 * <!-- begin-user-doc -->

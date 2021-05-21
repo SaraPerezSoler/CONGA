@@ -6,7 +6,7 @@ public interface Comparable {
 	
 	boolean isSimilarTo(Comparable other);
 	
-	default boolean isSimilar (List<? extends Comparable> list1, List<? extends Comparable> list2){
+	public static boolean isSimilarStatic (List<? extends Comparable> list1, List<? extends Comparable> list2){
 		if (list1.size() != list2.size()) {
 			return false;
 		}
@@ -25,5 +25,7 @@ public interface Comparable {
 		}
 		return true;
 	}
-
+	default boolean isSimilar (List<? extends Comparable> list1, List<? extends Comparable> list2){
+		return isSimilarStatic(list1, list2);
+	}
 }

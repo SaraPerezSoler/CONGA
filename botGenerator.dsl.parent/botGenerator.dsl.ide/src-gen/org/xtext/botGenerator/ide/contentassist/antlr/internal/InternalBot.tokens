@@ -10,7 +10,7 @@
 'Chatbot'=49
 'Composite'=77
 'FORM'=46
-'Fallback'=90
+'Fallback'=91
 'JSON'=45
 'Regex'=78
 'Request'=84
@@ -33,6 +33,7 @@
 'dataType'=88
 'date'=13
 'de'=22
+'empty'=90
 'en'=19
 'entities'=55
 'entity'=67
@@ -50,7 +51,7 @@
 'in'=63
 'inputs'=60
 'intents'=52
-'isList'=91
+'isList'=92
 'it'=26
 'ja'=27
 'ko'=28
@@ -65,7 +66,7 @@
 'prompts'=68
 'pt'=32
 'request.'=74
-'required'=92
+'required'=93
 'response'=82
 'ru'=33
 'status_code'=16
@@ -169,3 +170,4 @@ T__89=89
 T__90=90
 T__91=91
 T__92=92
+T__93=93

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see generator.GeneratorPackage#getToken()
  * @model abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface Token extends EObject, Comparable {
 } // Token

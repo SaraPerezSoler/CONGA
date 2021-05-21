@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getTextLanguageInput()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface TextLanguageInput extends WithLanguage, Comparable{
 	/**

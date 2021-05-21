@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getIntent()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface Intent extends Element, Comparable {
 	/**

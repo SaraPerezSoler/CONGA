@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class HTTPRequestTokeImpl extends TokenImpl implements HTTPRequestToke {
+public class HTTPRequestTokeImpl extends TokenImpl implements HTTPRequestToke, Comparable {
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->

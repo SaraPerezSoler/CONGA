@@ -33,5 +33,8 @@ public interface Entity extends Element {
 	 * @generated
 	 */
 	EList<LanguageInput> getInputs();
+	boolean isRegex();
+	boolean isComposite();
+	boolean isSimple();
 
 } // Entity

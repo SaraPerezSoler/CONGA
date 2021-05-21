@@ -380,4 +380,15 @@ public class BotImpl extends ElementImpl implements Bot {
 		return false;
 	}
 
+	@Override
+	public List<Action> getActionsContains(String actionName) {
+		List<Action> actions = new ArrayList<>();
+		for (Action action: getActions()) {
+			if (action.getName().contains(actionName)) {
+				actions.add(action);
+			}
+		}
+		return actions;
+	}
+
 } //BotImpl

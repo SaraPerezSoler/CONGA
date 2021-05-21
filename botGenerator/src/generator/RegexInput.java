@@ -17,9 +17,9 @@ package generator;
  *
  * @see generator.GeneratorPackage#getRegexInput()
  * @model
- * @generated
+ * @generated NOT
  */
-public interface RegexInput extends EntityInput, IntentInput {
+public interface RegexInput extends EntityInput, IntentInput, Comparable {
 	/**
 	 * Returns the value of the '<em><b>Expresion</b></em>' attribute.
 	 * <!-- begin-user-doc -->

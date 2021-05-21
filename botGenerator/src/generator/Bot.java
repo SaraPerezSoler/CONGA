@@ -2,6 +2,7 @@
  */
 package generator;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -98,5 +99,7 @@ public interface Bot extends Element {
 	List<Action> getActionStartWith(String name);
 
 	boolean containsElement(String name);
+
+	List<Action> getActionsContains(String action);
 
 } // Bot

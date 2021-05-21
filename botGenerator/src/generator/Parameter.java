@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getParameter()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface Parameter extends Element, Comparable {
 	/**

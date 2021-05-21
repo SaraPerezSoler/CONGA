@@ -193,6 +193,15 @@ public interface GeneratorFactory extends EFactory {
 	Image createImage();
 
 	/**
+	 * Returns a new object of class '<em>Empty</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Empty</em>'.
+	 * @generated
+	 */
+	Empty createEmpty();
+
+	/**
 	 * Returns a new object of class '<em>Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

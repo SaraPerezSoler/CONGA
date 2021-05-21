@@ -4,9 +4,11 @@
 package org.xtext.botGenerator.validation;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterators;
 import generator.Action;
 import generator.Bot;
 import generator.BotInteraction;
+import generator.DefaultEntity;
 import generator.Element;
 import generator.Entity;
 import generator.EntityInput;
@@ -17,9 +19,11 @@ import generator.HTTPRequestToke;
 import generator.HTTPResponse;
 import generator.HTTPReturnType;
 import generator.Intent;
+import generator.IntentInput;
 import generator.IntentLanguageInputs;
 import generator.Language;
 import generator.LanguageInput;
+import generator.Literal;
 import generator.Parameter;
 import generator.ParameterReferenceToken;
 import generator.PromptLanguage;
@@ -27,17 +31,20 @@ import generator.RegexInput;
 import generator.SimpleInput;
 import generator.Text;
 import generator.TextLanguageInput;
+import generator.Token;
 import generator.TrainingPhrase;
 import generator.UserInteraction;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.xtext.botGenerator.validation.AbstractBotValidator;
 
 /**
  * This class contains custom validation rules.
@@ -599,6 +606,57 @@ public class BotValidator extends AbstractBotValidator {
           }
         }
       }
+    }
+  }
+  
+  @Check
+  public void similarPhrases(final TrainingPhrase phrase) {
+    EObject bot = phrase.eContainer().eContainer().eContainer();
+    if ((bot instanceof Bot)) {
+      List<TrainingPhrase> trainingPhrases = IteratorExtensions.<TrainingPhrase>toList(Iterators.<TrainingPhrase>filter(((Bot) bot).eAllContents(), TrainingPhrase.class));
+      for (final TrainingPhrase tp : trainingPhrases) {
+        if ((phrase.isSimilarTo(tp) && (!phrase.equals(tp)))) {
+          this.warning("Two training phrases should not be equals", GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS);
+        }
+      }
+    }
+  }
+  
+  @Check
+  public void atLeastTreeTrainingPhrases(final IntentLanguageInputs intent) {
+    int _length = ((Object[])Conversions.unwrapArray(intent.getInputs(), Object.class)).length;
+    boolean _lessThan = (_length < 3);
+    if (_lessThan) {
+      boolean hasRegex = false;
+      EList<IntentInput> _inputs = intent.getInputs();
+      for (final IntentInput intentInput : _inputs) {
+        if ((intentInput instanceof RegexInput)) {
+          hasRegex = true;
+        }
+      }
+      if ((!hasRegex)) {
+        this.warning("The intents must contains at least tree training phrases or one regex per language", GeneratorPackage.Literals.INTENT_LANGUAGE_INPUTS__INPUTS);
+      }
+    }
+  }
+  
+  @Check
+  public void trainingPhraseWithOnlyTextEntity(final TrainingPhrase phrase) {
+    boolean onlyTextEntity = true;
+    EList<Token> _tokens = phrase.getTokens();
+    for (final Token token : _tokens) {
+      if ((token instanceof Literal)) {
+        onlyTextEntity = false;
+      } else {
+        if ((token instanceof ParameterReferenceToken)) {
+          if (((((ParameterReferenceToken) token).getParameter().getDefaultEntity() == null) || (!Objects.equal(((ParameterReferenceToken) token).getParameter().getDefaultEntity(), DefaultEntity.TEXT)))) {
+            onlyTextEntity = false;
+          }
+        }
+      }
+    }
+    if (onlyTextEntity) {
+      this.warning("Training phrases should contains something different to a text parameter", GeneratorPackage.Literals.INTENT_LANGUAGE_INPUTS__INPUTS);
     }
   }
 }

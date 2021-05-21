@@ -14,7 +14,7 @@ Bot returns Bot:
 
 
 Action returns Action:
-	Text | HTTPRequest | Image | HTTPResponse;
+	Text | HTTPRequest | Image | HTTPResponse | Empty;
 
 Token returns Token:
 	Literal | EntityToken | ParameterToken | ParameterRefenceToken;
@@ -167,6 +167,11 @@ Image returns Image:
 		'URL'':' URL=EString
 		('caption'':' caption=EString)?
 ;
+
+Empty returns Empty:
+	'empty' 'response' name=EString
+;
+
 
 TextLanguageInputHttpResponse returns TextLanguageInput:
 	'inputs'('in' language=Language)?'{'inputs+=TextInputHttpResponse (',' inputs+=TextInputHttpResponse)* '}';

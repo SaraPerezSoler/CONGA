@@ -257,6 +257,14 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.EMPTY: {
+				Empty empty = (Empty)theEObject;
+				T result = caseEmpty(empty);
+				if (result == null) result = caseAction(empty);
+				if (result == null) result = caseElement(empty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.TEXT: {
 				Text text = (Text)theEObject;
 				T result = caseText(text);
@@ -706,6 +714,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImage(Image object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Empty</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Empty</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEmpty(Empty object) {
 		return null;
 	}
 

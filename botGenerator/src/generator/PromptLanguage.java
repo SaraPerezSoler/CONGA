@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getPromptLanguage()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface PromptLanguage extends WithLanguage, Comparable {
 	/**

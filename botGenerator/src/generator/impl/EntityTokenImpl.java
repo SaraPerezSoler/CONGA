@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link generator.impl.EntityTokenImpl#getEntity <em>Entity</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT
  */
-public class EntityTokenImpl extends TokenImpl implements EntityToken {
+public class EntityTokenImpl extends TokenImpl implements EntityToken, Comparable {
 	/**
 	 * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
 	 * <!-- begin-user-doc -->

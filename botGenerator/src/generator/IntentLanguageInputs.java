@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getIntentLanguageInputs()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface IntentLanguageInputs extends WithLanguage, Comparable {
 	/**

@@ -142,7 +142,7 @@ class BotFormatter extends AbstractFormatter2 {
 	def dispatch void format(Intent intent, extension IFormattableDocument document) {
 		intent.prepend[setNewLines(2, 2, 2)]
 		intent.interior[indent]
-		intent.regionFor.feature(GeneratorPackage.Literals.ELEMENT__NAME).prepend[newLine]
+		//intent.regionFor.feature(GeneratorPackage.Literals.ELEMENT__NAME).prepend[newLine]
 		for (intentLanguageInputs : intent.inputs) {
 			intentLanguageInputs.format
 		}

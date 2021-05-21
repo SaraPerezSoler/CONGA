@@ -11,7 +11,9 @@ import generator.GeneratorPackage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
@@ -54,6 +56,8 @@ public class BotServlet extends XtextServlet {
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		}
+		
+		
 		return injector;
 	}
 	

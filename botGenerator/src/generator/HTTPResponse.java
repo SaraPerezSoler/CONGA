@@ -19,9 +19,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see generator.GeneratorPackage#getHTTPResponse()
  * @model
- * @generated
+ * @generated Not
  */
-public interface HTTPResponse extends Action {
+public interface HTTPResponse extends Action, Comparable {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.TextLanguageInput}.

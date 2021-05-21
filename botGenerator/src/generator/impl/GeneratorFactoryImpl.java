@@ -76,6 +76,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.PARAMETER: return createParameter();
 			case GeneratorPackage.PROMPT_LANGUAGE: return createPromptLanguage();
 			case GeneratorPackage.IMAGE: return createImage();
+			case GeneratorPackage.EMPTY: return createEmpty();
 			case GeneratorPackage.TEXT: return createText();
 			case GeneratorPackage.TEXT_LANGUAGE_INPUT: return createTextLanguageInput();
 			case GeneratorPackage.TEXT_INPUT: return createTextInput();
@@ -340,6 +341,17 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public Image createImage() {
 		ImageImpl image = new ImageImpl();
 		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Empty createEmpty() {
+		EmptyImpl empty = new EmptyImpl();
+		return empty;
 	}
 
 	/**

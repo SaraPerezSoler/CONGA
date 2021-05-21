@@ -1,0 +1,114 @@
+Chatbot RasaBot language : en
+
+intents :
+
+greet :
+	inputs in en {
+		hey ,
+		hello ,
+		^hi ,
+		"good morning" ,
+		"good evening" ,
+		"hey there"
+}
+
+hour :
+	inputs in en {
+		"When are you open?" ,
+		"Are you open today?" ,
+		"How late are you open on weekends?" ,
+		"What time do you open tomorrow morning?" ,
+		"When do you close?"
+}
+
+make_appointment :
+	inputs in en {
+		"I need an appointment for " ( Lucky ) [ petName ] ,
+		"I need an appointment for my " ( dog ) [ pet ] ( Chester ) [ petName ] " at " ( "3 PM" ) [ ^time ] " on " ( Saturday ) [ ^date ] ,
+		"My pet " ( Jordan ) [ petName ] " is sick" ,
+		"My " ( cat ) [ pet ] ( Alberto ) [ petName ] " is sick" ,
+		"I need to make an appointment at " ( "3 PM" ) [ ^time ] ( today ) [ ^date ] "." ,
+		"Can I set up an appointment for " ( noon ) [ ^time ] " on " ( Friday ) [ ^date ] "?" ,
+		"Can I schedule service for " ( "4 PM" ) [ ^time ] ( tomorrow ) [ ^date ] "?" ,
+		"Can I schedule service " ( tomorrow ) [ ^date ] "?" ,
+		"I need to make an appointment on " ( Monday ) [ ^date ] ,
+		"I need an appointment for my pet" ,
+		"My pet is sick" ,
+		"I need an appointment for my " ( kitty ) [ pet ] ,
+		"My " ( cat ) [ pet ] " is sick" ,
+		"I need an appointment for my " ( dog ) [ pet ] " at " ( "3 PM" ) [ ^time ] " on " ( Saturday ) [ ^date ] ,
+		"I want schredule an appointment for my " ( bird ) [ pet ] ( Arquimedes ) [ petName ] " on " ( Monday ) [ ^date ] " at " ( "9:00" ) [ ^time ]
+	}
+	parameters :
+		petName ,
+		pet ,
+		^time : entity time ;
+		^date : entity date ;
+
+affirm :
+	inputs in en {
+		correct ,
+		ye ,
+		"uh yes" ,
+		"let\'s do it" ,
+		yeah ,
+		"uh yes" ,
+		"um yes" ,
+		"yes knocking" ,
+		"that\'s correct" ,
+		"yes yes" ,
+		right ,
+		yea ,
+		yes ,
+		"yes right" ,
+		"yes and i dont care" ,
+		"right on" ,
+		"i love that"
+}
+
+deny :
+	inputs in en {
+		^no ,
+		"no new selection" ,
+		"no thanks" ,
+		"no thank you" ,
+		"uh no" ,
+		"breath no" ,
+		"do you have something else" ,
+		"no this does not work for me"
+}
+
+actions :
+	text response utter_greet_text :
+		inputs in en {
+			"Welcome. I can tell you the center hours, or I can make an appointment. What can I do for you?"
+	}
+	text response utter_hours_text :
+		inputs in en {
+			"We\'re open from 9 AM to 6 PM every day."
+	}
+	text response utter_all_done_text :
+		inputs in en {
+			"All done"
+	}
+	text response utter_ask_continue_text :
+		inputs in en {
+			"do you want to continue?"
+	}
+	text response utter_default_text :
+		inputs in en {
+			"Sorry, I don\'t undestand you "
+	}
+	empty response DefaultEmptyAction
+
+flows :
+	- user greet => chatbot utter_greet_text ;
+	- user hour => chatbot utter_hours_text ;
+	- user make_appointment => chatbot DefaultEmptyAction {
+		=> user greet => chatbot utter_greet_text ;
+		=> user hour => chatbot utter_hours_text , utter_ask_continue_text {
+			=> user deny => chatbot DefaultEmptyAction ;
+			=> user affirm => chatbot DefaultEmptyAction ;
+		} ;
+	} ;
+

@@ -2,9 +2,13 @@
  */
 package generator.impl;
 
+import generator.CompositeInput;
 import generator.Entity;
 import generator.GeneratorPackage;
 import generator.LanguageInput;
+import generator.RegexInput;
+import generator.SimpleInput;
+
 import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -141,6 +145,39 @@ public class EntityImpl extends ElementImpl implements Entity {
 				return inputs != null && !inputs.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public boolean isRegex() {
+		if (getInputs().isEmpty())
+			return false;
+		if (getInputs().get(0).getInputs().isEmpty())
+			return false;
+		if (!(getInputs().get(0).getInputs().get(0) instanceof RegexInput))
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean isComposite() {
+		if (getInputs().isEmpty())
+			return false;
+		if (getInputs().get(0).getInputs().isEmpty())
+			return false;
+		if (!(getInputs().get(0).getInputs().get(0) instanceof CompositeInput))
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean isSimple() {
+		if (getInputs().isEmpty())
+			return false;
+		if (getInputs().get(0).getInputs().isEmpty())
+			return false;
+		if (!(getInputs().get(0).getInputs().get(0) instanceof SimpleInput))
+			return false;
+		return true;
 	}
 
 } //EntityImpl

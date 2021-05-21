@@ -9,6 +9,7 @@ import generator.CompositeInput;
 import generator.DataType;
 import generator.DefaultEntity;
 import generator.Element;
+import generator.Empty;
 import generator.Entity;
 import generator.EntityInput;
 import generator.EntityToken;
@@ -244,6 +245,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass imageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emptyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1039,6 +1047,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
+	public EClass getEmpty() {
+		return emptyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getText() {
 		return textEClass;
 	}
@@ -1394,6 +1412,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(imageEClass, IMAGE__URL);
 		createEAttribute(imageEClass, IMAGE__CAPTION);
 
+		emptyEClass = createEClass(EMPTY);
+
 		textEClass = createEClass(TEXT);
 		createEReference(textEClass, TEXT__INPUTS);
 
@@ -1479,6 +1499,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		promptLanguageEClass.getESuperTypes().add(this.getWithLanguage());
 		actionEClass.getESuperTypes().add(this.getElement());
 		imageEClass.getESuperTypes().add(this.getAction());
+		emptyEClass.getESuperTypes().add(this.getAction());
 		textEClass.getESuperTypes().add(this.getAction());
 		textLanguageInputEClass.getESuperTypes().add(this.getWithLanguage());
 		httpRequestEClass.getESuperTypes().add(this.getAction());
@@ -1576,6 +1597,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(imageEClass, Image.class, "Image", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImage_URL(), ecorePackage.getEString(), "URL", null, 1, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_Caption(), ecorePackage.getEString(), "caption", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(emptyEClass, Empty.class, "Empty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(textEClass, Text.class, "Text", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getText_Inputs(), this.getTextLanguageInput(), null, "inputs", null, 1, -1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -54,7 +54,7 @@ import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
-import reverse.dialogflow.ReadAgent;
+import reverse.dialogflow.ReadDialogflowAgent;
 import reverse.dialogflow.agent.Agent;
 
 public class CongaData {
@@ -251,7 +251,7 @@ public class CongaData {
 	
 	public void loadBotFile(Project project, File file) throws IOException {
 		Resource resource = getProjectResource(project);
-		Agent agent = new ReadAgent().getAgent(file);
+		Agent agent = new ReadDialogflowAgent().getAgent(file);
 		Bot bot = agent.getBot();
 		bot.setName(project.getName());
 		resource.getContents().clear();
@@ -477,4 +477,17 @@ public class CongaData {
 		}
 		return count;
 	}
+	
+	public void saveAsXmi(Project p) {
+		Bot bot = getBotProject(p);
+		Resource xmiResource = getResourceSet().createResource(URI.createURI(getProjectFolderPath(p) + "/" + p.getName() + ".xmi"));
+		xmiResource.getContents().add(bot);
+		try {
+			xmiResource.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

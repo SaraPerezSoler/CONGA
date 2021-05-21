@@ -1247,6 +1247,43 @@ public interface GeneratorPackage extends EPackage {
 	int IMAGE_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.EmptyImpl <em>Empty</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.EmptyImpl
+	 * @see generator.impl.GeneratorPackageImpl#getEmpty()
+	 * @generated
+	 */
+	int EMPTY = 27;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY__NAME = ACTION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Empty</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Empty</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link generator.impl.TextImpl <em>Text</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1254,7 +1291,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getText()
 	 * @generated
 	 */
-	int TEXT = 27;
+	int TEXT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1300,7 +1337,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
 	 * @generated
 	 */
-	int TEXT_LANGUAGE_INPUT = 28;
+	int TEXT_LANGUAGE_INPUT = 29;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1346,7 +1383,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextInput()
 	 * @generated
 	 */
-	int TEXT_INPUT = 29;
+	int TEXT_INPUT = 30;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1383,7 +1420,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequest()
 	 * @generated
 	 */
-	int HTTP_REQUEST = 30;
+	int HTTP_REQUEST = 31;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1474,7 +1511,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPResponse()
 	 * @generated
 	 */
-	int HTTP_RESPONSE = 31;
+	int HTTP_RESPONSE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1529,7 +1566,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 32;
+	int KEY_VALUE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1575,7 +1612,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 33;
+	int DATA_TYPE = 34;
 
 	/**
 	 * The meta object id for the '{@link generator.Method <em>Method</em>}' enum.
@@ -1585,7 +1622,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 34;
+	int METHOD = 35;
 
 	/**
 	 * The meta object id for the '{@link generator.Language <em>Language</em>}' enum.
@@ -1595,7 +1632,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguage()
 	 * @generated
 	 */
-	int LANGUAGE = 35;
+	int LANGUAGE = 36;
 
 	/**
 	 * The meta object id for the '{@link generator.HTTPReturnType <em>HTTP Return Type</em>}' enum.
@@ -1605,7 +1642,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPReturnType()
 	 * @generated
 	 */
-	int HTTP_RETURN_TYPE = 36;
+	int HTTP_RETURN_TYPE = 37;
 
 	/**
 	 * The meta object id for the '{@link generator.DefaultEntity <em>Default Entity</em>}' enum.
@@ -1615,7 +1652,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDefaultEntity()
 	 * @generated
 	 */
-	int DEFAULT_ENTITY = 37;
+	int DEFAULT_ENTITY = 38;
 
 
 	/**
@@ -2305,6 +2342,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImage_Caption();
+
+	/**
+	 * Returns the meta object for class '{@link generator.Empty <em>Empty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Empty</em>'.
+	 * @see generator.Empty
+	 * @generated
+	 */
+	EClass getEmpty();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Text <em>Text</em>}'.
@@ -3155,6 +3202,16 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMAGE__CAPTION = eINSTANCE.getImage_Caption();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.EmptyImpl <em>Empty</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.EmptyImpl
+		 * @see generator.impl.GeneratorPackageImpl#getEmpty()
+		 * @generated
+		 */
+		EClass EMPTY = eINSTANCE.getEmpty();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TextImpl <em>Text</em>}' class.

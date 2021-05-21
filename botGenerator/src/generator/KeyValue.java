@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see generator.GeneratorPackage#getKeyValue()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface KeyValue extends EObject, Comparable {
 	/**
