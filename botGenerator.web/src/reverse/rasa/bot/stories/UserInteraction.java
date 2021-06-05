@@ -7,9 +7,15 @@ import generator.Intent;
 public class UserInteraction {
 	private String intent;
 	private BotInteraction next;
+	private generator.UserInteraction generated;
 
 	public UserInteraction(String info) {
 		intent = info.substring(info.indexOf("* ") + "* ".length(), info.indexOf("\n"));
+		intent = intent.replaceAll("\\{.*\\}", "");
+		if (intent.contains(" ")) {
+			intent = intent.substring(0, intent.indexOf(" "));
+		}
+
 		info = info.substring(info.indexOf("\n") + "\n".length());
 		if (!info.isBlank() && !info.isEmpty()) {
 			next = new BotInteraction(info);
@@ -34,15 +40,27 @@ public class UserInteraction {
 
 	public generator.UserInteraction getBotUserInteraction(Bot bot) {
 		Intent intent = bot.getIntent(getIntent());
-		if (intent != null) {
-			generator.UserInteraction interacction = GeneratorFactory.eINSTANCE.createUserInteraction();
-			interacction.setIntent(intent);
-			if (next !=null) {
-				interacction.setTarget(next.getBotBotInteraction(bot));
-			}
-			return interacction;
+		if (intent == null) {
+			intent = GeneratorFactory.eINSTANCE.createIntent();
+			intent.setName(getIntent());
+			bot.getIntents().add(intent);
 		}
-		return null;
+
+		generator.UserInteraction interacction = GeneratorFactory.eINSTANCE.createUserInteraction();
+		interacction.setIntent(intent);
+		if (next != null) {
+			interacction.setTarget(next.getBotBotInteraction(bot));
+		}
+		this.generated = interacction;
+		return interacction;
+
+	}
+
+	public void setParameters(Bot bot) {
+		if (next != null) {
+			next.setParameters(bot);
+		}
+		
 	}
 
 }

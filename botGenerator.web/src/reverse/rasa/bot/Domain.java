@@ -1,13 +1,16 @@
 package reverse.rasa.bot;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import generator.Action;
 import generator.Bot;
 import generator.Empty;
 import generator.GeneratorFactory;
 import generator.Image;
+import generator.Intent;
 import generator.Text;
 import generator.TextLanguageInput;
 import reverse.rasa.bot.domain.Response;
@@ -15,17 +18,17 @@ import reverse.rasa.bot.domain.Slot;
 
 public class Domain {
 
-	private List<String> intents;
+	private List<Object> intents;
 	private List<String> entities;
 	private List<String> actions;
 	private List<String> forms;
 	private Map<String, Slot> slots;
 	private Map<String, List<Response>> responses;
 	public static Action defaultEmptyAction;
-	public List<String> getIntents() {
+	public List<Object> getIntents() {
 		return intents;
 	}
-	public void setIntents(List<String> intents) {
+	public void setIntents(List<Object> intents) {
 		this.intents = intents;
 	}
 	public List<String> getEntities() {
@@ -58,11 +61,18 @@ public class Domain {
 	public void setResponses(Map<String, List<Response>> responses) {
 		this.responses = responses;
 	}
+	
+	public void setTemplates(Map<String, List<Response>> responses) {
+		this.responses = responses;
+	}
 	public void saveBotActions(Bot bot) {
 		defaultEmptyAction = GeneratorFactory.eINSTANCE.createEmpty();
 		defaultEmptyAction.setName("DefaultEmptyAction");
+		Set<String> actions = new HashSet<>();
+		actions.addAll(getActions());
+		actions.addAll(this.responses.keySet());
 		
-		for (String actionName: getActions()) {
+		for (String actionName: actions) {
 			if (responses.containsKey(actionName)) {
 				int imageCount = 1;
 				int emptyCount = 1;
@@ -112,8 +122,5 @@ public class Domain {
 			}
 		}
 	}
-	
-	
-	
 	
 }

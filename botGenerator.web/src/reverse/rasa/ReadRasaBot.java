@@ -21,6 +21,15 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.jsoup.Jsoup;
 
 public class ReadRasaBot {
+	List<String> fileIgnore = new ArrayList<>();
+
+	public ReadRasaBot() {
+	}
+
+	public ReadRasaBot(List<String> fileIgnore) {
+		this.fileIgnore.addAll(fileIgnore);
+	}
+
 	public RasaBot getBot(File mainFile) throws Exception {
 		File agentFiles = null;
 		if (!mainFile.isDirectory() && mainFile.getName().endsWith(".zip")) {
@@ -28,7 +37,7 @@ public class ReadRasaBot {
 			if (agentFiles == null) {
 				return null;
 			}
-		}else {
+		} else {
 			agentFiles = mainFile;
 		}
 
@@ -43,33 +52,40 @@ public class ReadRasaBot {
 		files.add(agentFiles);
 		ObjectMapper om = new ObjectMapper(new YAMLFactory());
 		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		
+
 		Parser parser = Parser.builder().build();
 		while (agentCreated == false && !files.isEmpty()) {
 			File currentFile = files.get(0);
 			if (currentFile.isDirectory()) {
 				for (File f : currentFile.listFiles()) {
-					if (f.getName().equals("nlu.md")) {
-						Node document = parser.parse(readFile(f));
-						HtmlRenderer renderer = HtmlRenderer.builder().build();
-						org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document)); 
-						rasaBot.setNlu(html);
-						//rasaBot.setNlu(readFile(f));
-						hasNLU = true;
-					} else if (f.getName().equals("domain.yml")) {
-						rasaBot.setDomain(om.readValue(f, Domain.class));
-						hasDomain = true;
-					} else if (f.getName().equals("stories.md")) {
-						rasaBot.setStories(readFile(f));
-						hasStories = true;
-					} else if (f.getName().equals("config.yml")) {
-						rasaBot.setConfig(om.readValue(f, Config.class));
-						hasConfig = true;
-					} else if (f.isDirectory()) {
-						files.add(f);
-					}
-					if (hasDomain && hasNLU && hasStories && hasConfig) {
-						agentCreated = true;
+					if (!fileIgnore.contains(f.getName())) {
+						if (f.getName().endsWith(".md")) {
+							String info = readFile(f);
+							if (info.contains("## intent:") || info.contains("## synonym:")
+									|| info.contains("## regex:") || info.contains("## lookup:")) {
+								Node document = parser.parse(readFile(f));
+								HtmlRenderer renderer = HtmlRenderer.builder().build();
+								org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document));
+								rasaBot.setNlu(html);
+								// rasaBot.setNlu(readFile(f));
+								hasNLU = true;
+							} else {
+								rasaBot.setStories(info);
+								hasStories = true;
+							}
+
+						} else if (f.getName().equals("domain.yml")) {
+							rasaBot.setDomain(om.readValue(f, Domain.class));
+							hasDomain = true;
+						} else if (f.getName().equals("config.yml")) {
+							rasaBot.setConfig(om.readValue(f, Config.class));
+							hasConfig = true;
+						} else if (f.isDirectory()) {
+							files.add(f);
+						}
+						if (hasDomain && hasNLU && hasStories && hasConfig) {
+							agentCreated = true;
+						}
 					}
 				}
 			}
@@ -84,7 +100,7 @@ public class ReadRasaBot {
 			try {
 				Scanner myReader = new Scanner(f);
 				while (myReader.hasNextLine()) {
-					text += myReader.nextLine()+"\n";
+					text += myReader.nextLine() + "\n";
 				}
 				myReader.close();
 			} catch (FileNotFoundException e) {

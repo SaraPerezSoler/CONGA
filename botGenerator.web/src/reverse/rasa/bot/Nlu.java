@@ -27,6 +27,10 @@ public class Nlu {
 	private Map<String, List<String>> regex = new HashMap<>();
 
 	public Nlu(Document html) {
+		add(html);
+	}
+	
+	public void add(Document html) {
 		Iterator<Element> elements = html.getElementsByTag("h2").iterator();
 		while (elements.hasNext()) {
 			Element element = elements.next();
@@ -42,6 +46,7 @@ public class Nlu {
 				saveSynonyms(name, ul);
 			}
 		}
+		
 	}
 
 	private void saveRegex(String name, Element ul) {
@@ -87,7 +92,7 @@ public class Nlu {
 
 			for (String s : this.regex.get(key)) {
 				RegexInput entry = GeneratorFactory.eINSTANCE.createRegexInput();
-				entity.setName(s);
+				entry.setExpresion(s);
 				langInputs.getInputs().add(entry);
 			}
 			entity.getInputs().add(langInputs);
@@ -153,4 +158,6 @@ public class Nlu {
 			}
 		}
 	}
+
+
 }

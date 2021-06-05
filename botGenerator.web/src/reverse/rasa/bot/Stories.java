@@ -13,6 +13,14 @@ public class Stories {
 	private List<UserInteraction> paths = new ArrayList<>();
 
 	public Stories(String stories) {
+		add(stories);
+	}
+	public void add(String stories) {
+		stories = stories.replaceAll("<!--.*-->", "");
+		while (stories.contains("  ")) {
+			stories = stories.replace("  ", " ");
+		}
+		stories = stories.replace(" \n", "\n");
 		String[] pathsStrings = stories.split("##");
 		for (String p : pathsStrings) {
 			if (!p.isBlank() && !p.isEmpty()) {
@@ -20,6 +28,7 @@ public class Stories {
 				paths.add(new UserInteraction(s));
 			}
 		}
+		
 	}
 
 	public void saveBotFlows(Bot bot) {
@@ -57,17 +66,26 @@ public class Stories {
 			interaction1.getActions().addAll(current.getActions());
 		}
 		boolean hasSimilarPath = false;
-		generator.UserInteraction currentNext = current.getOutcoming().get(0);
-		for (generator.UserInteraction next : interaction1.getOutcoming()) {
-			if (compareUserInteraction(next, currentNext)) {
-				hasSimilarPath = true;
-				break;
+		if (!current.getOutcoming().isEmpty()) {
+			generator.UserInteraction currentNext = current.getOutcoming().get(0);
+			for (generator.UserInteraction next : interaction1.getOutcoming()) {
+				if (compareUserInteraction(next, currentNext)) {
+					hasSimilarPath = true;
+					break;
+				}
+			}
+			if (!hasSimilarPath) {
+				interaction1.getOutcoming().add(currentNext);
 			}
 		}
-		if (!hasSimilarPath) {
-			interaction1.getOutcoming().add(currentNext);
-		}
-
 	}
+	public void setParameters(Bot bot) {
+		for (UserInteraction interaction : this.paths) {
+			interaction.setParameters(bot);
+		}
+		
+	}
+
+
 
 }

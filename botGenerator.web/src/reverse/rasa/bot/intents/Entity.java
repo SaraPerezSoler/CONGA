@@ -19,6 +19,10 @@ public class Entity extends Token {
 
 	public Entity(String literalString) {
 		this.literal = literalString.substring(literalString.indexOf("[")+1, literalString.indexOf("]"));
+		if (this.literal.contains(":")) {
+			this.literal = this.literal.substring(0, this.literal.indexOf(":"));
+		}
+	
 		literalString = literalString.replace("["+this.literal+"]", "");
 		if (literalString.contains("(")&& literalString.contains(")")) {
 			this.entity = literalString.substring(literalString.indexOf("(")+1, literalString.indexOf(")"));
@@ -41,7 +45,11 @@ public class Entity extends Token {
 
 	public Entity(Element param) {
 		this.entity = param.attr("href");
+		if (this.entity.contains(":")) {
+			this.entity = this.entity.substring(0, this.entity.indexOf(":"));
+		}
 		this.literal = param.text();
+		
 	}
 
 	public String getLiteral() {
@@ -111,7 +119,13 @@ public class Entity extends Token {
 			}else if (entity.contains("date")) {
 				param.setDefaultEntity(DefaultEntity.DATE);
 			}else {
-				param.setDefaultEntity(DefaultEntity.TEXT);
+				try {
+					ParseCardinal.parse(this.literal);
+					param.setDefaultEntity(DefaultEntity.NUMBER);
+				}catch (Exception e) {
+					param.setDefaultEntity(DefaultEntity.TEXT);
+				}
+				
 			}
 		}else {
 			param.setEntity(ent);

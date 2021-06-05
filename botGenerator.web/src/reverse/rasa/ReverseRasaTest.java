@@ -2,6 +2,8 @@ package reverse.rasa;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,10 +18,14 @@ import generator.Bot;
 public class ReverseRasaTest {
 	public static void main(String[] args) throws IOException {
 	
-		File f = new File ("D:\\git\\VetClinic\\RasaBot");
+		List<String> fileIgnore = new ArrayList<>();
+		fileIgnore.add("readme.md");
+		fileIgnore.add("README.md");
+		fileIgnore.add("Readme.md");
+		File f = new File ("D:\\Desktop\\Rasa Examples\\1.10\\GitHub\\rasa-demo-1.10.x");
 		try {
 			//RasaBot bot = new ReadRasaBot().getBot(f);
-			Bot bot = new ReadRasaBot().getBot(f).getRasaBot();
+			Bot bot = new ReadRasaBot(fileIgnore).getBot(f).getRasaBot();
 			
 			Injector injector = BotServlet.getInjector();
 			XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
