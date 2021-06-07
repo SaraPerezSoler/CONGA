@@ -19,6 +19,12 @@ public class Intent {
 	public Intent(String section) {
 		String fistLine = section.substring(0, section.indexOf("\n"));
 		name = fistLine;
+		while (name.startsWith(" ")){
+			name = name.substring(" ".length());
+		}
+		while (name.endsWith(" ")) {
+			name = name.substring(0, name.length()-" ".length());
+		}
 		String[] sents = section.replaceFirst(fistLine+"\n", "").split("-");
 		for (String sent: sents) {
 			if (!sent.isEmpty() && !sent.isBlank())
@@ -28,7 +34,14 @@ public class Intent {
 
 	public Intent(String name2, Element ul) {
 		this.name = name2;
+		while (name.startsWith(" ")){
+			name = name.substring(" ".length());
+		}
+		while (name.endsWith(" ")) {
+			name = name.substring(0, name.length()-" ".length());
+		}
 		Iterator<Element> li = ul.getElementsByTag("li").iterator();
+		
 		while (li.hasNext()) {
 			Element line = li.next();
 			sentences.add(new Sentence(line));

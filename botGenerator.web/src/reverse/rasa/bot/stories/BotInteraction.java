@@ -65,7 +65,7 @@ public class BotInteraction {
 	public generator.BotInteraction getBotBotInteraction(Bot bot) {
 		List<Action> actions = new ArrayList<>();
 		for (String action : this.actions) {
-			actions.addAll(bot.getActionsContains(action));
+			actions.addAll(bot.getActionStartWith(action));
 		}
 
 		generator.BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();

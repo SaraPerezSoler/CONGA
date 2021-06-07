@@ -3,6 +3,7 @@ package reverse.rasa.bot.stories;
 import generator.Bot;
 import generator.GeneratorFactory;
 import generator.Intent;
+import reverse.rasa.bot.Domain;
 
 public class UserInteraction {
 	private String intent;
@@ -14,6 +15,9 @@ public class UserInteraction {
 		intent = intent.replaceAll("\\{.*\\}", "");
 		if (intent.contains(" ")) {
 			intent = intent.substring(0, intent.indexOf(" "));
+		}
+		if (intent.endsWith(":")) {
+			intent = intent.substring(0, intent.length()-":".length());
 		}
 
 		info = info.substring(info.indexOf("\n") + "\n".length());

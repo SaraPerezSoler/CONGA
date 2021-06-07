@@ -22,7 +22,7 @@ public class ReverseRasaTest {
 		fileIgnore.add("readme.md");
 		fileIgnore.add("README.md");
 		fileIgnore.add("Readme.md");
-		File f = new File ("D:\\Desktop\\Rasa Examples\\1.10\\GitHub\\rasa-demo-1.10.x");
+		File f = new File ("D:\\Desktop\\Rasa Examples\\1.10\\GitHub\\Building-a-Conversational-Chatbot-for-Slack-using-Rasa-and-Python-master");
 		try {
 			//RasaBot bot = new ReadRasaBot().getBot(f);
 			Bot bot = new ReadRasaBot(fileIgnore).getBot(f).getRasaBot();
