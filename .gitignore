@@ -21,3 +21,4 @@ botGenerator.dsl.parent/botGenerator.dsl.web/target/m2e-wtp/web-resources/META-I
 botGenerator.dsl.parent/botGenerator.dsl.web/target/m2e-wtp/web-resources/META-INF/maven/botGenerator.dsl/botGenerator.dsl.web/pom.xml
 botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerator/ide/contentassist/antlr/internal/InternalBot.tokens
 botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerator/ide/contentassist/antlr/internal/InternalBot.g
+*.aird

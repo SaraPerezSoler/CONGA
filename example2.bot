@@ -1,0 +1,35 @@
+Chatbot example2 language: en
+
+intents:
+greetings:
+	inputs{
+		"hi",
+		"hello",
+		"hey",
+		"Good Morning",
+		"good evening",
+		"hey there",
+		"just going to say hi",
+		"greetings",
+		"long time no see"
+}
+
+fallback Fallback
+
+actions:
+	text response greet_action:
+		inputs{
+			"Hi! How are you doing?",
+			"Hello! How can I help you?",
+			"Good day! What can I do for you today?",
+			"Greetings! How can I assist?"
+	}
+	text response fallback_action:
+		inputs{
+			"I didn't get that. Can you say it again?",
+			"I didn't get that. Can you repeat?"
+	}
+
+flows:
+	- user greetings => chatbot greet_action;
+	- user fallback => chatbot fallback_action;
