@@ -5,6 +5,7 @@
 *.xtendbin
 *._trace
 */bin/*
+*/xtend-gen/*
 ReverseEngineering/agent/*
 ReverseEngineering/Coffee-Shop/*
 ReverseEngineering/Demo/*
@@ -22,3 +23,6 @@ botGenerator.dsl.parent/botGenerator.dsl.web/target/m2e-wtp/web-resources/META-I
 botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerator/ide/contentassist/antlr/internal/InternalBot.tokens
 botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerator/ide/contentassist/antlr/internal/InternalBot.g
 *.aird
+
+botGenerator.dsl.parent/botGenerator.dsl/xtend-gen/org/*
+botGenerator.dsl.parent/botGenerator.dsl.tests/xtend-gen/org/xtext/botGenerator/tests/BotParsingTest.java
