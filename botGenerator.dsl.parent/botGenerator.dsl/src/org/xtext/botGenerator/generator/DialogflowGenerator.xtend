@@ -29,11 +29,14 @@ import generator.Entity
 import java.util.List
 import java.util.UUID
 import zipUtils.Zip
+import java.util.Map
+import java.util.HashMap
 
 class DialogflowGenerator {
 	String path;
 	protected static String uri;
 	Zip zip;
+	Map<UserInteraction, String> affectedContext = new HashMap();
 	
 	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zip zip) {
 		var resourceName = resource.URI.lastSegment.substring(0, resource.URI.lastSegment.indexOf("."));
@@ -116,18 +119,23 @@ class DialogflowGenerator {
 	}
 
 	def contextName(UserInteraction transition, String prefix) {
+		if (affectedContext.containsKey(transition)){
+			return affectedContext.get(transition)
+		}
+		
 		var name = prefix + transition.intent.name + " - " + "followup"
 		name = name.replaceAll(" ", "");
+		affectedContext.put(transition, name)
 		return name
 	}
 
-	def contextName(String prefix) {
+	/*def contextName(String prefix) {
 		var name = prefix + "followup"
 		name = name.replaceAll(" ", "");
 		return name
-	}
+	}*/
 
-	def speechText(TextLanguageInput textAction) {
+	def speechText(TextLanguageInput textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
 			ret += "\""
@@ -135,7 +143,8 @@ class DialogflowGenerator {
 				if (token instanceof Literal) {
 					ret += token.text + " "
 				} else if (token instanceof ParameterToken) {
-					ret += "$" + token.parameter.name + " "
+					
+					ret += answerParam (token, transition)
 				}
 			}
 			ret += "\""
@@ -145,6 +154,21 @@ class DialogflowGenerator {
 			ret += "\n"
 		}
 		return ret;
+	}
+	
+	def answerParam (ParameterToken token, UserInteraction transition){
+		if (transition.intent.parameters.contains(token.parameter)){
+			return "$" + token.parameter.name + " "
+		}else{
+			var aux = transition;
+			while (aux.src!==null){
+				aux = aux.src.incoming
+				if (aux.intent.parameters.contains(token.parameter)){
+					return "#"+affectedContext.get(aux)+"."+token.parameter.name + " "
+				}
+			}
+		}
+		return " ";
 	}
 
 	def paramType(Parameter param) {
@@ -173,7 +197,7 @@ class DialogflowGenerator {
 			"name": "«prefix + transition.intent.name»",
 			"auto": true,
 			«IF transition.src!==null»
-				"contexts": ["«contextName(prefix)»"],
+				"contexts": ["«contextName(transition.src.incoming, prefix)»"],
 			«ELSE»
 				"contexts": [],
 			«ENDIF»
@@ -233,7 +257,7 @@ class DialogflowGenerator {
 											«ENDIF»
 											"condition": "",
 											"speech": [
-												«texLanguage.speechText»
+												«texLanguage.speechText(transition)»
 											]
 										}
 										«{coma=","; ""}»
