@@ -1,6 +1,7 @@
 package es.services;
 
 import java.io.File;
+
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -11,11 +12,10 @@ import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import es.main.CongaServices;
-import es.main.generators.DialogflowGenerator;
+import es.main.generators.RasaGenerator;
 
-@Path("/dialogflow")
-public class Dialogflow {
-
+@Path("/rasa")
+public class Rasa {
 	@POST
 	@Path("/generator")
 	@Consumes (MediaType.MULTIPART_FORM_DATA)
@@ -23,7 +23,7 @@ public class Dialogflow {
 	public String generator (@Context ServletContext context, @FormDataParam("file") File file, @FormDataParam("botName") String botName) {
 		String folderPath = context.getInitParameter("ServicePath");
 		CongaServices cs = new CongaServices(folderPath, file, botName);
-		DialogflowGenerator generator = new DialogflowGenerator(folderPath, cs.getName(), botName);
+		RasaGenerator generator = new RasaGenerator(folderPath, cs.getName(), botName);
 		File f = generator.doGenerate(cs.getResource()); 
 		cs.destroy();
 		

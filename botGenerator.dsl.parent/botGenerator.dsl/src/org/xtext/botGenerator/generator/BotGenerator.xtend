@@ -11,8 +11,8 @@ import generator.Entity
 import generator.RegexInput
 import generator.SimpleInput
 import generator.Intent
-import zipUtils.Zip;
 import org.eclipse.core.resources.ResourcesPlugin
+import zipUtils.Zipper
 
 /**
  * Generates code from your model files on save.
@@ -43,12 +43,12 @@ class BotGenerator extends AbstractGenerator {
 			
 		}
 		var dialogflowGeneratorUri = uri+"/Dialogflow"
-		var dialogflowZip = new Zip(dialogflowGeneratorUri, resourceName)
+		var dialogflowZip = new Zipper(dialogflowGeneratorUri, resourceName)
 		var dialogflow = new DialogflowGenerator()
 		dialogflow.doGenerate(resource, fsa, context, dialogflowZip)
 		
 		var rasaUri = uri+"/Rasa"
-		var rasaZip = new Zip(rasaUri, resourceName)
+		var rasaZip = new Zipper(rasaUri, resourceName)
 		var rasa = new RasaGenerator()
 	    rasa.doGenerate(resource, fsa, context, rasaZip)
 	}

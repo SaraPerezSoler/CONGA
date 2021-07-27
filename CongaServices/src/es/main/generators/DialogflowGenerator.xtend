@@ -1,8 +1,6 @@
-package org.xtext.botGenerator.generator
+package es.main.generators
 
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGeneratorContext
 import generator.Bot
 import generator.HTTPRequest
 import generator.Token
@@ -30,44 +28,42 @@ import java.util.List
 import java.util.UUID
 import java.util.Map
 import java.util.HashMap
-import zipUtils.Zipper
+import java.io.File
 
-class DialogflowGenerator {
-	String path;
-	protected static String uri;
-	Zipper zip;
-	Map<UserInteraction, String> affectedContext = new HashMap();
+class DialogflowGenerator extends BotGenerator{
 	
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zipper zip) {
-		var resourceName = resource.URI.lastSegment.substring(0, resource.URI.lastSegment.indexOf("."));
+	Map<UserInteraction, String> affectedContext = new HashMap();
+
+	new(String botPath, String fileName,  String botName){
+		super (botPath + File.separator+"Dialogflow"+File.separator+fileName, botName)
+		
+	}
+
+	override File doGenerate(Resource resource) {
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var requests = resource.allContents.filter(HTTPRequest).toList;
+
+//		generateFolder('entities')
+//		generateFolder('intents')
 		
-		path = resourceName + "/Dialogflow"
-		
-		
-		this.zip = zip;
-		
-		fsa.generateFile(path + '/package.json', "{\n \"version\": \"1.0.0\"\n}")
-		var packageValue = fsa.readBinaryFile(path + '/package.json')
-		zip.addFile("package.json", packageValue)
+		var f = generateFile('/package.json', "{\n \"version\": \"1.0.0\"\n}")
+		saveFileIntoZip(f, 'package.json')
 
 		if (!requests.isEmpty) {
 			var request = requests.get(0) as HTTPRequest
-			fsa.generateFile(path + '/agent.json', agentJSON(bot, request))
+			f = generateFile('/agent.json', agentJSON(bot, request))
 		} else {
-			fsa.generateFile(path + '/agent.json', agentJSON(bot, null))
+			f = generateFile('/agent.json', agentJSON(bot, null))
 		}
-		var agentValue = fsa.readBinaryFile(path + '/agent.json')
-		zip.addFile('agent.json', agentValue)
+		
+		saveFileIntoZip(f, 'agent.json')
 
 		var entities = resource.allContents.filter(Entity).toList;
 		for (Entity entity : entities) {
-			
-			fsa.generateFile(path + '/entities/' + entity.name + '.json', entityFile(entity))
-			var entityValue = fsa.readBinaryFile(path + '/entities/' + entity.name + '.json')
-			zip.addFileToFolder('entities', entity.name + '.json', entityValue)
-			
+
+			f = generateFile('entities'+File.separator + entity.name + '.json', entityFile(entity))
+			saveFileIntoZip(f, 'entities',  entity.name + '.json')
+
 			var lan = Language.ENGLISH;
 
 			for (LanguageInput input : entity.inputs) {
@@ -75,54 +71,51 @@ class DialogflowGenerator {
 				if (input.language != Language.EMPTY) {
 					lan = input.language
 				}
-				fsa.generateFile(path + '/entities/' + entity.name + '_entries_' + lan.languageAbbreviation + '.json',
+				f = generateFile('entities'+File.separator + entity.name + '_entries_' + lan.languageAbbreviation + '.json',
 					entriesFile(input))
-				var entityLanValue = fsa.readBinaryFile(path + '/entities/' + entity.name + '_entries_' + lan.languageAbbreviation + '.json')
-				zip.addFileToFolder('entities',	entity.name + '_entries_' + lan.languageAbbreviation + '.json', entityLanValue)
-			}			
+				saveFileIntoZip(f, 'entities', entity.name + '_entries_' + lan.languageAbbreviation + '.json')
+			}
 		}
 
 		for (UserInteraction transition : bot.flows) {
-			createTransitionFiles(transition, "", fsa, bot)
+			createTransitionFiles(transition, "", bot)
 		}
-		zip.close
+		close()
+		return getZipFile()
 
 	}
 
-	def void createTransitionFiles(UserInteraction transition, String prefix, IFileSystemAccess2 fsa, Bot bot) {
 
-		fsa.generateFile(path + '/intents/' + prefix + transition.intent.name + '.json',
+
+	def void createTransitionFiles(UserInteraction transition, String prefix, Bot bot) {
+
+		var f = generateFile('/intents/' + prefix + transition.intent.name + '.json',
 			transition.intentFile(prefix, bot))
-		var intentValue = fsa.readBinaryFile(path + '/intents/' + prefix + transition.intent.name + '.json')
-			
-		zip.addFileToFolder('intents', prefix + transition.intent.name + '.json', intentValue)
+		saveFileIntoZip(f, 'intents', prefix + transition.intent.name + '.json')
 
 		for (IntentLanguageInputs input : transition.intent.inputs) {
 			var lan = bot.languages.get(0)
 			if (input.language != Language.EMPTY) {
 				lan = input.language
 			}
-			fsa.generateFile(
-				path + '/intents/' + prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation +
+			f = generateFile(
+				'/intents/' + prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation +
 					'.json', input.usersayFile)
-			var intentLanValue = fsa.readBinaryFile(path + '/intents/' + prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation +
-					'.json')
-			zip.addFileToFolder('intents',
-				prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation + '.json', intentLanValue)
+			saveFileIntoZip(f, 'intents', prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation + '.json')
 		}
 		if (transition.target !== null) {
 			var newPrefix = prefix + transition.intent.name + " - ";
 			for (UserInteraction t : transition.target.outcoming) {
-				createTransitionFiles(t, newPrefix, fsa, bot)
+				createTransitionFiles(t, newPrefix, bot)
 			}
 		}
 	}
 
 	def contextName(UserInteraction transition, String prefix) {
-		if (affectedContext.containsKey(transition)){
+		if (affectedContext.containsKey(transition)) {
 			return affectedContext.get(transition)
 		}
-		
+
 		var name = prefix + transition.intent.name + " - " + "followup"
 		name = name.replaceAll(" ", "");
 		affectedContext.put(transition, name)
@@ -130,11 +123,10 @@ class DialogflowGenerator {
 	}
 
 	/*def contextName(String prefix) {
-		var name = prefix + "followup"
-		name = name.replaceAll(" ", "");
-		return name
-	}*/
-
+	 * 	var name = prefix + "followup"
+	 * 	name = name.replaceAll(" ", "");
+	 * 	return name
+	 }*/
 	def speechText(TextLanguageInput textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
@@ -143,8 +135,8 @@ class DialogflowGenerator {
 				if (token instanceof Literal) {
 					ret += token.text + " "
 				} else if (token instanceof ParameterToken) {
-					
-					ret += answerParam (token, transition)
+
+					ret += answerParam(token, transition)
 				}
 			}
 			ret += "\""
@@ -155,16 +147,16 @@ class DialogflowGenerator {
 		}
 		return ret;
 	}
-	
-	def answerParam (ParameterToken token, UserInteraction transition){
-		if (transition.intent.parameters.contains(token.parameter)){
+
+	def answerParam(ParameterToken token, UserInteraction transition) {
+		if (transition.intent.parameters.contains(token.parameter)) {
 			return "$" + token.parameter.name + " "
-		}else{
+		} else {
 			var aux = transition;
-			while (aux.src!==null){
+			while (aux.src !== null) {
 				aux = aux.src.incoming
-				if (aux.intent.parameters.contains(token.parameter)){
-					return "#"+affectedContext.get(aux)+"."+token.parameter.name + " "
+				if (aux.intent.parameters.contains(token.parameter)) {
+					return "#" + affectedContext.get(aux) + "." + token.parameter.name + " "
 				}
 			}
 		}
@@ -337,34 +329,34 @@ class DialogflowGenerator {
 	def usersayFile(IntentLanguageInputs intent) '''
 		[
 		«FOR phrase : intent.inputs»
-		«IF phrase instanceof TrainingPhrase»
-			{
-			  "id": "«UUID.randomUUID().toString»",
-			  "data": [
-			«FOR token: phrase.tokens»
-				«IF token instanceof Literal»
-					{
-					  "text": "«token.text»",
-					  "userDefined": false
-					},
-				«ELSEIF token instanceof ParameterReferenceToken»
-					{
-					  "text": "«(token as ParameterReferenceToken).textReference»",
-					  "alias": "«(token as ParameterReferenceToken).parameter.name»",
-					  "meta": "«(token as ParameterReferenceToken).parameter.paramType»",
-					  "userDefined": true
-					},
-				«ENDIF»
+			«IF phrase instanceof TrainingPhrase»
 				{
-					"text": " ",
-					"userDefined": false
-				}«IF !phrase.tokens.isTheLast(token)»,«ENDIF»
-			«ENDFOR»
-			],
-			"isTemplate": false,
-			"count": 0,
-			"updated": 0
-			}«IF !isTheLast(intent.inputs, phrase)»,«ENDIF»
+				  "id": "«UUID.randomUUID().toString»",
+				  "data": [
+				«FOR token: phrase.tokens»
+					«IF token instanceof Literal»
+						{
+						  "text": "«token.text»",
+						  "userDefined": false
+						},
+					«ELSEIF token instanceof ParameterReferenceToken»
+						{
+						  "text": "«(token as ParameterReferenceToken).textReference»",
+						  "alias": "«(token as ParameterReferenceToken).parameter.name»",
+						  "meta": "«(token as ParameterReferenceToken).parameter.paramType»",
+						  "userDefined": true
+						},
+					«ENDIF»
+					{
+						"text": " ",
+						"userDefined": false
+					}«IF !phrase.tokens.isTheLast(token)»,«ENDIF»
+				«ENDFOR»
+				],
+				"isTemplate": false,
+				"count": 0,
+				"updated": 0
+				}«IF !isTheLast(intent.inputs, phrase)»,«ENDIF»
 			«ENDIF»
 		 «ENDFOR»
 		 ]
@@ -430,26 +422,24 @@ class DialogflowGenerator {
 			"id": "«UUID.randomUUID().toString»",
 			"name": "«entity.name»",
 			"isOverridable": true,	  
-			«IF BotGenerator.entityType(entity) === BotGenerator.REGEX»
-			"isEnum": false,
-			"isRegexp":true,
-			"automatedExpansion": true,
-			"allowFuzzyExtraction": false
-			«ELSEIF BotGenerator.entityType(entity) === BotGenerator.SIMPLE»
-			"isEnum": false,
-			"isRegexp": false,
-			"automatedExpansion": true,
-			"allowFuzzyExtraction": true
+			«IF entityType(entity) === BotGenerator.REGEX»
+				"isEnum": false,
+				"isRegexp":true,
+				"automatedExpansion": true,
+				"allowFuzzyExtraction": false
+			«ELSEIF entityType(entity) === BotGenerator.SIMPLE»
+				"isEnum": false,
+				"isRegexp": false,
+				"automatedExpansion": true,
+				"allowFuzzyExtraction": true
 			«ELSE»
-			"isEnum": true,
-			"isRegexp": false,
-			"automatedExpansion": false,
-			"allowFuzzyExtraction": false
+				"isEnum": true,
+				"isRegexp": false,
+				"automatedExpansion": false,
+				"allowFuzzyExtraction": false
 			«ENDIF»
 		}
 	'''
-
-
 
 	def entityIsSimple(Entity entity) {
 	}
@@ -463,34 +453,35 @@ class DialogflowGenerator {
 			«ENDFOR»
 		]
 	'''
-	
-	def entry(EntityInput entry){
-		if (entry instanceof SimpleInput){
+
+	def entry(EntityInput entry) {
+		if (entry instanceof SimpleInput) {
 			return entry(entry)
-		}else if (entry instanceof CompositeInput){
+		} else if (entry instanceof CompositeInput) {
 			return entry(entry)
-		}else if (entry instanceof RegexInput){
+		} else if (entry instanceof RegexInput) {
 			return entry(entry)
 		}
 	}
-	
-	def entry(SimpleInput entry)'''
+
+	def entry(SimpleInput entry) '''
 		"value": "«entry.name»",
 		"synonyms": [
 			"«entry.name»"«IF !entry.values.empty»,«ENDIF»
-			«FOR synonym: entry.values»
-			"«synonym»"«IF !entry.values.isTheLast(synonym)»,«ENDIF»
+			«FOR synonym : entry.values»
+				"«synonym»"«IF !entry.values.isTheLast(synonym)»,«ENDIF»
 			«ENDFOR»
 		]
 	'''
-	
-	def entry(CompositeInput entry)'''
+
+	def entry(CompositeInput entry) '''
 		"value": "«entry.compositeEntry»",
 		"synonyms": [
 			"«entry.compositeEntry»"
 		]
 	'''
-	def entry(RegexInput entry)'''
+
+	def entry(RegexInput entry) '''
 		"value": "«entry.expresion»",
 		"synonyms": [
 			"«entry.expresion»"

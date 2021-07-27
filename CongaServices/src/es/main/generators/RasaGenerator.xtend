@@ -1,4 +1,4 @@
-package org.xtext.botGenerator.generator
+package es.main.generators
 
 import generator.Action
 import generator.Bot
@@ -15,8 +15,6 @@ import generator.TextInput
 import generator.TrainingPhrase
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGeneratorContext
 import generator.HTTPRequest
 import generator.DataType
 import generator.HTTPResponse
@@ -32,14 +30,17 @@ import generator.SimpleInput
 import generator.RegexInput
 import generator.LanguageInput
 import generator.EntityInput
-import zipUtils.Zipper
+import java.io.File
 
-class RasaGenerator {
+class RasaGenerator extends BotGenerator{
 
-	String path;
 
-	def doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context, Zipper zip) {
-		var resourceName = resource.URI.lastSegment.substring(0, resource.URI.lastSegment.indexOf("."));
+	new(String path,String fileName, String botName) {
+		super(path+ File.separator+"Rasa"+File.separator+fileName, botName)
+	}
+	
+	override doGenerate(Resource resource) {
+
 		var bot = resource.allContents.filter(Bot).toList.get(0);
 		var intents = resource.allContents.filter(Intent).toList;
 		var entities = resource.allContents.filter(Entity).toList;
@@ -50,44 +51,40 @@ class RasaGenerator {
 			leafsU(flow, leafs)
 		}
 
-		path = resourceName + "/Rasa"
-		fsa.generateFile(path + '/requirements.txt',
+		var f = generateFile('requirements.txt',
 			"tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
-		var requirements = fsa.readBinaryFile(path + '/requirements.txt')
-		zip.addFile("requirements.txt", requirements)
+		saveFileIntoZip(f, "requirements.txt");
 
 		for (Language lan : bot.languages) {
 
-			path = path + '/'+lan.languageAbbreviation
-			fsa.generateFile(path + '/actions.py', actions(intents, entities, actions, lan))
-			var actionValue = fsa.readBinaryFile(path + '/actions.py')
-			zip.addFileToFolder(lan.languageAbbreviation, "actions.py", actionValue)
+			var subPath = lan.languageAbbreviation + File.separator
+			var dataPath = subPath + 'data'+ File.separator
+//			generateFolder(subPath);
+//			generateFolder(dataPath)
+			
+			f = generateFile(subPath +'actions.py', actions(intents, entities, actions, lan))
+			saveFileIntoZip(f, subPath, 'actions.py')
 
-			fsa.generateFile(path + '/config.yml', config(lan))
-			var configValue = fsa.readBinaryFile(path + '/config.yml')
-			zip.addFileToFolder(lan.languageAbbreviation, "config.yml", configValue)
+			f = generateFile(subPath + 'config.yml', config(lan))
+			saveFileIntoZip(f, subPath, 'config.yml')
 
-			fsa.generateFile(path + '/credentials.yml', credentials)
-			var credentialValue = fsa.readBinaryFile(path + '/credentials.yml')
-			zip.addFileToFolder(lan.languageAbbreviation, "credentials.yml", credentialValue)
+			f = generateFile(subPath + 'credentials.yml', credentials)
+			saveFileIntoZip(f, subPath, 'credentials.yml')
+			
+			f = generateFile(subPath + 'domain.yml', domain(intents, parameters, actions, lan))
+			saveFileIntoZip(f, subPath, 'domain.yml')
 
-			fsa.generateFile(path + '/domain.yml', domain(intents, parameters, actions, lan))
-			var domainValue = fsa.readBinaryFile(path + '/domain.yml')
-			zip.addFileToFolder(lan.languageAbbreviation, "domain.yml", domainValue)
+			f = generateFile(subPath + 'endpoints.yml', endpoint)
+			saveFileIntoZip(f, subPath, 'endpoints.yml')
 
-			fsa.generateFile(path + '/endpoints.yml', endpoint)
-			var endpointsValue = fsa.readBinaryFile(path + '/endpoints.yml')
-			zip.addFileToFolder(lan.languageAbbreviation, "endpoints.yml", endpointsValue)
+			f = generateFile(dataPath+'nlu.md', nlu(intents, entities, lan))
+			saveFileIntoZip(f, dataPath, 'nlu.md')
 
-			fsa.generateFile(path + '/data/nlu.md', nlu(intents, entities, lan))
-			var nluValue = fsa.readBinaryFile(path + '/data/nlu.md')
-			zip.addFileToFolder(lan.languageAbbreviation + "/data", "nlu.md", nluValue)
-
-			fsa.generateFile(path + '/data/stories.md', stories(leafs))
-			var storiesValue = fsa.readBinaryFile(path + '/data/stories.md')
-			zip.addFileToFolder(lan.languageAbbreviation + "/data", "stories.md", storiesValue)
+			f = generateFile(dataPath +'stories.md', stories(leafs))
+			saveFileIntoZip(f, dataPath, 'stories.md')
 		}
-		zip.close
+		close()
+		zipFile
 	}
 
 	def String actionName(Action action) {
@@ -217,7 +214,7 @@ class RasaGenerator {
 				return None
 				
 		«FOR entity : entities»
-			«IF BotGenerator.entityType(entity) === BotGenerator.SIMPLE»
+			«IF entityType(entity) === BotGenerator.SIMPLE»
 				«FOR simpleLanguage : entity.inputs»
 					«IF simpleLanguage.language.equals(lan)»
 						«entity.name.rasaValue»_db={
@@ -233,7 +230,7 @@ class RasaGenerator {
 							return None
 					«ENDIF»		
 				«ENDFOR»
-			«ELSEIF BotGenerator.entityType(entity) === BotGenerator.COMPOSITE»
+			«ELSEIF entityType(entity) === BotGenerator.COMPOSITE»
 				def «entity.name.rasaValue»_validate(value:Text):
 					
 					return None
@@ -507,7 +504,7 @@ class RasaGenerator {
 		«FOR intent : intents»
 			«FOR intentLanguageInput: intent.inputs»
 				«IF intentLanguageInput.language.equals(lan)»
-					«IF BotGenerator.intentType(intent) === BotGenerator.TRAINING»
+					«IF intentType(intent) === BotGenerator.TRAINING»
 						## intent:«intent.name.getRasaValue»
 						«FOR input : intentLanguageInput.inputs»
 							- «(input as TrainingPhrase).generate(lan)»
@@ -520,14 +517,14 @@ class RasaGenerator {
 			
 			«FOR languageInput: entity.inputs»
 				«IF languageInput.language.equals(lan)»
-					«IF BotGenerator.entityType(entity) === BotGenerator.SIMPLE»
+					«IF entityType(entity) === BotGenerator.SIMPLE»
 						«FOR input: languageInput.inputs»
 							## synonym:«(input as SimpleInput).name»
 							«FOR synonym : (input as SimpleInput).values»
 								- «synonym»
 							«ENDFOR»
 						«ENDFOR»
-					«ELSEIF BotGenerator.entityType(entity) === BotGenerator.REGEX»
+					«ELSEIF entityType(entity) === BotGenerator.REGEX»
 						##regex:«entity.name»
 						«FOR input: languageInput.inputs»
 							- «(input as RegexInput).expresion»
@@ -546,7 +543,7 @@ class RasaGenerator {
 			if (token instanceof Literal) {
 				ret += token.text + " "
 			} else if (token instanceof ParameterReferenceToken) {
-				if (BotGenerator.entityType(token.parameter.entity) == BotGenerator.SIMPLE) {
+				if (entityType(token.parameter.entity) == BotGenerator.SIMPLE) {
 				if (token.parameter.entity !== null){
 					ret +=
 					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +'"'+

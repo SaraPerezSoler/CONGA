@@ -9,27 +9,33 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class Zip {
+public class Zipper {
 	private FileOutputStream fos;
 	private ZipOutputStream zos;
+	private File file;
 
-	public Zip(String path, String name) {
+	public Zipper(String path, String name) {
 
 		try {
-			File file = new File(path);
-			if (!file.exists()) {
-				file.mkdirs();
+			File dir = new File(path);
+			if (!dir.exists()) {
+				dir.mkdirs();
 			}else {
-				if (!file.isDirectory()) {
-					file.mkdirs();
+				if (!dir.isDirectory()) {
+					dir.mkdirs();
 				}
 			}
-			fos = new FileOutputStream(path + "/" + name + ".zip");
+			file = new File (path + "/" + name + ".zip");
+			fos = new FileOutputStream(file);
 			zos = new ZipOutputStream(new BufferedOutputStream(fos));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public File getFile() {
+		return file;
 	}
 
 	/*public void addFile(String path, String fileName) {
