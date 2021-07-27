@@ -47,7 +47,11 @@ public class LoadProject extends HttpServlet {
 		try {
 
 			String projectName = request.getParameter("projectName");
-
+			if (projectName.isEmpty() || projectName.isBlank()) {
+				getServletContext().setAttribute("msg", "The project must contain a name.");
+				request.getRequestDispatcher("newproject.jsp").forward(request, response);
+				return;
+			}
 			String userString = (String) request.getSession().getAttribute("user");
 
 			CongaData conga = CongaData.getCongaData(getServletContext());

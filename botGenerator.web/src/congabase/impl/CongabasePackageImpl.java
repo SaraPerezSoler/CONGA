@@ -6,8 +6,12 @@ import congabase.AQuestion;
 import congabase.CongaSystem;
 import congabase.CongabaseFactory;
 import congabase.CongabasePackage;
+import congabase.KeyValue;
 import congabase.Project;
 import congabase.RelevanceLevel;
+import congabase.Service;
+import congabase.ServiceStatus;
+import congabase.ServiceType;
 import congabase.User;
 import congabase.UserAnswer;
 
@@ -76,7 +80,35 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass serviceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass keyValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum relevanceLevelEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum serviceStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum serviceTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -179,6 +211,33 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 */
 	public EReference getCongaSystem_Questionnaire() {
 		return (EReference)congaSystemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCongaSystem_Generators() {
+		return (EReference)congaSystemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCongaSystem_Converters() {
+		return (EReference)congaSystemEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCongaSystem_Validators() {
+		return (EReference)congaSystemEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -375,8 +434,134 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getService() {
+		return serviceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Url() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_Tool() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Type() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Status() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Version() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_User() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_BasicAuth() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_Headers() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKeyValue() {
+		return keyValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKeyValue_Key() {
+		return (EAttribute)keyValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKeyValue_Value() {
+		return (EAttribute)keyValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getRelevanceLevel() {
 		return relevanceLevelEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getServiceStatus() {
+		return serviceStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getServiceType() {
+		return serviceTypeEEnum;
 	}
 
 	/**
@@ -411,6 +596,9 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		createEReference(congaSystemEClass, CONGA_SYSTEM__USERS);
 		createEReference(congaSystemEClass, CONGA_SYSTEM__PROJECTS);
 		createEReference(congaSystemEClass, CONGA_SYSTEM__QUESTIONNAIRE);
+		createEReference(congaSystemEClass, CONGA_SYSTEM__GENERATORS);
+		createEReference(congaSystemEClass, CONGA_SYSTEM__CONVERTERS);
+		createEReference(congaSystemEClass, CONGA_SYSTEM__VALIDATORS);
 
 		userEClass = createEClass(USER);
 		createEAttribute(userEClass, USER__NICK);
@@ -438,8 +626,24 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		createEReference(toolToDoubleEClass, TOOL_TO_DOUBLE__KEY);
 		createEAttribute(toolToDoubleEClass, TOOL_TO_DOUBLE__VALUE);
 
+		serviceEClass = createEClass(SERVICE);
+		createEAttribute(serviceEClass, SERVICE__URL);
+		createEReference(serviceEClass, SERVICE__TOOL);
+		createEAttribute(serviceEClass, SERVICE__TYPE);
+		createEAttribute(serviceEClass, SERVICE__STATUS);
+		createEAttribute(serviceEClass, SERVICE__VERSION);
+		createEReference(serviceEClass, SERVICE__USER);
+		createEReference(serviceEClass, SERVICE__BASIC_AUTH);
+		createEReference(serviceEClass, SERVICE__HEADERS);
+
+		keyValueEClass = createEClass(KEY_VALUE);
+		createEAttribute(keyValueEClass, KEY_VALUE__KEY);
+		createEAttribute(keyValueEClass, KEY_VALUE__VALUE);
+
 		// Create enums
 		relevanceLevelEEnum = createEEnum(RELEVANCE_LEVEL);
+		serviceStatusEEnum = createEEnum(SERVICE_STATUS);
+		serviceTypeEEnum = createEEnum(SERVICE_TYPE);
 	}
 
 	/**
@@ -479,6 +683,9 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEReference(getCongaSystem_Users(), this.getUser(), null, "users", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCongaSystem_Projects(), this.getProject(), null, "projects", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCongaSystem_Questionnaire(), theRecommenderQuestionnairePackage.getQuestionnaire(), null, "questionnaire", null, 1, 1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCongaSystem_Generators(), this.getService(), null, "generators", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCongaSystem_Converters(), this.getService(), null, "converters", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCongaSystem_Validators(), this.getService(), null, "validators", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUser_Nick(), ecorePackage.getEString(), "nick", null, 1, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -506,6 +713,20 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEReference(getToolToDouble_Key(), theRecommenderQuestionnairePackage.getTool(), null, "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getToolToDouble_Value(), ecorePackage.getEDoubleObject(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getService_Url(), ecorePackage.getEString(), "url", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Tool(), theRecommenderQuestionnairePackage.getTool(), null, "tool", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Type(), this.getServiceType(), "type", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Status(), this.getServiceStatus(), "status", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Version(), ecorePackage.getEString(), "version", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_User(), this.getUser(), null, "user", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_BasicAuth(), this.getKeyValue(), null, "basicAuth", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Headers(), this.getKeyValue(), null, "headers", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(keyValueEClass, KeyValue.class, "KeyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKeyValue_Key(), ecorePackage.getEString(), "key", null, 1, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKeyValue_Value(), ecorePackage.getEJavaObject(), "value", null, 1, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(relevanceLevelEEnum, RelevanceLevel.class, "RelevanceLevel");
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.IRRELEVANT);
@@ -514,6 +735,16 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.CRITICAL_ONE);
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.CRITICAL_ALL);
 		addEEnumLiteral(relevanceLevelEEnum, RelevanceLevel.CRITICAL);
+
+		initEEnum(serviceStatusEEnum, ServiceStatus.class, "ServiceStatus");
+		addEEnumLiteral(serviceStatusEEnum, ServiceStatus.ON);
+		addEEnumLiteral(serviceStatusEEnum, ServiceStatus.ERROR);
+		addEEnumLiteral(serviceStatusEEnum, ServiceStatus.OFF);
+
+		initEEnum(serviceTypeEEnum, ServiceType.class, "ServiceType");
+		addEEnumLiteral(serviceTypeEEnum, ServiceType.GENERATOR);
+		addEEnumLiteral(serviceTypeEEnum, ServiceType.CONVERTER);
+		addEEnumLiteral(serviceTypeEEnum, ServiceType.VALIDATOR);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -28,7 +28,7 @@
 						%>
 						<div class="alert alert-danger"><%=getServletContext().getAttribute("msg")%></div>
 						<%
-							}
+							getServletContext().setAttribute("msg", null);}
 						%>
 					</div>
 				</div>

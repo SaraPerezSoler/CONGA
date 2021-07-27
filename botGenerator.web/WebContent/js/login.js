@@ -73,6 +73,24 @@ function validateLgPassword() {
 	}
 }
 
+function validateProjectName() {
+	var $name = $("#projectName");
+	var $error_text = $("#error_projectName");
+	if ($name.val() == ""){
+		fieldRequired($name, $error_text);
+	}else{
+		ok($name, $error_text);
+	}
+}
+function validateUrl() {
+	var $name = $("#url");
+	var $error_text = $("#error_url");
+	if ($name.val() == ""){
+		fieldRequired($name, $error_text);
+	}else{
+		ok($name, $error_text);
+	}
+}
 function fieldRequired(field, error_field) {
 	error(field, error_field, "Este campo es obligatorio.");
 }

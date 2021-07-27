@@ -1,6 +1,6 @@
 
 <%
-	boolean hasUser = true;
+boolean hasUser = true;
 String congaRef = "User.jsp";
 if (session == null) {
 	hasUser = false;
@@ -27,9 +27,10 @@ if (session == null) {
 
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link " href="#">Docs</a></li>
+			<li class="nav-item"><a class="nav-link "
+				href="https://saraperezsoler.github.io/CONGA/">Docs</a></li>
 			<%
-				if (hasUser) {
+			if (hasUser) {
 			%>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
@@ -37,32 +38,38 @@ if (session == null) {
 					project</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
-						class="dropdown-item" href="loadproject.jsp">Load from Dialogflow files</a>
+						class="dropdown-item" href="loadproject.jsp">Load from
+						Dialogflow files</a>
 				</div></li>
 			<%
-				}
+			}
 			%>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+				role="button" aria-haspopup="true" aria-expanded="false">Service Manager</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="NewService.jsp">new service</a> <a
+						class="dropdown-item" href="prueba.html">manage service</a>
+				</div></li>
 		</ul>
 	</div>
 	<%
-		if (hasUser) {
+	if (hasUser) {
 	%>
-	<a href="User.jsp">
-	<span><svg width="1em" height="1em" viewBox="0 0 16 16"
-			class="bi bi-person-fill" fill="currentColor"
-			xmlns="http://www.w3.org/2000/svg">
+	<a href="User.jsp"> <span><svg width="1em" height="1em"
+				viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor"
+				xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd"
-				d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-</svg> <%=session.getAttribute("user")%></span> </a>
-<a href="logout"
-		class="btn btn-light">Sign out</a>
+					d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+</svg> <%=session.getAttribute("user")%></span>
+	</a> <a href="logout" class="btn btn-light">Sign out</a>
 	<%
-		} else {
+	} else {
 	%>
 
 	<a href="index.jsp" class="btn btn-light">Sign in</a>
 
 	<%
-		}
+	}
 	%>
 </nav>

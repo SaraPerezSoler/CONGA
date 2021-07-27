@@ -19,6 +19,9 @@ import recommenderQuestionnaire.Questionnaire;
  *   <li>{@link congabase.CongaSystem#getUsers <em>Users</em>}</li>
  *   <li>{@link congabase.CongaSystem#getProjects <em>Projects</em>}</li>
  *   <li>{@link congabase.CongaSystem#getQuestionnaire <em>Questionnaire</em>}</li>
+ *   <li>{@link congabase.CongaSystem#getGenerators <em>Generators</em>}</li>
+ *   <li>{@link congabase.CongaSystem#getConverters <em>Converters</em>}</li>
+ *   <li>{@link congabase.CongaSystem#getValidators <em>Validators</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getCongaSystem()
@@ -71,6 +74,42 @@ public interface CongaSystem extends EObject {
 	 * @generated
 	 */
 	void setQuestionnaire(Questionnaire value);
+
+	/**
+	 * Returns the value of the '<em><b>Generators</b></em>' containment reference list.
+	 * The list contents are of type {@link congabase.Service}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generators</em>' containment reference list.
+	 * @see congabase.CongabasePackage#getCongaSystem_Generators()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Service> getGenerators();
+
+	/**
+	 * Returns the value of the '<em><b>Converters</b></em>' containment reference list.
+	 * The list contents are of type {@link congabase.Service}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Converters</em>' containment reference list.
+	 * @see congabase.CongabasePackage#getCongaSystem_Converters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Service> getConverters();
+
+	/**
+	 * Returns the value of the '<em><b>Validators</b></em>' containment reference list.
+	 * The list contents are of type {@link congabase.Service}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Validators</em>' containment reference list.
+	 * @see congabase.CongabasePackage#getCongaSystem_Validators()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Service> getValidators();
 
 	User getUser(String user);
 

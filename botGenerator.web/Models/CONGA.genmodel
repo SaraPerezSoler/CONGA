@@ -14,10 +14,23 @@
       <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/CRITICAL_ALL"/>
       <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//RelevanceLevel/CRITICAL"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CONGA.ecore#//ServiceStatus">
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceStatus/ON"/>
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceStatus/ERROR"/>
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceStatus/OFF"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CONGA.ecore#//ServiceType">
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceType/GENERATOR"/>
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceType/CONVERTER"/>
+      <genEnumLiterals ecoreEnumLiteral="CONGA.ecore#//ServiceType/VALIDATOR"/>
+    </genEnums>
     <genClasses ecoreClass="CONGA.ecore#//CongaSystem">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/users"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/projects"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/questionnaire"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/generators"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/converters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//CongaSystem/validators"/>
     </genClasses>
     <genClasses ecoreClass="CONGA.ecore#//User">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//User/nick"/>
@@ -44,6 +57,20 @@
     <genClasses ecoreClass="CONGA.ecore#//ToolToDouble">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//ToolToDouble/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//ToolToDouble/value"/>
+    </genClasses>
+    <genClasses ecoreClass="CONGA.ecore#//Service">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/url"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/tool"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/version"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/user"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/basicAuth"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/headers"/>
+    </genClasses>
+    <genClasses ecoreClass="CONGA.ecore#//KeyValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//KeyValue/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//KeyValue/value"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="RecommenderQuestionnaire" disposableProviderFactory="true"

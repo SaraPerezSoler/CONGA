@@ -65,6 +65,8 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 			case CongabasePackage.USER_ANSWER: return createUserAnswer();
 			case CongabasePackage.AQUESTION: return createAQuestion();
 			case CongabasePackage.TOOL_TO_DOUBLE: return (EObject)createToolToDouble();
+			case CongabasePackage.SERVICE: return createService();
+			case CongabasePackage.KEY_VALUE: return createKeyValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -80,6 +82,10 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 		switch (eDataType.getClassifierID()) {
 			case CongabasePackage.RELEVANCE_LEVEL:
 				return createRelevanceLevelFromString(eDataType, initialValue);
+			case CongabasePackage.SERVICE_STATUS:
+				return createServiceStatusFromString(eDataType, initialValue);
+			case CongabasePackage.SERVICE_TYPE:
+				return createServiceTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -95,6 +101,10 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 		switch (eDataType.getClassifierID()) {
 			case CongabasePackage.RELEVANCE_LEVEL:
 				return convertRelevanceLevelToString(eDataType, instanceValue);
+			case CongabasePackage.SERVICE_STATUS:
+				return convertServiceStatusToString(eDataType, instanceValue);
+			case CongabasePackage.SERVICE_TYPE:
+				return convertServiceTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +176,26 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Service createService() {
+		ServiceImpl service = new ServiceImpl();
+		return service;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KeyValue createKeyValue() {
+		KeyValueImpl keyValue = new KeyValueImpl();
+		return keyValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RelevanceLevel createRelevanceLevelFromString(EDataType eDataType, String initialValue) {
 		RelevanceLevel result = RelevanceLevel.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -178,6 +208,46 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	 * @generated
 	 */
 	public String convertRelevanceLevelToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ServiceStatus createServiceStatusFromString(EDataType eDataType, String initialValue) {
+		ServiceStatus result = ServiceStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertServiceStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ServiceType createServiceTypeFromString(EDataType eDataType, String initialValue) {
+		ServiceType result = ServiceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertServiceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

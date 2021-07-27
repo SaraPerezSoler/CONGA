@@ -96,6 +96,10 @@ public class CongaData {
 		String[] ret = {"Dialogflow", "Rasa"};
 		return ret;
 	}
+	
+	public List<Tool> getAllTools(){
+		return conga.getQuestionnaire().getTools();
+	}
 
 	public static CongaData getCongaData(ServletContext context) throws Exception {
 		if (context != null) {

@@ -232,15 +232,6 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		getTools().add(tool);
 		return tool;
 	}
-	@Override
-	public Tool getTool(String string) {
-		for (Tool tool : getTools()) {
-			if (tool.getName().equalsIgnoreCase(string)) {
-				return tool;
-			}
-		}
-		return null;
-	}
 
 	public Evaluation createEvaluation(String evName, String evText, boolean multi, List<String> options,
 			Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Evaluator ev) {
@@ -294,5 +285,14 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		return ret;
 	}
 
+	@Override
+	public Tool getTool(String string) {
+		for (Tool tool : getTools()) {
+			if (tool.getName().equalsIgnoreCase(string)) {
+				return tool;
+			}
+		}
+		return null;
+	}
 
 } //QuestionnaireImpl

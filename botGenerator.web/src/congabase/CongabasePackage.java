@@ -95,13 +95,40 @@ public interface CongabasePackage extends EPackage {
 	int CONGA_SYSTEM__QUESTIONNAIRE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Generators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONGA_SYSTEM__GENERATORS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Converters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONGA_SYSTEM__CONVERTERS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Validators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONGA_SYSTEM__VALIDATORS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Conga System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONGA_SYSTEM_FEATURE_COUNT = 3;
+	int CONGA_SYSTEM_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Conga System</em>' class.
@@ -397,6 +424,152 @@ public interface CongabasePackage extends EPackage {
 	int TOOL_TO_DOUBLE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link congabase.impl.ServiceImpl <em>Service</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.impl.ServiceImpl
+	 * @see congabase.impl.CongabasePackageImpl#getService()
+	 * @generated
+	 */
+	int SERVICE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__URL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tool</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TOOL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__STATUS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__VERSION = 4;
+
+	/**
+	 * The feature id for the '<em><b>User</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__USER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Basic Auth</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__BASIC_AUTH = 6;
+
+	/**
+	 * The feature id for the '<em><b>Headers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__HEADERS = 7;
+
+	/**
+	 * The number of structural features of the '<em>Service</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_FEATURE_COUNT = 8;
+
+	/**
+	 * The number of operations of the '<em>Service</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link congabase.impl.KeyValueImpl <em>Key Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.impl.KeyValueImpl
+	 * @see congabase.impl.CongabasePackageImpl#getKeyValue()
+	 * @generated
+	 */
+	int KEY_VALUE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_VALUE__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_VALUE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Key Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_VALUE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Key Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_VALUE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link congabase.RelevanceLevel <em>Relevance Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -404,7 +577,28 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getRelevanceLevel()
 	 * @generated
 	 */
-	int RELEVANCE_LEVEL = 6;
+	int RELEVANCE_LEVEL = 8;
+
+
+	/**
+	 * The meta object id for the '{@link congabase.ServiceStatus <em>Service Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.ServiceStatus
+	 * @see congabase.impl.CongabasePackageImpl#getServiceStatus()
+	 * @generated
+	 */
+	int SERVICE_STATUS = 9;
+
+	/**
+	 * The meta object id for the '{@link congabase.ServiceType <em>Service Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.ServiceType
+	 * @see congabase.impl.CongabasePackageImpl#getServiceType()
+	 * @generated
+	 */
+	int SERVICE_TYPE = 10;
 
 
 	/**
@@ -449,6 +643,39 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCongaSystem_Questionnaire();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link congabase.CongaSystem#getGenerators <em>Generators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Generators</em>'.
+	 * @see congabase.CongaSystem#getGenerators()
+	 * @see #getCongaSystem()
+	 * @generated
+	 */
+	EReference getCongaSystem_Generators();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link congabase.CongaSystem#getConverters <em>Converters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Converters</em>'.
+	 * @see congabase.CongaSystem#getConverters()
+	 * @see #getCongaSystem()
+	 * @generated
+	 */
+	EReference getCongaSystem_Converters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link congabase.CongaSystem#getValidators <em>Validators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Validators</em>'.
+	 * @see congabase.CongaSystem#getValidators()
+	 * @see #getCongaSystem()
+	 * @generated
+	 */
+	EReference getCongaSystem_Validators();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.User <em>User</em>}'.
@@ -679,6 +906,136 @@ public interface CongabasePackage extends EPackage {
 	EAttribute getToolToDouble_Value();
 
 	/**
+	 * Returns the meta object for class '{@link congabase.Service <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Service</em>'.
+	 * @see congabase.Service
+	 * @generated
+	 */
+	EClass getService();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getUrl <em>Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Url</em>'.
+	 * @see congabase.Service#getUrl()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Url();
+
+	/**
+	 * Returns the meta object for the reference '{@link congabase.Service#getTool <em>Tool</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Tool</em>'.
+	 * @see congabase.Service#getTool()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_Tool();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see congabase.Service#getType()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see congabase.Service#getStatus()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see congabase.Service#getVersion()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Version();
+
+	/**
+	 * Returns the meta object for the reference '{@link congabase.Service#getUser <em>User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>User</em>'.
+	 * @see congabase.Service#getUser()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_User();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link congabase.Service#getBasicAuth <em>Basic Auth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Basic Auth</em>'.
+	 * @see congabase.Service#getBasicAuth()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_BasicAuth();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link congabase.Service#getHeaders <em>Headers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Headers</em>'.
+	 * @see congabase.Service#getHeaders()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_Headers();
+
+	/**
+	 * Returns the meta object for class '{@link congabase.KeyValue <em>Key Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Key Value</em>'.
+	 * @see congabase.KeyValue
+	 * @generated
+	 */
+	EClass getKeyValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.KeyValue#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see congabase.KeyValue#getKey()
+	 * @see #getKeyValue()
+	 * @generated
+	 */
+	EAttribute getKeyValue_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.KeyValue#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see congabase.KeyValue#getValue()
+	 * @see #getKeyValue()
+	 * @generated
+	 */
+	EAttribute getKeyValue_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link congabase.RelevanceLevel <em>Relevance Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -687,6 +1044,26 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getRelevanceLevel();
+
+	/**
+	 * Returns the meta object for enum '{@link congabase.ServiceStatus <em>Service Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Service Status</em>'.
+	 * @see congabase.ServiceStatus
+	 * @generated
+	 */
+	EEnum getServiceStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link congabase.ServiceType <em>Service Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Service Type</em>'.
+	 * @see congabase.ServiceType
+	 * @generated
+	 */
+	EEnum getServiceType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -744,6 +1121,30 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONGA_SYSTEM__QUESTIONNAIRE = eINSTANCE.getCongaSystem_Questionnaire();
+
+		/**
+		 * The meta object literal for the '<em><b>Generators</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONGA_SYSTEM__GENERATORS = eINSTANCE.getCongaSystem_Generators();
+
+		/**
+		 * The meta object literal for the '<em><b>Converters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONGA_SYSTEM__CONVERTERS = eINSTANCE.getCongaSystem_Converters();
+
+		/**
+		 * The meta object literal for the '<em><b>Validators</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONGA_SYSTEM__VALIDATORS = eINSTANCE.getCongaSystem_Validators();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.UserImpl <em>User</em>}' class.
@@ -924,6 +1325,106 @@ public interface CongabasePackage extends EPackage {
 		EAttribute TOOL_TO_DOUBLE__VALUE = eINSTANCE.getToolToDouble_Value();
 
 		/**
+		 * The meta object literal for the '{@link congabase.impl.ServiceImpl <em>Service</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.impl.ServiceImpl
+		 * @see congabase.impl.CongabasePackageImpl#getService()
+		 * @generated
+		 */
+		EClass SERVICE = eINSTANCE.getService();
+
+		/**
+		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__URL = eINSTANCE.getService_Url();
+
+		/**
+		 * The meta object literal for the '<em><b>Tool</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__TOOL = eINSTANCE.getService_Tool();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__TYPE = eINSTANCE.getService_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__STATUS = eINSTANCE.getService_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__VERSION = eINSTANCE.getService_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>User</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__USER = eINSTANCE.getService_User();
+
+		/**
+		 * The meta object literal for the '<em><b>Basic Auth</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__BASIC_AUTH = eINSTANCE.getService_BasicAuth();
+
+		/**
+		 * The meta object literal for the '<em><b>Headers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__HEADERS = eINSTANCE.getService_Headers();
+
+		/**
+		 * The meta object literal for the '{@link congabase.impl.KeyValueImpl <em>Key Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.impl.KeyValueImpl
+		 * @see congabase.impl.CongabasePackageImpl#getKeyValue()
+		 * @generated
+		 */
+		EClass KEY_VALUE = eINSTANCE.getKeyValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KEY_VALUE__KEY = eINSTANCE.getKeyValue_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KEY_VALUE__VALUE = eINSTANCE.getKeyValue_Value();
+
+		/**
 		 * The meta object literal for the '{@link congabase.RelevanceLevel <em>Relevance Level</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -932,6 +1433,26 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum RELEVANCE_LEVEL = eINSTANCE.getRelevanceLevel();
+
+		/**
+		 * The meta object literal for the '{@link congabase.ServiceStatus <em>Service Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.ServiceStatus
+		 * @see congabase.impl.CongabasePackageImpl#getServiceStatus()
+		 * @generated
+		 */
+		EEnum SERVICE_STATUS = eINSTANCE.getServiceStatus();
+
+		/**
+		 * The meta object literal for the '{@link congabase.ServiceType <em>Service Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.ServiceType
+		 * @see congabase.impl.CongabasePackageImpl#getServiceType()
+		 * @generated
+		 */
+		EEnum SERVICE_TYPE = eINSTANCE.getServiceType();
 
 	}
 
