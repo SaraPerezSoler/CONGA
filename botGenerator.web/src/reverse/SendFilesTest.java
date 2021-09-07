@@ -19,14 +19,14 @@ public class SendFilesTest {
 
 	public static void main(String[] args) {
 
-		File file = new File("D:/CONGA/admin/test/test.xmi");
+		File file = new File("D:/CONGA/admin/searchBot/searchBot.xmi");
 		@SuppressWarnings("resource")
 		final MultiPart multiPart = new FormDataMultiPart().field("file", file, MediaType.APPLICATION_OCTET_STREAM_TYPE)
 				.field("botName", "test", MediaType.TEXT_PLAIN_TYPE);
 		multiPart.setMediaType(MediaType.MULTIPART_FORM_DATA_TYPE);
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/CongaServices/rasa/generator")
+		WebTarget target = client.target("http://localhost:8080/CongaServices/dialogflow/generator")
 				.register(MultiPartFeature.class);
 		Response response = target.request(MediaType.TEXT_PLAIN)
 				.post(Entity.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE));

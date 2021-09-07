@@ -45,7 +45,14 @@ public class CreateProject extends HttpServlet {
 				String userString = (String) request.getSession().getAttribute("user");
 
 				CongaData conga = CongaData.getCongaData(getServletContext());
-				Project project = conga.newProject(projectName, userString, language.toUpperCase());
+				Project project = conga.getProject(userString, projectName);
+				if (project!= null) {
+					getServletContext().setAttribute("msg", "A project with the name "+projectName+" already exit");
+					request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+					return;
+				}
+				
+				project = conga.newProject(projectName, userString, language.toUpperCase());
 				if (project != null) {
 					getServletContext().setAttribute("project", project);
 					request.getRequestDispatcher("editor.jsp").forward(request, response);

@@ -177,13 +177,22 @@ public interface CongabasePackage extends EPackage {
 	int USER__PROJECTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Services</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER__SERVICES = 3;
+
+	/**
 	 * The number of structural features of the '<em>User</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_FEATURE_COUNT = 3;
+	int USER_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>User</em>' class.
@@ -506,13 +515,31 @@ public interface CongabasePackage extends EPackage {
 	int SERVICE__HEADERS = 7;
 
 	/**
+	 * The feature id for the '<em><b>Last Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__LAST_ACCESS = 8;
+
+	/**
+	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__SERVICE_ID = 9;
+
+	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = 8;
+	int SERVICE_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Service</em>' class.
@@ -719,6 +746,17 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUser_Projects();
+
+	/**
+	 * Returns the meta object for the reference list '{@link congabase.User#getServices <em>Services</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Services</em>'.
+	 * @see congabase.User#getServices()
+	 * @see #getUser()
+	 * @generated
+	 */
+	EReference getUser_Services();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.Project <em>Project</em>}'.
@@ -1004,6 +1042,28 @@ public interface CongabasePackage extends EPackage {
 	EReference getService_Headers();
 
 	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getLastAccess <em>Last Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Access</em>'.
+	 * @see congabase.Service#getLastAccess()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_LastAccess();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Service#getServiceId <em>Service Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Service Id</em>'.
+	 * @see congabase.Service#getServiceId()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_ServiceId();
+
+	/**
 	 * Returns the meta object for class '{@link congabase.KeyValue <em>Key Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1179,6 +1239,14 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference USER__PROJECTS = eINSTANCE.getUser_Projects();
+
+		/**
+		 * The meta object literal for the '<em><b>Services</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USER__SERVICES = eINSTANCE.getUser_Services();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.ProjectImpl <em>Project</em>}' class.
@@ -1397,6 +1465,22 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SERVICE__HEADERS = eINSTANCE.getService_Headers();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Access</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__LAST_ACCESS = eINSTANCE.getService_LastAccess();
+
+		/**
+		 * The meta object literal for the '<em><b>Service Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__SERVICE_ID = eINSTANCE.getService_ServiceId();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.KeyValueImpl <em>Key Value</em>}' class.

@@ -10,7 +10,7 @@ import java.io.FileWriter
 import org.eclipse.emf.ecore.resource.Resource
 import java.io.FileInputStream
 import zipUtils.Zipper
-import es.main.CongaServices
+import es.main.CongaResource
 
 abstract class BotGenerator {
 	public static final int REGEX = 0;
@@ -20,9 +20,10 @@ abstract class BotGenerator {
 
 	String path;
 	Zipper zip;
-	new(String path, String botName){
+
+	new(String path, String botName) {
 		this.path = path
-		this.zip = new Zipper(path, botName); 
+		this.zip = new Zipper(path, botName);
 	}
 
 	abstract def File doGenerate(Resource resource);
@@ -48,24 +49,24 @@ abstract class BotGenerator {
 			}
 		}
 	}
-	
-	def close(){
+
+	def close() {
 		zip.close
-		
+
 		var file = new File(path);
 		var contents = file.listFiles;
-		if (contents !== null){
-			for (f: contents){
-				if (!f.equals(zip.file)){
+		if (contents !== null) {
+			for (f : contents) {
+				if (!f.equals(zip.file)) {
 					removeFile(f)
 				}
 			}
 		}
-		
-		CongaServices.remove.add(file)
-		
+
+		CongaResource.remove.add(file)
+
 	}
-	
+
 	def void removeFile(File file) {
 		var contents = file.listFiles();
 		if (contents !== null) {
@@ -75,30 +76,32 @@ abstract class BotGenerator {
 		}
 		file.delete();
 	}
-	
-	def File getZipFile(){
+
+	def File getZipFile() {
 		return zip.file
 	}
-	
+
 	def File generateFile(String fileName, CharSequence content) {
-		generateFile(fileName, content.toString)
+		var newName = fileName.replace(":", "").replace("*", "")
+		.replace("?", "").replace("\"", "").replace("<", "").replace(">", "").replace("|", "")
+		generateFile(newName, content.toString)
 	}
 
 	def File generateFile(String fileName, String content) {
-		var file = new File(path +File.separator +fileName);
+		var file = new File(path + File.separator + fileName);
 		if (file.exists) {
 			file.delete();
 		}
 		var folder = file.parentFile
-		if (folder !== null && !folder.exists){
+		if (folder !== null && !folder.exists) {
 			folder.mkdirs
-		} 
+		}
 		var bw = new BufferedWriter(new FileWriter(file));
 		bw.write(content);
 		bw.close
 		return file
 	}
-	
+
 //	def File generateFolder(String fileName) {
 //		var file = new File(path +File.separator +fileName);
 //		if (!file.exists) {
@@ -106,13 +109,12 @@ abstract class BotGenerator {
 //		}
 //		return file;
 //	}
-
 	def void saveFileIntoZip(File f, String name) {
 		var packageValue = new FileInputStream(f);
 		zip.addFile(name, packageValue)
 		packageValue.close
 	}
-	
+
 	def void saveFileIntoZip(File f, String folder, String name) {
 		var packageValue = new FileInputStream(f);
 		zip.addFileToFolder(folder, name, packageValue)

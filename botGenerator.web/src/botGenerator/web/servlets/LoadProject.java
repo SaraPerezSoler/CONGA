@@ -15,13 +15,14 @@ import javax.servlet.http.Part;
 import com.google.common.io.Files;
 
 import congabase.Project;
+import congabase.Service;
 import congabase.main.CongaData;
 import generator.Language;
 
 /**
  * Servlet implementation class CreateProject
  */
-@WebServlet("/loadFromDialogflow")
+@WebServlet("/loadBot")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class LoadProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,38 +46,52 @@ public class LoadProject extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-
+			CongaData conga = CongaData.getCongaData(getServletContext());
+			String parserId = request.getParameter("versionSelect");
+			Service service = conga.getParserService(parserId);
+			
+			if (service == null) {
+				getServletContext().setAttribute("msg", "You must select a tool and a version.");
+				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+				return;
+			}
+			
 			String projectName = request.getParameter("projectName");
 			if (projectName.isEmpty() || projectName.isBlank()) {
 				getServletContext().setAttribute("msg", "The project must contain a name.");
-				request.getRequestDispatcher("newproject.jsp").forward(request, response);
+				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
 				return;
 			}
 			String userString = (String) request.getSession().getAttribute("user");
-
-			CongaData conga = CongaData.getCongaData(getServletContext());
-			Project project = conga.newProject(projectName, userString, Language.ENGLISH.getLiteral());
+			Project project = conga.getProject(userString, projectName);
+			if (project!= null) {
+				getServletContext().setAttribute("msg", "A project with the name "+projectName+" already exit");
+				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+				return;
+			}
+			
+			project = conga.newProject(projectName, userString, Language.ENGLISH.getLiteral());
 			if (project != null) {
 
 				// Comprobar que el usuario solo ha mandado un fichero
 				if (request.getParts().size() != 2) {
-					response.getWriter().append("Send one and only one file. Served at: ")
-							.append(request.getContextPath());
+//					getServletContext().setAttribute("msg", "You must select only one zip file.");
+//					request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+//					return;
 				}
 				String tempPath = getServletContext().getRealPath("") + File.separator + "temp";
 				File tempDir = new File(tempPath);
 				if (!tempDir.exists())
 					tempDir.mkdirs();
-
-				String uploadPath = conga.getProjectFolderPath(project) + File.separator + "load" + File.separator
-						+ "DialogFlow";
+				
+				String uploadPath = conga.getProjectFolderPath(project) + File.separator + "load";
 
 				File uploadDir = new File(uploadPath);
 				if (!uploadDir.exists())
 					uploadDir.mkdirs();
 
 				// Copiar el fichero mandado por el usuario al directorio que se acaba de crear
-				String fileName;
+				String fileName = null;
 				String fileTempPath = "";
 				String filePath = "";
 				File dst = null;
@@ -90,14 +105,20 @@ public class LoadProject extends HttpServlet {
 					File src = new File(fileTempPath);
 					dst = new File(filePath);
 					if (!src.exists()) {
-						response.getWriter().append("Some error ocurre at create " + fileTempPath);
+						getServletContext().setAttribute("msg", "Some error ocurre at create.");
+						request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+						return;
 					}
 					Files.copy(src, dst);
-					src.delete();
+					delete(src);
 				}
 				if (dst != null) {
-					conga.loadBotFile(project, dst);
+					File f = SendService.sendService(service, dst, fileName);
+					conga.loadBotFile(project, f);
+					delete(f);
 				}
+				delete(uploadDir);
+				
 				getServletContext().setAttribute("project", project);
 				request.getRequestDispatcher("editor.jsp").forward(request, response);
 			}
@@ -105,6 +126,15 @@ public class LoadProject extends HttpServlet {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void delete(File f) {
+		if (f.isDirectory()) {
+			for (File child: f.listFiles()) {
+				delete (child);
+			}
+		}
+		f.delete();
 	}
 
 	private String getFileName(Part part) {
@@ -121,5 +151,7 @@ public class LoadProject extends HttpServlet {
 		}
 		return null;
 	}
+	
+
 
 }

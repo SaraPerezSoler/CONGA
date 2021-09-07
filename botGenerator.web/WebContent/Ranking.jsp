@@ -1,3 +1,4 @@
+<%@page import="congabase.Service"%>
 <%@page import="recommenderQuestionnaire.Evaluation"%>
 <%@page import="recommenderQuestionnaire.Option"%>
 <%@page import="congabase.AQuestion"%>
@@ -25,18 +26,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
-function generate(tool, resourceId) {
-	jQuery.get('http://' + location.host + '/botGenerator.web/xtext-service/generate?resource=' +resourceId+'&allArtifacts=true',
-			function(result) {
-			});
-	window.open('http://' + location.host + '/botGenerator.web/getfiles?resource=' + resourceId+'&tool='+tool)
-}
+	function generate(tool, resourceId) {
+		jQuery.get('http://' + location.host
+				+ '/botGenerator.web/xtext-service/generate?resource='
+				+ resourceId + '&allArtifacts=true', function(result) {
+		});
+		window.open('http://' + location.host
+				+ '/botGenerator.web/getfiles?resource=' + resourceId
+				+ '&tool=' + tool)
+	}
 </script>
 </head>
 <body>
 	<%
-		String projectName = request.getParameter("projectName");
+	String projectName = request.getParameter("projectName");
 	String user = (String) session.getAttribute("user");
 	CongaData conga = CongaData.getCongaData(getServletContext());
 
@@ -48,8 +51,10 @@ function generate(tool, resourceId) {
 		<div class="row justify-content-md-center box">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page-item"><a class="page-link page-size" href="User.jsp">User Menu</a></li>
-					<li class="page-item"><a class="page-link page-size" href="openProject?projectName=<%=projectName%>">Open bot</a></li>
+					<li class="page-item"><a class="page-link page-size"
+						href="User.jsp">User Menu</a></li>
+					<li class="page-item"><a class="page-link page-size"
+						href="openProject?projectName=<%=projectName%>">Open bot</a></li>
 					<li class="page-item active" aria-current="page"><span
 						class="page-link page-size"> Ranking <span class="sr-only">(current)</span>
 					</span></li>
@@ -71,9 +76,9 @@ function generate(tool, resourceId) {
 							<table class="table table-hover">
 								<tbody>
 									<%
-										for (String tool : ranking.keySet()) {
+									for (String tool : ranking.keySet()) {
 										String disabled = "disabled";
-										if (tool.equalsIgnoreCase("Rasa") || tool.equalsIgnoreCase("Dialogflow")) {
+										if (conga.supportedGeneratorTools().containsKey(tool)) {
 											disabled = "";
 										}
 									%>
@@ -81,8 +86,11 @@ function generate(tool, resourceId) {
 										<th scope="row"><%=tool%></th>
 										<td><%=df2.format(ranking.get(tool) * 100)%>%</td>
 										<td>
-											<button type="button" class="btn btn-outline-primary" onclick="generate('<%=tool%>', '<%=user%>/<%=projectName%>.bot')" 
-												<%=disabled%>>
+											<button type="button"
+												class="btn btn-outline-primary dropdown-toggle"
+												<%=disabled%> type="button"
+												id="dropdownMenuButton-<%=tool%>" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">
 												<svg width="1em" height="1em" viewBox="0 0 16 16"
 													class="bi bi-download" fill="currentColor"
 													xmlns="http://www.w3.org/2000/svg">
@@ -92,10 +100,23 @@ function generate(tool, resourceId) {
 														d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
 												</svg>
 											</button>
+											<ul class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton-<%=tool%>">
+												<%
+												if (conga.supportedGeneratorTools().containsKey(tool)) {
+													for (Service s : conga.supportedGeneratorTools().get(tool)) {
+												%>
+												<li><a class="dropdown-item"
+													href="Generator?serviceId=<%=s.getServiceId()%>&projectName=<%=projectName%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
+												<%
+												}
+												}
+												%>
+											</ul>
 										</td>
 									</tr>
 									<%
-										}
+									}
 									%>
 								</tbody>
 							</table>

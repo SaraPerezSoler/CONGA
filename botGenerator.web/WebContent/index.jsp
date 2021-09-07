@@ -14,6 +14,12 @@
 <script src="js/login.js"></script>
 </head>
 <body>
+	<%
+	String username = (String) session.getAttribute("user");
+	if (username != null) {
+		request.getRequestDispatcher("User.jsp").forward(request, response);
+	}
+	%>
 	<div class="container">
 		<div class="row justify-content-md-center loginbox">
 			<div class="col">
@@ -24,11 +30,12 @@
 				<div class="row">
 					<div class="col">
 						<%
-							if (getServletContext().getAttribute("msg") != null) {
+						if (getServletContext().getAttribute("msg") != null) {
 						%>
 						<div class="alert alert-danger"><%=getServletContext().getAttribute("msg")%></div>
 						<%
-							getServletContext().setAttribute("msg", null);}
+						getServletContext().setAttribute("msg", null);
+						}
 						%>
 					</div>
 				</div>

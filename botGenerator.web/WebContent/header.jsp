@@ -34,22 +34,21 @@ if (session == null) {
 			%>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-				role="button" aria-haspopup="true" aria-expanded="false">New
-					project</a>
+				role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
-						class="dropdown-item" href="loadproject.jsp">Load from
-						Dialogflow files</a>
+					<a class="dropdown-item" href="newproject.jsp">New empty project</a> 
+					<a class="dropdown-item" href="loadproject.jsp">Load project from files</a>
+					<a class="dropdown-item" href="User.jsp">Project Manager</a>
 				</div></li>
 			<%
 			}
 			%>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-				role="button" aria-haspopup="true" aria-expanded="false">Service Manager</a>
+				role="button" aria-haspopup="true" aria-expanded="false">Services</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="NewService.jsp">new service</a> <a
-						class="dropdown-item" href="prueba.html">manage service</a>
+					<a class="dropdown-item" href="NewService.jsp">New service</a> <a
+						class="dropdown-item" href="serviceManager.jsp">Service Manager</a>
 				</div></li>
 		</ul>
 	</div>

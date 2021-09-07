@@ -2,6 +2,7 @@
  */
 package congabase;
 
+import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,6 +25,8 @@ import recommenderQuestionnaire.Tool;
  *   <li>{@link congabase.Service#getUser <em>User</em>}</li>
  *   <li>{@link congabase.Service#getBasicAuth <em>Basic Auth</em>}</li>
  *   <li>{@link congabase.Service#getHeaders <em>Headers</em>}</li>
+ *   <li>{@link congabase.Service#getLastAccess <em>Last Access</em>}</li>
+ *   <li>{@link congabase.Service#getServiceId <em>Service Id</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getService()
@@ -42,6 +45,7 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	String getUrl();
+	String getSortURL();
 
 	/**
 	 * Sets the value of the '{@link congabase.Service#getUrl <em>Url</em>}' attribute.
@@ -149,12 +153,14 @@ public interface Service extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>User</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link congabase.User#getServices <em>Services</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>User</em>' reference.
 	 * @see #setUser(User)
 	 * @see congabase.CongabasePackage#getService_User()
-	 * @model required="true"
+	 * @see congabase.User#getServices
+	 * @model opposite="services" required="true"
 	 * @generated
 	 */
 	User getUser();
@@ -202,5 +208,49 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	EList<KeyValue> getHeaders();
+
+	/**
+	 * Returns the value of the '<em><b>Last Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Access</em>' attribute.
+	 * @see #setLastAccess(Date)
+	 * @see congabase.CongabasePackage#getService_LastAccess()
+	 * @model
+	 * @generated
+	 */
+	Date getLastAccess();
+
+	/**
+	 * Sets the value of the '{@link congabase.Service#getLastAccess <em>Last Access</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Access</em>' attribute.
+	 * @see #getLastAccess()
+	 * @generated
+	 */
+	void setLastAccess(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Service Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Service Id</em>' attribute.
+	 * @see #setServiceId(long)
+	 * @see congabase.CongabasePackage#getService_ServiceId()
+	 * @model required="true"
+	 * @generated
+	 */
+	long getServiceId();
+
+	/**
+	 * Sets the value of the '{@link congabase.Service#getServiceId <em>Service Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Service Id</em>' attribute.
+	 * @see #getServiceId()
+	 * @generated
+	 */
+	void setServiceId(long value);
 
 } // Service

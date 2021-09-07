@@ -4,6 +4,8 @@ package congabase.impl;
 
 import congabase.CongabasePackage;
 import congabase.Project;
+import congabase.Service;
+import congabase.ServiceType;
 import congabase.User;
 
 import java.util.Collection;
@@ -33,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link congabase.impl.UserImpl#getNick <em>Nick</em>}</li>
  *   <li>{@link congabase.impl.UserImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link congabase.impl.UserImpl#getProjects <em>Projects</em>}</li>
+ *   <li>{@link congabase.impl.UserImpl#getServices <em>Services</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,6 +90,16 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * @ordered
 	 */
 	protected EList<Project> projects;
+
+	/**
+	 * The cached value of the '{@link #getServices() <em>Services</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getServices()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Service> services;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,12 +179,26 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Service> getServices() {
+		if (services == null) {
+			services = new EObjectWithInverseResolvingEList<Service>(Service.class, this, CongabasePackage.USER__SERVICES, CongabasePackage.SERVICE__USER);
+		}
+		return services;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CongabasePackage.USER__PROJECTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProjects()).basicAdd(otherEnd, msgs);
+			case CongabasePackage.USER__SERVICES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getServices()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -186,6 +213,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 		switch (featureID) {
 			case CongabasePackage.USER__PROJECTS:
 				return ((InternalEList<?>)getProjects()).basicRemove(otherEnd, msgs);
+			case CongabasePackage.USER__SERVICES:
+				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -204,6 +233,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				return getPassword();
 			case CongabasePackage.USER__PROJECTS:
 				return getProjects();
+			case CongabasePackage.USER__SERVICES:
+				return getServices();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,6 +258,10 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				getProjects().clear();
 				getProjects().addAll((Collection<? extends Project>)newValue);
 				return;
+			case CongabasePackage.USER__SERVICES:
+				getServices().clear();
+				getServices().addAll((Collection<? extends Service>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -248,6 +283,9 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case CongabasePackage.USER__PROJECTS:
 				getProjects().clear();
 				return;
+			case CongabasePackage.USER__SERVICES:
+				getServices().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -266,6 +304,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 			case CongabasePackage.USER__PROJECTS:
 				return projects != null && !projects.isEmpty();
+			case CongabasePackage.USER__SERVICES:
+				return services != null && !services.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -296,6 +336,18 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean containService(String tool, String version, String type) {
+		ServiceType sType = ServiceType.valueOf(type.toUpperCase());
+		
+		for (Service s: getServices()) {
+			if (s.getTool().getName().equals(tool) && s.getVersion().equals(version) && s.getType().equals(sType)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 } //UserImpl

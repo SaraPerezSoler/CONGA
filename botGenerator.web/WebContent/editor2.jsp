@@ -101,7 +101,7 @@
 			Tool selected:
 			<select name="tool" id="tool" class="form-control editor-buttons">
 				<%
-				  for (String tool: CongaData.supportedTools()){ 
+				for (String tool: CongaData.getCongaData("").supportedGeneratorTools().keySet()){
 				%>
 				<option value="<%=tool%>" ><%=tool%></option>
 				<%} %>

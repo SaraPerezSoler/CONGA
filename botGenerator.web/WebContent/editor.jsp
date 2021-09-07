@@ -1,3 +1,4 @@
+<%@page import="congabase.Service"%>
 <%@page import="congabase.main.CongaData"%>
 <%@page import="congabase.Project"%>
 <html>
@@ -114,16 +115,38 @@
 
 						});
 			});
+
+	$(document).ready(function() {
+		$('.dropdown-submenu a').on("click", function(e) {
+			$(this).parents('ul').find('.dropdown-submenu ul').hide();
+			$(this).parents('ul').parents('ul').find('.dropdown-submenu ul').hide();
+			$(this).next('ul').toggle();
+			e.stopPropagation();
+			e.preventDefault();
+			var ref = $(this).attr('href');
+			if (ref.localeCompare('#')!=0){
+				window.open(
+						'http://'
+						+ location.host +'/botGenerator.web/'+ref ,
+						function(result) {
+						});
+				setTimeout(function () {
+					location.reload();
+			    }, 500);
+				 
+			}
+		});
+	});
 </script>
 </head>
 
 <body>
 	<%
-		Project project = (Project) getServletContext().getAttribute("project");
+	Project project = (Project) getServletContext().getAttribute("project");
 	CongaData conga = CongaData.getCongaData(getServletContext());
 	%>
 	<div class="container">
-		<jsp:include page="header2.jsp" />
+		<jsp:include page="header.jsp" />
 		<nav class="navbar navbar-light" style="background-color: #FFFFFF;">
 			<div class="form-inline" style="width: 100%">
 				<button id="save-button"
@@ -136,36 +159,46 @@
 					aria-expanded="false">New</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="newproject.jsp">Empty project</a> <a
-						class="dropdown-item" href="loadproject.jsp">Load from
-						Dialogflow files</a>
+						class="dropdown-item" href="loadproject.jsp">Load from files</a>
 				</div>
 				<button id="format-button"
 					class="btn btn-outline-secondary  button-nav-size button-nav-margin button-nav-height">
 					Format</button>
-				<div class="form-group button-nav-margin">
-					<select name="tool" id="tool"
-						class="form-control button-nav-size button-nav-height"
-						style="width: 125px;">
-						<%
-							for (String tool : CongaData.supportedTools()) {
-						%>
-						<option value="<%=tool%>"><%=tool%></option>
-						<%
-							}
-						%>
-					</select>
-					<button id="get-button"
-						class="btn btn-outline-secondary button-nav-size button-nav-height">
+				<div class="dropdown">
+					<button class="btn btn-outline-secondary dropdown-toggle"
+						type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 						<svg width="1em" height="1em" viewBox="0 0 16 16"
 							class="bi bi-download" fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg">
-		  				<path fill-rule="evenodd"
+			  				<path fill-rule="evenodd"
 								d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-		  				<path fill-rule="evenodd"
+			  				<path fill-rule="evenodd"
 								d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-					</svg>
+						</svg>
 					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<%
+						for (String tool : conga.supportedGeneratorTools().keySet()) {
+						%>
+						<li class="dropdown-submenu"><a class="dropdown-item"
+							href="#"><%=tool%></a>
+							<ul class="dropdown-menu">
+								<%
+								for (Service s : conga.supportedGeneratorTools().get(tool)) {
+								%>
+								<li><a class="dropdown-item"
+									href="Generator?serviceId=<%=s.getServiceId()%>&projectName=<%=project.getName()%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
+								<%
+								}
+								%>
+							</ul></li>
+						<%
+						}
+						%>
+					</ul>
 				</div>
+
 				<a href="questionnaire1.jsp?projectName=<%=project.getName()%>"
 					id=""
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
@@ -177,7 +210,7 @@
 				</svg>
 				</a>
 				<%
-					if (project.getQuestionnaire() != null && project.getQuestionnaire().getDate() != null) {
+				if (project.getQuestionnaire() != null && project.getQuestionnaire().getDate() != null) {
 				%>
 				<a href="Ranking.jsp?projectName=<%=project.getName()%>"
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
@@ -191,7 +224,7 @@
 					</svg>
 				</a>
 				<%
-					} else {
+				} else {
 				%>
 				<button
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height"
@@ -211,13 +244,25 @@
 				</svg>
 				</button>
 				<%
-					}
+				}
 				%>
 			</div>
 		</nav>
-
+		
 		<div class="row justify-content-md-center">
 			<div class="col-7">
+				<div class="row">
+					<div class="col">
+						<%
+						if (getServletContext().getAttribute("msg") != null) {
+						%>
+						<div class="alert alert-danger"><%=getServletContext().getAttribute("msg")%></div>
+						<%
+						getServletContext().setAttribute("msg", null);
+						}
+						%>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col">
 						<div id="xtext-editor" data-editor-xtext-lang="bot"

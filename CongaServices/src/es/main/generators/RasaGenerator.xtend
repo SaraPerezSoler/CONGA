@@ -36,7 +36,7 @@ class RasaGenerator extends BotGenerator{
 
 
 	new(String path,String fileName, String botName) {
-		super(path+ File.separator+"Rasa"+File.separator+fileName, botName)
+		super(path+File.separator+fileName, botName)
 	}
 	
 	override doGenerate(Resource resource) {

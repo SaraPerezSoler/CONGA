@@ -1,27 +1,23 @@
 package es.main;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import generator.GeneratorPackage;
 
-public class CongaServices {
-
-	private static String FOLDER_PATH = null;
+public abstract class FileManager {
+	protected static String FOLDER_PATH = null;
 	private String path;
 	private String name;
-	private static ResourceSet resourceSet = null;
+	private String ext;
 	public static List<File> remove = new ArrayList<File>();
-	private Resource resource = null;
+	private static ResourceSet resourceSet = null;
 
 	public static ResourceSet getResourceSet() {
 		if (resourceSet == null) {
@@ -39,27 +35,37 @@ public class CongaServices {
 		return resourceSet;
 	}
 
-	public CongaServices(String folderPath, File file, String botName) {
+	public FileManager(String folderPath, File file, String fname) {
 		removePrevius();
 		if (FOLDER_PATH == null) {
 			FOLDER_PATH = folderPath;
 			File file1 = new File(FOLDER_PATH);
-			if (!file1.exists()) {
-				file1.mkdirs();
+			if (file1.exists()) {
+				removeFile(file1);
 			}
+			file1.mkdirs();
 		}
 		String countString = "";
 		int count = 0;
 		File file2 = null;
+		String[] split = fname.split("\\.");
+		String auxName;
+		if (split.length == 2) {
+			auxName = split[0];
+			ext = "." + split[1];
+		} else {
+			auxName = fname;
+			ext = "";
+		}
 		do {
-			name = botName + countString;
-			path = FOLDER_PATH + File.separator + name + ".xmi";
+
+			name = auxName + countString;
+			path = FOLDER_PATH + File.separator + name + ext;
 			file2 = new File(path);
 			count++;
 			countString = Integer.toString(count);
 		} while (file2.exists());
 		file.renameTo(file2);
-		this.resource = getResourceSet().getResource(URI.createURI(path), true);
 	}
 
 	private void removePrevius() {
@@ -82,24 +88,19 @@ public class CongaServices {
 		file.delete();
 	}
 
-	public Resource getResource() {
-		return resource;
+	public void destroy() {
+		remove.add(getFile());
 	}
-	
+
+	public File getFile() {
+		return new File(path);
+	}
+
+	public String getPath() {
+		return path;
+	}
+
 	public String getName() {
 		return name;
 	}
-
-	public void destroy() {
-		try {
-			resource.delete(null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		if (file.exists()) {
-//			file.delete();
-//		}
-	}
-
 }

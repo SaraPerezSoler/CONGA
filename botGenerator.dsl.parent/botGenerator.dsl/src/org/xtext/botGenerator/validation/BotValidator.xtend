@@ -499,7 +499,7 @@ class BotValidator extends AbstractBotValidator {
 			}
 		}
 		if (onlyTextEntity){
-			warning("Training phrases should contains something different to a text parameter", GeneratorPackage.Literals.INTENT_LANGUAGE_INPUTS__INPUTS)
+			warning("Training phrases should contains something different to a text parameter", GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
 		}
 	}
 }

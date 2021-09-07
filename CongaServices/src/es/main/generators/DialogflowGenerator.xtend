@@ -35,7 +35,7 @@ class DialogflowGenerator extends BotGenerator{
 	Map<UserInteraction, String> affectedContext = new HashMap();
 
 	new(String botPath, String fileName,  String botName){
-		super (botPath + File.separator+"Dialogflow"+File.separator+fileName, botName)
+		super (botPath+File.separator+fileName, botName)
 		
 	}
 

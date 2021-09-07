@@ -36,6 +36,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//User/nick"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//User/password"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//User/projects"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//User/services"/>
     </genClasses>
     <genClasses ecoreClass="CONGA.ecore#//Project">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Project/name"/>
@@ -67,6 +68,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/user"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/basicAuth"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CONGA.ecore#//Service/headers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/lastAccess"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//Service/serviceId"/>
     </genClasses>
     <genClasses ecoreClass="CONGA.ecore#//KeyValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CONGA.ecore#//KeyValue/key"/>

@@ -24,8 +24,10 @@ public class Stories {
 		String[] pathsStrings = stories.split("##");
 		for (String p : pathsStrings) {
 			if (!p.isBlank() && !p.isEmpty()) {
-				String s = p.substring(p.indexOf("*"));
-				paths.add(new UserInteraction(s));
+				if (p.indexOf("*")!= -1) {
+					String s = p.substring(p.indexOf("*"));
+					paths.add(new UserInteraction(s));
+				}
 			}
 		}
 		
