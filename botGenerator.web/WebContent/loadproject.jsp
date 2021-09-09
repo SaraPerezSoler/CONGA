@@ -106,7 +106,7 @@ function selectedChange(){
 						</div>
 						<div class="col-6">
 							<div class="form-group">
-								<label>Select the Dialogflow agent</label>
+								<label>Select a file zip to load the chatbot</label>
 								<div class="custom-file">
 									<input type="file" id="model-file" name="model-file"
 										class="custom-file-input" /> <label class="custom-file-label"
