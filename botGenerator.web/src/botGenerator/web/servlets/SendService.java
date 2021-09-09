@@ -77,10 +77,15 @@ public class SendService {
 		return null;
 	}
 	
-	public static void sendError(ServletContext context, CongaData conga, String serviceId, String userString,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static void sendError(ServletContext context, CongaData conga, String serviceId, String userString,HttpServletRequest request, HttpServletResponse response, String errorPage) throws ServletException, IOException {
 		conga.errorService(userString, serviceId);
 		context.setAttribute("msg", "This services don't work properly");
-		request.getRequestDispatcher("Error.jsp").forward(request, response);
+		if (errorPage == null || errorPage.isEmpty()) {
+			request.getRequestDispatcher("error.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher(errorPage).forward(request, response);
+		}
+		
 		
 	}
 }

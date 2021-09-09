@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -47,8 +46,10 @@ public class LoadProject extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Project project = null;
+		CongaData conga = null;
 		try {
-			CongaData conga = CongaData.getCongaData(getServletContext());
+			conga = CongaData.getCongaData(getServletContext());
 			String parserId = request.getParameter("versionSelect");
 			Service service = conga.getParserService(parserId);
 
@@ -66,7 +67,7 @@ public class LoadProject extends HttpServlet {
 			}
 
 			String userString = (String) request.getSession().getAttribute("user");
-			Project project = conga.getProject(userString, projectName);
+			project = conga.getProject(userString, projectName);
 			if (project != null) {
 				getServletContext().setAttribute("msg", "A project with the name " + projectName + " already exit");
 				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
@@ -83,12 +84,14 @@ public class LoadProject extends HttpServlet {
 				}
 
 				if (service.getStatus() != ServiceStatus.ON) {
-					SendService.sendError(getServletContext(), conga, parserId, userString, request, response);
+					SendService.sendError(getServletContext(), conga, parserId, userString, request, response,  "loadproject.jsp");
+					conga.delProject(userString, projectName);	
 					return;
 				}
 				File ret = SendService.sendService(service, dst, dst.getName());
 				if (ret == null) {
-					SendService.sendError(getServletContext(), conga, parserId, userString, request, response);
+					SendService.sendError(getServletContext(), conga, parserId, userString, request, response, "loadproject.jsp");
+					conga.delProject(userString, projectName);
 					return;
 				}
 				conga.loadBotFile(project, ret);
@@ -101,6 +104,9 @@ public class LoadProject extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			getServletContext().setAttribute("msg", "Some error occurred processing the file");
+			if (conga != null && project!= null) {
+				conga.delProject(project.getOwner().getNick(), project.getName());
+			}
 			request.getRequestDispatcher("loadproject.jsp").forward(request, response);
 			return;
 		}

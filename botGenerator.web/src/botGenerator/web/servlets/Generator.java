@@ -21,7 +21,7 @@ import congabase.main.CongaData;
 /**
  * Servlet implementation class Generator
  */
-@WebServlet("/Generator")
+@WebServlet("/generator")
 public class Generator extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,12 +52,12 @@ public class Generator extends HttpServlet {
 			String botName = project.getName();
 			Service service = conga.getGeneratorService(generatorId);
 			if (service.getStatus()!=ServiceStatus.ON) {
-				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
+				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
 			File ret = SendService.sendService(service, f, botName);
 			if (ret == null) {
-				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
+				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
 			conga.addLastDateService(userString, generatorId, new Date());
@@ -66,7 +66,7 @@ public class Generator extends HttpServlet {
 			FileUtils.copyFile(ret, response.getOutputStream());
 			ret.delete();
 		} catch (Exception e) {
-			SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
+			SendService.sendError(getServletContext(), conga, generatorId, userString, request, response,(String) getServletContext().getAttribute("jsp"));
 		}
 	}
 

@@ -26,15 +26,21 @@
 <script type="text/javascript">
 	var baseUrl = window.location.pathname;
 	console.log(baseUrl)
-	var fileIndex = baseUrl.indexOf("editor.html");
+	var fileIndex = baseUrl.indexOf("editor.jsp");
+	var fileIndex1 = baseUrl.indexOf("generator");
 	var fileIndex2 = baseUrl.indexOf("createProject");
 	var fileIndex3 = baseUrl.indexOf("openProject");
+	var fileIndex4 = baseUrl.indexOf("loadBot");
 	if (fileIndex > 0)
 		baseUrl = baseUrl.slice(0, fileIndex);
+	if (fileIndex1 > 0)
+		baseUrl = baseUrl.slice(0, fileIndex1);
 	if (fileIndex2 > 0)
 		baseUrl = baseUrl.slice(0, fileIndex2);
 	if (fileIndex3 > 0)
 		baseUrl = baseUrl.slice(0, fileIndex3);
+	if (fileIndex4 > 0)
+		baseUrl = baseUrl.slice(0, fileIndex4);
 	require
 			.config({
 				baseUrl : baseUrl,
@@ -116,25 +122,32 @@
 						});
 			});
 
+	// 	$(document).ready(function() {
+	// 		$('.dropdown-submenu a').on("click", function(e) {
+	// 			$(this).parents('ul').find('.dropdown-submenu ul').hide();
+	// 			$(this).parents('ul').parents('ul').find('.dropdown-submenu ul').hide();
+	// 			$(this).next('ul').toggle();
+	// 			e.stopPropagation();
+	// 			e.preventDefault();
+	// 			var ref = $(this).attr('href');
+	// 			if (ref.localeCompare('#')!=0){
+	// 				window.open(
+	// 						'http://'
+	// 						+ location.host +'/botGenerator.web/'+ref ,
+	// 						function(result) {
+	// 						});
+	// 				setTimeout(function () {
+	// 					location.reload();
+	// 			    }, 500);
+
+	// 			}
+	// 		});
+	// 	});
 	$(document).ready(function() {
-		$('.dropdown-submenu a').on("click", function(e) {
-			$(this).parents('ul').find('.dropdown-submenu ul').hide();
-			$(this).parents('ul').parents('ul').find('.dropdown-submenu ul').hide();
+		$('.dropdown-submenu a').on("mouseover", function(e) {
 			$(this).next('ul').toggle();
 			e.stopPropagation();
 			e.preventDefault();
-			var ref = $(this).attr('href');
-			if (ref.localeCompare('#')!=0){
-				window.open(
-						'http://'
-						+ location.host +'/botGenerator.web/'+ref ,
-						function(result) {
-						});
-				setTimeout(function () {
-					location.reload();
-			    }, 500);
-				 
-			}
 		});
 	});
 </script>
@@ -144,6 +157,7 @@
 	<%
 	Project project = (Project) getServletContext().getAttribute("project");
 	CongaData conga = CongaData.getCongaData(getServletContext());
+	getServletContext().setAttribute("jsp", "editor.jsp");
 	%>
 	<div class="container">
 		<jsp:include page="header.jsp" />
@@ -188,7 +202,7 @@
 								for (Service s : conga.supportedGeneratorTools().get(tool)) {
 								%>
 								<li><a class="dropdown-item"
-									href="Generator?serviceId=<%=s.getServiceId()%>&projectName=<%=project.getName()%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
+									href="generator?serviceId=<%=s.getServiceId()%>&projectName=<%=project.getName()%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
 								<%
 								}
 								%>
@@ -248,7 +262,7 @@
 				%>
 			</div>
 		</nav>
-		
+
 		<div class="row justify-content-md-center">
 			<div class="col-7">
 				<div class="row">

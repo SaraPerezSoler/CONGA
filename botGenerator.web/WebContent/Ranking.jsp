@@ -45,6 +45,7 @@
 
 	Map<String, Double> ranking = conga.getRanking(user, projectName);
 	DecimalFormat df2 = new DecimalFormat("#.##");
+	getServletContext().setAttribute("jsp", "Ranking.jsp");
 	%>
 	<div class="container">
 		<jsp:include page="header.jsp" />
@@ -70,6 +71,18 @@
 
 		<div class="row justify-content-md-center box">
 			<div class="col">
+				<div class="row">
+					<div class="col">
+						<%
+						if (getServletContext().getAttribute("msg") != null) {
+						%>
+						<div class="alert alert-danger"><%=getServletContext().getAttribute("msg")%></div>
+						<%
+						getServletContext().setAttribute("msg", null);
+						}
+						%>
+					</div>
+				</div>
 				<div class="row justify-content-md-center">
 					<div class="col">
 						<div class="table-responsive">
@@ -107,7 +120,7 @@
 													for (Service s : conga.supportedGeneratorTools().get(tool)) {
 												%>
 												<li><a class="dropdown-item"
-													href="Generator?serviceId=<%=s.getServiceId()%>&projectName=<%=projectName%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
+													href="generator?serviceId=<%=s.getServiceId()%>&projectName=<%=projectName%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
 												<%
 												}
 												}
