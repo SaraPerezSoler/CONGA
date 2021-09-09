@@ -1,8 +1,13 @@
 package botGenerator.web.servlets;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -18,6 +23,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 import congabase.KeyValue;
 import congabase.Service;
+import congabase.main.CongaData;
 
 public class SendService {
 	public static File sendService(Service service, File file, String name) {
@@ -69,5 +75,12 @@ public class SendService {
 			}
 		}
 		return null;
+	}
+	
+	public static void sendError(ServletContext context, CongaData conga, String serviceId, String userString,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		conga.errorService(userString, serviceId);
+		context.setAttribute("msg", "This services don't work properly");
+		request.getRequestDispatcher("Error.jsp").forward(request, response);
+		
 	}
 }

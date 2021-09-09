@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import com.google.common.io.Files;
 
 import congabase.Project;
 import congabase.Service;
+import congabase.ServiceStatus;
 import congabase.main.CongaData;
 import generator.Language;
 
@@ -49,89 +51,66 @@ public class LoadProject extends HttpServlet {
 			CongaData conga = CongaData.getCongaData(getServletContext());
 			String parserId = request.getParameter("versionSelect");
 			Service service = conga.getParserService(parserId);
-			
+
 			if (service == null) {
 				getServletContext().setAttribute("msg", "You must select a tool and a version.");
 				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
 				return;
 			}
-			
+
 			String projectName = request.getParameter("projectName");
 			if (projectName.isEmpty() || projectName.isBlank()) {
 				getServletContext().setAttribute("msg", "The project must contain a name.");
 				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
 				return;
 			}
+
 			String userString = (String) request.getSession().getAttribute("user");
 			Project project = conga.getProject(userString, projectName);
-			if (project!= null) {
-				getServletContext().setAttribute("msg", "A project with the name "+projectName+" already exit");
+			if (project != null) {
+				getServletContext().setAttribute("msg", "A project with the name " + projectName + " already exit");
 				request.getRequestDispatcher("loadproject.jsp").forward(request, response);
 				return;
 			}
-			
+
 			project = conga.newProject(projectName, userString, Language.ENGLISH.getLiteral());
 			if (project != null) {
-
-				// Comprobar que el usuario solo ha mandado un fichero
-				if (request.getParts().size() != 2) {
-//					getServletContext().setAttribute("msg", "You must select only one zip file.");
-//					request.getRequestDispatcher("loadproject.jsp").forward(request, response);
-//					return;
+				File dst = readMultiPartFile(request, conga, project);
+				if (dst == null) {
+					getServletContext().setAttribute("msg", "Some error occurred reading the file");
+					request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+					return;
 				}
-				String tempPath = getServletContext().getRealPath("") + File.separator + "temp";
-				File tempDir = new File(tempPath);
-				if (!tempDir.exists())
-					tempDir.mkdirs();
-				
-				String uploadPath = conga.getProjectFolderPath(project) + File.separator + "load";
 
-				File uploadDir = new File(uploadPath);
-				if (!uploadDir.exists())
-					uploadDir.mkdirs();
-
-				// Copiar el fichero mandado por el usuario al directorio que se acaba de crear
-				String fileName = null;
-				String fileTempPath = "";
-				String filePath = "";
-				File dst = null;
-				if (request.getPart(FILE_ATTRIBUTE_NAME) != null) {
-					Part part = request.getPart(FILE_ATTRIBUTE_NAME);
-					fileName = getFileName(part);
-					fileTempPath = tempPath + File.separator + fileName;
-					filePath = uploadPath + File.separator + fileName;
-					part.write(fileTempPath);
-
-					File src = new File(fileTempPath);
-					dst = new File(filePath);
-					if (!src.exists()) {
-						getServletContext().setAttribute("msg", "Some error ocurre at create.");
-						request.getRequestDispatcher("loadproject.jsp").forward(request, response);
-						return;
-					}
-					Files.copy(src, dst);
-					delete(src);
+				if (service.getStatus() != ServiceStatus.ON) {
+					SendService.sendError(getServletContext(), conga, parserId, userString, request, response);
+					return;
 				}
-				if (dst != null) {
-					File f = SendService.sendService(service, dst, fileName);
-					conga.loadBotFile(project, f);
-					delete(f);
+				File ret = SendService.sendService(service, dst, dst.getName());
+				if (ret == null) {
+					SendService.sendError(getServletContext(), conga, parserId, userString, request, response);
+					return;
 				}
-				delete(uploadDir);
-				
+				conga.loadBotFile(project, ret);
+				delete(ret);
+				delete(dst.getParentFile());
+
 				getServletContext().setAttribute("project", project);
 				request.getRequestDispatcher("editor.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			getServletContext().setAttribute("msg", "Some error occurred processing the file");
+			request.getRequestDispatcher("loadproject.jsp").forward(request, response);
+			return;
 		}
 
 	}
-	
+
 	private void delete(File f) {
 		if (f.isDirectory()) {
-			for (File child: f.listFiles()) {
-				delete (child);
+			for (File child : f.listFiles()) {
+				delete(child);
 			}
 		}
 		f.delete();
@@ -151,7 +130,42 @@ public class LoadProject extends HttpServlet {
 		}
 		return null;
 	}
-	
 
+	private File readMultiPartFile(HttpServletRequest request, CongaData conga, Project project)
+			throws IOException, ServletException {
+
+		String tempPath = getServletContext().getRealPath("") + File.separator + "temp";
+		File tempDir = new File(tempPath);
+		if (!tempDir.exists())
+			tempDir.mkdirs();
+
+		String uploadPath = conga.getProjectFolderPath(project) + File.separator + "load";
+
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists())
+			uploadDir.mkdirs();
+
+		// Copiar el fichero mandado por el usuario al directorio que se acaba de crear
+		String fileName = null;
+		String fileTempPath = "";
+		String filePath = "";
+		File dst = null;
+		if (request.getPart(FILE_ATTRIBUTE_NAME) != null) {
+			Part part = request.getPart(FILE_ATTRIBUTE_NAME);
+			fileName = getFileName(part);
+			fileTempPath = tempPath + File.separator + fileName;
+			filePath = uploadPath + File.separator + fileName;
+			part.write(fileTempPath);
+
+			File src = new File(fileTempPath);
+			dst = new File(filePath);
+			if (!src.exists()) {
+				return null;
+			}
+			Files.copy(src, dst);
+			delete(src);
+		}
+		return dst;
+	}
 
 }

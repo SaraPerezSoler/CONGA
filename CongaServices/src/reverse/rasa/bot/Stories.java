@@ -15,6 +15,7 @@ public class Stories {
 	public Stories(String stories) {
 		add(stories);
 	}
+
 	public void add(String stories) {
 		stories = stories.replaceAll("<!--.*-->", "");
 		while (stories.contains("  ")) {
@@ -24,11 +25,13 @@ public class Stories {
 		String[] pathsStrings = stories.split("##");
 		for (String p : pathsStrings) {
 			if (!p.isBlank() && !p.isEmpty()) {
-				String s = p.substring(p.indexOf("*"));
-				paths.add(new UserInteraction(s));
+				if (p.indexOf("*") != -1) {
+					String s = p.substring(p.indexOf("*"));
+					paths.add(new UserInteraction(s));
+				}
 			}
 		}
-		
+
 	}
 
 	public void saveBotFlows(Bot bot) {
@@ -79,13 +82,12 @@ public class Stories {
 			}
 		}
 	}
+
 	public void setParameters(Bot bot) {
 		for (UserInteraction interaction : this.paths) {
 			interaction.setParameters(bot);
 		}
-		
+
 	}
-
-
 
 }

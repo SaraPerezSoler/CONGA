@@ -52,12 +52,12 @@ public class Generator extends HttpServlet {
 			String botName = project.getName();
 			Service service = conga.getGeneratorService(generatorId);
 			if (service.getStatus()!=ServiceStatus.ON) {
-				sendError(conga, generatorId, userString, request, response);
+				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
 				return;
 			}
 			File ret = SendService.sendService(service, f, botName);
 			if (ret == null) {
-				sendError(conga, generatorId, userString, request, response);
+				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
 				return;
 			}
 			conga.addLastDateService(userString, generatorId, new Date());
@@ -66,16 +66,11 @@ public class Generator extends HttpServlet {
 			FileUtils.copyFile(ret, response.getOutputStream());
 			ret.delete();
 		} catch (Exception e) {
-			sendError(conga, generatorId, userString, request, response);
+			SendService.sendError(getServletContext(), conga, generatorId, userString, request, response);
 		}
 	}
 
-	private void sendError(CongaData conga, String serviceId, String userString,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		conga.errorService(userString, serviceId);
-		getServletContext().setAttribute("msg", "This services don't work properly");
-		request.getRequestDispatcher("Error.jsp").forward(request, response);
-		
-	}
+	
 
 	
 
