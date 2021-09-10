@@ -61,13 +61,41 @@
 										baseUrl : baseUrl,
 										syntaxDefinition : "xtext-resources/generated/mode-bot"
 									});
+							
+							function validate(){
+								jQuery
+								.get(
+										'http://'
+												+ location.host
+												+ '/botGenerator.web/xtext-service/validate?resource='
+												+ editor.xtextServices.options.resourceId,
+										function(result) {
+													var issues = result.issues;
+													if (issues.length == 0){
+														document.getElementById("general-error").innerHTML = "Validation completed successfully";
+													}else{
+														document.getElementById("general-error").innerHTML = "Validation completed with errors";
+													}
+													console.log(result);
+													
+										});
+							}
+							function save() {
+								documents = editor.xtextServices
+										.saveResource();
+								validate();
+								location.reload()
+								
+							}
+							validate();
 
-							$("#save-button").click(
-									function() {
-										documents = editor.xtextServices
-												.saveResource();
-										location.reload()
-									});
+							$("#save-button").click(function () {save();});
+						
+// 							 $('body').on("keydown", function(e) { 
+// 						            if (e.ctrlKey && e.which === 83) {
+// 						            	save();
+// 						            }
+// 						        });
 							$("#format-button").click(function() {
 								documents = editor.xtextServices.format();
 							});
@@ -82,13 +110,19 @@
 																		+ '/botGenerator.web/xtext-service/validate?resource='
 																		+ editor.xtextServices.options.resourceId,
 																function(result) {
-																	console
-																			.log(result);
+																			var issues = result.issues;
+																			if (issues.length == 0){
+																				document.getElementById("general-error").innerHTML = "Validation completed successfully";
+																			}else{
+																				document.getElementById("general-error").innerHTML = "Validation completed with errors";
+																			}
+																			console.log(result);
+																			
 																});
-// 												documents = editor.xtextServices
-// 														.validate();
-// 												console.log(documents
-// 														.toString());
+												// 												documents = editor.xtextServices
+												// 														.validate();
+												// 												console.log(documents
+												// 														.toString());
 											});
 
 							$("#change-resource")
@@ -162,13 +196,22 @@
 	// 			}
 	// 		});
 	// 	});
+	
 	$(document).ready(function() {
 		$('.dropdown-submenu a').on("mouseover", function(e) {
 			$(this).next('ul').toggle();
 			e.stopPropagation();
 			e.preventDefault();
 		});
+		$('#collapseOne').on('hidden.bs.collapse', function () {
+			document.getElementById("arrow").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"> <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg>';
+			});
+		$('#collapseOne').on('shown.bs.collapse', function () {
+			document.getElementById("arrow").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"> <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg>';
+			});
 	});
+	
+	
 </script>
 </head>
 
@@ -327,7 +370,7 @@
 				</div>
 			</div>
 
-			<div class="col-5">
+			<div class="col-5 max-height-large">
 				<!-- <div class="col-5 align-self-center">  -->
 				<div class="row justify-content-end">
 					<img alt="Flow legend" class="align-self-end legend"
@@ -349,9 +392,33 @@
 					<img alt="Flow image" class="align-self-center image"
 						src="FileServlet?projectName=<%=project.getName()%>">
 				</div>
-				<div class="row justify-content-md-center">
-					<label for="exampleFormControlTextarea1">Example textarea</label>
-					<textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
+
+			</div>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col" id="console-div">
+				<h5 class="card-title">Card title</h5>
+				<div class="card scroll" id="console-card">
+					<div class="card-body">
+						<h6 class="card-subtitle mb-2 text-muted">
+							<button class="btn btn-link" data-toggle="collapse"
+								data-target="#collapseOne" aria-expanded="true"
+								aria-controls="collapseOne" >
+								<span id="arrow"> <svg xmlns="http://www.w3.org/2000/svg"
+										width="16" height="16" fill="currentColor"
+										class="bi bi-caret-down" viewBox="0 0 16 16">
+  <path
+											d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+</svg></span>
+							</button>
+							<span> Collapsible Group Item #1</span>
+						</h6>
+						<div id="collapseOne" class="collapse show"
+							aria-labelledby="headingOne" data-parent="#console-div">
+							<span id ="general-error">  </span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
