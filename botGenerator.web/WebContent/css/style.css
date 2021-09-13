@@ -12,11 +12,11 @@
 }
 
 #console-card{
-	height: 100%;
+	height: 250px;
 }
 #console-div{
 	margin: 10px;
-	height: 150px;
+	
 }
 
 #dirty-indicator {

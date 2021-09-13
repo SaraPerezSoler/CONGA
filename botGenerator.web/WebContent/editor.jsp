@@ -73,8 +73,29 @@
 													var issues = result.issues;
 													if (issues.length == 0){
 														document.getElementById("general-error").innerHTML = "Validation completed successfully";
+														document.getElementById("counter").innerHTML = '(0 errors, 0 warnings)';
 													}else{
-														document.getElementById("general-error").innerHTML = "Validation completed with errors";
+														var table = '<div class="table-responsive"> <table class="table table-hover"> <tbody>';
+														var warnings = '';
+														var errors = '';
+														var wcount = 0;
+														var ecount = 0;
+														for (var i = 0; i < issues.length; i++) {
+															var issue = issues[i];
+															if (issue.severity == "warning"){
+																wcount++;
+																//F5B301
+																warnings += '<tr style="color:#D79D00;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></td><td> Line '+issue.line+': '+issue.description+'</td></tr>';
+															}else if (issue.severity == "error"){
+																ecount++;
+																errors += '<tr style="color:red;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16"> <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/> </svg></td><td>Line '+issue.line+': '+issue.description+'</td></tr>';
+															}
+														}
+														table += errors;
+														table += warnings;
+														table += '</tbody> </table> </div>';
+														document.getElementById("general-error").innerHTML = table;
+														document.getElementById("counter").innerHTML = '('+ecount+' errors, '+wcount+' warnings)';
 													}
 													console.log(result);
 													
@@ -92,7 +113,8 @@
 							$("#save-button").click(function () {save();});
 						
 // 							 $('body').on("keydown", function(e) { 
-// 						            if (e.ctrlKey && e.which === 83) {
+// 						            if (e.ctrlKey && e.shiftKey  && e.which === 83) {
+// 						            	console.log("pressed");
 // 						            	save();
 // 						            }
 // 						        });
@@ -103,26 +125,7 @@
 							$("#validate-button")
 									.click(
 											function() {
-												jQuery
-														.get(
-																'http://'
-																		+ location.host
-																		+ '/botGenerator.web/xtext-service/validate?resource='
-																		+ editor.xtextServices.options.resourceId,
-																function(result) {
-																			var issues = result.issues;
-																			if (issues.length == 0){
-																				document.getElementById("general-error").innerHTML = "Validation completed successfully";
-																			}else{
-																				document.getElementById("general-error").innerHTML = "Validation completed with errors";
-																			}
-																			console.log(result);
-																			
-																});
-												// 												documents = editor.xtextServices
-												// 														.validate();
-												// 												console.log(documents
-												// 														.toString());
+												validate();
 											});
 
 							$("#change-resource")
@@ -289,12 +292,9 @@
 				<a href="questionnaire1.jsp?projectName=<%=project.getName()%>"
 					id=""
 					class="btn btn-outline-secondary button-nav-size button-nav-margin button-nav-height">
-					Questionnaire <svg width="1em" height="1em" viewBox="0 0 16 16"
-						class="bi bi-question-octagon-fill" fill="currentColor"
-						xmlns="http://www.w3.org/2000/svg">
-  					<path fill-rule="evenodd"
-							d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zM5.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" />
-				</svg>
+					Questionnaire <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+</svg>
 				</a>
 				<%
 				if (project.getQuestionnaire() != null && project.getQuestionnaire().getDate() != null) {
@@ -398,7 +398,7 @@
 
 		<div class="row justify-content-md-center">
 			<div class="col" id="console-div">
-				<h5 class="card-title">Card title</h5>
+				<h5 class="card-title">Problems</h5>
 				<div class="card scroll" id="console-card">
 					<div class="card-body">
 						<h6 class="card-subtitle mb-2 text-muted">
@@ -412,7 +412,7 @@
 											d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
 </svg></span>
 							</button>
-							<span> Collapsible Group Item #1</span>
+							<span> General Problems <span id="counter"></span></span>
 						</h6>
 						<div id="collapseOne" class="collapse show"
 							aria-labelledby="headingOne" data-parent="#console-div">
