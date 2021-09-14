@@ -50,6 +50,8 @@ class BotValidator extends AbstractBotValidator {
 //					INVALID_NAME)
 //		}
 //	}
+	public static boolean BooleanValue = false;
+
 	@Check
 	def checkHTTTPRequestTokenDataKey(HTTPRequestToke httpRequestToken) {
 		if (httpRequestToken.type != HTTPReturnType.DATA && !httpRequestToken.dataKey.isEmpty) {
@@ -180,8 +182,8 @@ class BotValidator extends AbstractBotValidator {
 							param.prompts.add(prompt2)
 						}
 					}
-					index ++;
-					if (index == intent.parameters.size){
+					index++;
+					if (index == intent.parameters.size) {
 						stop = true;
 					}
 				} while (!stop)
@@ -399,8 +401,8 @@ class BotValidator extends AbstractBotValidator {
 							GeneratorPackage.Literals.ENTITY__INPUTS)
 					}
 					has_simple = true
-				}else{
-					if (has_regex ||has_simple ) {
+				} else {
+					if (has_regex || has_simple) {
 						error("Entities only can have one entry type, regex, simple or composite",
 							GeneratorPackage.Literals.ENTITY__INPUTS)
 					}
@@ -409,14 +411,16 @@ class BotValidator extends AbstractBotValidator {
 			}
 		}
 	}
-	@Check 
-	def regexSyntax(RegexInput input){
-		try{
+
+	@Check
+	def regexSyntax(RegexInput input) {
+		try {
 			Pattern.compile(input.expresion)
-		}catch (PatternSyntaxException exception){
+		} catch (PatternSyntaxException exception) {
 			error(exception.description, GeneratorPackage.Literals.REGEX_INPUT__EXPRESION)
 		}
 	}
+
 	@Check
 	def textLanguage(Action action) {
 		var actionLan = new ArrayList<Language>();
@@ -459,47 +463,53 @@ class BotValidator extends AbstractBotValidator {
 			}
 		}
 	}
-	
+
 	@Check
 	def similarPhrases(TrainingPhrase phrase) {
 		var bot = phrase.eContainer.eContainer.eContainer;
-		if (bot instanceof Bot){
+		if (bot instanceof Bot) {
 			var trainingPhrases = (bot as Bot).eAllContents.filter(TrainingPhrase).toList
-			for (tp: trainingPhrases){
-				if (phrase.isSimilarTo(tp) && !phrase.equals(tp)){
-					warning("Two training phrases should not be equals", GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+			for (tp : trainingPhrases) {
+				if (phrase.isSimilarTo(tp) && !phrase.equals(tp)) {
+					warning("Two training phrases should not be equals",
+						GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
 				}
 			}
 		}
 	}
+
 	@Check
-	def atLeastTreeTrainingPhrases(IntentLanguageInputs intent){
-		if (intent.inputs.length <3){
-		 	var hasRegex=false;
-		 	for (intentInput: intent.inputs){
-		 		if (intentInput instanceof RegexInput){
-		 			hasRegex = true;
-		 		}
-		 	}
-		 	if (!hasRegex){
-		 		warning("The intents must contains at least tree training phrases or one regex per language", GeneratorPackage.Literals.INTENT_LANGUAGE_INPUTS__INPUTS)
-		 	}
+	def atLeastTreeTrainingPhrases(IntentLanguageInputs intent) {
+		if (intent.inputs.length < 3) {
+			var hasRegex = false;
+			for (intentInput : intent.inputs) {
+				if (intentInput instanceof RegexInput) {
+					hasRegex = true;
+				}
+			}
+			if (!hasRegex) {
+				warning("The intents must contains at least tree training phrases or one regex per language",
+					GeneratorPackage.Literals.INTENT_LANGUAGE_INPUTS__INPUTS)
+			}
 		}
 	}
+
 	@Check
 	def trainingPhraseWithOnlyTextEntity(TrainingPhrase phrase) {
 		var onlyTextEntity = true
-		for (token: phrase.tokens){
-			if (token instanceof Literal){
+		for (token : phrase.tokens) {
+			if (token instanceof Literal) {
 				onlyTextEntity = false;
-			}else if (token instanceof ParameterReferenceToken){
-				if ((token as ParameterReferenceToken).parameter.defaultEntity === null || (token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT){
+			} else if (token instanceof ParameterReferenceToken) {
+				if ((token as ParameterReferenceToken).parameter.defaultEntity === null ||
+					(token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT) {
 					onlyTextEntity = false;
 				}
 			}
 		}
-		if (onlyTextEntity){
-			warning("Training phrases should contains something different to a text parameter", GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+		if (onlyTextEntity) {
+			warning("Training phrases should contains something different to a text parameter",
+				GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
 		}
 	}
 }

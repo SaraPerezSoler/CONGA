@@ -67,10 +67,13 @@
 								.get(
 										'http://'
 												+ location.host
-												+ '/botGenerator.web/xtext-service/validate?resource='
-												+ editor.xtextServices.options.resourceId,
+												+ '/botGenerator.web/validate',
 										function(result) {
-													var issues = result.issues;
+// 													console.log(result);
+													const rest = JSON.parse(result);
+													console.log(rest);
+													var issues = rest.issues;
+													console.log(issues);
 													if (issues.length == 0){
 														document.getElementById("general-error").innerHTML = "Validation completed successfully";
 														document.getElementById("counter").innerHTML = '(0 errors, 0 warnings)';
@@ -97,7 +100,6 @@
 														document.getElementById("general-error").innerHTML = table;
 														document.getElementById("counter").innerHTML = '('+ecount+' errors, '+wcount+' warnings)';
 													}
-													console.log(result);
 													
 										});
 							}
