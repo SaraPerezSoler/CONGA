@@ -29,10 +29,12 @@ import java.util.UUID
 import java.util.Map
 import java.util.HashMap
 import java.io.File
+import java.util.ArrayList
 
 class DialogflowGenerator extends BotGenerator{
 	
 	Map<UserInteraction, String> affectedContext = new HashMap();
+	List <String> intentsNames = new ArrayList(); 
 
 	new(String botPath, String fileName,  String botName){
 		super (botPath+File.separator+fileName, botName)
@@ -78,20 +80,60 @@ class DialogflowGenerator extends BotGenerator{
 		}
 
 		for (UserInteraction transition : bot.flows) {
-			createTransitionFiles(transition, "", bot)
+			createTransitionFiles(transition, new ArrayList(), bot)
 		}
 		close()
 		return getZipFile()
 
 	}
+	public static int limit = 86;
+	public static int maxSize = 10;
+	def createIntentPrefix(List<String> prev){
+		if (prev.isEmpty){
+			return "";
+		}
+		var ret=""
+		var i = 0;
+		var size = prev.size();
+		if (prev.size()>=(maxSize-1)){
+			 i  = prev.size()-(maxSize-1)
+			 size = (maxSize-1);
+		}
+	
+		for (; i<prev.size();i++){
+				var value = prev.get(i);
+				var maxLength = ((limit/(size+1))-3)
+				if (value.length>maxLength){
+					value = value.substring(0,maxLength);
+				}
+				ret += value +" - " 
+		}
+		return ret;
+	}
+	def createIntentName (List<String> prev, String name){
+		var prefix = createIntentPrefix(prev)
+		var newName = name;
+		if (name.length>(limit-prefix.length-3)){
+			newName = newName.substring(0, limit-prefix.length-3)
+		}
+		var auxName = prefix + newName
+		var i = 0
+		while(intentsNames.contains(auxName)){
+			i++
+			auxName = prefix + newName + i
+		}
+		intentsNames.add(auxName)
+		println(auxName + " - "+ auxName.length)
+		return auxName
+		
+	}
 
+	def void createTransitionFiles(UserInteraction transition, List<String> prev, Bot bot) {
+		var name = createIntentName(prev, transition.intent.name) 
 
-
-	def void createTransitionFiles(UserInteraction transition, String prefix, Bot bot) {
-
-		var f = generateFile('/intents/' + prefix + transition.intent.name + '.json',
-			transition.intentFile(prefix, bot))
-		saveFileIntoZip(f, 'intents', prefix + transition.intent.name + '.json')
+		var f = generateFile('/intents/' + name + '.json',
+			transition.intentFile(createIntentPrefix(prev), bot))
+		saveFileIntoZip(f, 'intents', name + '.json')
 
 		for (IntentLanguageInputs input : transition.intent.inputs) {
 			var lan = bot.languages.get(0)
@@ -99,14 +141,14 @@ class DialogflowGenerator extends BotGenerator{
 				lan = input.language
 			}
 			f = generateFile(
-				'/intents/' + prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation +
+				'/intents/' + name + '_usersays_' + lan.languageAbbreviation +
 					'.json', input.usersayFile)
-			saveFileIntoZip(f, 'intents', prefix + transition.intent.name + '_usersays_' + lan.languageAbbreviation + '.json')
+			saveFileIntoZip(f, 'intents', name + '_usersays_' + lan.languageAbbreviation + '.json')
 		}
 		if (transition.target !== null) {
-			var newPrefix = prefix + transition.intent.name + " - ";
+			prev.add(transition.intent.name);
 			for (UserInteraction t : transition.target.outcoming) {
-				createTransitionFiles(t, newPrefix, bot)
+				createTransitionFiles(t, prev, bot)
 			}
 		}
 	}
