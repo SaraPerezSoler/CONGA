@@ -16,8 +16,8 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.RasaGenerator;
+import es.main.reverse.RasaReverse;
 import generator.Bot;
-import reverse.rasa.ReadRasaBot;
 
 @Path("/rasa")
 public class Rasa {
@@ -44,8 +44,8 @@ public class Rasa {
 	public Response parser (@Context ServletContext context, @FormDataParam("file") File file, @FormDataParam("name") String fileName) throws Exception {
 		String folderPath = context.getInitParameter("ServicePath");
 		ToolFiles tf = new ToolFiles(folderPath, file, fileName);
-		ReadRasaBot parser = new ReadRasaBot();
-		Bot bot = parser.getRasaBot(tf.getFile()).getBot(); 
+		RasaReverse parser = new RasaReverse();
+		Bot bot = parser.getChatbot(tf.getFile()).getBot(); 
 		File f = tf.createResource(bot);
 		tf.destroy();
 		return Response.ok(f, MediaType.APPLICATION_OCTET_STREAM)

@@ -17,8 +17,8 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.DialogflowGenerator;
+import es.main.reverse.DialogflowReverse;
 import generator.Bot;
-import reverse.dialogflow.ReadDialogflowAgent;
 
 @Path("/dialogflow")
 public class Dialogflow {
@@ -45,8 +45,8 @@ public class Dialogflow {
 	public Response parser (@Context ServletContext context, @FormDataParam("file") File file, @FormDataParam("name") String fileName) throws IOException {
 		String folderPath = context.getInitParameter("ServicePath");
 		ToolFiles tf = new ToolFiles(folderPath, file, fileName);
-		ReadDialogflowAgent parser = new ReadDialogflowAgent();
-		Bot bot = parser.getAgent(tf.getFile()).getBot(); 
+		DialogflowReverse parser = new DialogflowReverse();
+		Bot bot = parser.getChatbot(tf.getFile()).getBot(); 
 		File f = tf.createResource(bot);
 		tf.destroy();
 		return Response.ok(f, MediaType.APPLICATION_OCTET_STREAM)

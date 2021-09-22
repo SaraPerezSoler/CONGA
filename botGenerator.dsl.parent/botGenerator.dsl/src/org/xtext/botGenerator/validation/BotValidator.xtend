@@ -501,7 +501,7 @@ class BotValidator extends AbstractBotValidator {
 			if (token instanceof Literal) {
 				onlyTextEntity = false;
 			} else if (token instanceof ParameterReferenceToken) {
-				if ((token as ParameterReferenceToken).parameter.defaultEntity === null ||
+				if ((token as ParameterReferenceToken).parameter.entity !== null ||
 					(token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT) {
 					onlyTextEntity = false;
 				}
