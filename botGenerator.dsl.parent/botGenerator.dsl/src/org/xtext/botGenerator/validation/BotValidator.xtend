@@ -271,10 +271,12 @@ class BotValidator extends AbstractBotValidator {
 				}
 			}
 			for (Language lan : container.languages) {
-				if (!intentLan.contains(lan) && intent.fallbackIntent !== true) {
-					warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
-						", but this intent does not have an input in this language",
-						GeneratorPackage.Literals.ELEMENT__NAME)
+				if (BooleanValue == false) {
+					if (!intentLan.contains(lan) && intent.fallbackIntent !== true) {
+						warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+							", but this intent does not have an input in this language",
+							GeneratorPackage.Literals.ELEMENT__NAME)
+					}
 				}
 			}
 		}
