@@ -3,6 +3,7 @@
  */
 package botGenerator.web.xtextServlets;
 
+import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 
@@ -20,6 +21,7 @@ public class BotWebModule extends AbstractBotWebModule {
 		binder.bind(IServerResourceHandler.class).to(MyFileResourceHandler.class);
 		binder.bind(IResourceBaseProvider.class).toInstance(
 				new MyResourceBaseProvider(CongaData.getPath()));
+		binder.bind(XtextServiceDispatcher.class).to(MyXtextServiceDispatcher.class);
 		super.configure(binder);
 	}
 	

@@ -2,27 +2,43 @@
  */
 package congabase.impl;
 
+import java.io.File;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.media.multipart.MultiPart;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 import congabase.CongabasePackage;
 import congabase.KeyValue;
 import congabase.Service;
 import congabase.ServiceStatus;
 import congabase.ServiceType;
-
 import congabase.User;
-import java.util.Collection;
-import java.util.Date;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import recommenderQuestionnaire.Tool;
 
 /**
@@ -726,5 +742,84 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 		}
 		return getUrl();
 	}
+	
+	public File sendAndGetFile(File file, String name) {
+		Response response = senService(file, name, MediaType.APPLICATION_OCTET_STREAM);
+
+		MultivaluedMap<String, String> header = response.getStringHeaders();
+		List<String> contentType = header.get("Content-type");
+		if (response.getStatus() >= 200 && response.getStatus() < 300) {
+			if (contentType.contains(MediaType.APPLICATION_OCTET_STREAM)) {
+				File output = response.readEntity(File.class);
+				String fname = null;
+				List<String> contentDisposition = header.get("Content-Disposition");
+				if (contentDisposition != null) {
+					for (String s : contentDisposition) {
+						if (s.contains("filename=")) {
+							fname = s.substring(s.indexOf("filename=") + "filename=".length());
+							fname = fname.split("\"")[1];
+							// System.out.println(name);
+						}
+					}
+				}
+				File f = null;
+				if (fname != null) {
+					f = new File(output.getParent() + "/" + fname);
+					if (f.exists()) {
+						f.delete();
+					}
+					output.renameTo(f);
+
+				}
+				return f;
+			}
+		}
+		return null;
+	}
+	
+	public JSONObject sendAndGetJSON(File file, String name) {
+	
+		Response response = senService(file, name, MediaType.APPLICATION_JSON);
+
+		MultivaluedMap<String, String> header = response.getStringHeaders();
+		List<String> contentType = header.get("Content-type");
+		if (response.getStatus() >= 200 && response.getStatus() < 300) {
+			if (contentType.contains(MediaType.APPLICATION_JSON)) {
+				String output = response.readEntity(String.class);
+				try {
+					return new JSONObject(output);
+				}catch (JSONException e) {
+					JSONObject ret = new JSONObject();
+					ret.put("problems", new JSONArray(output));
+					return ret;
+				}
+			}
+		}
+		return null;
+	}	
+	
+	private Response senService(File file, String name, String consumes) {
+		@SuppressWarnings("resource")
+		final MultiPart multiPart = new FormDataMultiPart().field("file", file, MediaType.APPLICATION_OCTET_STREAM_TYPE)
+				.field("name", name, MediaType.TEXT_PLAIN_TYPE);
+		multiPart.setMediaType(MediaType.MULTIPART_FORM_DATA_TYPE);
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target(this.getUrl()).register(MultiPartFeature.class);
+		if (this.getBasicAuth() != null) {
+			if (!this.getBasicAuth().getKey().isEmpty() && !this.getBasicAuth().getKey().isBlank()) {
+				HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(this.getBasicAuth().getKey(),
+						this.getBasicAuth().getValue().toString().getBytes());
+				target = target.register(feature);
+			}
+		}
+		javax.ws.rs.client.Invocation.Builder builder = target.request(consumes);
+		for (KeyValue keyValue : this.getHeaders()) {
+			builder = builder.header(keyValue.getKey(), keyValue.getValue().toString());
+		}
+		Response response = builder.post(Entity.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE));
+		return response;
+	}
+	
+	
 
 } //ServiceImpl

@@ -32,6 +32,7 @@ import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 import generator.Literal
 import generator.DefaultEntity
+import org.xtext.botGenerator.validation.Problem.Severity
 
 /**
  * This class contains custom validation rules. 
@@ -50,7 +51,19 @@ class BotValidator extends AbstractBotValidator {
 //					INVALID_NAME)
 //		}
 //	}
-	public static boolean BooleanValue = false;
+	public static ProblemSet set;
+
+	@Check
+	def checkBot(Bot bot) {
+		if (set !== null) {
+			var list = set.getProblems(Bot.name)
+			for (Problem problem : list) {
+				if (problem.severity == Severity.ERROR) {
+					error('[' + set.tool + ']' + problem.message, GeneratorPackage.Literals.ELEMENT__NAME, "tool error")
+				}
+			}
+		}
+	}
 
 	@Check
 	def checkHTTTPRequestTokenDataKey(HTTPRequestToke httpRequestToken) {
@@ -271,12 +284,10 @@ class BotValidator extends AbstractBotValidator {
 				}
 			}
 			for (Language lan : container.languages) {
-				if (BooleanValue == false) {
-					if (!intentLan.contains(lan) && intent.fallbackIntent !== true) {
-						warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
-							", but this intent does not have an input in this language",
-							GeneratorPackage.Literals.ELEMENT__NAME)
-					}
+				if (!intentLan.contains(lan) && intent.fallbackIntent !== true) {
+					warning("The chatbot supports " + lan.literal.toLowerCase().toFirstUpper +
+						", but this intent does not have an input in this language",
+						GeneratorPackage.Literals.ELEMENT__NAME)
 				}
 			}
 		}

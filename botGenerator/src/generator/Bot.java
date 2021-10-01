@@ -2,7 +2,6 @@
  */
 package generator;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;

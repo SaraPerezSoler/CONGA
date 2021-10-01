@@ -37,4 +37,9 @@
 		<param-name>ServicePath</param-name>
 		<param-value>/CongaServices</param-value>
 	</context-param>
+	
+		<context-param>
+		<param-name>PandorabotsFiles</param-name>
+		<param-value>/CONGA/</param-value>
+	</context-param>
 </web-app>

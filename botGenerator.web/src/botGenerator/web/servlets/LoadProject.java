@@ -88,7 +88,7 @@ public class LoadProject extends HttpServlet {
 					conga.delProject(userString, projectName);	
 					return;
 				}
-				File ret = SendService.sendService(service, dst, dst.getName());
+				File ret = service.sendAndGetFile(dst, dst.getName());
 				if (ret == null) {
 					SendService.sendError(getServletContext(), conga, parserId, userString, request, response, "loadproject.jsp");
 					conga.delProject(userString, projectName);

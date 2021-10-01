@@ -123,7 +123,6 @@ class DialogflowGenerator extends BotGenerator{
 			auxName = prefix + newName + i
 		}
 		intentsNames.add(auxName)
-		println(auxName + " - "+ auxName.length)
 		return auxName
 		
 	}

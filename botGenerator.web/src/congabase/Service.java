@@ -2,9 +2,11 @@
  */
 package congabase;
 
+import java.io.File;
 import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.json.JSONObject;
 
 import recommenderQuestionnaire.Tool;
 
@@ -252,5 +254,7 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	void setServiceId(long value);
+	File sendAndGetFile(File f, String botName);
+	JSONObject sendAndGetJSON(File file, String name);
 
 } // Service

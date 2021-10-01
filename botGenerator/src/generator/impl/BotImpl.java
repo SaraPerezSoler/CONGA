@@ -83,6 +83,7 @@ public class BotImpl extends ElementImpl implements Bot {
 	 * @generated
 	 * @ordered
 	 */
+	
 	protected EList<UserInteraction> flows;
 
 	/**

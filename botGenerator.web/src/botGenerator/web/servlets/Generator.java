@@ -40,33 +40,34 @@ public class Generator extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String projectName = request.getParameter("projectName");
-		String userString = (String) request.getSession().getAttribute("user");
+		String userProject = (String) request.getSession().getAttribute("user");
+		String userService = request.getParameter("userName");
 		String generatorId = request.getParameter("serviceId");
 
 		CongaData conga = null;
 		try {
 			conga = CongaData.getCongaData(getServletContext());
-			Project project = conga.getProject(userString, projectName);
+			Project project = conga.getProject(userProject, projectName);
 			conga.saveAsXmi(project);
 			File f = new File(conga.getProjectXMIPath(project));
 			String botName = project.getName();
 			Service service = conga.getGeneratorService(generatorId);
 			if (service.getStatus()!=ServiceStatus.ON) {
-				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response, (String) getServletContext().getAttribute("jsp"));
+				SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
-			File ret = SendService.sendService(service, f, botName);
+			File ret = service.sendAndGetFile(f, botName);
 			if (ret == null) {
-				SendService.sendError(getServletContext(), conga, generatorId, userString, request, response, (String) getServletContext().getAttribute("jsp"));
+				SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
-			conga.addLastDateService(userString, generatorId, new Date());
+			conga.addLastDateService(userProject, generatorId, new Date());
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			response.setHeader("Content-Disposition", "filename=\""+service.getTool().getName()+"_"+botName+".zip\"");
 			FileUtils.copyFile(ret, response.getOutputStream());
 			ret.delete();
 		} catch (Exception e) {
-			SendService.sendError(getServletContext(), conga, generatorId, userString, request, response,(String) getServletContext().getAttribute("jsp"));
+			SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response,(String) getServletContext().getAttribute("jsp"));
 		}
 	}
 

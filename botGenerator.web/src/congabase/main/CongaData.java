@@ -32,7 +32,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.xtext.botGenerator.generator.BotGenerator;
 
-import com.google.common.io.Files;
 import com.google.inject.Injector;
 
 import botGenerator.web.xtextServlets.BotServlet;
@@ -100,6 +99,21 @@ public class CongaData {
 	public Map<String, List<Service>> supportedGeneratorTools() {
 		Map<String, List<Service>> ret = new HashMap<>();
 		for (Service service : conga.getGenerators()) {
+			if (service.getStatus() == ServiceStatus.ON) {
+				List<Service> services = ret.get(service.getTool().getName());
+				if (services == null) {
+					services = new ArrayList<>();
+					ret.put(service.getTool().getName(), services);
+				}
+				services.add(service);
+			}
+		}
+		return ret;
+	}
+	
+	public Map<String, List<Service>> supportedValidatorTools() {
+		Map<String, List<Service>> ret = new HashMap<>();
+		for (Service service : conga.getValidators()) {
 			if (service.getStatus() == ServiceStatus.ON) {
 				List<Service> services = ret.get(service.getTool().getName());
 				if (services == null) {
@@ -454,6 +468,22 @@ public class CongaData {
 		}
 		Service selected = null;
 		for (Service s : conga.getGenerators()) {
+			if (s.getServiceId() == serviceLong) {
+				selected = s;
+			}
+		}
+		return selected;
+	}
+	
+	public Service getValidatorService(String generatorId) {
+		long serviceLong;
+		try {
+			serviceLong = Long.parseLong(generatorId);
+		} catch (Exception e) {
+			return null;
+		}
+		Service selected = null;
+		for (Service s : conga.getValidators()) {
 			if (s.getServiceId() == serviceLong) {
 				selected = s;
 			}
