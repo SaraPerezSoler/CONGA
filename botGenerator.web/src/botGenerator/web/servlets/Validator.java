@@ -65,34 +65,17 @@ public class Validator extends HttpServlet {
 				ObjectMapper mapper = new ObjectMapper();
 				JSONObject obj = s.sendAndGetJSON(f, botName);
 				ProblemSet set = mapper.readValue(obj.toString(), ProblemSet.class);
-				System.out.println(set);
 				set.setTool(s.getTool().getName());
 				BotValidator.set = set;
 			}else {
 				BotValidator.set = null;
 			}
-//			IResourceValidator resourceValidator = BotServlet.getInjector().getInstance(IResourceValidator.class);
-//			List<Issue> issues = resourceValidator.validate(conga.getProjectResource(project),
-//		            CheckMode.EXPENSIVE_ONLY, CancelIndicator.NullImpl);
-			
-//			Gson gson = new Gson();
-//			response.setContentType("text/x-json");
-//			gson.toJson(issues, response.getWriter());
-			
-//			IServerResourceHandler resourceHandler = BotServlet.getInjector().getInstance(IServerResourceHandler.class);
-//			HttpServiceContext serviceContext = new HttpServiceContext(request);
-//			XtextWebDocument document = resourceHandler.get(File.separator + project.getOwner().getNick() + File.separator + project.getName() + File.separator + project.getName() + ".bot", serviceContext);
-//			document.clearCachedServiceResults();
-//			
 			Resource resource = conga.getProjectResource(project);
 			IResourceScopeCache cache =((XtextResource)resource).getCache();
 			cache.clear(resource);
 			
-//			request.getRequestDispatcher("xtext-service?"+IServiceContext.SERVICE_TYPE+"=validate&clear=true&resource="+project.getOwner().getNick() + "/" + project.getName()+".bot").include(request, response);
 			request.getRequestDispatcher("/editor.jsp").forward(request, response);
-			//request.getRequestDispatcher("editor.jsp").forward(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

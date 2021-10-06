@@ -71,7 +71,6 @@ public class Dialogflow {
 		ObjectMapper mapper = new ObjectMapper();
 		String objects = mapper.writeValueAsString(problems);
 		cs.destroy();
-		System.out.println(objects);
 		return Response.ok(objects, MediaType.APPLICATION_JSON).build();
 		
 	}

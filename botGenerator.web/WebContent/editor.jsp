@@ -49,45 +49,91 @@ function validate(projectId) {
 			document
 					.getElementById("counter").innerHTML = '(0 errors, 0 warnings)';
 		} else {
-			var generalTable = '<div class="table-responsive"> <table class="table table-hover"> <tbody>';
-			var specificTable = '<div class="table-responsive"> <table class="table table-hover"> <tbody>';
+			
 			var gWarnings = '';
 			var gErrors = '';
 			var eWarnings = '';
 			var eErrors = '';
-			var wcount = 0;
-			var ecount = 0;
+			var gwcount = 0;
+			var gecount = 0;
+			var ewcount = 0;
+			var eecount = 0;
 			var hasTool = false;
+			var toolName = '';
 			for (var i = 0; i < issues.length; i++) {
 				var issue = issues[i];
 				if (issue.severity == "warning") {
-					wcount++;
-					//F5B301
+					if (issue.description.startsWith("[")){
+						hasTool = true;
+						toolName = issue.description.slice(1, issue.description.indexOf(']'));
+						var desc = issue.description.slice(issue.description.indexOf(']')+1);
+						ewcount++;
+						eWarnings += '<tr style="color:#D79D00;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></td><td> Line '
+							+ issue.line
+							+ ': '
+							+ desc
+							+ '</td></tr>';
+					}else{
+						gwcount++;
+						//F5B301
 						gWarnings += '<tr style="color:#D79D00;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></td><td> Line '
 								+ issue.line
 								+ ': '
 								+ issue.description
 								+ '</td></tr>';
+					}
 				} else if (issue.severity == "error") {
-					ecount++;
-					gErrors += '<tr style="color:red;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16"> <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/> </svg></td><td>Line '
+					if (issue.description.startsWith("[")){
+						hasTool = true;
+						toolName = issue.description.slice(1, issue.description.indexOf(']'));
+						var desc = issue.description.slice(issue.description.indexOf(']')+1);
+						eecount++;
+						eErrors += '<tr style="color:red;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16"> <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/> </svg></td><td>Line '
 							+ issue.line
 							+ ': '
-							+ issue.description
+							+ desc
 							+ '</td></tr>';
+					}else{
+						gecount++;
+						gErrors += '<tr style="color:red;"><td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16"> <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/> </svg></td><td>Line '
+								+ issue.line
+								+ ': '
+								+ issue.description
+								+ '</td></tr>';
+					}
 				}
 			}
+			var generalTable = '<div class="table-responsive"> <table class="table table-hover"> <tbody>';
 			generalTable += gErrors;
 			generalTable += gWarnings;
 			generalTable += '</tbody> </table> </div>';
+			
 			document
-					.getElementById("general-error").innerHTML = generalTable;
-			document
-					.getElementById("counter").innerHTML = '('
-					+ ecount
-					+ ' errors, '
-					+ wcount
-					+ ' warnings)';
+			.getElementById("general-error").innerHTML = generalTable;
+	document
+			.getElementById("counter").innerHTML = '('
+			+ gecount
+			+ ' errors, '
+			+ gwcount
+			+ ' warnings)';
+	
+			if (hasTool){
+				var specificTable = '<div class="table-responsive"> <table class="table table-hover"> <tbody>';
+				specificTable += eWarnings;
+				specificTable += eErrors;
+				specificTable += '</tbody> </table> </div>';
+				document.getElementById("specific-title").innerHTML = '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" '
+																	 +'aria-expanded="true" aria-controls="collapseTwo"><span id="arrowTwo"> '
+																	 +'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" '
+																	 +'class="bi bi-caret-down" viewBox="0 0 16 16"> '
+																	 +'<path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />'
+																	 +'</svg></span></button>'+toolName+' Problem ('+eecount+' errors,'+ewcount+' warnings)';
+				document
+				.getElementById("specific-error").innerHTML = specificTable;
+			}
+			
+			
+			
 		}
 
 	});
@@ -264,18 +310,30 @@ function validate(projectId) {
 							other = this;
 						});
 
-						$('.collapseAction')
+						$('#collapseOne')
 								.on(
 										'hidden.bs.collapse',
 										function() {
-											document.getElementById("arrow").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"> <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg>';
+											document.getElementById("arrowOne").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"> <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg>';
 										});
-						$('.collapseAction')
+						$('#collapseOne')
 								.on(
 										'shown.bs.collapse',
 										function() {
-											document.getElementById("arrow").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"> <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg>';
+											document.getElementById("arrowOne").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"> <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg>';
 										});
+						$('#collapseTwo')
+						.on(
+								'hidden.bs.collapse',
+								function() {
+									document.getElementById("arrowTwo").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"> <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg>';
+								});
+					$('#collapseTwo')
+						.on(
+								'shown.bs.collapse',
+								function() {
+									document.getElementById("arrowTwo").innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"> <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg>';
+								});
 					});
 </script>
 </head>
@@ -511,7 +569,7 @@ function validate(projectId) {
 								<button class="btn btn-link" data-toggle="collapse"
 									data-target="#collapseOne" aria-expanded="true"
 									aria-controls="collapseOne">
-									<span id="arrow"> <svg
+									<span id="arrowOne"> <svg
 											xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											fill="currentColor" class="bi bi-caret-down"
 											viewBox="0 0 16 16">
@@ -521,8 +579,7 @@ function validate(projectId) {
 								</button>
 								 General Problems <span id="counter"></span></span>
 							</h6>
-							<div id="collapseOne" class="collapse show collapseAction"
-								aria-labelledby="headingOne" data-parent="#console-div">
+							<div id="collapseOne" class="collapse show multi-collapse collapseAction">
 								<span id="general-error"> </span>
 							</div>
 						</div>
@@ -532,8 +589,7 @@ function validate(projectId) {
 							<h6 class="card-subtitle mb-2 text-muted">
 								<span id ="specific-title"> </span>
 							</h6>
-							<div id="collapseOne" class="collapse show collapseAction"
-								aria-labelledby="headingOne" data-parent="#console-div">
+							<div id="collapseTwo" class="collapse show multi-collapse collapseAction">
 								<span id="specific-error"> </span>
 							</div>
 						</div>
