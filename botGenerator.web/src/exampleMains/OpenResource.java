@@ -20,6 +20,12 @@ import generator.Literal;
 import generator.TrainingPhrase;
 import generator.UserInteraction;
 
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A test main
+ * 
+ * **/
 public class OpenResource {
 
 //	@Inject

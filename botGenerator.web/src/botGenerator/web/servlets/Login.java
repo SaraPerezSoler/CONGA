@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to Login in CONGA Web tool
+ * 
  * Servlet implementation class Login
  */
 @WebServlet("/login")

@@ -19,6 +19,10 @@ import congabase.ServiceStatus;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to call an external services and generates code from a CONGA resource
+ * 
  * Servlet implementation class Generator
  */
 @WebServlet("/generator")
@@ -41,7 +45,6 @@ public class Generator extends HttpServlet {
 			throws ServletException, IOException {
 		String projectName = request.getParameter("projectName");
 		String userProject = (String) request.getSession().getAttribute("user");
-		String userService = request.getParameter("userName");
 		String generatorId = request.getParameter("serviceId");
 
 		CongaData conga = null;
@@ -53,12 +56,12 @@ public class Generator extends HttpServlet {
 			String botName = project.getName();
 			Service service = conga.getGeneratorService(generatorId);
 			if (service.getStatus()!=ServiceStatus.ON) {
-				SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
+				SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
 			File ret = service.sendAndGetFile(f, botName);
 			if (ret == null) {
-				SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
+				SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
 			conga.addLastDateService(userProject, generatorId, new Date());
@@ -67,7 +70,7 @@ public class Generator extends HttpServlet {
 			FileUtils.copyFile(ret, response.getOutputStream());
 			ret.delete();
 		} catch (Exception e) {
-			SendService.sendError(getServletContext(), conga, generatorId, userProject, request, response,(String) getServletContext().getAttribute("jsp"));
+			SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response,(String) getServletContext().getAttribute("jsp"));
 		}
 	}
 

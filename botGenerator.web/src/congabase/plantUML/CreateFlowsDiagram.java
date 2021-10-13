@@ -12,13 +12,18 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
-import com.google.inject.Inject;
 
 import botGenerator.web.xtextServlets.BotServlet;
 import generator.Action;
 import generator.BotInteraction;
 import generator.UserInteraction;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * Generates PlantUML script to create a flow diagram using a state diagram format
+ * UserInteractions are transitions, BotInteractions states
+ * 
+ * **/
 public class CreateFlowsDiagram {
 
 	private static final String ENTR = "\n";

@@ -8,7 +8,12 @@ import java.util.List;
 
 import net.sourceforge.plantuml.GeneratedImage;
 import net.sourceforge.plantuml.SourceFileReader;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * Takes a PlantUML script and generates a PNG file 
+ * 
+ * **/
 public class UML {
 
 	public static File write(String path, String text) {

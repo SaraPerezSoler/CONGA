@@ -15,6 +15,10 @@ import congabase.User;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to create a new CONGA service
+ * 
  * Servlet implementation class AddService
  */
 @WebServlet("/addService")

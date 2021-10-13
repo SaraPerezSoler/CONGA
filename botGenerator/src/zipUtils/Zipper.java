@@ -8,7 +8,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A class to take several files and create only one Zip file, used in generation service
+ * 
+ * **/
 public class Zipper {
 	private FileOutputStream fos;
 	private ZipOutputStream zos;

@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import congabase.main.CongaData;
-
-public class SendService {
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A class to send an error when a service does not work properly
+ * 
+ **/
+public class SendServiceError {
 	public static void sendError(ServletContext context, CongaData conga, String serviceId, String userString,HttpServletRequest request, HttpServletResponse response, String errorPage) throws ServletException, IOException {
 		conga.errorService(userString, serviceId);
 		context.setAttribute("msg", "This services don't work properly");

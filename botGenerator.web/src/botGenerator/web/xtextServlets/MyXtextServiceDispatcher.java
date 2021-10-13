@@ -4,6 +4,13 @@ import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 
+/**
+ * @author Sara Pérez Soler
+ * 
+ * When clear parameter is true, clear the cache to force validation and other service execution
+ * 
+ * **/
+
 public class MyXtextServiceDispatcher extends XtextServiceDispatcher {
 	
 	@Override

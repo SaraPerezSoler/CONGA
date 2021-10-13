@@ -6,7 +6,12 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 
 import congabase.Project;
 import congabase.main.CongaData;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * Indicates to XText the resource path
+ * 
+ * **/
 public class MyResourceBaseProvider implements IResourceBaseProvider {
 	private final String resourceBase;
 

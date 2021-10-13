@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to delete a CONGA service
+ * 
  * Servlet implementation class DeleteService
  */
 @WebServlet("/deleteService")

@@ -12,6 +12,10 @@ import congabase.main.CongaData;
 import generator.Language;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to create a new CONGA project and its resource
+ * 
  * Servlet implementation class CreateProject
  */
 @WebServlet("/createProject")

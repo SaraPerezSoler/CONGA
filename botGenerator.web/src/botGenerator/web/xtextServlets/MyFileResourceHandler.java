@@ -13,6 +13,12 @@ import com.google.inject.Inject;
 import congabase.Project;
 import congabase.main.CongaData;
 
+/**
+ * @author Sara Pérez Soler
+ * 
+ * When a resource is modified, change the CONGA modification date
+ * 
+ * **/
 public class MyFileResourceHandler extends org.eclipse.xtext.web.server.persistence.FileResourceHandler {
 	@Inject
 	private IResourceBaseProvider resourceBaseProvider;

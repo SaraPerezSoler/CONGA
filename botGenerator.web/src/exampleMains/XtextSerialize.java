@@ -22,7 +22,12 @@ import generator.Bot;
 import generator.GeneratorPackage;
 
 
-//import generator.GeneratorPackage;
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A test main
+ * 
+ * **/
 
 public class XtextSerialize {
 

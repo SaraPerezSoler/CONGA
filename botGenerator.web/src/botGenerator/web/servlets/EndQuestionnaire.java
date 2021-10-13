@@ -17,6 +17,10 @@ import congabase.RelevanceLevel;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to ends the recommender questionnaire and calculates the recommendations for a specific CONGA project
+ * 
  * Servlet implementation class EndQuestionnaire
  */
 @WebServlet("/endQuestionnaire")

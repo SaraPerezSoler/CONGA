@@ -13,6 +13,10 @@ import botGenerator.web.xtextServlets.MyResourceBaseProvider;
 import congabase.Project;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to save the first part of the recommender and redirect to the second
+ * 
  * Servlet implementation class GoRecomender
  */
 @WebServlet("/goRecommender")

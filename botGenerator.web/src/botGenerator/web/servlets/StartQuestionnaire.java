@@ -16,6 +16,10 @@ import congabase.Project;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to starts a recommender questionnaire for a specific CONGA project
+ * 
  * Servlet implementation class ProcesaFichero
  */
 @WebServlet("/startQuestionnaire")

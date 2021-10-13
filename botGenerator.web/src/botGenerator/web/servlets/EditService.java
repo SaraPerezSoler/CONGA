@@ -16,6 +16,10 @@ import congabase.User;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to change a CONGA service features
+ * 
  * Servlet implementation class EditService
  */
 @WebServlet("/editService")

@@ -22,8 +22,8 @@ import es.main.ToolFiles;
 import es.main.generators.DialogflowGenerator;
 import es.main.reverse.DialogflowReverse;
 import es.main.validator.DialogflowValidator;
-import es.main.validator.Problem;
 import generator.Bot;
+import validation.problems.Problem;
 
 @Path("/dialogflow")
 public class Dialogflow {
@@ -70,6 +70,7 @@ public class Dialogflow {
 		List<Problem> problems = validator.validate(cs.getResource()); 
 		ObjectMapper mapper = new ObjectMapper();
 		String objects = mapper.writeValueAsString(problems);
+		System.out.println(objects);
 		cs.destroy();
 		return Response.ok(objects, MediaType.APPLICATION_JSON).build();
 		

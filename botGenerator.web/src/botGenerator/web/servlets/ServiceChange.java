@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to switch the services status: ERROR to ON, ON to OFF and OFF to ON
+ * 
  * Servlet implementation class ServiceChange
  */
 @WebServlet("/serviceChange")

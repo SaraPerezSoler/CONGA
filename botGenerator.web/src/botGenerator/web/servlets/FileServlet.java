@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to generate and return the PlantUML flow image of a project
+ * 
  * Servlet implementation class FileServlet
  */
 @WebServlet("/FileServlet")

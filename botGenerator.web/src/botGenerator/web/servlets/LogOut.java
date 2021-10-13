@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to logout in CONGA Web Tool
+ * 
  * Servlet implementation class LogOut
  */
 @WebServlet("/logout")

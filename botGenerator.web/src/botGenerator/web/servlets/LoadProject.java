@@ -21,6 +21,11 @@ import congabase.main.CongaData;
 import generator.Language;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to to call an external services and parse from some tool files into a CONGA resource, 
+ * also it creates a new CONGA project for the resource
+ * 
  * Servlet implementation class CreateProject
  */
 @WebServlet("/loadBot")
@@ -84,13 +89,13 @@ public class LoadProject extends HttpServlet {
 				}
 
 				if (service.getStatus() != ServiceStatus.ON) {
-					SendService.sendError(getServletContext(), conga, parserId, userString, request, response,  "loadproject.jsp");
+					SendServiceError.sendError(getServletContext(), conga, parserId, userString, request, response,  "loadproject.jsp");
 					conga.delProject(userString, projectName);	
 					return;
 				}
 				File ret = service.sendAndGetFile(dst, dst.getName());
 				if (ret == null) {
-					SendService.sendError(getServletContext(), conga, parserId, userString, request, response, "loadproject.jsp");
+					SendServiceError.sendError(getServletContext(), conga, parserId, userString, request, response, "loadproject.jsp");
 					conga.delProject(userString, projectName);
 					return;
 				}

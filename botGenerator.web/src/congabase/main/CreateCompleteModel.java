@@ -5,7 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import congabase.Project;
 import generator.Bot;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * Main to text CongaData class
+ * 
+ * **/
 public class CreateCompleteModel {
 
 	public static void main(String[] args) throws Exception {

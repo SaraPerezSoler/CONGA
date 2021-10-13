@@ -32,7 +32,6 @@ import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 import generator.Literal
 import generator.DefaultEntity
-import org.xtext.botGenerator.validation.Problem.Severity
 
 /**
  * This class contains custom validation rules. 
@@ -51,19 +50,6 @@ class BotValidator extends AbstractBotValidator {
 //					INVALID_NAME)
 //		}
 //	}
-	public static ProblemSet set;
-
-	@Check
-	def checkBot(Bot bot) {
-		if (set !== null) {
-			var list = set.getProblems(Bot.name)
-			for (Problem problem : list) {
-				if (problem.severity == Severity.ERROR) {
-					error('[' + set.tool + ']' + problem.message, GeneratorPackage.Literals.ELEMENT__NAME, "tool error")
-				}
-			}
-		}
-	}
 
 	@Check
 	def checkHTTTPRequestTokenDataKey(HTTPRequestToke httpRequestToken) {

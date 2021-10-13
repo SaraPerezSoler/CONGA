@@ -1,5 +1,11 @@
 package exampleMains;
 
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A test main
+ * 
+ * **/
 public class Test {
 
 	public static void main(String[] args) {

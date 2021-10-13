@@ -11,6 +11,10 @@ import congabase.Project;
 import congabase.main.CongaData;
 
 /**
+ * @author Sara Pérez Soler
+ * 
+ * A servlet to open the CONGA editor with for concrete project and its resource
+ * 
  * Servlet implementation class OpenProject
  */
 @WebServlet("/openProject")

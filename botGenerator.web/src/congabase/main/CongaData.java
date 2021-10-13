@@ -59,7 +59,12 @@ import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * Manager class of CONGA Web Tool
+ * 
+ * **/
 public class CongaData {
 
 	private static final String FILENAME = "CONGA.xmi";

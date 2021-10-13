@@ -6,7 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
+/**
+ * @author Sara Pérez Soler
+ * 
+ * A class to take several a Zip file and extract the content files, used in parser service
+ * 
+ * **/
 public class Unzipper {
 
 	private File dest;
