@@ -2,8 +2,12 @@
  */
 package congabase;
 
+import java.io.File;
 import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
+
+
+import validation.problems.ProblemSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -137,5 +141,10 @@ public interface Project extends EObject {
 	 * @generated
 	 */
 	void setModificationDate(Date value);
+	
+	Service getCurrentValidator();
 
+	void setCurrentValidator(Service currentValidator);
+	void validate(File f) throws Exception;
+	ProblemSet getProblemSet();
 } // Project

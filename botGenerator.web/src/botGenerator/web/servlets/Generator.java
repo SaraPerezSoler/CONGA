@@ -3,6 +3,7 @@ package botGenerator.web.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
+import botGenerator.web.xtextServlets.BotServlet;
 import congabase.Project;
 import congabase.Service;
 import congabase.ServiceStatus;
@@ -34,7 +41,6 @@ public class Generator extends HttpServlet {
 	 */
 	public Generator() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -59,19 +65,47 @@ public class Generator extends HttpServlet {
 				SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
+			if (!checkValidation(service, conga, project)) {
+				SendServiceError.sendNotExecuting(getServletContext(), conga, "There is code errors", generatorId, userProject, request, response,((String) getServletContext().getAttribute("jsp"))+"?toolName="+service.getTool().getName());
+				return;
+			}
 			File ret = service.sendAndGetFile(f, botName);
 			if (ret == null) {
 				SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
 				return;
 			}
+			
 			conga.addLastDateService(userProject, generatorId, new Date());
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			response.setIntHeader("Refresh", 5);
 			response.setHeader("Content-Disposition", "filename=\""+service.getTool().getName()+"_"+botName+".zip\"");
 			FileUtils.copyFile(ret, response.getOutputStream());
 			ret.delete();
 		} catch (Exception e) {
 			SendServiceError.sendError(getServletContext(), conga, generatorId, userProject, request, response,(String) getServletContext().getAttribute("jsp"));
 		}
+	}
+	
+	private boolean checkValidation(Service service, CongaData conga, Project project) throws Exception {
+		Service validatorService = conga.getValidatorService(service.getUser(), service.getTool(), service.getVersion());
+		if (validatorService != null) {
+			project.setCurrentValidator(validatorService);
+			conga.validate(project);
+		}else {
+			project.setCurrentValidator(null);
+		}
+		
+		IResourceValidator validator = BotServlet.getInjector().getInstance(IResourceValidator.class);
+		List<Issue> issues = validator.validate(conga.getProjectResource(project), CheckMode.ALL, CancelIndicator.NullImpl);
+		if (!issues.isEmpty()) {
+			for (Issue issue : issues) {
+				if (issue.getSeverity() == Severity.ERROR) {
+					return false;
+				}
+			}
+		}
+		return true;
+		
 	}
 
 	

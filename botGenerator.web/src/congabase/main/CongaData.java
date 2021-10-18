@@ -59,6 +59,8 @@ import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
+
+
 /**
  * @author Sara Pérez Soler
  * 
@@ -511,6 +513,29 @@ public class CongaData {
 		}
 		return selected;
 	}
+	
+	public Service getService(User user, Tool tool, String version, ServiceType type) {
+		for (Service s:user.getServices()) {
+			if (s.getType() == type) {
+				if (s.getTool().equals(tool) && s.getVersion().equalsIgnoreCase(version)) {
+					return s;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Service getGeneratorService(User user, Tool tool, String version) {
+		return getService(user, tool, version, ServiceType.GENERATOR);
+	}
+	
+	public Service getValidatorService(User user, Tool tool, String version) {
+		return getService(user, tool, version, ServiceType.VALIDATOR);
+	}
+	
+	public Service getParserService(User user, Tool tool, String version) {
+		return getService(user, tool, version, ServiceType.CONVERTER);
+	}
 
 	public Tool getTool(String tool) {
 		for (Tool t : getAllTools()) {
@@ -582,6 +607,19 @@ public class CongaData {
 		if (u != null) {
 			return u.get(project);
 		}
+		return null;
+	}
+	
+	public Project getProject(Resource resource) {
+		for (Project p: conga.getProjects()) {
+			Resource resource2 = getProjectResource(p);
+			String uri1 = resource.getURI().toString().replace("\\", "/");
+			String uri2 = resource2.getURI().toString().replace("\\", "/");
+			if (uri1.equals(uri2)) {
+				return p;
+			}
+		}
+		
 		return null;
 	}
 
@@ -784,7 +822,11 @@ public class CongaData {
 			e.printStackTrace();
 		}
 	}
-
-
+	
+	public void validate (Project p) throws Exception {
+		saveAsXmi(p);
+		File f = new File(getProjectXMIPath(p));
+		p.validate(f);
+	}
 
 }

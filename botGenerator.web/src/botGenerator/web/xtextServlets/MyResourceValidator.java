@@ -1,10 +1,12 @@
 package botGenerator.web.xtextServlets;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -16,7 +18,11 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
+
+import congabase.Project;
+import congabase.main.CongaData;
 import generator.Bot;
+import generator.GeneratorPackage;
 import validation.problems.Problem;
 import validation.problems.Problem.Severity;
 import validation.problems.ProblemSet;
@@ -30,21 +36,34 @@ import validation.problems.ProblemSet;
 
 public class MyResourceValidator extends ResourceValidatorImpl {
 	
-	//Call the service instead of get the problems
-	private Map<Resource, ProblemSet> problems= new HashMap<>();
-	
+
 	@Override
 	public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator mon) throws OperationCanceledError {
 		List<Issue> issues = super.validate(resource, mode, mon);
 		IAcceptor<Issue> acceptor= createAcceptor(issues);
-		ProblemSet set = problems.get(resource);
-		set.resolve((Bot)resource.getContents().get(0));
-		if (set != null) {
-			for (Problem problem: set.getProblems()) {
-				Diagnostic diagnostic = new FeatureBasedDiagnostic(toDiagnosticSeverity(problem.getSeverity()), problem.getMessage(), problem.obtainEObject(), problem.obtainFeature(),ValidationMessageAcceptor.INSIGNIFICANT_INDEX, CheckType.NORMAL,null);
-				getDiagnosticConverter().convertValidatorDiagnostic(diagnostic, acceptor);
+		try {
+			CongaData conga = CongaData.getCongaData((ServletContext)null);
+			Project p = conga.getProject(resource);
+			ProblemSet set;
+			set = p.getProblemSet();
+			if (set != null) {
+				set.resolve((Bot)resource.getContents().get(0));
+				for (Problem problem: set.getProblems()) {
+					EObject object = problem.obtainEObject();
+					EStructuralFeature feature = problem.obtainFeature();
+					if (object == null) {
+						object = resource.getContents().get(0);
+						feature = GeneratorPackage.Literals.ELEMENT__NAME;
+					}
+					Diagnostic diagnostic = new FeatureBasedDiagnostic(toDiagnosticSeverity(problem.getSeverity()), '['+set.getTool()+']'+ problem.getMessage(), object, feature,ValidationMessageAcceptor.INSIGNIFICANT_INDEX, CheckType.NORMAL,null);
+					getDiagnosticConverter().convertValidatorDiagnostic(diagnostic, acceptor);
+				}
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 		return issues;
 	}

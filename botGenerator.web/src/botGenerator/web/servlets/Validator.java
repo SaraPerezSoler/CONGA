@@ -1,6 +1,5 @@
 package botGenerator.web.servlets;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,18 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.IResourceScopeCache;
-import org.json.JSONObject;
-import org.xtext.botGenerator.validation.BotValidator;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import congabase.Project;
 import congabase.Service;
+import congabase.ServiceStatus;
 import congabase.main.CongaData;
-import validation.problems.ProblemSet;
 
 /**
  * Servlet implementation class Validator
@@ -41,32 +32,27 @@ public class Validator extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Project project = (Project) getServletContext().getAttribute("project");
+		String projectName = request.getParameter("projectName");
+		String userProject = (String) request.getSession().getAttribute("user");
 		String validatorId = request.getParameter("serviceId");
+		CongaData conga = null;
 		try {
-			CongaData conga = CongaData.getCongaData(getServletContext());
+			conga = CongaData.getCongaData(getServletContext());
+			Project project = conga.getProject(userProject, projectName);
 			Service s = conga.getValidatorService(validatorId);
-			conga.saveAsXmi(project);
-			File f = new File(conga.getProjectXMIPath(project));
-			String botName = project.getName();
 			String param = "";
 			if (s!=null) {
-				ObjectMapper mapper = new ObjectMapper();
-				JSONObject obj = s.sendAndGetJSON(f, botName);
-				ProblemSet set = mapper.readValue(obj.toString(), ProblemSet.class);
-				set.setTool(s.getTool().getName());
-				BotValidator.set = set;
+				if (s.getStatus()!=ServiceStatus.ON) {
+					SendServiceError.sendError(getServletContext(), conga, validatorId, userProject, request, response, (String) getServletContext().getAttribute("jsp"));
+					return;
+				}
 				param = "?toolName="+s.getTool().getName();
-			}else {
-				BotValidator.set = null;
 			}
-			Resource resource = conga.getProjectResource(project);
-			IResourceScopeCache cache =((XtextResource)resource).getCache();
-			cache.clear(resource);
-			
+			project.setCurrentValidator(s);
+			conga.validate(project);
 			request.getRequestDispatcher("/editor.jsp"+param).forward(request, response);
 		} catch (Exception e) {
-			e.printStackTrace();
+			SendServiceError.sendError(getServletContext(), conga, validatorId, userProject, request, response,(String) getServletContext().getAttribute("jsp"));
 		}
 		
 		

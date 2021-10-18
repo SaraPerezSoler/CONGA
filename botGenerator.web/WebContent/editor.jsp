@@ -26,8 +26,8 @@
 	getServletContext().setAttribute("jsp", "editor.jsp");
 	
 	String toolName = request.getParameter("toolName");
-	if (toolName==null){
-		BotValidator.set = null;
+	if (toolName == null){
+		project.setCurrentValidator(null);
 	}
 	%>
 <link rel="stylesheet" type="text/css" href="xtext/2.23.0/xtext-ace.css" />
@@ -170,8 +170,8 @@ function validate(projectId) {
 							
 							function save() {
 								documents = editor.xtextServices.saveResource();
-								validate();
-								location.reload()
+								validate(editor.xtextServices.options.resourceId);
+								location.reload();
 
 							}
 							validate(editor.xtextServices.options.resourceId);
@@ -180,53 +180,9 @@ function validate(projectId) {
 								save();
 							});
 
-							// 							 $('body').on("keydown", function(e) { 
-							// 						            if (e.ctrlKey && e.shiftKey  && e.which === 83) {
-							// 						            	console.log("pressed");
-							// 						            	save();
-							// 						            }
-							// 						        });
 							$("#format-button").click(function() {
 								documents = editor.xtextServices.format();
 							});
-
-							$("#validate-button").click(function() {
-								validate();
-							});
-
-							$("#change-resource")
-									.change(
-											function() {
-												var resourceId = $(
-														"#change-resource option:selected")
-														.attr("value");
-												editor.xtextServices.serviceBuilder
-														.changeResource(resourceId);
-											});
-
-							$("#get-button")
-									.click(
-											function() {
-												var e = document
-														.getElementById("tool");
-												var tool = e.options[e.selectedIndex].value;
-												jQuery
-														.get(
-																'http://'
-																		+ location.host
-																		+ '/botGenerator.web/xtext-service/generate?resource='
-																		+ editor.xtextServices.options.resourceId
-																		+ '&allArtifacts=true',
-																function(result) {
-																});
-												window
-														.open('http://'
-																+ location.host
-																+ '/botGenerator.web/getfiles?resource='
-																+ editor.xtextServices.options.resourceId
-																+ '&tool='
-																+ tool)
-											});
 
 							$("#recomender")
 									.click(
@@ -243,28 +199,6 @@ function validate(projectId) {
 
 						});
 			});
-
-	// 	$(document).ready(function() {
-	// 		$('.dropdown-submenu a').on("click", function(e) {
-	// 			$(this).parents('ul').find('.dropdown-submenu ul').hide();
-	// 			$(this).parents('ul').parents('ul').find('.dropdown-submenu ul').hide();
-	// 			$(this).next('ul').toggle();
-	// 			e.stopPropagation();
-	// 			e.preventDefault();
-	// 			var ref = $(this).attr('href');
-	// 			if (ref.localeCompare('#')!=0){
-	// 				window.open(
-	// 						'http://'
-	// 						+ location.host +'/botGenerator.web/'+ref ,
-	// 						function(result) {
-	// 						});
-	// 				setTimeout(function () {
-	// 					location.reload();
-	// 			    }, 500);
-
-	// 			}
-	// 		});
-	// 	});
 	var prev = null;
 	var other = null;
 	$(document)

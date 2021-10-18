@@ -24,16 +24,16 @@ public class DialogflowValidator {
 		Iterator<Bot>botIterator= IteratorExtensions.filter(resource.getAllContents(), Bot.class);
 		
 		if (!botIterator.hasNext()) {
-			problems.add(new Problem(Severity.ERROR, null, GeneratorPackage.Literals.BOT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
+			//problems.add(new Problem(Severity.ERROR, null, GeneratorPackage.Literals.BOT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
 			return problems;
 		}
-		problems.add(new Problem(Severity.WARNING, null, GeneratorPackage.Literals.INTENT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
+		//problems.add(new Problem(Severity.WARNING, null, GeneratorPackage.Literals.INTENT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
 
 		Bot bot = botIterator.next();
-		problems.add(new Problem(Severity.WARNING, bot.getIntents().get(0), GeneratorPackage.Literals.INTENT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
+		problems.add(new Problem(Severity.WARNING, bot.getIntents().get(0), GeneratorPackage.Literals.INTENT.getName(), "The intent warning", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
 
 		if (!botIterator.hasNext()) {
-			problems.add(new Problem(Severity.ERROR, null, GeneratorPackage.Literals.BOT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
+			problems.add(new Problem(Severity.ERROR, bot, GeneratorPackage.Literals.BOT.getName(), "The bot definition is not correct", GeneratorPackage.Literals.ELEMENT__NAME.getName()));
 			return problems;
 		}
 

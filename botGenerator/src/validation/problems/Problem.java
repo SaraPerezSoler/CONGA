@@ -110,6 +110,9 @@ public class Problem {
 	}
 
 	public EStructuralFeature obtainFeature() {
+		if (obtainEObject() == null) {
+			return null;
+		}
 		return obtainEObject().eClass().getEStructuralFeature(efeature);
 	}
 
@@ -124,7 +127,7 @@ public class Problem {
 
 	private boolean isEObject(EObject obj) {
 		Map<String, Object> secondObj = eObjectToMap(obj);
-		return secondObj.equals(object);
+		return secondObj.toString().equals(object.toString());
 	}
 
 	public String getEfeature() {
