@@ -30,6 +30,7 @@ import java.util.Map
 import java.util.HashMap
 import java.io.File
 import java.util.ArrayList
+import generator.ButtonAction
 
 class DialogflowGenerator extends BotGenerator{
 	
@@ -171,6 +172,16 @@ class DialogflowGenerator extends BotGenerator{
 	def speechText(TextLanguageInput textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
+			ret+= input.speechText(transition)
+			if (!isTheLast(textAction.inputs, input)) {
+				ret += ","
+			}
+			ret += "\n"
+		}
+		return ret;
+	}
+	def speechText(TextInput input, UserInteraction transition) {
+		var ret = ""
 			ret += "\""
 			for (Token token : input.tokens) {
 				if (token instanceof Literal) {
@@ -181,11 +192,6 @@ class DialogflowGenerator extends BotGenerator{
 				}
 			}
 			ret += "\""
-			if (!isTheLast(textAction.inputs, input)) {
-				ret += ","
-			}
-			ret += "\n"
-		}
 		return ret;
 	}
 
@@ -305,6 +311,30 @@ class DialogflowGenerator extends BotGenerator{
 									«{coma=","; ""}»
 								«ELSEIF action instanceof HTTPRequest»
 									«{webhook=true; ""}»
+								«ELSEIF action instanceof ButtonAction»
+									«FOR texLanguage : action.inputs»
+										«coma»
+										{
+											"type": 1,
+											«IF texLanguage.language != Language.EMPTY»
+												"lang": "«texLanguage.language.languageAbbreviation»",
+											«ELSE»
+												"lang": "«bot.languages.get(0).languageAbbreviation»",
+											«ENDIF»
+											"condition": "",
+											"subtitle": «texLanguage.text.speechText(transition)»,
+											"buttons": [ 
+											«FOR button: texLanguage.buttons»
+												{
+													"text": «button.value»«IF button.action!== null»,
+													"postback": «button.action»
+													«ENDIF»
+												}«IF !isTheLast(texLanguage.buttons, button)», «ENDIF»
+											«ENDFOR» 
+											]
+										}
+										«{coma=","; ""}»
+									«ENDFOR»
 								«ENDIF»
 							«ENDFOR »
 			«ENDIF»
