@@ -146,6 +146,17 @@
     <genClasses ecoreClass="BotGenerator.ecore#//Text">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//Text/inputs"/>
     </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//ButtonAction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//ButtonAction/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//ButtonsLanguageInputs">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//ButtonsLanguageInputs/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//ButtonsLanguageInputs/buttons"/>
+    </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//Button">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Button/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Button/action"/>
+    </genClasses>
     <genClasses ecoreClass="BotGenerator.ecore#//TextLanguageInput">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//TextLanguageInput/inputs"/>
     </genClasses>

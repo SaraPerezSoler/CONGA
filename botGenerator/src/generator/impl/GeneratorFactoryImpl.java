@@ -78,6 +78,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.IMAGE: return createImage();
 			case GeneratorPackage.EMPTY: return createEmpty();
 			case GeneratorPackage.TEXT: return createText();
+			case GeneratorPackage.BUTTON_ACTION: return createButtonAction();
+			case GeneratorPackage.BUTTONS_LANGUAGE_INPUTS: return createButtonsLanguageInputs();
+			case GeneratorPackage.BUTTON: return createButton();
 			case GeneratorPackage.TEXT_LANGUAGE_INPUT: return createTextLanguageInput();
 			case GeneratorPackage.TEXT_INPUT: return createTextInput();
 			case GeneratorPackage.HTTP_REQUEST: return createHTTPRequest();
@@ -363,6 +366,39 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public Text createText() {
 		TextImpl text = new TextImpl();
 		return text;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ButtonAction createButtonAction() {
+		ButtonActionImpl buttonAction = new ButtonActionImpl();
+		return buttonAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ButtonsLanguageInputs createButtonsLanguageInputs() {
+		ButtonsLanguageInputsImpl buttonsLanguageInputs = new ButtonsLanguageInputsImpl();
+		return buttonsLanguageInputs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Button createButton() {
+		ButtonImpl button = new ButtonImpl();
+		return button;
 	}
 
 	/**

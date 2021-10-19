@@ -211,6 +211,33 @@ public interface GeneratorFactory extends EFactory {
 	Text createText();
 
 	/**
+	 * Returns a new object of class '<em>Button Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Button Action</em>'.
+	 * @generated
+	 */
+	ButtonAction createButtonAction();
+
+	/**
+	 * Returns a new object of class '<em>Buttons Language Inputs</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Buttons Language Inputs</em>'.
+	 * @generated
+	 */
+	ButtonsLanguageInputs createButtonsLanguageInputs();
+
+	/**
+	 * Returns a new object of class '<em>Button</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Button</em>'.
+	 * @generated
+	 */
+	Button createButton();
+
+	/**
 	 * Returns a new object of class '<em>Text Language Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

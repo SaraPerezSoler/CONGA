@@ -14,7 +14,7 @@ Bot returns Bot:
 
 
 Action returns Action:
-	Text | HTTPRequest | Image | HTTPResponse | Empty;
+	Text | HTTPRequest | Image | HTTPResponse | Empty | ButtonAction;
 
 Token returns Token:
 	Literal | EntityToken | ParameterToken | ParameterRefenceToken;
@@ -143,7 +143,7 @@ SimpleInput returns SimpleInput:
 	name=EString ('synonyms'  values+=EString ( "," values+=EString)* )? ;
 
 Text returns Text:
-	'text' 'response' name=EString':'
+	('Text'|'text') 'response' name=EString':'
 	(inputs+=TextLanguageInput)+
 		 ;
 TextLanguageInput returns TextLanguageInput:
@@ -163,13 +163,30 @@ HTTPRequest returns HTTPRequest:
 		('data'':'  data+=Data ( "," data+=Data)*';'  
 		 'dataType'':'  dataType=DataType';')?;
 Image returns Image:
-	'image' 'response' name=EString':'
+	('Image'|'mage') 'response' name=EString':'
 		'URL'':' URL=EString
 		('caption'':' caption=EString)?
 ;
 
 Empty returns Empty:
-	'empty' 'response' name=EString
+	'Empty' 'response' name=EString
+;
+
+ButtonAction returns ButtonAction:
+	'Button' 'response' name=EString':'
+	inputs+=ButtonLanguageInput
+;
+
+ButtonLanguageInput returns ButtonsLanguageInputs:
+	('inputs'('in' language=Language)?)?'{'
+		'text:' text= TextInputText 
+		'buttons:'
+		(buttons+=Button)+	
+	'}'
+;
+Button returns Button: 
+	'-' 'value:' value=EString
+	('action:' action=EString)?
 ;
 
 

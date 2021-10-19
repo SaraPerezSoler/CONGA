@@ -1330,6 +1330,153 @@ public interface GeneratorPackage extends EPackage {
 	int TEXT_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.ButtonActionImpl <em>Button Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonActionImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButtonAction()
+	 * @generated
+	 */
+	int BUTTON_ACTION = 29;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION__INPUTS = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Button Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Button Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonsLanguageInputsImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+	 * @generated
+	 */
+	int BUTTONS_LANGUAGE_INPUTS = 30;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Text</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__TEXT = WITH_LANGUAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Buttons</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__BUTTONS = WITH_LANGUAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Buttons Language Inputs</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Buttons Language Inputs</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButton()
+	 * @generated
+	 */
+	int BUTTON = 31;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Action</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ACTION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1337,7 +1484,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
 	 * @generated
 	 */
-	int TEXT_LANGUAGE_INPUT = 29;
+	int TEXT_LANGUAGE_INPUT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1383,7 +1530,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextInput()
 	 * @generated
 	 */
-	int TEXT_INPUT = 30;
+	int TEXT_INPUT = 33;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1420,7 +1567,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequest()
 	 * @generated
 	 */
-	int HTTP_REQUEST = 31;
+	int HTTP_REQUEST = 34;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1511,7 +1658,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPResponse()
 	 * @generated
 	 */
-	int HTTP_RESPONSE = 32;
+	int HTTP_RESPONSE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1566,7 +1713,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 33;
+	int KEY_VALUE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1612,7 +1759,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 34;
+	int DATA_TYPE = 37;
 
 	/**
 	 * The meta object id for the '{@link generator.Method <em>Method</em>}' enum.
@@ -1622,7 +1769,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 35;
+	int METHOD = 38;
 
 	/**
 	 * The meta object id for the '{@link generator.Language <em>Language</em>}' enum.
@@ -1632,7 +1779,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguage()
 	 * @generated
 	 */
-	int LANGUAGE = 36;
+	int LANGUAGE = 39;
 
 	/**
 	 * The meta object id for the '{@link generator.HTTPReturnType <em>HTTP Return Type</em>}' enum.
@@ -1642,7 +1789,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPReturnType()
 	 * @generated
 	 */
-	int HTTP_RETURN_TYPE = 37;
+	int HTTP_RETURN_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link generator.DefaultEntity <em>Default Entity</em>}' enum.
@@ -1652,7 +1799,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDefaultEntity()
 	 * @generated
 	 */
-	int DEFAULT_ENTITY = 38;
+	int DEFAULT_ENTITY = 41;
 
 
 	/**
@@ -2373,6 +2520,91 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getText_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link generator.ButtonAction <em>Button Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button Action</em>'.
+	 * @see generator.ButtonAction
+	 * @generated
+	 */
+	EClass getButtonAction();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link generator.ButtonAction#getInputs <em>Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
+	 * @see generator.ButtonAction#getInputs()
+	 * @see #getButtonAction()
+	 * @generated
+	 */
+	EReference getButtonAction_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link generator.ButtonsLanguageInputs <em>Buttons Language Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Buttons Language Inputs</em>'.
+	 * @see generator.ButtonsLanguageInputs
+	 * @generated
+	 */
+	EClass getButtonsLanguageInputs();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link generator.ButtonsLanguageInputs#getText <em>Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Text</em>'.
+	 * @see generator.ButtonsLanguageInputs#getText()
+	 * @see #getButtonsLanguageInputs()
+	 * @generated
+	 */
+	EReference getButtonsLanguageInputs_Text();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link generator.ButtonsLanguageInputs#getButtons <em>Buttons</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Buttons</em>'.
+	 * @see generator.ButtonsLanguageInputs#getButtons()
+	 * @see #getButtonsLanguageInputs()
+	 * @generated
+	 */
+	EReference getButtonsLanguageInputs_Buttons();
+
+	/**
+	 * Returns the meta object for class '{@link generator.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button</em>'.
+	 * @see generator.Button
+	 * @generated
+	 */
+	EClass getButton();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.Button#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see generator.Button#getValue()
+	 * @see #getButton()
+	 * @generated
+	 */
+	EAttribute getButton_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.Button#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action</em>'.
+	 * @see generator.Button#getAction()
+	 * @see #getButton()
+	 * @generated
+	 */
+	EAttribute getButton_Action();
 
 	/**
 	 * Returns the meta object for class '{@link generator.TextLanguageInput <em>Text Language Input</em>}'.
@@ -3230,6 +3462,76 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEXT__INPUTS = eINSTANCE.getText_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonActionImpl <em>Button Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonActionImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButtonAction()
+		 * @generated
+		 */
+		EClass BUTTON_ACTION = eINSTANCE.getButtonAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTON_ACTION__INPUTS = eINSTANCE.getButtonAction_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonsLanguageInputsImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+		 * @generated
+		 */
+		EClass BUTTONS_LANGUAGE_INPUTS = eINSTANCE.getButtonsLanguageInputs();
+
+		/**
+		 * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTONS_LANGUAGE_INPUTS__TEXT = eINSTANCE.getButtonsLanguageInputs_Text();
+
+		/**
+		 * The meta object literal for the '<em><b>Buttons</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTONS_LANGUAGE_INPUTS__BUTTONS = eINSTANCE.getButtonsLanguageInputs_Buttons();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButton()
+		 * @generated
+		 */
+		EClass BUTTON = eINSTANCE.getButton();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUTTON__VALUE = eINSTANCE.getButton_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUTTON__ACTION = eINSTANCE.getButton_Action();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.
