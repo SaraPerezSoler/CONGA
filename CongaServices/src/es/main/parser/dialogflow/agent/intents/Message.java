@@ -6,6 +6,8 @@ import java.util.List;
 import es.main.parser.dialogflow.agent.Agent;
 import generator.Action;
 import generator.Bot;
+import generator.ButtonAction;
+import generator.ButtonsLanguageInputs;
 import generator.GeneratorFactory;
 import generator.Image;
 import generator.Intent;
@@ -21,8 +23,36 @@ public class Message {
 	private String lang;
 	private List<String> speech;
 	private String imageUrl;
+	private String subtitle;
+	private String title;
+	private List<Button> buttons;
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public List<Button> getButtons() {
+		return buttons;
+	}
+
+	public void setButtons(List<Button> buttons) {
+		this.buttons = buttons;
+	}
 
 	private static final int TEXT_TYPE = 0;
+	private static final int CARD_TYPE = 1;
 	private static final int IMAGE_TYPE = 3;
 
 //	public int getType() {
@@ -74,13 +104,31 @@ public class Message {
 		this.imageUrl = imageUrl;
 	}
 
-	public Action getBotAction(Intent intent, int textCounter, int imgCounter, Bot bot, Agent agent) {
+	public Action getBotAction(Intent intent, int textCounter, int imgCounter, int buttonCounter, Bot bot, Agent agent) {
 		if (getType() == IMAGE_TYPE) {
 			String actionName = intent.getName() + "ImgResp" + imgCounter;
 			Image ret = GeneratorFactory.eINSTANCE.createImage();
 			ret.setName(actionName);
 			ret.setURL(getImageUrl());
 			return ret;
+		}else if (getType() == CARD_TYPE) {
+			
+			String actionName = intent.getName() + "ButtonResp" + buttonCounter;
+			ButtonsLanguageInputs buttonLang =  GeneratorFactory.eINSTANCE.createButtonsLanguageInputs();
+			buttonLang.setLanguage(Agent.castLanguage(getLang()));
+			String title = "";
+			String subtitle = "";
+			if (getTitle()!=null) {
+				title=getTitle()+"\n";
+			}
+			if (getSubtitle()!=null) {
+				subtitle= getSubtitle();
+			}
+			buttonLang.setText(createTextInputs(title+subtitle, intent, agent, bot));
+			
+			ButtonAction ret = GeneratorFactory.eINSTANCE.createButtonAction();
+			ret.setName(actionName);
+			ret.g
 		} else {
 
 			TextLanguageInput textLang = GeneratorFactory.eINSTANCE.createTextLanguageInput();

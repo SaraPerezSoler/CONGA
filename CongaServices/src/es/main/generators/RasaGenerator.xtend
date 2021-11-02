@@ -31,6 +31,7 @@ import generator.RegexInput
 import generator.LanguageInput
 import generator.EntityInput
 import java.io.File
+import generator.ButtonAction
 
 class RasaGenerator extends BotGenerator{
 
@@ -62,7 +63,7 @@ class RasaGenerator extends BotGenerator{
 //			generateFolder(subPath);
 //			generateFolder(dataPath)
 			
-			f = generateFile(subPath +'actions.py', actions(intents, entities, actions, lan))
+			f = generateFile(subPath +'actions.py', actions(intents, entities, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'actions.py')
 
 			f = generateFile(subPath + 'config.yml', config(lan))
@@ -71,13 +72,13 @@ class RasaGenerator extends BotGenerator{
 			f = generateFile(subPath + 'credentials.yml', credentials)
 			saveFileIntoZip(f, subPath, 'credentials.yml')
 			
-			f = generateFile(subPath + 'domain.yml', domain(intents, parameters, actions, lan))
+			f = generateFile(subPath + 'domain.yml', domain(intents, parameters, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'domain.yml')
 
 			f = generateFile(subPath + 'endpoints.yml', endpoint)
 			saveFileIntoZip(f, subPath, 'endpoints.yml')
 
-			f = generateFile(dataPath+'nlu.md', nlu(intents, entities, lan))
+			f = generateFile(dataPath+'nlu.md', nlu(intents, entities, lan, bot))
 			saveFileIntoZip(f, dataPath, 'nlu.md')
 
 			f = generateFile(dataPath +'stories.md', stories(leafs))
@@ -156,7 +157,7 @@ class RasaGenerator extends BotGenerator{
 		«ENDFOR»
 	'''
 
-	def actions(List<Intent> intents, List<Entity> entities, List<Action> actions, Language lan) '''
+	def actions(List<Intent> intents, List<Entity> entities, List<Action> actions, Language lan, Bot bot) '''
 		# This files contains your custom actions which can be used to run
 		# custom Python code.
 		#
@@ -216,7 +217,7 @@ class RasaGenerator extends BotGenerator{
 		«FOR entity : entities»
 			«IF entityType(entity) === BotGenerator.SIMPLE»
 				«FOR simpleLanguage : entity.inputs»
-					«IF simpleLanguage.language.equals(lan)»
+					«IF simpleLanguage.language.compare(lan, bot)»
 						«entity.name.rasaValue»_db={
 							«FOR input: simpleLanguage.inputs»
 								"«(input as SimpleInput).name.toLowerCase»":["«(input as SimpleInput).name.toLowerCase»"«FOR value: (input as SimpleInput).values»,"«value.toLowerCase»"«ENDFOR»]«IF !DialogflowGenerator.isTheLast(entity.inputs, input)»,«ENDIF»
@@ -354,7 +355,7 @@ class RasaGenerator extends BotGenerator{
 							tracker: Tracker,
 							domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 						response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
-						text = «getHttpResponseText(action as HTTPResponse, lan)»
+						text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
 						dispatcher.utter_message(text)
 						return []         
 				
@@ -364,10 +365,10 @@ class RasaGenerator extends BotGenerator{
 		
 	'''
 
-	def getHttpResponseText(HTTPResponse action, Language lan) {
+	def getHttpResponseText(HTTPResponse action, Language lan, Bot bot) {
 		var ret = ""
 		for (TextLanguageInput textLanguage : action.inputs) {
-			if (textLanguage.language.equals(lan)) {
+			if (textLanguage.language.compare(lan, bot)) {
 				for (token : textLanguage.inputs.get(0).tokens) {
 					if (token instanceof Literal) {
 						ret += "'" + token.text + "'"
@@ -397,7 +398,7 @@ class RasaGenerator extends BotGenerator{
 		return ret
 	}
 
-	def domain(List<Intent> intents, List<Parameter> parameters, List<Action> actions, Language lan) '''
+	def domain(List<Intent> intents, List<Parameter> parameters, List<Action> actions, Language lan, Bot bot) '''
 		intents:
 		  «FOR intent : intents»
 		  	- «intent.name.getRasaValue»
@@ -415,12 +416,12 @@ class RasaGenerator extends BotGenerator{
 		  	  auto_fill: false
 		  «ENDFOR»
 		
-		templates:
+		responses:
 		  «FOR parameter : parameters»
 		  	«IF parameter.isRequired && !parameter.prompts.isEmpty»
 		  		utter_ask_«parameter.paramName»:
 		  		«FOR prompt:parameter.prompts»
-		  			«IF prompt.language.equals(lan)»
+		  			«IF prompt.language.compare(lan, bot)»
 		  				«FOR text : prompt.prompts»	
 		  					- text: "«text»"
 		  				«ENDFOR»
@@ -434,7 +435,7 @@ class RasaGenerator extends BotGenerator{
 		  	«IF action instanceof Text»
 		  		«action.actionName»:
 		  		«FOR textLanguageInput: action.inputs»
-		  			«IF textLanguageInput.language.equals(lan)»
+		  			«IF textLanguageInput.language.compare(lan, bot)»
 		  				«FOR input : textLanguageInput.inputs»	
 		  					- text: "«input.textActionInput»"
 		  				«ENDFOR»
@@ -444,6 +445,21 @@ class RasaGenerator extends BotGenerator{
 		  		«action.actionName»:
 		  		- text: «IF (action as Image).caption !== null»"«(action as Image).caption»"«ELSE»""«ENDIF»
 		  		  image: "«(action as Image).URL»"
+		  	«ELSEIF action instanceof ButtonAction»
+		  		«FOR textLanguageInput: action.inputs»
+		  			«action.actionName»:
+		  			«IF textLanguageInput.language.compare(lan, bot)»
+		  			- text: "«textLanguageInput.text.textActionInput»"
+		  			buttons:
+		  			«FOR button: textLanguageInput.buttons»
+		  			- title: "«button.value»"
+		  			«IF button.action !== null»
+		  			payload: "«button.action»"
+				  		    «ENDIF»
+				  		  «ENDFOR»
+			  		 «ENDIF»
+		  		 «ENDFOR»
+		  		 
 		  	«ENDIF»
 		  «ENDFOR»
 		
@@ -465,6 +481,14 @@ class RasaGenerator extends BotGenerator{
 		  	«ENDIF»
 		  «ENDFOR»
 	'''
+	
+	def compare(Language language, Language language2, Bot bot) {
+		var aux = language
+		if (aux.equals(Language.EMPTY)){
+			aux = bot.languages.get(0);
+		}
+		return aux.equals(language2)
+	}
 
 	def textActionInput(TextInput input) {
 		var ret = ""
@@ -500,14 +524,14 @@ class RasaGenerator extends BotGenerator{
 		}
 	}
 
-	def nlu(List<Intent> intents, List<Entity> entities, Language lan) '''
+	def nlu(List<Intent> intents, List<Entity> entities, Language lan, Bot bot) '''
 		«FOR intent : intents»
 			«FOR intentLanguageInput: intent.inputs»
-				«IF intentLanguageInput.language.equals(lan)»
+				«IF intentLanguageInput.language.compare(lan, bot)»
 					«IF intentType(intent) === BotGenerator.TRAINING»
 						## intent:«intent.name.getRasaValue»
 						«FOR input : intentLanguageInput.inputs»
-							- «(input as TrainingPhrase).generate(lan)»
+							- «(input as TrainingPhrase).generate(lan, bot)»
 						«ENDFOR»
 					«ENDIF»
 				«ENDIF»
@@ -516,7 +540,7 @@ class RasaGenerator extends BotGenerator{
 		«FOR entity : entities»
 			
 			«FOR languageInput: entity.inputs»
-				«IF languageInput.language.equals(lan)»
+				«IF languageInput.language.compare(lan, bot)»
 					«IF entityType(entity) === BotGenerator.SIMPLE»
 						«FOR input: languageInput.inputs»
 							## synonym:«(input as SimpleInput).name»
@@ -537,7 +561,7 @@ class RasaGenerator extends BotGenerator{
 		
 	'''
 
-	def generate(TrainingPhrase phrase, Language lan) {
+	def generate(TrainingPhrase phrase, Language lan, Bot bot) {
 		var ret = ""
 		for (token : phrase.tokens) {
 			if (token instanceof Literal) {
@@ -547,7 +571,7 @@ class RasaGenerator extends BotGenerator{
 				if (token.parameter.entity !== null){
 					ret +=
 					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +'"'+
-						'"value":'+ '"'+getEntry(token.textReference, token.parameter.entity, lan) +'" }' 
+						'"value":'+ '"'+getEntry(token.textReference, token.parameter.entity, lan, bot) +'" }' 
 				}
 				ret +=
 					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +
@@ -564,9 +588,9 @@ class RasaGenerator extends BotGenerator{
 		return ret;
 	}
 
-	def getEntry(String string, Entity entity, Language lan) {
+	def getEntry(String string, Entity entity, Language lan, Bot bot) {
 		for (LanguageInput languageInput : entity.inputs) {
-			if (languageInput.language.equals(lan)) {
+			if (languageInput.language.compare(lan, bot)) {
 				for (EntityInput input : languageInput.inputs) {
 					if (input instanceof SimpleInput) {
 						if ((input as SimpleInput).name.equalsIgnoreCase(string)) {
