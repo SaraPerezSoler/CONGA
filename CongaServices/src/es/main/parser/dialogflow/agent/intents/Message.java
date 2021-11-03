@@ -113,7 +113,6 @@ public class Message {
 			return ret;
 		}else if (getType() == CARD_TYPE) {
 			
-			String actionName = intent.getName() + "ButtonResp" + buttonCounter;
 			ButtonsLanguageInputs buttonLang =  GeneratorFactory.eINSTANCE.createButtonsLanguageInputs();
 			buttonLang.setLanguage(Agent.castLanguage(getLang()));
 			String title = "";
@@ -125,10 +124,30 @@ public class Message {
 				subtitle= getSubtitle();
 			}
 			buttonLang.setText(createTextInputs(title+subtitle, intent, agent, bot));
+			 
+			for (Button button: getButtons()) {
+				buttonLang.getButtons().add(button.getBotButton());
+			}
 			
+			for (int j = 1; j <= buttonCounter; j++) {
+				String actionName = intent.getName() + "ButtonResp" + j;
+				Action ret = bot.getAction(actionName);
+				if (ret != null && ret instanceof ButtonAction) {
+					ButtonsLanguageInputs aux = ((ButtonAction) ret).getInput(Agent.castLanguage(getLang()));
+					if (aux == null) {
+						((ButtonAction) ret).getInputs().add(buttonLang);
+						return ((ButtonAction) ret);
+					}
+				}
+			}
+			
+			String actionName = intent.getName() + "ButtonResp" + buttonCounter;
 			ButtonAction ret = GeneratorFactory.eINSTANCE.createButtonAction();
 			ret.setName(actionName);
-			ret.g
+			((ButtonAction) ret).getInputs().add(buttonLang);
+			return ret;
+			
+			
 		} else {
 
 			TextLanguageInput textLang = GeneratorFactory.eINSTANCE.createTextLanguageInput();

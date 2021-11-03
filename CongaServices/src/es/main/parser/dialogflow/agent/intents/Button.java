@@ -1,5 +1,7 @@
 package es.main.parser.dialogflow.agent.intents;
 
+import generator.GeneratorFactory;
+
 public class Button {
 
 	private String text;
@@ -15,6 +17,12 @@ public class Button {
 	}
 	public void setPostback(String postback) {
 		this.postback = postback;
+	}
+	public generator.Button getBotButton() {
+		generator.Button ret = GeneratorFactory.eINSTANCE.createButton();
+		ret.setValue(getText());
+		ret.setAction(getPostback());
+		return ret;
 	}
 	
 	

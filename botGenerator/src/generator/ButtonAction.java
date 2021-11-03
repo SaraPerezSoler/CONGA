@@ -33,4 +33,6 @@ public interface ButtonAction extends Action {
 	 */
 	EList<ButtonsLanguageInputs> getInputs();
 
+	ButtonsLanguageInputs getInput(Language lan);
+
 } // ButtonAction

@@ -6,6 +6,7 @@ import generator.ButtonAction;
 import generator.ButtonsLanguageInputs;
 import generator.Comparable;
 import generator.GeneratorPackage;
+import generator.Language;
 
 import java.util.Collection;
 
@@ -153,6 +154,16 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 	public boolean isSimilarTo(Comparable other) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ButtonsLanguageInputs getInput(Language lan) {
+		for (ButtonsLanguageInputs  buttonLang: getInputs()) {
+			if (buttonLang.getLanguage()==lan) {
+				return buttonLang;
+			}
+		}
+		return null;
 	}
 
 } //ButtonActionImpl
