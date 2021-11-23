@@ -24,6 +24,8 @@
         eType="#//UserInteraction" eOpposite="#//UserInteraction/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outcoming" upperBound="-1"
         eType="#//UserInteraction" containment="true" eOpposite="#//UserInteraction/src"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="backTo" upperBound="-1"
+        eType="#//UserInteraction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UserInteraction" eSuperTypes="#//Interaction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="intent" lowerBound="1"
@@ -32,6 +34,7 @@
         eOpposite="#//BotInteraction/outcoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//BotInteraction"
         containment="true" eOpposite="#//BotInteraction/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

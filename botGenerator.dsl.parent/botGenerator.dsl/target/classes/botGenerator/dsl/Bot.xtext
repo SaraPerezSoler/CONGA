@@ -41,14 +41,14 @@ IntentLanguageInputs returns IntentLanguageInputs:
 ;
 
 Transition returns UserInteraction:
-	'user' intent=[Intent|EString]('=>'target=(State|State2))?
+	'user' intent=[Intent|EString] ('(''label:' name=EString')')?('=>'target=(State|State2))?
 ;
 State returns BotInteraction:
-	'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'outcoming+=Transition)? 
+	'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString]))? 
 ;
 State2 returns BotInteraction:
 	'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
-	  ('=>' outcoming+=Transition';')+
+	  ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
 	 '}'
 ;
 IntentInput returns IntentInput:

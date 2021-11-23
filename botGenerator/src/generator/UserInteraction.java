@@ -15,6 +15,7 @@ package generator;
  *   <li>{@link generator.UserInteraction#getIntent <em>Intent</em>}</li>
  *   <li>{@link generator.UserInteraction#getSrc <em>Src</em>}</li>
  *   <li>{@link generator.UserInteraction#getTarget <em>Target</em>}</li>
+ *   <li>{@link generator.UserInteraction#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see generator.GeneratorPackage#getUserInteraction()
@@ -91,5 +92,27 @@ public interface UserInteraction extends Interaction {
 	 * @generated
 	 */
 	void setTarget(BotInteraction value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see generator.GeneratorPackage#getUserInteraction_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link generator.UserInteraction#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // UserInteraction

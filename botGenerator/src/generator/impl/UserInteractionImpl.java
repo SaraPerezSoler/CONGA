@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link generator.impl.UserInteractionImpl#getIntent <em>Intent</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getSrc <em>Src</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link generator.impl.UserInteractionImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,6 +53,26 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @ordered
 	 */
 	protected BotInteraction target;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,6 +227,29 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @generated
 	 */
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.USER_INTERACTION__SRC:
@@ -265,6 +309,8 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return getSrc();
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return getTarget();
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,6 +331,9 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return;
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				setTarget((BotInteraction)newValue);
+				return;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -307,6 +356,9 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				setTarget((BotInteraction)null);
 				return;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -325,8 +377,26 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return getSrc() != null;
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return target != null;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override

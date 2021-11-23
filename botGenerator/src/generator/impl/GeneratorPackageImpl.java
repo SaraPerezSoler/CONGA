@@ -531,6 +531,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
+	public EReference getBotInteraction_BackTo() {
+		return (EReference)botInteractionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getUserInteraction() {
 		return userInteractionEClass;
 	}
@@ -563,6 +573,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	@Override
 	public EReference getUserInteraction_Target() {
 		return (EReference)userInteractionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getUserInteraction_Name() {
+		return (EAttribute)userInteractionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1437,11 +1457,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(botInteractionEClass, BOT_INTERACTION__ACTIONS);
 		createEReference(botInteractionEClass, BOT_INTERACTION__INCOMING);
 		createEReference(botInteractionEClass, BOT_INTERACTION__OUTCOMING);
+		createEReference(botInteractionEClass, BOT_INTERACTION__BACK_TO);
 
 		userInteractionEClass = createEClass(USER_INTERACTION);
 		createEReference(userInteractionEClass, USER_INTERACTION__INTENT);
 		createEReference(userInteractionEClass, USER_INTERACTION__SRC);
 		createEReference(userInteractionEClass, USER_INTERACTION__TARGET);
+		createEAttribute(userInteractionEClass, USER_INTERACTION__NAME);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__NAME);
@@ -1636,11 +1658,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getBotInteraction_Actions(), this.getAction(), null, "actions", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBotInteraction_Incoming(), this.getUserInteraction(), this.getUserInteraction_Target(), "incoming", null, 1, 1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBotInteraction_Outcoming(), this.getUserInteraction(), this.getUserInteraction_Src(), "outcoming", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBotInteraction_BackTo(), this.getUserInteraction(), null, "backTo", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userInteractionEClass, UserInteraction.class, "UserInteraction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUserInteraction_Intent(), this.getIntent(), null, "intent", null, 1, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserInteraction_Src(), this.getBotInteraction(), this.getBotInteraction_Outcoming(), "src", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserInteraction_Target(), this.getBotInteraction(), this.getBotInteraction_Incoming(), "target", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUserInteraction_Name(), ecorePackage.getEString(), "name", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

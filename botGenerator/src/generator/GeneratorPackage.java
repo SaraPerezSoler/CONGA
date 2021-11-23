@@ -243,13 +243,22 @@ public interface GeneratorPackage extends EPackage {
 	int BOT_INTERACTION__OUTCOMING = INTERACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Back To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOT_INTERACTION__BACK_TO = INTERACTION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Bot Interaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOT_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 3;
+	int BOT_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Bot Interaction</em>' class.
@@ -298,13 +307,22 @@ public interface GeneratorPackage extends EPackage {
 	int USER_INTERACTION__TARGET = INTERACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INTERACTION__NAME = INTERACTION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>User Interaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 3;
+	int USER_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>User Interaction</em>' class.
@@ -1921,6 +1939,17 @@ public interface GeneratorPackage extends EPackage {
 	EReference getBotInteraction_Outcoming();
 
 	/**
+	 * Returns the meta object for the reference list '{@link generator.BotInteraction#getBackTo <em>Back To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Back To</em>'.
+	 * @see generator.BotInteraction#getBackTo()
+	 * @see #getBotInteraction()
+	 * @generated
+	 */
+	EReference getBotInteraction_BackTo();
+
+	/**
 	 * Returns the meta object for class '{@link generator.UserInteraction <em>User Interaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1962,6 +1991,17 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUserInteraction_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.UserInteraction#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see generator.UserInteraction#getName()
+	 * @see #getUserInteraction()
+	 * @generated
+	 */
+	EAttribute getUserInteraction_Name();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Element <em>Element</em>}'.
@@ -2956,6 +2996,14 @@ public interface GeneratorPackage extends EPackage {
 		EReference BOT_INTERACTION__OUTCOMING = eINSTANCE.getBotInteraction_Outcoming();
 
 		/**
+		 * The meta object literal for the '<em><b>Back To</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOT_INTERACTION__BACK_TO = eINSTANCE.getBotInteraction_BackTo();
+
+		/**
 		 * The meta object literal for the '{@link generator.impl.UserInteractionImpl <em>User Interaction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2988,6 +3036,14 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USER_INTERACTION__TARGET = eINSTANCE.getUserInteraction_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_INTERACTION__NAME = eINSTANCE.getUserInteraction_Name();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.ElementImpl <em>Element</em>}' class.

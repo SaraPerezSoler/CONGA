@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link generator.impl.BotInteractionImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link generator.impl.BotInteractionImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link generator.impl.BotInteractionImpl#getOutcoming <em>Outcoming</em>}</li>
+ *   <li>{@link generator.impl.BotInteractionImpl#getBackTo <em>Back To</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,6 +61,17 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	 */
 	protected EList<UserInteraction> outcoming;
 	
+
+	/**
+	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBackTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<UserInteraction> backTo;
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +166,19 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EList<UserInteraction> getBackTo() {
+		if (backTo == null) {
+			backTo = new EObjectResolvingEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__BACK_TO);
+		}
+		return backTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -212,6 +237,8 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				return getIncoming();
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				return getOutcoming();
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				return getBackTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -236,6 +263,10 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				getOutcoming().clear();
 				getOutcoming().addAll((Collection<? extends UserInteraction>)newValue);
 				return;
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				getBackTo().clear();
+				getBackTo().addAll((Collection<? extends UserInteraction>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -257,6 +288,9 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				getOutcoming().clear();
 				return;
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				getBackTo().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -275,6 +309,8 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				return getIncoming() != null;
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				return outcoming != null && !outcoming.isEmpty();
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				return backTo != null && !backTo.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
