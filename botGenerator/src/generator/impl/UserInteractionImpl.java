@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link generator.impl.UserInteractionImpl#getSrc <em>Src</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link generator.impl.UserInteractionImpl#getBackTo <em>Back To</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,6 +74,16 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBackTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected BotInteraction backTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -250,6 +261,46 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @generated
 	 */
 	@Override
+	public BotInteraction getBackTo() {
+		if (backTo != null && backTo.eIsProxy()) {
+			InternalEObject oldBackTo = (InternalEObject)backTo;
+			backTo = (BotInteraction)eResolveProxy(oldBackTo);
+			if (backTo != oldBackTo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, backTo));
+			}
+		}
+		return backTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BotInteraction basicGetBackTo() {
+		return backTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setBackTo(BotInteraction newBackTo) {
+		BotInteraction oldBackTo = backTo;
+		backTo = newBackTo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, backTo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.USER_INTERACTION__SRC:
@@ -311,6 +362,9 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return getTarget();
 			case GeneratorPackage.USER_INTERACTION__NAME:
 				return getName();
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				if (resolve) return getBackTo();
+				return basicGetBackTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -334,6 +388,9 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return;
 			case GeneratorPackage.USER_INTERACTION__NAME:
 				setName((String)newValue);
+				return;
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				setBackTo((BotInteraction)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -359,6 +416,9 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 			case GeneratorPackage.USER_INTERACTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				setBackTo((BotInteraction)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +439,8 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return target != null;
 			case GeneratorPackage.USER_INTERACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				return backTo != null;
 		}
 		return super.eIsSet(featureID);
 	}

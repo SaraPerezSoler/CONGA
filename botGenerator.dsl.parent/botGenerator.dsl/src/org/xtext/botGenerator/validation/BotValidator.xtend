@@ -32,6 +32,7 @@ import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 import generator.Literal
 import generator.DefaultEntity
+import generator.UserInteraction
 
 /**
  * This class contains custom validation rules. 
@@ -135,6 +136,7 @@ class BotValidator extends AbstractBotValidator {
 			}
 		}
 	}
+	
 
 	@Check
 	def nameUnique(SimpleInput input) {
@@ -509,6 +511,102 @@ class BotValidator extends AbstractBotValidator {
 		if (onlyTextEntity) {
 			warning("Training phrases should contains something different to a text parameter",
 				GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+		}
+	}
+	@Check
+	def loopsPath (UserInteraction interaction){
+		if (interaction.backTo!== null){
+			if (pathContainsBotInteraction(interaction, interaction.backTo)===false){
+				error("Back to bot interaction must be in the same path, previously",
+							GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
+			}
+		}
+	}
+	def boolean pathContainsBotInteraction(UserInteraction user, BotInteraction bot){
+		if (user.src!== null){
+			if (user.src === bot){
+				return true;
+			}else{
+				return pathContainsBotInteraction(user.src.incoming, bot)
+			}
+		}
+		return false;
+	}
+	
+	@Check
+	def loopsPath (BotInteraction interaction){
+		if (interaction.backTo!== null){
+			for (UserInteraction backTo: interaction.backTo){
+				if (pathContainsUserInteraction(interaction, backTo)===false){
+					error("Back to user interaction must be in the same path, previously",
+								GeneratorPackage.Literals.BOT_INTERACTION__BACK_TO)
+				}
+			}
+		}
+	}
+	def boolean pathContainsUserInteraction(BotInteraction bot, UserInteraction user){
+		if (bot.incoming === user){
+				return true;
+			}else{
+				if (bot.incoming.src !== null){
+					return pathContainsUserInteraction(bot.incoming.src, user)
+				}
+			}
+		return false;
+	}
+	
+	@Check
+	def loopsSeveralPaths (BotInteraction interaction){
+		if (interaction.backTo!== null){
+			if (!interaction.backTo.isEmpty){
+				for (UserInteraction user: interaction.backTo){
+					if (!hasStopCondition(user)){
+						error("There is an endless loop, ensure there is at least one path with end",
+								GeneratorPackage.Literals.BOT_INTERACTION__BACK_TO)
+					}
+				}
+			}
+		}
+	}
+	
+	@Check
+	def loopsSeveralPaths (UserInteraction interaction){
+		if (interaction.backTo!== null){
+			if (!hasStopCondition(interaction.backTo)){
+				error("There is an endless loop, ensure there is at least one path with end",
+						GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
+			}
+		}
+	}
+	
+	def boolean hasStopCondition(UserInteraction user){
+		if (user.target!== null){
+			return hasStopCondition (user.target);
+		}else{
+			if (user.backTo!== null){
+				return false;
+			}else{
+				return true;
+			}
+			
+		}
+	}
+	
+	def boolean hasStopCondition(BotInteraction bot){
+		if (bot.outcoming !== null && !bot.outcoming.isEmpty){
+			for (UserInteraction user: bot.outcoming){
+				if (hasStopCondition (user)){
+					return true;
+				}	
+			}
+			return false;
+		}else{
+			if (bot.backTo!== null && !bot.backTo.isEmpty){
+				return false;
+			}else{
+				return true;
+			}
+			
 		}
 	}
 }

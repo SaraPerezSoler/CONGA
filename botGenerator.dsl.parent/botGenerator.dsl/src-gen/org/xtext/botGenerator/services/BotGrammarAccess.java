@@ -469,180 +469,115 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUserKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cIntentAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cIntentIntentCrossReference_1_0 = (CrossReference)cIntentAssignment_1.eContents().get(0);
-		private final RuleCall cIntentIntentEStringParserRuleCall_1_0_1 = (RuleCall)cIntentIntentCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Keyword cLabelKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Assignment cNameAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cNameEStringParserRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cNameEStringParserRuleCall_0_0_0 = (RuleCall)cNameAssignment_0_0.eContents().get(0);
+		private final Keyword cColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Keyword cUserKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cIntentAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cIntentIntentCrossReference_2_0 = (CrossReference)cIntentAssignment_2.eContents().get(0);
+		private final RuleCall cIntentIntentEStringParserRuleCall_2_0_1 = (RuleCall)cIntentIntentCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cEqualsSignGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cTargetAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final Alternatives cTargetAlternatives_3_1_0 = (Alternatives)cTargetAssignment_3_1.eContents().get(0);
-		private final RuleCall cTargetStateParserRuleCall_3_1_0_0 = (RuleCall)cTargetAlternatives_3_1_0.eContents().get(0);
-		private final RuleCall cTargetState2ParserRuleCall_3_1_0_1 = (RuleCall)cTargetAlternatives_3_1_0.eContents().get(1);
+		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
+		private final Assignment cTargetAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
+		private final Alternatives cTargetAlternatives_3_1_0_0 = (Alternatives)cTargetAssignment_3_1_0.eContents().get(0);
+		private final RuleCall cTargetStateParserRuleCall_3_1_0_0_0 = (RuleCall)cTargetAlternatives_3_1_0_0.eContents().get(0);
+		private final RuleCall cTargetState2ParserRuleCall_3_1_0_0_1 = (RuleCall)cTargetAlternatives_3_1_0_0.eContents().get(1);
+		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
+		private final Keyword cBackKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
+		private final Keyword cToKeyword_3_1_1_1 = (Keyword)cGroup_3_1_1.eContents().get(1);
+		private final Assignment cBackToAssignment_3_1_1_2 = (Assignment)cGroup_3_1_1.eContents().get(2);
+		private final CrossReference cBackToBotInteractionCrossReference_3_1_1_2_0 = (CrossReference)cBackToAssignment_3_1_1_2.eContents().get(0);
+		private final RuleCall cBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1 = (RuleCall)cBackToBotInteractionCrossReference_3_1_1_2_0.eContents().get(1);
 		
 		//Transition returns UserInteraction:
-		//    'user' intent=[Intent|EString] ('(''label:' name=EString')')?('=>'target=(State|State2))?
+		//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'user' intent=[Intent|EString] ('(''label:' name=EString')')?('=>'target=(State|State2))?
+		//(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
 		public Group getGroup() { return cGroup; }
 		
-		//'user'
-		public Keyword getUserKeyword_0() { return cUserKeyword_0; }
-		
-		//intent=[Intent|EString]
-		public Assignment getIntentAssignment_1() { return cIntentAssignment_1; }
-		
-		//[Intent|EString]
-		public CrossReference getIntentIntentCrossReference_1_0() { return cIntentIntentCrossReference_1_0; }
-		
-		//EString
-		public RuleCall getIntentIntentEStringParserRuleCall_1_0_1() { return cIntentIntentEStringParserRuleCall_1_0_1; }
-		
-		//('(''label:' name=EString')')?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//'('
-		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
-		
-		//'label:'
-		public Keyword getLabelKeyword_2_1() { return cLabelKeyword_2_1; }
+		//(name=EString':')?
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//name=EString
-		public Assignment getNameAssignment_2_2() { return cNameAssignment_2_2; }
+		public Assignment getNameAssignment_0_0() { return cNameAssignment_0_0; }
 		
 		//EString
-		public RuleCall getNameEStringParserRuleCall_2_2_0() { return cNameEStringParserRuleCall_2_2_0; }
+		public RuleCall getNameEStringParserRuleCall_0_0_0() { return cNameEStringParserRuleCall_0_0_0; }
 		
-		//')'
-		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
+		//':'
+		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
 		
-		//('=>'target=(State|State2))?
+		//'user'
+		public Keyword getUserKeyword_1() { return cUserKeyword_1; }
+		
+		//intent=[Intent|EString]
+		public Assignment getIntentAssignment_2() { return cIntentAssignment_2; }
+		
+		//[Intent|EString]
+		public CrossReference getIntentIntentCrossReference_2_0() { return cIntentIntentCrossReference_2_0; }
+		
+		//EString
+		public RuleCall getIntentIntentEStringParserRuleCall_2_0_1() { return cIntentIntentEStringParserRuleCall_2_0_1; }
+		
+		//('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_3_0() { return cEqualsSignGreaterThanSignKeyword_3_0; }
 		
+		//(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString])
+		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
+		
 		//target=(State|State2)
-		public Assignment getTargetAssignment_3_1() { return cTargetAssignment_3_1; }
+		public Assignment getTargetAssignment_3_1_0() { return cTargetAssignment_3_1_0; }
 		
 		//(State|State2)
-		public Alternatives getTargetAlternatives_3_1_0() { return cTargetAlternatives_3_1_0; }
+		public Alternatives getTargetAlternatives_3_1_0_0() { return cTargetAlternatives_3_1_0_0; }
 		
 		//State
-		public RuleCall getTargetStateParserRuleCall_3_1_0_0() { return cTargetStateParserRuleCall_3_1_0_0; }
+		public RuleCall getTargetStateParserRuleCall_3_1_0_0_0() { return cTargetStateParserRuleCall_3_1_0_0_0; }
 		
 		//State2
-		public RuleCall getTargetState2ParserRuleCall_3_1_0_1() { return cTargetState2ParserRuleCall_3_1_0_1; }
+		public RuleCall getTargetState2ParserRuleCall_3_1_0_0_1() { return cTargetState2ParserRuleCall_3_1_0_0_1; }
+		
+		//'back' 'to' backTo=[BotInteraction|EString]
+		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
+		
+		//'back'
+		public Keyword getBackKeyword_3_1_1_0() { return cBackKeyword_3_1_1_0; }
+		
+		//'to'
+		public Keyword getToKeyword_3_1_1_1() { return cToKeyword_3_1_1_1; }
+		
+		//backTo=[BotInteraction|EString]
+		public Assignment getBackToAssignment_3_1_1_2() { return cBackToAssignment_3_1_1_2; }
+		
+		//[BotInteraction|EString]
+		public CrossReference getBackToBotInteractionCrossReference_3_1_1_2_0() { return cBackToBotInteractionCrossReference_3_1_1_2_0; }
+		
+		//EString
+		public RuleCall getBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1() { return cBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1; }
 	}
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cChatbotKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cActionsActionCrossReference_1_0 = (CrossReference)cActionsAssignment_1.eContents().get(0);
-		private final RuleCall cActionsActionEStringParserRuleCall_1_0_1 = (RuleCall)cActionsActionCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cActionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cActionsActionCrossReference_2_1_0 = (CrossReference)cActionsAssignment_2_1.eContents().get(0);
-		private final RuleCall cActionsActionEStringParserRuleCall_2_1_0_1 = (RuleCall)cActionsActionCrossReference_2_1_0.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cNameEStringParserRuleCall_0_0_0 = (RuleCall)cNameAssignment_0_0.eContents().get(0);
+		private final Keyword cColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Keyword cChatbotKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cActionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cActionsActionCrossReference_2_0 = (CrossReference)cActionsAssignment_2.eContents().get(0);
+		private final RuleCall cActionsActionEStringParserRuleCall_2_0_1 = (RuleCall)cActionsActionCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cEqualsSignGreaterThanSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Alternatives cAlternatives_3_1 = (Alternatives)cGroup_3.eContents().get(1);
-		private final Assignment cOutcomingAssignment_3_1_0 = (Assignment)cAlternatives_3_1.eContents().get(0);
-		private final RuleCall cOutcomingTransitionParserRuleCall_3_1_0_0 = (RuleCall)cOutcomingAssignment_3_1_0.eContents().get(0);
-		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
-		private final Keyword cBackToKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
-		private final Assignment cBackToAssignment_3_1_1_1 = (Assignment)cGroup_3_1_1.eContents().get(1);
-		private final CrossReference cBackToUserInteractionCrossReference_3_1_1_1_0 = (CrossReference)cBackToAssignment_3_1_1_1.eContents().get(0);
-		private final RuleCall cBackToUserInteractionEStringParserRuleCall_3_1_1_1_0_1 = (RuleCall)cBackToUserInteractionCrossReference_3_1_1_1_0.eContents().get(1);
-		
-		//State returns BotInteraction:
-		//    'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString]))?
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString]))?
-		public Group getGroup() { return cGroup; }
-		
-		//'chatbot'
-		public Keyword getChatbotKeyword_0() { return cChatbotKeyword_0; }
-		
-		//actions+=[Action|EString]
-		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
-		
-		//[Action|EString]
-		public CrossReference getActionsActionCrossReference_1_0() { return cActionsActionCrossReference_1_0; }
-		
-		//EString
-		public RuleCall getActionsActionEStringParserRuleCall_1_0_1() { return cActionsActionEStringParserRuleCall_1_0_1; }
-		
-		//(','actions+=[Action|EString])*
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-		
-		//actions+=[Action|EString]
-		public Assignment getActionsAssignment_2_1() { return cActionsAssignment_2_1; }
-		
-		//[Action|EString]
-		public CrossReference getActionsActionCrossReference_2_1_0() { return cActionsActionCrossReference_2_1_0; }
-		
-		//EString
-		public RuleCall getActionsActionEStringParserRuleCall_2_1_0_1() { return cActionsActionEStringParserRuleCall_2_1_0_1; }
-		
-		//('=>'(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString]))?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//'=>'
-		public Keyword getEqualsSignGreaterThanSignKeyword_3_0() { return cEqualsSignGreaterThanSignKeyword_3_0; }
-		
-		//(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString])
-		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
-		
-		//outcoming+=Transition
-		public Assignment getOutcomingAssignment_3_1_0() { return cOutcomingAssignment_3_1_0; }
-		
-		//Transition
-		public RuleCall getOutcomingTransitionParserRuleCall_3_1_0_0() { return cOutcomingTransitionParserRuleCall_3_1_0_0; }
-		
-		//'backTo' backTo+=[UserInteraction|EString]
-		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-		
-		//'backTo'
-		public Keyword getBackToKeyword_3_1_1_0() { return cBackToKeyword_3_1_1_0; }
-		
-		//backTo+=[UserInteraction|EString]
-		public Assignment getBackToAssignment_3_1_1_1() { return cBackToAssignment_3_1_1_1; }
-		
-		//[UserInteraction|EString]
-		public CrossReference getBackToUserInteractionCrossReference_3_1_1_1_0() { return cBackToUserInteractionCrossReference_3_1_1_1_0; }
-		
-		//EString
-		public RuleCall getBackToUserInteractionEStringParserRuleCall_3_1_1_1_0_1() { return cBackToUserInteractionEStringParserRuleCall_3_1_1_1_0_1; }
-	}
-	public class State2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.State2");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cChatbotKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cActionsActionCrossReference_1_0 = (CrossReference)cActionsAssignment_1.eContents().get(0);
-		private final RuleCall cActionsActionEStringParserRuleCall_1_0_1 = (RuleCall)cActionsActionCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cActionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cActionsActionCrossReference_2_1_0 = (CrossReference)cActionsAssignment_2_1.eContents().get(0);
-		private final RuleCall cActionsActionEStringParserRuleCall_2_1_0_1 = (RuleCall)cActionsActionCrossReference_2_1_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cActionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cActionsActionCrossReference_3_1_0 = (CrossReference)cActionsAssignment_3_1.eContents().get(0);
+		private final RuleCall cActionsActionEStringParserRuleCall_3_1_0_1 = (RuleCall)cActionsActionCrossReference_3_1_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cEqualsSignGreaterThanSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
@@ -654,58 +589,61 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final Assignment cBackToAssignment_4_1_1_2 = (Assignment)cGroup_4_1_1.eContents().get(2);
 		private final CrossReference cBackToUserInteractionCrossReference_4_1_1_2_0 = (CrossReference)cBackToAssignment_4_1_1_2.eContents().get(0);
 		private final RuleCall cBackToUserInteractionEStringParserRuleCall_4_1_1_2_0_1 = (RuleCall)cBackToUserInteractionCrossReference_4_1_1_2_0.eContents().get(1);
-		private final Keyword cSemicolonKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//State2 returns BotInteraction:
-		//    'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
-		//      ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
-		//     '}'
+		//State returns BotInteraction:
+		//    (name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString]))?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
-		//  ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
-		// '}'
+		//(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString]))?
 		public Group getGroup() { return cGroup; }
 		
-		//'chatbot'
-		public Keyword getChatbotKeyword_0() { return cChatbotKeyword_0; }
+		//(name=EString':')?
+		public Group getGroup_0() { return cGroup_0; }
 		
-		//actions+=[Action|EString]
-		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
-		
-		//[Action|EString]
-		public CrossReference getActionsActionCrossReference_1_0() { return cActionsActionCrossReference_1_0; }
+		//name=EString
+		public Assignment getNameAssignment_0_0() { return cNameAssignment_0_0; }
 		
 		//EString
-		public RuleCall getActionsActionEStringParserRuleCall_1_0_1() { return cActionsActionEStringParserRuleCall_1_0_1; }
+		public RuleCall getNameEStringParserRuleCall_0_0_0() { return cNameEStringParserRuleCall_0_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
+		
+		//'chatbot'
+		public Keyword getChatbotKeyword_1() { return cChatbotKeyword_1; }
+		
+		//actions+=[Action|EString]
+		public Assignment getActionsAssignment_2() { return cActionsAssignment_2; }
+		
+		//[Action|EString]
+		public CrossReference getActionsActionCrossReference_2_0() { return cActionsActionCrossReference_2_0; }
+		
+		//EString
+		public RuleCall getActionsActionEStringParserRuleCall_2_0_1() { return cActionsActionEStringParserRuleCall_2_0_1; }
 		
 		//(','actions+=[Action|EString])*
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_3() { return cGroup_3; }
 		
 		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 		
 		//actions+=[Action|EString]
-		public Assignment getActionsAssignment_2_1() { return cActionsAssignment_2_1; }
+		public Assignment getActionsAssignment_3_1() { return cActionsAssignment_3_1; }
 		
 		//[Action|EString]
-		public CrossReference getActionsActionCrossReference_2_1_0() { return cActionsActionCrossReference_2_1_0; }
+		public CrossReference getActionsActionCrossReference_3_1_0() { return cActionsActionCrossReference_3_1_0; }
 		
 		//EString
-		public RuleCall getActionsActionEStringParserRuleCall_2_1_0_1() { return cActionsActionEStringParserRuleCall_2_1_0_1; }
+		public RuleCall getActionsActionEStringParserRuleCall_3_1_0_1() { return cActionsActionEStringParserRuleCall_3_1_0_1; }
 		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-		
-		//('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
+		//('=>'(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString]))?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_4_0() { return cEqualsSignGreaterThanSignKeyword_4_0; }
 		
-		//(outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])
+		//(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString])
 		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
 		
 		//outcoming+=Transition
@@ -731,12 +669,130 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		
 		//EString
 		public RuleCall getBackToUserInteractionEStringParserRuleCall_4_1_1_2_0_1() { return cBackToUserInteractionEStringParserRuleCall_4_1_1_2_0_1; }
+	}
+	public class State2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.State2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cNameEStringParserRuleCall_0_0_0 = (RuleCall)cNameAssignment_0_0.eContents().get(0);
+		private final Keyword cColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Keyword cChatbotKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cActionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cActionsActionCrossReference_2_0 = (CrossReference)cActionsAssignment_2.eContents().get(0);
+		private final RuleCall cActionsActionEStringParserRuleCall_2_0_1 = (RuleCall)cActionsActionCrossReference_2_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cActionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cActionsActionCrossReference_3_1_0 = (CrossReference)cActionsAssignment_3_1.eContents().get(0);
+		private final RuleCall cActionsActionEStringParserRuleCall_3_1_0_1 = (RuleCall)cActionsActionCrossReference_3_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cEqualsSignGreaterThanSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Alternatives cAlternatives_5_1 = (Alternatives)cGroup_5.eContents().get(1);
+		private final Assignment cOutcomingAssignment_5_1_0 = (Assignment)cAlternatives_5_1.eContents().get(0);
+		private final RuleCall cOutcomingTransitionParserRuleCall_5_1_0_0 = (RuleCall)cOutcomingAssignment_5_1_0.eContents().get(0);
+		private final Group cGroup_5_1_1 = (Group)cAlternatives_5_1.eContents().get(1);
+		private final Keyword cBackKeyword_5_1_1_0 = (Keyword)cGroup_5_1_1.eContents().get(0);
+		private final Keyword cToKeyword_5_1_1_1 = (Keyword)cGroup_5_1_1.eContents().get(1);
+		private final Assignment cBackToAssignment_5_1_1_2 = (Assignment)cGroup_5_1_1.eContents().get(2);
+		private final CrossReference cBackToUserInteractionCrossReference_5_1_1_2_0 = (CrossReference)cBackToAssignment_5_1_1_2.eContents().get(0);
+		private final RuleCall cBackToUserInteractionEStringParserRuleCall_5_1_1_2_0_1 = (RuleCall)cBackToUserInteractionCrossReference_5_1_1_2_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_5_2 = (Keyword)cGroup_5.eContents().get(2);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//State2 returns BotInteraction:
+		//    (name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
+		//      ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
+		//     '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
+		//  ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
+		// '}'
+		public Group getGroup() { return cGroup; }
+		
+		//(name=EString':')?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//name=EString
+		public Assignment getNameAssignment_0_0() { return cNameAssignment_0_0; }
+		
+		//EString
+		public RuleCall getNameEStringParserRuleCall_0_0_0() { return cNameEStringParserRuleCall_0_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
+		
+		//'chatbot'
+		public Keyword getChatbotKeyword_1() { return cChatbotKeyword_1; }
+		
+		//actions+=[Action|EString]
+		public Assignment getActionsAssignment_2() { return cActionsAssignment_2; }
+		
+		//[Action|EString]
+		public CrossReference getActionsActionCrossReference_2_0() { return cActionsActionCrossReference_2_0; }
+		
+		//EString
+		public RuleCall getActionsActionEStringParserRuleCall_2_0_1() { return cActionsActionEStringParserRuleCall_2_0_1; }
+		
+		//(','actions+=[Action|EString])*
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//','
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
+		
+		//actions+=[Action|EString]
+		public Assignment getActionsAssignment_3_1() { return cActionsAssignment_3_1; }
+		
+		//[Action|EString]
+		public CrossReference getActionsActionCrossReference_3_1_0() { return cActionsActionCrossReference_3_1_0; }
+		
+		//EString
+		public RuleCall getActionsActionEStringParserRuleCall_3_1_0_1() { return cActionsActionEStringParserRuleCall_3_1_0_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		
+		//('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'=>'
+		public Keyword getEqualsSignGreaterThanSignKeyword_5_0() { return cEqualsSignGreaterThanSignKeyword_5_0; }
+		
+		//(outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])
+		public Alternatives getAlternatives_5_1() { return cAlternatives_5_1; }
+		
+		//outcoming+=Transition
+		public Assignment getOutcomingAssignment_5_1_0() { return cOutcomingAssignment_5_1_0; }
+		
+		//Transition
+		public RuleCall getOutcomingTransitionParserRuleCall_5_1_0_0() { return cOutcomingTransitionParserRuleCall_5_1_0_0; }
+		
+		//'back' 'to' backTo+=[UserInteraction|EString]
+		public Group getGroup_5_1_1() { return cGroup_5_1_1; }
+		
+		//'back'
+		public Keyword getBackKeyword_5_1_1_0() { return cBackKeyword_5_1_1_0; }
+		
+		//'to'
+		public Keyword getToKeyword_5_1_1_1() { return cToKeyword_5_1_1_1; }
+		
+		//backTo+=[UserInteraction|EString]
+		public Assignment getBackToAssignment_5_1_1_2() { return cBackToAssignment_5_1_1_2; }
+		
+		//[UserInteraction|EString]
+		public CrossReference getBackToUserInteractionCrossReference_5_1_1_2_0() { return cBackToUserInteractionCrossReference_5_1_1_2_0; }
+		
+		//EString
+		public RuleCall getBackToUserInteractionEStringParserRuleCall_5_1_1_2_0_1() { return cBackToUserInteractionEStringParserRuleCall_5_1_1_2_0_1; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_4_2() { return cSemicolonKeyword_4_2; }
+		public Keyword getSemicolonKeyword_5_2() { return cSemicolonKeyword_5_2; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class IntentInputElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.IntentInput");
@@ -3082,7 +3138,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//Transition returns UserInteraction:
-	//    'user' intent=[Intent|EString] ('(''label:' name=EString')')?('=>'target=(State|State2))?
+	//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
 	//;
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
@@ -3093,7 +3149,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//State returns BotInteraction:
-	//    'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'backTo' backTo+=[UserInteraction|EString]))?
+	//    (name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString]))?
 	//;
 	public StateElements getStateAccess() {
 		return pState;
@@ -3104,7 +3160,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//State2 returns BotInteraction:
-	//    'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
+	//    (name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
 	//      ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
 	//     '}'
 	//;

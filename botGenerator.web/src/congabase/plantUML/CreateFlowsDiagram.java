@@ -69,6 +69,9 @@ public class CreateFlowsDiagram {
 				for (UserInteraction interaction : user.getTarget().getOutcoming()) {
 					flowString += printFlow(interaction);
 				}
+				for (UserInteraction interaction : user.getTarget().getBackTo()) {
+					flowString += printBackTo(interaction, user.getTarget());
+				}
 				
 			}
 		}
@@ -89,6 +92,22 @@ public class CreateFlowsDiagram {
 			previousState = stateName(userInteraction.getSrc());
 		}
 
+		if (userInteraction.getTarget() == null) {
+			if (userInteraction.getBackTo() == null) {
+				nextState = "[*]";
+			}else {
+				nextState = stateName(userInteraction.getBackTo());
+			}
+		} else {
+			nextState = stateName(userInteraction.getTarget());
+		}
+		return previousState + "-->" + nextState + " : " + userInteraction.getIntent().getName() + ENTR;
+
+	}
+	private String printBackTo(UserInteraction userInteraction, BotInteraction from) {
+		String previousState;
+		String nextState;
+		previousState = stateName(from);
 		if (userInteraction.getTarget() == null) {
 			nextState = "[*]";
 		} else {

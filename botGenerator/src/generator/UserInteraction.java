@@ -16,6 +16,7 @@ package generator;
  *   <li>{@link generator.UserInteraction#getSrc <em>Src</em>}</li>
  *   <li>{@link generator.UserInteraction#getTarget <em>Target</em>}</li>
  *   <li>{@link generator.UserInteraction#getName <em>Name</em>}</li>
+ *   <li>{@link generator.UserInteraction#getBackTo <em>Back To</em>}</li>
  * </ul>
  *
  * @see generator.GeneratorPackage#getUserInteraction()
@@ -114,5 +115,27 @@ public interface UserInteraction extends Interaction {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Back To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Back To</em>' reference.
+	 * @see #setBackTo(BotInteraction)
+	 * @see generator.GeneratorPackage#getUserInteraction_BackTo()
+	 * @model
+	 * @generated
+	 */
+	BotInteraction getBackTo();
+
+	/**
+	 * Sets the value of the '{@link generator.UserInteraction#getBackTo <em>Back To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Back To</em>' reference.
+	 * @see #getBackTo()
+	 * @generated
+	 */
+	void setBackTo(BotInteraction value);
 
 } // UserInteraction
