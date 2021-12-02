@@ -105,6 +105,9 @@ class DialogflowGenerator extends BotGenerator {
 						for (UserInteraction ui : backTo.target.outcoming) {
 							newBotInteraction.backTo.add(ui)
 						}
+						for (UserInteraction ui : backTo.target.backTo) {
+							newBotInteraction.backTo.add(ui)
+						}
 						newInteraction.target = newBotInteraction
 						interaction.target.backTo.remove(backTo);
 						interaction.target.outcoming.add(newInteraction);
