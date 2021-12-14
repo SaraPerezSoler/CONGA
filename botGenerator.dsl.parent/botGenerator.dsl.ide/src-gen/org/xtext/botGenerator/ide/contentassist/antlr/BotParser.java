@@ -70,7 +70,8 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTransitionAccess().getGroup(), "rule__Transition__Group__0");
 			builder.put(grammarAccess.getTransitionAccess().getGroup_0(), "rule__Transition__Group_0__0");
 			builder.put(grammarAccess.getTransitionAccess().getGroup_3(), "rule__Transition__Group_3__0");
-			builder.put(grammarAccess.getTransitionAccess().getGroup_3_1_1(), "rule__Transition__Group_3_1_1__0");
+			builder.put(grammarAccess.getBackToBotAccess().getGroup(), "rule__BackToBot__Group__0");
+			builder.put(grammarAccess.getBackToBotAccess().getGroup_0(), "rule__BackToBot__Group_0__0");
 			builder.put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
 			builder.put(grammarAccess.getStateAccess().getGroup_0(), "rule__State__Group_0__0");
 			builder.put(grammarAccess.getStateAccess().getGroup_3(), "rule__State__Group_3__0");
@@ -161,7 +162,9 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTransitionAccess().getNameAssignment_0_0(), "rule__Transition__NameAssignment_0_0");
 			builder.put(grammarAccess.getTransitionAccess().getIntentAssignment_2(), "rule__Transition__IntentAssignment_2");
 			builder.put(grammarAccess.getTransitionAccess().getTargetAssignment_3_1_0(), "rule__Transition__TargetAssignment_3_1_0");
-			builder.put(grammarAccess.getTransitionAccess().getBackToAssignment_3_1_1_2(), "rule__Transition__BackToAssignment_3_1_1_2");
+			builder.put(grammarAccess.getTransitionAccess().getBackToAssignment_3_1_1(), "rule__Transition__BackToAssignment_3_1_1");
+			builder.put(grammarAccess.getBackToBotAccess().getPreviousAssignment_0_1(), "rule__BackToBot__PreviousAssignment_0_1");
+			builder.put(grammarAccess.getBackToBotAccess().getBackToAssignment_3(), "rule__BackToBot__BackToAssignment_3");
 			builder.put(grammarAccess.getStateAccess().getNameAssignment_0_0(), "rule__State__NameAssignment_0_0");
 			builder.put(grammarAccess.getStateAccess().getActionsAssignment_2(), "rule__State__ActionsAssignment_2");
 			builder.put(grammarAccess.getStateAccess().getActionsAssignment_3_1(), "rule__State__ActionsAssignment_3_1");

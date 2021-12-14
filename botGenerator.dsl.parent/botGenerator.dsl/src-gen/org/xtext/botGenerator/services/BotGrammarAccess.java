@@ -484,19 +484,15 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final Alternatives cTargetAlternatives_3_1_0_0 = (Alternatives)cTargetAssignment_3_1_0.eContents().get(0);
 		private final RuleCall cTargetStateParserRuleCall_3_1_0_0_0 = (RuleCall)cTargetAlternatives_3_1_0_0.eContents().get(0);
 		private final RuleCall cTargetState2ParserRuleCall_3_1_0_0_1 = (RuleCall)cTargetAlternatives_3_1_0_0.eContents().get(1);
-		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
-		private final Keyword cBackKeyword_3_1_1_0 = (Keyword)cGroup_3_1_1.eContents().get(0);
-		private final Keyword cToKeyword_3_1_1_1 = (Keyword)cGroup_3_1_1.eContents().get(1);
-		private final Assignment cBackToAssignment_3_1_1_2 = (Assignment)cGroup_3_1_1.eContents().get(2);
-		private final CrossReference cBackToBotInteractionCrossReference_3_1_1_2_0 = (CrossReference)cBackToAssignment_3_1_1_2.eContents().get(0);
-		private final RuleCall cBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1 = (RuleCall)cBackToBotInteractionCrossReference_3_1_1_2_0.eContents().get(1);
+		private final Assignment cBackToAssignment_3_1_1 = (Assignment)cAlternatives_3_1.eContents().get(1);
+		private final RuleCall cBackToBackToBotParserRuleCall_3_1_1_0 = (RuleCall)cBackToAssignment_3_1_1.eContents().get(0);
 		
 		//Transition returns UserInteraction:
-		//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
+		//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) |  backTo=BackToBot))?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
+		//(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) |  backTo=BackToBot))?
 		public Group getGroup() { return cGroup; }
 		
 		//(name=EString':')?
@@ -523,13 +519,13 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		//EString
 		public RuleCall getIntentIntentEStringParserRuleCall_2_0_1() { return cIntentIntentEStringParserRuleCall_2_0_1; }
 		
-		//('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
+		//('=>'(target=(State|State2) |  backTo=BackToBot))?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_3_0() { return cEqualsSignGreaterThanSignKeyword_3_0; }
 		
-		//(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString])
+		//(target=(State|State2) |  backTo=BackToBot)
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
 		
 		//target=(State|State2)
@@ -544,23 +540,63 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		//State2
 		public RuleCall getTargetState2ParserRuleCall_3_1_0_0_1() { return cTargetState2ParserRuleCall_3_1_0_0_1; }
 		
-		//'back' 'to' backTo=[BotInteraction|EString]
-		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
+		//backTo=BackToBot
+		public Assignment getBackToAssignment_3_1_1() { return cBackToAssignment_3_1_1; }
 		
-		//'back'
-		public Keyword getBackKeyword_3_1_1_0() { return cBackKeyword_3_1_1_0; }
+		//BackToBot
+		public RuleCall getBackToBackToBotParserRuleCall_3_1_1_0() { return cBackToBackToBotParserRuleCall_3_1_1_0; }
+	}
+	public class BackToBotElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.BackToBot");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cPrevKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cPreviousAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final CrossReference cPreviousActionCrossReference_0_1_0 = (CrossReference)cPreviousAssignment_0_1.eContents().get(0);
+		private final RuleCall cPreviousActionEStringParserRuleCall_0_1_0_1 = (RuleCall)cPreviousActionCrossReference_0_1_0.eContents().get(1);
+		private final Keyword cBackKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cToKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBackToAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cBackToBotInteractionCrossReference_3_0 = (CrossReference)cBackToAssignment_3.eContents().get(0);
+		private final RuleCall cBackToBotInteractionEStringParserRuleCall_3_0_1 = (RuleCall)cBackToBotInteractionCrossReference_3_0.eContents().get(1);
 		
-		//'to'
-		public Keyword getToKeyword_3_1_1_1() { return cToKeyword_3_1_1_1; }
+		//BackToBot returns BackToBot:
+		//    ('prev' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
+		//;
+		@Override public ParserRule getRule() { return rule; }
 		
-		//backTo=[BotInteraction|EString]
-		public Assignment getBackToAssignment_3_1_1_2() { return cBackToAssignment_3_1_1_2; }
+		//('prev' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
+		public Group getGroup() { return cGroup; }
 		
-		//[BotInteraction|EString]
-		public CrossReference getBackToBotInteractionCrossReference_3_1_1_2_0() { return cBackToBotInteractionCrossReference_3_1_1_2_0; }
+		//('prev' (previous+=[Action| EString])+)?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'prev'
+		public Keyword getPrevKeyword_0_0() { return cPrevKeyword_0_0; }
+		
+		//(previous+=[Action| EString])+
+		public Assignment getPreviousAssignment_0_1() { return cPreviousAssignment_0_1; }
+		
+		//[Action| EString]
+		public CrossReference getPreviousActionCrossReference_0_1_0() { return cPreviousActionCrossReference_0_1_0; }
 		
 		//EString
-		public RuleCall getBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1() { return cBackToBotInteractionEStringParserRuleCall_3_1_1_2_0_1; }
+		public RuleCall getPreviousActionEStringParserRuleCall_0_1_0_1() { return cPreviousActionEStringParserRuleCall_0_1_0_1; }
+		
+		//'back'
+		public Keyword getBackKeyword_1() { return cBackKeyword_1; }
+		
+		//'to'
+		public Keyword getToKeyword_2() { return cToKeyword_2; }
+		
+		//backTo=[BotInteraction|EString]
+		public Assignment getBackToAssignment_3() { return cBackToAssignment_3; }
+		
+		//[BotInteraction|EString]
+		public CrossReference getBackToBotInteractionCrossReference_3_0() { return cBackToBotInteractionCrossReference_3_0; }
+		
+		//EString
+		public RuleCall getBackToBotInteractionEStringParserRuleCall_3_0_1() { return cBackToBotInteractionEStringParserRuleCall_3_0_1; }
 	}
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.State");
@@ -2915,6 +2951,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	private final Intent1Elements pIntent1;
 	private final IntentLanguageInputsElements pIntentLanguageInputs;
 	private final TransitionElements pTransition;
+	private final BackToBotElements pBackToBot;
 	private final StateElements pState;
 	private final State2Elements pState2;
 	private final IntentInputElements pIntentInput;
@@ -2976,6 +3013,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		this.pIntent1 = new Intent1Elements();
 		this.pIntentLanguageInputs = new IntentLanguageInputsElements();
 		this.pTransition = new TransitionElements();
+		this.pBackToBot = new BackToBotElements();
 		this.pState = new StateElements();
 		this.pState2 = new State2Elements();
 		this.pIntentInput = new IntentInputElements();
@@ -3138,7 +3176,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//Transition returns UserInteraction:
-	//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) | 'back' 'to' backTo=[BotInteraction|EString]))?
+	//    (name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) |  backTo=BackToBot))?
 	//;
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
@@ -3146,6 +3184,17 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	
 	public ParserRule getTransitionRule() {
 		return getTransitionAccess().getRule();
+	}
+	
+	//BackToBot returns BackToBot:
+	//    ('prev' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
+	//;
+	public BackToBotElements getBackToBotAccess() {
+		return pBackToBot;
+	}
+	
+	public ParserRule getBackToBotRule() {
+		return getBackToBotAccess().getRule();
 	}
 	
 	//State returns BotInteraction:

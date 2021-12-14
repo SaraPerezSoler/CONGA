@@ -3,6 +3,7 @@
 package generator.impl;
 
 import generator.Action;
+import generator.BackToBot;
 import generator.Bot;
 import generator.BotInteraction;
 import generator.Button;
@@ -87,6 +88,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass userInteractionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass backToBotEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -603,6 +611,36 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	@Override
 	public EReference getUserInteraction_BackTo() {
 		return (EReference)userInteractionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBackToBot() {
+		return backToBotEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBackToBot_Previous() {
+		return (EReference)backToBotEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBackToBot_BackTo() {
+		return (EReference)backToBotEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1487,6 +1525,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(userInteractionEClass, USER_INTERACTION__NAME);
 		createEReference(userInteractionEClass, USER_INTERACTION__BACK_TO);
 
+		backToBotEClass = createEClass(BACK_TO_BOT);
+		createEReference(backToBotEClass, BACK_TO_BOT__PREVIOUS);
+		createEReference(backToBotEClass, BACK_TO_BOT__BACK_TO);
+
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__NAME);
 
@@ -1688,7 +1730,11 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getUserInteraction_Src(), this.getBotInteraction(), this.getBotInteraction_Outcoming(), "src", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserInteraction_Target(), this.getBotInteraction(), this.getBotInteraction_Incoming(), "target", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUserInteraction_Name(), ecorePackage.getEString(), "name", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUserInteraction_BackTo(), this.getBotInteraction(), null, "backTo", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserInteraction_BackTo(), this.getBackToBot(), null, "backTo", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(backToBotEClass, BackToBot.class, "BackToBot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBackToBot_Previous(), this.getAction(), null, "previous", null, 0, -1, BackToBot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBackToBot_BackTo(), this.getBotInteraction(), null, "backTo", null, 1, 1, BackToBot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

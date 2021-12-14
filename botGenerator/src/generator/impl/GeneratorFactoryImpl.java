@@ -60,6 +60,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.BOT: return createBot();
 			case GeneratorPackage.BOT_INTERACTION: return createBotInteraction();
 			case GeneratorPackage.USER_INTERACTION: return createUserInteraction();
+			case GeneratorPackage.BACK_TO_BOT: return createBackToBot();
 			case GeneratorPackage.ENTITY: return createEntity();
 			case GeneratorPackage.LANGUAGE_INPUT: return createLanguageInput();
 			case GeneratorPackage.SIMPLE_INPUT: return createSimpleInput();
@@ -168,6 +169,17 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public UserInteraction createUserInteraction() {
 		UserInteractionImpl userInteraction = new UserInteractionImpl();
 		return userInteraction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BackToBot createBackToBot() {
+		BackToBotImpl backToBot = new BackToBotImpl();
+		return backToBot;
 	}
 
 	/**

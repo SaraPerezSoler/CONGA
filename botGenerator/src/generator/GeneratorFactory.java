@@ -49,6 +49,15 @@ public interface GeneratorFactory extends EFactory {
 	UserInteraction createUserInteraction();
 
 	/**
+	 * Returns a new object of class '<em>Back To Bot</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Back To Bot</em>'.
+	 * @generated
+	 */
+	BackToBot createBackToBot();
+
+	/**
 	 * Returns a new object of class '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

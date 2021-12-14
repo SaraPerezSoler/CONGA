@@ -859,33 +859,91 @@ ruleTransition returns [EObject current=null]
 				)
 				    |
 				(
-					otherlv_6='back'
-					{
-						newLeafNode(otherlv_6, grammarAccess.getTransitionAccess().getBackKeyword_3_1_1_0());
-					}
-					otherlv_7='to'
-					{
-						newLeafNode(otherlv_7, grammarAccess.getTransitionAccess().getToKeyword_3_1_1_1());
-					}
 					(
-						(
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getTransitionRule());
-								}
+						{
+							newCompositeNode(grammarAccess.getTransitionAccess().getBackToBackToBotParserRuleCall_3_1_1_0());
+						}
+						lv_backTo_6_0=ruleBackToBot
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getTransitionRule());
 							}
-							{
-								newCompositeNode(grammarAccess.getTransitionAccess().getBackToBotInteractionCrossReference_3_1_1_2_0());
-							}
-							ruleEString
-							{
-								afterParserOrEnumRuleCall();
-							}
-						)
+							set(
+								$current,
+								"backTo",
+								lv_backTo_6_0,
+								"org.xtext.botGenerator.Bot.BackToBot");
+							afterParserOrEnumRuleCall();
+						}
 					)
 				)
 			)
 		)?
+	)
+;
+
+// Entry rule entryRuleBackToBot
+entryRuleBackToBot returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getBackToBotRule()); }
+	iv_ruleBackToBot=ruleBackToBot
+	{ $current=$iv_ruleBackToBot.current; }
+	EOF;
+
+// Rule BackToBot
+ruleBackToBot returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0='prev'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getBackToBotAccess().getPrevKeyword_0_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getBackToBotRule());
+						}
+					}
+					{
+						newCompositeNode(grammarAccess.getBackToBotAccess().getPreviousActionCrossReference_0_1_0());
+					}
+					ruleEString
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)+
+		)?
+		otherlv_2='back'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getBackToBotAccess().getBackKeyword_1());
+		}
+		otherlv_3='to'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getBackToBotAccess().getToKeyword_2());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getBackToBotRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getBackToBotAccess().getBackToBotInteractionCrossReference_3_0());
+				}
+				ruleEString
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 

@@ -516,7 +516,7 @@ class BotValidator extends AbstractBotValidator {
 	@Check
 	def loopsPath (UserInteraction interaction){
 		if (interaction.backTo!== null){
-			if (pathContainsBotInteraction(interaction, interaction.backTo)===false){
+			if (pathContainsBotInteraction(interaction, interaction.backTo.backTo)===false){
 				error("Back to bot interaction must be in the same path, previously",
 							GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
 			}
@@ -572,7 +572,7 @@ class BotValidator extends AbstractBotValidator {
 	@Check
 	def loopsSeveralPaths (UserInteraction interaction){
 		if (interaction.backTo!== null){
-			if (!hasStopCondition(interaction.backTo)){
+			if (!hasStopCondition(interaction.backTo.backTo)){
 				error("There is an endless loop, ensure there is at least one path with end",
 						GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
 			}

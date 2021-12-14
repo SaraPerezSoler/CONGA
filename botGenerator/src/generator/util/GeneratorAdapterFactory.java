@@ -84,6 +84,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createUserInteractionAdapter();
 			}
 			@Override
+			public Adapter caseBackToBot(BackToBot object) {
+				return createBackToBotAdapter();
+			}
+			@Override
 			public Adapter caseElement(Element object) {
 				return createElementAdapter();
 			}
@@ -288,6 +292,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserInteractionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.BackToBot <em>Back To Bot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.BackToBot
+	 * @generated
+	 */
+	public Adapter createBackToBotAdapter() {
 		return null;
 	}
 

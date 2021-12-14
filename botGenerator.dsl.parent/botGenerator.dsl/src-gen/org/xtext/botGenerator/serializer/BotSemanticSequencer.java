@@ -4,6 +4,7 @@
 package org.xtext.botGenerator.serializer;
 
 import com.google.inject.Inject;
+import generator.BackToBot;
 import generator.Bot;
 import generator.BotInteraction;
 import generator.Button;
@@ -59,6 +60,9 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == GeneratorPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case GeneratorPackage.BACK_TO_BOT:
+				sequence_BackToBot(context, (BackToBot) semanticObject); 
+				return; 
 			case GeneratorPackage.BOT:
 				sequence_Bot(context, (Bot) semanticObject); 
 				return; 
@@ -222,6 +226,18 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     BackToBot returns BackToBot
+	 *
+	 * Constraint:
+	 *     (previous+=[Action|EString]* backTo=[BotInteraction|EString])
+	 */
+	protected void sequence_BackToBot(ISerializationContext context, BackToBot semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -793,7 +809,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Transition returns UserInteraction
 	 *
 	 * Constraint:
-	 *     (name=EString? intent=[Intent|EString] (target=State | target=State2 | backTo=[BotInteraction|EString])?)
+	 *     (name=EString? intent=[Intent|EString] (target=State | target=State2 | backTo=BackToBot)?)
 	 */
 	protected void sequence_Transition(ISerializationContext context, UserInteraction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

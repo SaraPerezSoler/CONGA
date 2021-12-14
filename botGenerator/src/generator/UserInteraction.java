@@ -117,25 +117,25 @@ public interface UserInteraction extends Interaction {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Back To</b></em>' reference.
+	 * Returns the value of the '<em><b>Back To</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Back To</em>' reference.
-	 * @see #setBackTo(BotInteraction)
+	 * @return the value of the '<em>Back To</em>' containment reference.
+	 * @see #setBackTo(BackToBot)
 	 * @see generator.GeneratorPackage#getUserInteraction_BackTo()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	BotInteraction getBackTo();
+	BackToBot getBackTo();
 
 	/**
-	 * Sets the value of the '{@link generator.UserInteraction#getBackTo <em>Back To</em>}' reference.
+	 * Sets the value of the '{@link generator.UserInteraction#getBackTo <em>Back To</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Back To</em>' reference.
+	 * @param value the new value of the '<em>Back To</em>' containment reference.
 	 * @see #getBackTo()
 	 * @generated
 	 */
-	void setBackTo(BotInteraction value);
+	void setBackTo(BackToBot value);
 
 } // UserInteraction

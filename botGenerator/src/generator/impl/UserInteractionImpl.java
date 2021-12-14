@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.BackToBot;
 import generator.BotInteraction;
 import generator.GeneratorPackage;
 import generator.Intent;
@@ -76,14 +77,14 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' reference.
+	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getBackTo()
 	 * @generated
 	 * @ordered
 	 */
-	protected BotInteraction backTo;
+	protected BackToBot backTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,15 +262,7 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @generated
 	 */
 	@Override
-	public BotInteraction getBackTo() {
-		if (backTo != null && backTo.eIsProxy()) {
-			InternalEObject oldBackTo = (InternalEObject)backTo;
-			backTo = (BotInteraction)eResolveProxy(oldBackTo);
-			if (backTo != oldBackTo) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, backTo));
-			}
-		}
+	public BackToBot getBackTo() {
 		return backTo;
 	}
 
@@ -278,8 +271,14 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BotInteraction basicGetBackTo() {
-		return backTo;
+	public NotificationChain basicSetBackTo(BackToBot newBackTo, NotificationChain msgs) {
+		BackToBot oldBackTo = backTo;
+		backTo = newBackTo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, newBackTo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -288,11 +287,18 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @generated
 	 */
 	@Override
-	public void setBackTo(BotInteraction newBackTo) {
-		BotInteraction oldBackTo = backTo;
-		backTo = newBackTo;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, backTo));
+	public void setBackTo(BackToBot newBackTo) {
+		if (newBackTo != backTo) {
+			NotificationChain msgs = null;
+			if (backTo != null)
+				msgs = ((InternalEObject)backTo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.USER_INTERACTION__BACK_TO, null, msgs);
+			if (newBackTo != null)
+				msgs = ((InternalEObject)newBackTo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.USER_INTERACTION__BACK_TO, null, msgs);
+			msgs = basicSetBackTo(newBackTo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, newBackTo, newBackTo));
 	}
 
 	/**
@@ -327,6 +333,8 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return basicSetSrc(null, msgs);
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return basicSetTarget(null, msgs);
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				return basicSetBackTo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -363,8 +371,7 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 			case GeneratorPackage.USER_INTERACTION__NAME:
 				return getName();
 			case GeneratorPackage.USER_INTERACTION__BACK_TO:
-				if (resolve) return getBackTo();
-				return basicGetBackTo();
+				return getBackTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -390,7 +397,7 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				setName((String)newValue);
 				return;
 			case GeneratorPackage.USER_INTERACTION__BACK_TO:
-				setBackTo((BotInteraction)newValue);
+				setBackTo((BackToBot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -417,7 +424,7 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				setName(NAME_EDEFAULT);
 				return;
 			case GeneratorPackage.USER_INTERACTION__BACK_TO:
-				setBackTo((BotInteraction)null);
+				setBackTo((BackToBot)null);
 				return;
 		}
 		super.eUnset(featureID);

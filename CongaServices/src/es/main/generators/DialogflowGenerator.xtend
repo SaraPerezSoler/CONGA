@@ -263,14 +263,15 @@ class DialogflowGenerator extends BotGenerator {
 	}
 
 	def intentFile(UserInteraction transition, String prefix, Bot bot) {
-		var actions = null as List<Action>;
-	
-		if (transition.target!==null){
-			actions = transition.target.actions;
-		}else if (transition.backTo!== null){
-			actions = transition.backTo.actions;
+		var actions = new ArrayList();
+
+		if (transition.target !== null) {
+			actions.addAll(transition.target.actions);
+		} else if (transition.backTo !== null) {
+			actions.addAll(transition.backTo.previous);
+			actions.addAll(transition.backTo.backTo.actions)
 		}
-		
+
 		'''
 			«var webhook =false»
 			«var contextComa = ""»
@@ -306,11 +307,11 @@ class DialogflowGenerator extends BotGenerator {
 							«ELSEIF transition.backTo !== null»
 								«contextComa»
 								{
-									"name": "«affectedContext.get(transition.backTo.incoming)»",
+									"name": "«affectedContext.get(transition.backTo.backTo.incoming)»",
 									"parameters": {},
 									"lifespan": 2
 								}«{contextComa= ","; ""}»
-								«FOR UserInteraction backTo: transition.backTo.backTo»
+								«FOR UserInteraction backTo: transition.backTo.backTo.backTo»
 									«contextComa»
 									{
 										"name": "«affectedContext.get(backTo.src.incoming)»",
@@ -395,7 +396,7 @@ class DialogflowGenerator extends BotGenerator {
 												«FOR button: texLanguage.buttons»
 													{
 														"text": "«button.value»"«IF button.action!== null»,
-															"postback": "«button.action»"
+																"postback": "«button.action»"
 														«ENDIF»
 													}«IF !isTheLast(texLanguage.buttons, button)», «ENDIF»
 												«ENDFOR» 

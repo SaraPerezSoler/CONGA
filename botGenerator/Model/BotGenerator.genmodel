@@ -78,6 +78,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//UserInteraction/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//UserInteraction/backTo"/>
     </genClasses>
+    <genClasses ecoreClass="BotGenerator.ecore#//BackToBot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//BackToBot/previous"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//BackToBot/backTo"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="BotGenerator.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//Element/name"/>
     </genClasses>
