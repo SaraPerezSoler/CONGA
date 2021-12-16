@@ -218,7 +218,7 @@ class DialogflowGenerator extends BotGenerator {
 		ret += "\""
 		for (Token token : input.tokens) {
 			if (token instanceof Literal) {
-				ret += token.text + " "
+				ret += token.text.replaceAll("\n", "\\n") + " "
 			} else if (token instanceof ParameterToken) {
 
 				ret += answerParam(token, transition)

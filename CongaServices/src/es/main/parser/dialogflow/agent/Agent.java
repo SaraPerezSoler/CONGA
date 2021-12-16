@@ -23,7 +23,7 @@ import generator.TextInput;
 import generator.TextLanguageInput;
 import generator.UserInteraction;
 
-public class Agent extends Chatbot{
+public class Agent extends Chatbot {
 
 	private String name;
 	private String language;
@@ -37,6 +37,8 @@ public class Agent extends Chatbot{
 
 	private Map<Action, List<Action>> similarActions = new HashMap<Action, List<Action>>();
 	private Map<generator.Intent, List<generator.Intent>> similarIntents = new HashMap<>();
+
+	private Map<Integer, Map<Intent, UserInteraction>> flow_intent = new HashMap<Integer, Map<Intent, UserInteraction>>();
 
 	public Agent() {
 	}
@@ -92,7 +94,7 @@ public class Agent extends Chatbot{
 		}
 		return intents;
 	}
-	
+
 	public Intent getIntentsByAffectedContext(String context) {
 		for (Intent intent : getIntents()) {
 			if (intent.containsAffectedContext(context)) {
@@ -100,7 +102,7 @@ public class Agent extends Chatbot{
 			}
 		}
 		return null;
-		
+
 	}
 
 	public void setIntents(List<Intent> intents) {
@@ -128,10 +130,10 @@ public class Agent extends Chatbot{
 		}
 		for (Entity entity : getEntities()) {
 			generator.Entity botEntity = entity.getBotEntity();
-			int i=1;
+			int i = 1;
 			String name = botEntity.getName();
-			while (bot.containsElement(botEntity.getName())==true) {
-				botEntity.setName(name+i);
+			while (bot.containsElement(botEntity.getName()) == true) {
+				botEntity.setName(name + i);
 				i++;
 			}
 			bot.getEntities().add(botEntity);
@@ -154,10 +156,11 @@ public class Agent extends Chatbot{
 				saveAction(action, bot);
 			}
 		}
-
+		int i = 0;
 		for (Intent intent : getIntents()) {
 			if (intent.getContexts().isEmpty()) {
-				bot.getFlows().add(startFlow(intent, bot));
+				bot.getFlows().add(startFlow(intent, bot, i));
+				i++;
 			}
 		}
 
@@ -177,13 +180,13 @@ public class Agent extends Chatbot{
 			}
 		}
 		if (hasSimiliar == false) {
-			int i=1;
+			int i = 1;
 			String name = botIntent.getName();
-			while (bot.containsElement(botIntent.getName())==true) {
-				botIntent.setName(name+i);
+			while (bot.containsElement(botIntent.getName()) == true) {
+				botIntent.setName(name + i);
 				i++;
 			}
-			
+
 			List<generator.Intent> list = new ArrayList<generator.Intent>();
 			list.add(botIntent);
 			similarIntents.put(botIntent, list);
@@ -214,13 +217,13 @@ public class Agent extends Chatbot{
 			}
 		}
 		if (hasSimiliar == false) {
-			int i=1;
+			int i = 1;
 			String name = action.getName();
-			while (bot.containsElement(action.getName())==true) {
-				action.setName(name+i);
+			while (bot.containsElement(action.getName()) == true) {
+				action.setName(name + i);
 				i++;
 			}
-			
+
 			List<Action> list = new ArrayList<Action>();
 			list.add(action);
 			similarActions.put(action, list);
@@ -237,21 +240,27 @@ public class Agent extends Chatbot{
 		return null;
 	}
 
-	private UserInteraction startFlow(Intent intent, Bot bot) {
+	private UserInteraction startFlow(Intent intent, Bot bot, int numPath) {
 		UserInteraction interaction = null;
 		for (UserInteraction aux : bot.getFlows()) {
 			if (aux.getIntent().equals(getIntent(intent.getBotIntent(bot)))) {
 				interaction = aux;
+				numPath = bot.getFlows().indexOf(aux);
 				break;
 			}
 		}
-		return completeInteraction(interaction, intent, bot);
+		if (interaction == null) {
+			flow_intent.put(numPath, new HashMap<Intent, UserInteraction>());
+		}
+		return completeInteraction(interaction, intent, bot, numPath);
 
 	}
-	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot){
+
+	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot, int numPath) {
 		if (interaction == null) {
 			interaction = GeneratorFactory.eINSTANCE.createUserInteraction();
 			interaction.setIntent(getIntent(intent.getBotIntent(bot)));
+			flow_intent.get(numPath).put(intent, interaction);
 		}
 		BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
 		for (Action act : intent.getBotIntentActions(bot, this)) {
@@ -263,17 +272,23 @@ public class Agent extends Chatbot{
 			botInteraction.getActions().add(empty);
 		}
 		interaction.setTarget(botInteraction);
-		
+
 		List<Context> affectedContext = new ArrayList<>();
-		intent.getResponses().forEach((r)->affectedContext.addAll(r.getAffectedContexts()));
+		intent.getResponses().forEach((r) -> affectedContext.addAll(r.getAffectedContexts()));
 		for (Context context : affectedContext) {
 			for (Intent followUp : getIntents(context)) {
-				botInteraction.getOutcoming().add(continueFlow(followUp, bot, botInteraction));
+				if (flow_intent.get(numPath).containsKey(followUp)) {
+					botInteraction.getBackTo().add(flow_intent.get(numPath).get(followUp));
+				} else {
+					UserInteraction aux = continueFlow(followUp, bot, botInteraction, numPath);
+					botInteraction.getOutcoming().add(aux);
+				}
 			}
 		}
 		return interaction;
 	}
-	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction) {
+
+	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction, int numPath) {
 		UserInteraction interaction = null;
 		for (UserInteraction aux : prevBotInteraction.getOutcoming()) {
 			if (aux.getIntent().equals(getIntent(intent.getBotIntent(bot)))) {
@@ -281,9 +296,9 @@ public class Agent extends Chatbot{
 				break;
 			}
 		}
-		return completeInteraction(interaction, intent, bot);
+		return completeInteraction(interaction, intent, bot, numPath);
 	}
-	
+
 	public static Language castLanguage(String language) {
 		if (language == null) {
 			return Language.ENGLISH;
@@ -357,6 +372,5 @@ public class Agent extends Chatbot{
 		languages.addAll(getSupportedLanguages());
 		return languages;
 	}
-
 
 }
