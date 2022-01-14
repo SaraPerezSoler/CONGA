@@ -41,22 +41,23 @@ IntentLanguageInputs returns IntentLanguageInputs:
 ;
 
 Transition returns UserInteraction:
-	(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State|State2) |  backTo=BackToBot))?
+	(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State2|State) |  backTo=BackToBot))?
 ;
 
 BackToBot returns BackToBot:
-	('prev' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
+	('chatbot' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
 ;
 
+State2 returns BotInteraction:
+	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('{'
+	  ('=>' ((outcoming+=Transition)| ('back' 'to' backTo+=[UserInteraction|EString]))';')+
+	 '}')?
+;
 
 State returns BotInteraction:
-	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | 'back' 'to' backTo+=[UserInteraction|EString]))? 
+	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | ('back' 'to' backTo+=[UserInteraction|EString]))) 
 ;
-State2 returns BotInteraction:
-	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
-	  ('=>' (outcoming+=Transition| 'back' 'to' backTo+=[UserInteraction|EString])';')+
-	 '}'
-;
+
 IntentInput returns IntentInput:
 	TrainingPhrase | RegexInput
 ;

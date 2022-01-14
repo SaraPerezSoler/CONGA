@@ -711,7 +711,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     State2 returns BotInteraction
 	 *
 	 * Constraint:
-	 *     (name=EString? actions+=[Action|EString] actions+=[Action|EString]* (outcoming+=Transition | backTo+=[UserInteraction|EString])+)
+	 *     (name=EString? actions+=[Action|EString] actions+=[Action|EString]* (outcoming+=Transition | backTo+=[UserInteraction|EString])*)
 	 */
 	protected void sequence_State2(ISerializationContext context, BotInteraction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -723,7 +723,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     State returns BotInteraction
 	 *
 	 * Constraint:
-	 *     (name=EString? actions+=[Action|EString] actions+=[Action|EString]* (outcoming+=Transition | backTo+=[UserInteraction|EString])?)
+	 *     (name=EString? actions+=[Action|EString] actions+=[Action|EString]* (outcoming+=Transition | backTo+=[UserInteraction|EString]))
 	 */
 	protected void sequence_State(ISerializationContext context, BotInteraction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -809,7 +809,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Transition returns UserInteraction
 	 *
 	 * Constraint:
-	 *     (name=EString? intent=[Intent|EString] (target=State | target=State2 | backTo=BackToBot)?)
+	 *     (name=EString? intent=[Intent|EString] (target=State2 | target=State | backTo=BackToBot)?)
 	 */
 	protected void sequence_Transition(ISerializationContext context, UserInteraction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

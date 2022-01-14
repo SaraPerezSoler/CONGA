@@ -824,9 +824,9 @@ ruleTransition returns [EObject current=null]
 					(
 						(
 							{
-								newCompositeNode(grammarAccess.getTransitionAccess().getTargetStateParserRuleCall_3_1_0_0_0());
+								newCompositeNode(grammarAccess.getTransitionAccess().getTargetState2ParserRuleCall_3_1_0_0_0());
 							}
-							lv_target_5_1=ruleState
+							lv_target_5_1=ruleState2
 							{
 								if ($current==null) {
 									$current = createModelElementForParent(grammarAccess.getTransitionRule());
@@ -835,14 +835,14 @@ ruleTransition returns [EObject current=null]
 									$current,
 									"target",
 									lv_target_5_1,
-									"org.xtext.botGenerator.Bot.State");
+									"org.xtext.botGenerator.Bot.State2");
 								afterParserOrEnumRuleCall();
 							}
 							    |
 							{
-								newCompositeNode(grammarAccess.getTransitionAccess().getTargetState2ParserRuleCall_3_1_0_0_1());
+								newCompositeNode(grammarAccess.getTransitionAccess().getTargetStateParserRuleCall_3_1_0_0_1());
 							}
-							lv_target_5_2=ruleState2
+							lv_target_5_2=ruleState
 							{
 								if ($current==null) {
 									$current = createModelElementForParent(grammarAccess.getTransitionRule());
@@ -851,7 +851,7 @@ ruleTransition returns [EObject current=null]
 									$current,
 									"target",
 									lv_target_5_2,
-									"org.xtext.botGenerator.Bot.State2");
+									"org.xtext.botGenerator.Bot.State");
 								afterParserOrEnumRuleCall();
 							}
 						)
@@ -899,9 +899,9 @@ ruleBackToBot returns [EObject current=null]
 }:
 	(
 		(
-			otherlv_0='prev'
+			otherlv_0='chatbot'
 			{
-				newLeafNode(otherlv_0, grammarAccess.getBackToBotAccess().getPrevKeyword_0_0());
+				newLeafNode(otherlv_0, grammarAccess.getBackToBotAccess().getChatbotKeyword_0_0());
 			}
 			(
 				(
@@ -944,6 +944,160 @@ ruleBackToBot returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleState2
+entryRuleState2 returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getState2Rule()); }
+	iv_ruleState2=ruleState2
+	{ $current=$iv_ruleState2.current; }
+	EOF;
+
+// Rule State2
+ruleState2 returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getState2Access().getNameEStringParserRuleCall_0_0_0());
+					}
+					lv_name_0_0=ruleEString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getState2Rule());
+						}
+						set(
+							$current,
+							"name",
+							lv_name_0_0,
+							"org.xtext.botGenerator.Bot.EString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_1=':'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getState2Access().getColonKeyword_0_1());
+			}
+		)?
+		otherlv_2='chatbot'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getState2Access().getChatbotKeyword_1());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getState2Rule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getState2Access().getActionsActionCrossReference_2_0());
+				}
+				ruleEString
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_4=','
+			{
+				newLeafNode(otherlv_4, grammarAccess.getState2Access().getCommaKeyword_3_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getState2Rule());
+						}
+					}
+					{
+						newCompositeNode(grammarAccess.getState2Access().getActionsActionCrossReference_3_1_0());
+					}
+					ruleEString
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		(
+			otherlv_6='{'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getState2Access().getLeftCurlyBracketKeyword_4_0());
+			}
+			(
+				otherlv_7='=>'
+				{
+					newLeafNode(otherlv_7, grammarAccess.getState2Access().getEqualsSignGreaterThanSignKeyword_4_1_0());
+				}
+				(
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getState2Access().getOutcomingTransitionParserRuleCall_4_1_1_0_0());
+							}
+							lv_outcoming_8_0=ruleTransition
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getState2Rule());
+								}
+								add(
+									$current,
+									"outcoming",
+									lv_outcoming_8_0,
+									"org.xtext.botGenerator.Bot.Transition");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+					    |
+					(
+						otherlv_9='back'
+						{
+							newLeafNode(otherlv_9, grammarAccess.getState2Access().getBackKeyword_4_1_1_1_0());
+						}
+						otherlv_10='to'
+						{
+							newLeafNode(otherlv_10, grammarAccess.getState2Access().getToKeyword_4_1_1_1_1());
+						}
+						(
+							(
+								{
+									if ($current==null) {
+										$current = createModelElement(grammarAccess.getState2Rule());
+									}
+								}
+								{
+									newCompositeNode(grammarAccess.getState2Access().getBackToUserInteractionCrossReference_4_1_1_1_2_0());
+								}
+								ruleEString
+								{
+									afterParserOrEnumRuleCall();
+								}
+							)
+						)
+					)
+				)
+				otherlv_12=';'
+				{
+					newLeafNode(otherlv_12, grammarAccess.getState2Access().getSemicolonKeyword_4_1_2());
+				}
+			)+
+			otherlv_13='}'
+			{
+				newLeafNode(otherlv_13, grammarAccess.getState2Access().getRightCurlyBracketKeyword_4_2());
+			}
+		)?
 	)
 ;
 
@@ -1083,159 +1237,7 @@ ruleState returns [EObject current=null]
 					)
 				)
 			)
-		)?
-	)
-;
-
-// Entry rule entryRuleState2
-entryRuleState2 returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getState2Rule()); }
-	iv_ruleState2=ruleState2
-	{ $current=$iv_ruleState2.current; }
-	EOF;
-
-// Rule State2
-ruleState2 returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getState2Access().getNameEStringParserRuleCall_0_0_0());
-					}
-					lv_name_0_0=ruleEString
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getState2Rule());
-						}
-						set(
-							$current,
-							"name",
-							lv_name_0_0,
-							"org.xtext.botGenerator.Bot.EString");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			otherlv_1=':'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getState2Access().getColonKeyword_0_1());
-			}
-		)?
-		otherlv_2='chatbot'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getState2Access().getChatbotKeyword_1());
-		}
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getState2Rule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getState2Access().getActionsActionCrossReference_2_0());
-				}
-				ruleEString
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
 		)
-		(
-			otherlv_4=','
-			{
-				newLeafNode(otherlv_4, grammarAccess.getState2Access().getCommaKeyword_3_0());
-			}
-			(
-				(
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getState2Rule());
-						}
-					}
-					{
-						newCompositeNode(grammarAccess.getState2Access().getActionsActionCrossReference_3_1_0());
-					}
-					ruleEString
-					{
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		otherlv_6='{'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getState2Access().getLeftCurlyBracketKeyword_4());
-		}
-		(
-			otherlv_7='=>'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getState2Access().getEqualsSignGreaterThanSignKeyword_5_0());
-			}
-			(
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getState2Access().getOutcomingTransitionParserRuleCall_5_1_0_0());
-						}
-						lv_outcoming_8_0=ruleTransition
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getState2Rule());
-							}
-							add(
-								$current,
-								"outcoming",
-								lv_outcoming_8_0,
-								"org.xtext.botGenerator.Bot.Transition");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-				    |
-				(
-					otherlv_9='back'
-					{
-						newLeafNode(otherlv_9, grammarAccess.getState2Access().getBackKeyword_5_1_1_0());
-					}
-					otherlv_10='to'
-					{
-						newLeafNode(otherlv_10, grammarAccess.getState2Access().getToKeyword_5_1_1_1());
-					}
-					(
-						(
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getState2Rule());
-								}
-							}
-							{
-								newCompositeNode(grammarAccess.getState2Access().getBackToUserInteractionCrossReference_5_1_1_2_0());
-							}
-							ruleEString
-							{
-								afterParserOrEnumRuleCall();
-							}
-						)
-					)
-				)
-			)
-			otherlv_12=';'
-			{
-				newLeafNode(otherlv_12, grammarAccess.getState2Access().getSemicolonKeyword_5_2());
-			}
-		)+
-		otherlv_13='}'
-		{
-			newLeafNode(otherlv_13, grammarAccess.getState2Access().getRightCurlyBracketKeyword_6());
-		}
 	)
 ;
 

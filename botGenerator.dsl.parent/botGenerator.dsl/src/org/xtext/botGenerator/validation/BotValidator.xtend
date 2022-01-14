@@ -561,7 +561,7 @@ class BotValidator extends AbstractBotValidator {
 			if (!interaction.backTo.isEmpty){
 				for (UserInteraction user: interaction.backTo){
 					if (!hasStopCondition(user)){
-						error("There is an endless loop, ensure there is at least one path with end",
+						warning("There is an endless loop, ensure there is at least one path with end",
 								GeneratorPackage.Literals.BOT_INTERACTION__BACK_TO)
 					}
 				}
@@ -573,7 +573,7 @@ class BotValidator extends AbstractBotValidator {
 	def loopsSeveralPaths (UserInteraction interaction){
 		if (interaction.backTo!== null){
 			if (!hasStopCondition(interaction.backTo.backTo)){
-				error("There is an endless loop, ensure there is at least one path with end",
+				warning("There is an endless loop, ensure there is at least one path with end",
 						GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
 			}
 		}

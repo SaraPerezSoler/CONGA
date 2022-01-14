@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ButtonsLanguageInputs extends WithLanguage {
+public interface ButtonsLanguageInputs extends WithLanguage, Comparable{
 	/**
 	 * Returns the value of the '<em><b>Text</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

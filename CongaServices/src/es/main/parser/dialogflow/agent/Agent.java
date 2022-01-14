@@ -38,7 +38,7 @@ public class Agent extends Chatbot {
 	private Map<Action, List<Action>> similarActions = new HashMap<Action, List<Action>>();
 	private Map<generator.Intent, List<generator.Intent>> similarIntents = new HashMap<>();
 
-	private Map<Integer, Map<Intent, UserInteraction>> flow_intent = new HashMap<Integer, Map<Intent, UserInteraction>>();
+	private Map<String, Map<Intent, UserInteraction>> flow_intent = new HashMap<String, Map<Intent, UserInteraction>>();
 
 	public Agent() {
 	}
@@ -249,20 +249,27 @@ public class Agent extends Chatbot {
 				break;
 			}
 		}
-		if (interaction == null) {
-			flow_intent.put(numPath, new HashMap<Intent, UserInteraction>());
-		}
-		return completeInteraction(interaction, intent, bot, numPath);
+		
+		return completeInteraction(interaction, intent, bot, numPath+"");
 
 	}
-
-	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot, int numPath) {
+	private int num_userInteraction = 1;
+	private int num_botInteraction = 1;
+	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot, String numPath) {
 		if (interaction == null) {
 			interaction = GeneratorFactory.eINSTANCE.createUserInteraction();
 			interaction.setIntent(getIntent(intent.getBotIntent(bot)));
+			interaction.setName("user"+num_userInteraction);
+			num_userInteraction++;
+			
+			if (flow_intent.get(numPath)==null) {
+				flow_intent.put(numPath, new HashMap<Intent, UserInteraction>());
+			}
 			flow_intent.get(numPath).put(intent, interaction);
 		}
 		BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
+		botInteraction.setName("bot"+num_botInteraction);
+		num_botInteraction++;
 		for (Action act : intent.getBotIntentActions(bot, this)) {
 			botInteraction.getActions().add(getAction(act));
 		}
@@ -276,19 +283,38 @@ public class Agent extends Chatbot {
 		List<Context> affectedContext = new ArrayList<>();
 		intent.getResponses().forEach((r) -> affectedContext.addAll(r.getAffectedContexts()));
 		for (Context context : affectedContext) {
+			int i = 0;
 			for (Intent followUp : getIntents(context)) {
-				if (flow_intent.get(numPath).containsKey(followUp)) {
-					botInteraction.getBackTo().add(flow_intent.get(numPath).get(followUp));
+				UserInteraction aux = getInPath(numPath, followUp);
+				if (aux != null) {
+					botInteraction.getBackTo().add(aux);
 				} else {
-					UserInteraction aux = continueFlow(followUp, bot, botInteraction, numPath);
+					aux = continueFlow(followUp, bot, botInteraction, numPath+"_"+i);
 					botInteraction.getOutcoming().add(aux);
+					i++;
 				}
 			}
 		}
 		return interaction;
 	}
+	
+	private UserInteraction getInPath(String numPath, Intent followUp) {
+		String[] nums = numPath.split("_");
+		String path="";
+		String sep = "";
+		for (String n: nums) {
+			path += sep+n;
+			sep = "_";
+			if (flow_intent.get(path)!= null) {
+				if (flow_intent.get(path).containsKey(followUp)) {
+					return flow_intent.get(path).get(followUp);
+				}
+			}
+		}
+		return null;
+	}
 
-	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction, int numPath) {
+	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction, String numPath) {
 		UserInteraction interaction = null;
 		for (UserInteraction aux : prevBotInteraction.getOutcoming()) {
 			if (aux.getIntent().equals(getIntent(intent.getBotIntent(bot)))) {

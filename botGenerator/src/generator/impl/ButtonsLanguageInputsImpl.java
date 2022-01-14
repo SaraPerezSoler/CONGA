@@ -4,6 +4,7 @@ package generator.impl;
 
 import generator.Button;
 import generator.ButtonsLanguageInputs;
+import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.TextInput;
 
@@ -219,5 +220,29 @@ public class ButtonsLanguageInputsImpl extends WithLanguageImpl implements Butto
 		}
 		return super.eIsSet(featureID);
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ButtonsLanguageInputsImpl other = (ButtonsLanguageInputsImpl) obj;
+		if (buttons == null) {
+			if (other.buttons != null)
+				return false;
+		} else if (!isSimilar(getButtons(), other.getButtons()))
+			return false;
+		if (text == null) {
+			if (other.text != null)
+				return false;
+		} else if (!text.isSimilarTo(other.text))
+			return false;
+		return true;
+	}
+	
+	
 
 } //ButtonsLanguageInputsImpl

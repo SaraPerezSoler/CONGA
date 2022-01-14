@@ -3,6 +3,7 @@
 package generator.impl;
 
 import generator.Button;
+import generator.Comparable;
 import generator.GeneratorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -217,5 +218,28 @@ public class ButtonImpl extends MinimalEObjectImpl.Container implements Button {
 		result.append(')');
 		return result.toString();
 	}
+
+	@Override
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ButtonImpl other = (ButtonImpl) obj;
+		if (action == null) {
+			if (other.action != null)
+				return false;
+		} else if (!action.equals(other.action))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
 
 } //ButtonImpl

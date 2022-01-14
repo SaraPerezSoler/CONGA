@@ -151,11 +151,24 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 	}
 
 	@Override
-	public boolean isSimilarTo(Comparable other) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ButtonActionImpl other = (ButtonActionImpl) obj;
+		if (inputs == null) {
+			if (other.inputs != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
+			return false;
+		return true;
 	}
 
+	
+	
 	@Override
 	public ButtonsLanguageInputs getInput(Language lan) {
 		for (ButtonsLanguageInputs  buttonLang: getInputs()) {
