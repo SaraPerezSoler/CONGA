@@ -105,13 +105,18 @@ public class Message {
 	}
 
 	public Action getBotAction(Intent intent, int textCounter, int imgCounter, int buttonCounter, Bot bot, Agent agent) {
+		
+		if (getType() == CARD_TYPE && (getButtons()== null || getButtons().isEmpty())) {
+			getSpeech().add(title+subtitle);
+		}
+		
 		if (getType() == IMAGE_TYPE) {
 			String actionName = intent.getName() + "ImgResp" + imgCounter;
 			Image ret = GeneratorFactory.eINSTANCE.createImage();
 			ret.setName(actionName);
 			ret.setURL(getImageUrl());
 			return ret;
-		}else if (getType() == CARD_TYPE) {
+		}else if (getType() == CARD_TYPE && getButtons()!= null && !getButtons().isEmpty()) {
 			
 			ButtonsLanguageInputs buttonLang =  GeneratorFactory.eINSTANCE.createButtonsLanguageInputs();
 			buttonLang.setLanguage(Agent.castLanguage(getLang()));
