@@ -94,6 +94,8 @@
 													level = "alert-secondary";
 												}else if (score == 100) {
 													level = "alert-success";
+												} else if (score >= 75) {
+													level = "alert-info";
 												} else if (score >= 50) {
 													level = "alert-warning";
 												} else {

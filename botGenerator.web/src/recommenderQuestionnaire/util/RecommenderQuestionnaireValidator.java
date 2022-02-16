@@ -155,9 +155,12 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(option, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(option, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOption_allToolsRegister(option, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOption_toolInAcceptedAndRefused(option, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOption_toolInRefusedAndUnknown(option, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOption_toolInAcceptedAndUnkown(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInAvailableAndUnavailable(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInAvailableAndPossible(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInAvailableAndUnkown(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInUnavailableAndUnknown(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInUnavailableAndPossible(option, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOption_toolInPossibleAndUnknown(option, diagnostics, context);
 		return result;
 	}
 
@@ -168,7 +171,7 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 	 * @generated
 	 */
 	protected static final String OPTION__ALL_TOOLS_REGISTER__EEXPRESSION = "Tool.allInstances()->forAll(t |\n" +
-		"\t\t\t\tself.acceptedTools->includes(t) or self.refusedTools->includes(t) or self.unknown->includes(t))";
+		"\t\t\t\tself.available->includes(t) or self.unavailable->includes(t) or self.unknown->includes(t) or self.possible->includes(t))";
 
 	/**
 	 * Validates the allToolsRegister constraint of '<em>Option</em>'.
@@ -192,21 +195,21 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 	}
 
 	/**
-	 * The cached validation expression for the toolInAcceptedAndRefused constraint of '<em>Option</em>'.
+	 * The cached validation expression for the toolInAvailableAndUnavailable constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final String OPTION__TOOL_IN_ACCEPTED_AND_REFUSED__EEXPRESSION = "Tool.allInstances()->forAll(t | self.acceptedTools->includes(t) implies not\n" +
-		"\t\t\t\tself.refusedTools->includes(t))";
+	protected static final String OPTION__TOOL_IN_AVAILABLE_AND_UNAVAILABLE__EEXPRESSION = "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n" +
+		"\t\t\t\tself.unavailable->includes(t))";
 
 	/**
-	 * Validates the toolInAcceptedAndRefused constraint of '<em>Option</em>'.
+	 * Validates the toolInAvailableAndUnavailable constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOption_toolInAcceptedAndRefused(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateOption_toolInAvailableAndUnavailable(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			validate
 				(RecommenderQuestionnairePackage.Literals.OPTION,
@@ -214,29 +217,29 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 				 diagnostics,
 				 context,
 				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 "toolInAcceptedAndRefused",
-				 OPTION__TOOL_IN_ACCEPTED_AND_REFUSED__EEXPRESSION,
+				 "toolInAvailableAndUnavailable",
+				 OPTION__TOOL_IN_AVAILABLE_AND_UNAVAILABLE__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 DIAGNOSTIC_SOURCE,
 				 0);
 	}
 
 	/**
-	 * The cached validation expression for the toolInRefusedAndUnknown constraint of '<em>Option</em>'.
+	 * The cached validation expression for the toolInAvailableAndPossible constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final String OPTION__TOOL_IN_REFUSED_AND_UNKNOWN__EEXPRESSION = "Tool.allInstances()->forAll(t | self.refusedTools->includes(t) implies not\n" +
-		"\t\t\t\tself.unknown->includes(t))";
+	protected static final String OPTION__TOOL_IN_AVAILABLE_AND_POSSIBLE__EEXPRESSION = "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n" +
+		"\t\t\t\tself.possible->includes(t))";
 
 	/**
-	 * Validates the toolInRefusedAndUnknown constraint of '<em>Option</em>'.
+	 * Validates the toolInAvailableAndPossible constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOption_toolInRefusedAndUnknown(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateOption_toolInAvailableAndPossible(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			validate
 				(RecommenderQuestionnairePackage.Literals.OPTION,
@@ -244,29 +247,29 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 				 diagnostics,
 				 context,
 				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 "toolInRefusedAndUnknown",
-				 OPTION__TOOL_IN_REFUSED_AND_UNKNOWN__EEXPRESSION,
+				 "toolInAvailableAndPossible",
+				 OPTION__TOOL_IN_AVAILABLE_AND_POSSIBLE__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 DIAGNOSTIC_SOURCE,
 				 0);
 	}
 
 	/**
-	 * The cached validation expression for the toolInAcceptedAndUnkown constraint of '<em>Option</em>'.
+	 * The cached validation expression for the toolInAvailableAndUnkown constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static final String OPTION__TOOL_IN_ACCEPTED_AND_UNKOWN__EEXPRESSION = "Tool.allInstances()->forAll(t | self.acceptedTools->includes(t) implies not\n" +
+	protected static final String OPTION__TOOL_IN_AVAILABLE_AND_UNKOWN__EEXPRESSION = "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n" +
 		"\t\t\t\tself.unknown->includes(t))";
 
 	/**
-	 * Validates the toolInAcceptedAndUnkown constraint of '<em>Option</em>'.
+	 * Validates the toolInAvailableAndUnkown constraint of '<em>Option</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOption_toolInAcceptedAndUnkown(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateOption_toolInAvailableAndUnkown(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			validate
 				(RecommenderQuestionnairePackage.Literals.OPTION,
@@ -274,8 +277,98 @@ public class RecommenderQuestionnaireValidator extends EObjectValidator {
 				 diagnostics,
 				 context,
 				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-				 "toolInAcceptedAndUnkown",
-				 OPTION__TOOL_IN_ACCEPTED_AND_UNKOWN__EEXPRESSION,
+				 "toolInAvailableAndUnkown",
+				 OPTION__TOOL_IN_AVAILABLE_AND_UNKOWN__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the toolInUnavailableAndUnknown constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String OPTION__TOOL_IN_UNAVAILABLE_AND_UNKNOWN__EEXPRESSION = "Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not\n" +
+		"\t\t\t\tself.unknown->includes(t))";
+
+	/**
+	 * Validates the toolInUnavailableAndUnknown constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOption_toolInUnavailableAndUnknown(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(RecommenderQuestionnairePackage.Literals.OPTION,
+				 option,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "toolInUnavailableAndUnknown",
+				 OPTION__TOOL_IN_UNAVAILABLE_AND_UNKNOWN__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the toolInUnavailableAndPossible constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String OPTION__TOOL_IN_UNAVAILABLE_AND_POSSIBLE__EEXPRESSION = "Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not\n" +
+		"\t\t\t\tself.possible->includes(t))";
+
+	/**
+	 * Validates the toolInUnavailableAndPossible constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOption_toolInUnavailableAndPossible(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(RecommenderQuestionnairePackage.Literals.OPTION,
+				 option,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "toolInUnavailableAndPossible",
+				 OPTION__TOOL_IN_UNAVAILABLE_AND_POSSIBLE__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the toolInPossibleAndUnknown constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String OPTION__TOOL_IN_POSSIBLE_AND_UNKNOWN__EEXPRESSION = "Tool.allInstances()->forAll(t | self.possible->includes(t) implies not\n" +
+		"\t\t\t\tself.unknown->includes(t))";
+
+	/**
+	 * Validates the toolInPossibleAndUnknown constraint of '<em>Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOption_toolInPossibleAndUnknown(Option option, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(RecommenderQuestionnairePackage.Literals.OPTION,
+				 option,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "toolInPossibleAndUnknown",
+				 OPTION__TOOL_IN_POSSIBLE_AND_UNKNOWN__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 DIAGNOSTIC_SOURCE,
 				 0);

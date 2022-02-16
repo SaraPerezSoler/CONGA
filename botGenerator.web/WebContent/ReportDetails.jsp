@@ -136,20 +136,25 @@
 
 										<ul class="list-group">
 											<%
-														for (Option option : question.getSelecteds()) {
-																if (option.isAccepted(tool)) {
+											for (Option option : question.getSelecteds()) {
+																									if (option.isAvailable(tool)) {
 											%>
 											<li class="list-group-item list-group-item-success"><%=option.getText()%>
-												(Accepted)</li>
+												(available)</li>
 											<%
-												} else if (option.isRefused(tool)) {
+											} else if (option.isUnavailable(tool)) {
 											%>
 											<li class="list-group-item list-group-item-danger"><%=option.getText()%>
-												(Refused)</li>
+												(unavailable)</li>
+											<%
+											} else if (option.isPossible(tool)) {
+											%>
+											<li class="list-group-item list-group-item-info"><%=option.getText()%>
+												(possible)</li>
 											<%
 												} else {
 											%>
-											<li class="list-group-item list-group-item-warning"><%=option.getText()%>
+											<li class="list-group-item list-group-item-secondary"><%=option.getText()%>
 												(Unknown)</li>
 											<%
 												}

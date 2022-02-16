@@ -60,7 +60,7 @@ public interface Questionnaire extends EObject {
 	Tool createTool(String tool);
 
 	Evaluation createEvaluation(String name, String text, boolean multiresponse, List<String> options,
-			Map<String, List<String>> accepted, Map<String, List<String>> refused, Evaluator ev);
+			Map<String, List<String>> accepted, Map<String, List<String>> refused,Map<String, List<String>> opt_tools_possible, Evaluator ev);
 
 	List<Evaluation> getEvaluations();
 	List<Question> getNOTEvaluations();

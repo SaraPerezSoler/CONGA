@@ -40,7 +40,7 @@ import recommenderQuestionnaire.evaluations.Evaluator;
  *   <li>{@link recommenderQuestionnaire.impl.QuestionnaireImpl#getQuestions <em>Questions</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT
  */
 public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Questionnaire {
 	/**
@@ -226,7 +226,7 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		tool.setName(toolName);
 		for (Question q : getQuestions()) {
 			for (Option a : q.getOptions()) {
-				tool.getUnknown().add(a);
+				tool.getUnknownOptions().add(a);
 			}
 		}
 		getTools().add(tool);
@@ -234,7 +234,7 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 	}
 
 	public Evaluation createEvaluation(String evName, String evText, boolean multi, List<String> options,
-			Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Evaluator ev) {
+			Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Map<String, List<String>> opt_tools_possible, Evaluator ev) {
 		
 		
 		Evaluation evaluation = getEvaluation(evName);
@@ -251,11 +251,14 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 			a.setText(opt);
 			List<String> acp = opt_tools_accepted.get(opt);
 			List<String> ref = opt_tools_refused.get(opt);
+			List<String> poss = opt_tools_refused.get(opt);
 			for (Tool tool : getTools()) {
 				if (acp != null && acp.contains(tool.getName())) {
-					a.getAcceptedTools().add(tool);
+					a.getAvailable().add(tool);
 				} else if (ref != null && ref.contains(tool.getName())) {
-					a.getRefusedTools().add(tool);
+					a.getPossible().add(tool);
+				} else if (poss != null && poss.contains(tool.getName())) {
+					a.getPossible().add(tool);
 				} else {
 					a.getUnknown().add(tool);
 				}
