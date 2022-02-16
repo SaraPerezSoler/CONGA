@@ -13,9 +13,9 @@
         upperBound="-1" eType="#//Question" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tool" eSuperTypes="#//WithName">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="acceptedOptions" lowerBound="1"
-        upperBound="-1" eType="#//Option" eOpposite="#//Option/acceptedTools"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unknown" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableOptions" lowerBound="1"
+        upperBound="-1" eType="#//Option" eOpposite="#//Option/available"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unknownOptions" upperBound="-1"
         eType="#//Option" eOpposite="#//Option/unknown"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unavailableOptions" upperBound="-1"
         eType="#//Option" eOpposite="#//Option/unavailable"/>
