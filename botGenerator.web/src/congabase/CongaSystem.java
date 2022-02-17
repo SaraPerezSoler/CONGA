@@ -22,6 +22,7 @@ import recommenderQuestionnaire.Questionnaire;
  *   <li>{@link congabase.CongaSystem#getGenerators <em>Generators</em>}</li>
  *   <li>{@link congabase.CongaSystem#getConverters <em>Converters</em>}</li>
  *   <li>{@link congabase.CongaSystem#getValidators <em>Validators</em>}</li>
+ *   <li>{@link congabase.CongaSystem#getQOptions <em>QOptions</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getCongaSystem()
@@ -110,6 +111,18 @@ public interface CongaSystem extends EObject {
 	 * @generated
 	 */
 	EList<Service> getValidators();
+
+	/**
+	 * Returns the value of the '<em><b>QOptions</b></em>' containment reference list.
+	 * The list contents are of type {@link congabase.RecommenderOption}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>QOptions</em>' containment reference list.
+	 * @see congabase.CongabasePackage#getCongaSystem_QOptions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<RecommenderOption> getQOptions();
 
 	User getUser(String user);
 

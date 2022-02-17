@@ -1,3 +1,4 @@
+<%@page import="congabase.RecommenderOption"%>
 <%@page import="congabase.Service"%>
 <%@page import="recommenderQuestionnaire.Evaluation"%>
 <%@page import="recommenderQuestionnaire.Option"%>
@@ -87,46 +88,46 @@
 					<div class="col">
 						<div class="table-responsive">
 							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">Tool</th>
+										<th scope="col">User</th>
+										<th scope="col">Version</th>
+										<th scope="col">Score</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
 								<tbody>
 									<%
 									for (String tool : ranking.keySet()) {
+										RecommenderOption ro = conga.getToolOptions(tool);
+										Service gen = conga.getGeneratorService(ro.getUser(), ro.getTool(), ro.getVersion());
 										String disabled = "disabled";
-										if (conga.supportedGeneratorTools().containsKey(tool)) {
+										String disable2 = "aria-disabled=\"true\"";
+										long serviceId = 0;
+										if (gen != null) {
+											serviceId = gen.getServiceId();
 											disabled = "";
+											disable2 = "";
 										}
 									%>
 									<tr>
-										<th scope="row"><%=tool%></th>
+										<th scope="row"><%=ro.getTool().getName()%></th>
+										<td><%=ro.getUser().getNick()%></td>
+										<td><%=ro.getVersion()%></td>
 										<td><%=df2.format(ranking.get(tool) * 100)%>%</td>
-										<td>
-											<button type="button"
-												class="btn btn-outline-primary dropdown-toggle"
-												<%=disabled%> type="button"
-												id="dropdownMenuButton-<%=tool%>" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false">
-												<svg width="1em" height="1em" viewBox="0 0 16 16"
-													class="bi bi-download" fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg">
+										<td><a
+											href="generator?serviceId=<%=serviceId%>&projectName=<%=projectName%>"
+											class="btn btn-outline-primary <%=disabled%>" role="button"
+											<%=disable2%>> <svg width="1em" height="1em"
+													viewBox="0 0 16 16" class="bi bi-download"
+													fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 												  <path fill-rule="evenodd"
 														d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
 												  <path fill-rule="evenodd"
 														d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
 												</svg>
-											</button>
-											<ul class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton-<%=tool%>">
-												<%
-												if (conga.supportedGeneratorTools().containsKey(tool)) {
-													for (Service s : conga.supportedGeneratorTools().get(tool)) {
-												%>
-												<li><a class="dropdown-item"
-													href="generator?serviceId=<%=s.getServiceId()%>&projectName=<%=projectName%>"><%=s.getUser().getNick()%>/<%=s.getVersion()%></a></li>
-												<%
-												}
-												}
-												%>
-											</ul>
-										</td>
+										</a></td>
 									</tr>
 									<%
 									}

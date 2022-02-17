@@ -160,49 +160,13 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 	int TOOL__NAME = WITH_NAME__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Available Options</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL__AVAILABLE_OPTIONS = WITH_NAME_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Unknown Options</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL__UNKNOWN_OPTIONS = WITH_NAME_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Unavailable Options</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL__UNAVAILABLE_OPTIONS = WITH_NAME_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Possible Options</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL__POSSIBLE_OPTIONS = WITH_NAME_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Tool</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOOL_FEATURE_COUNT = WITH_NAME_FEATURE_COUNT + 4;
+	int TOOL_FEATURE_COUNT = WITH_NAME_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Tool</em>' class.
@@ -361,49 +325,13 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 	int OPTION__TEXT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Available</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTION__AVAILABLE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Unavailable</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTION__UNAVAILABLE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Unknown</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTION__UNKNOWN = 3;
-
-	/**
-	 * The feature id for the '<em><b>Possible</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTION__POSSIBLE = 4;
-
-	/**
 	 * The number of structural features of the '<em>Option</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTION_FEATURE_COUNT = 5;
+	int OPTION_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Option</em>' class.
@@ -456,50 +384,6 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTool();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Tool#getAvailableOptions <em>Available Options</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Available Options</em>'.
-	 * @see recommenderQuestionnaire.Tool#getAvailableOptions()
-	 * @see #getTool()
-	 * @generated
-	 */
-	EReference getTool_AvailableOptions();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Tool#getUnknownOptions <em>Unknown Options</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Unknown Options</em>'.
-	 * @see recommenderQuestionnaire.Tool#getUnknownOptions()
-	 * @see #getTool()
-	 * @generated
-	 */
-	EReference getTool_UnknownOptions();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Tool#getUnavailableOptions <em>Unavailable Options</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Unavailable Options</em>'.
-	 * @see recommenderQuestionnaire.Tool#getUnavailableOptions()
-	 * @see #getTool()
-	 * @generated
-	 */
-	EReference getTool_UnavailableOptions();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Tool#getPossibleOptions <em>Possible Options</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Possible Options</em>'.
-	 * @see recommenderQuestionnaire.Tool#getPossibleOptions()
-	 * @see #getTool()
-	 * @generated
-	 */
-	EReference getTool_PossibleOptions();
 
 	/**
 	 * Returns the meta object for class '{@link recommenderQuestionnaire.Question <em>Question</em>}'.
@@ -574,50 +458,6 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOption_Text();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Option#getAvailable <em>Available</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Available</em>'.
-	 * @see recommenderQuestionnaire.Option#getAvailable()
-	 * @see #getOption()
-	 * @generated
-	 */
-	EReference getOption_Available();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Option#getUnavailable <em>Unavailable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Unavailable</em>'.
-	 * @see recommenderQuestionnaire.Option#getUnavailable()
-	 * @see #getOption()
-	 * @generated
-	 */
-	EReference getOption_Unavailable();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Option#getUnknown <em>Unknown</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Unknown</em>'.
-	 * @see recommenderQuestionnaire.Option#getUnknown()
-	 * @see #getOption()
-	 * @generated
-	 */
-	EReference getOption_Unknown();
-
-	/**
-	 * Returns the meta object for the reference list '{@link recommenderQuestionnaire.Option#getPossible <em>Possible</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Possible</em>'.
-	 * @see recommenderQuestionnaire.Option#getPossible()
-	 * @see #getOption()
-	 * @generated
-	 */
-	EReference getOption_Possible();
 
 	/**
 	 * Returns the meta object for class '{@link recommenderQuestionnaire.WithName <em>With Name</em>}'.
@@ -700,38 +540,6 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 		EClass TOOL = eINSTANCE.getTool();
 
 		/**
-		 * The meta object literal for the '<em><b>Available Options</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOOL__AVAILABLE_OPTIONS = eINSTANCE.getTool_AvailableOptions();
-
-		/**
-		 * The meta object literal for the '<em><b>Unknown Options</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOOL__UNKNOWN_OPTIONS = eINSTANCE.getTool_UnknownOptions();
-
-		/**
-		 * The meta object literal for the '<em><b>Unavailable Options</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOOL__UNAVAILABLE_OPTIONS = eINSTANCE.getTool_UnavailableOptions();
-
-		/**
-		 * The meta object literal for the '<em><b>Possible Options</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TOOL__POSSIBLE_OPTIONS = eINSTANCE.getTool_PossibleOptions();
-
-		/**
 		 * The meta object literal for the '{@link recommenderQuestionnaire.impl.QuestionImpl <em>Question</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -792,38 +600,6 @@ public interface RecommenderQuestionnairePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPTION__TEXT = eINSTANCE.getOption_Text();
-
-		/**
-		 * The meta object literal for the '<em><b>Available</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTION__AVAILABLE = eINSTANCE.getOption_Available();
-
-		/**
-		 * The meta object literal for the '<em><b>Unavailable</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTION__UNAVAILABLE = eINSTANCE.getOption_Unavailable();
-
-		/**
-		 * The meta object literal for the '<em><b>Unknown</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTION__UNKNOWN = eINSTANCE.getOption_Unknown();
-
-		/**
-		 * The meta object literal for the '<em><b>Possible</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTION__POSSIBLE = eINSTANCE.getOption_Possible();
 
 		/**
 		 * The meta object literal for the '{@link recommenderQuestionnaire.impl.WithNameImpl <em>With Name</em>}' class.

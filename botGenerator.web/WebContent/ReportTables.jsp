@@ -1,3 +1,4 @@
+<%@page import="congabase.RecommenderOption"%>
 <%@page import="recommenderQuestionnaire.Evaluation"%>
 <%@page import="recommenderQuestionnaire.Option"%>
 <%@page import="congabase.AQuestion"%>
@@ -88,7 +89,8 @@
 											<th scope="row"><%=tool%></th>
 											<%
 												for (AQuestion ev : questions) {
-												double score = ev.getScore(tool) * 100;
+												RecommenderOption ro = conga.getToolOptions(tool);
+												double score = ev.getScore(ro) * 100;
 												String level;
 												if (score<0){
 													level = "alert-secondary";

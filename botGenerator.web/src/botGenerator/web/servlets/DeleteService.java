@@ -36,7 +36,7 @@ public class DeleteService extends HttpServlet {
 		String userString = (String) request.getSession().getAttribute("user");
 		try {
 			CongaData conga = CongaData.getCongaData(getServletContext());
-			conga.delService(userString, serviceId);
+			conga.delUtility(userString, serviceId);
 			request.getRequestDispatcher("/serviceManager.jsp").forward(request, response);
 
 		} catch (Exception e) {

@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,12 +89,20 @@ public class CongabaseAdapterFactory extends AdapterFactoryImpl {
 				return createAQuestionAdapter();
 			}
 			@Override
-			public Adapter caseToolToDouble(Map.Entry<Tool, Double> object) {
-				return createToolToDoubleAdapter();
+			public Adapter caseROptionToDouble(Map.Entry<RecommenderOption, Double> object) {
+				return createROptionToDoubleAdapter();
+			}
+			@Override
+			public Adapter caseUtility(Utility object) {
+				return createUtilityAdapter();
 			}
 			@Override
 			public Adapter caseService(Service object) {
 				return createServiceAdapter();
+			}
+			@Override
+			public Adapter caseRecommenderOption(RecommenderOption object) {
+				return createRecommenderOptionAdapter();
 			}
 			@Override
 			public Adapter caseKeyValue(KeyValue object) {
@@ -192,7 +199,7 @@ public class CongabaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Tool To Double</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>ROption To Double</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -201,7 +208,21 @@ public class CongabaseAdapterFactory extends AdapterFactoryImpl {
 	 * @see java.util.Map.Entry
 	 * @generated
 	 */
-	public Adapter createToolToDoubleAdapter() {
+	public Adapter createROptionToDoubleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link congabase.Utility <em>Utility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see congabase.Utility
+	 * @generated
+	 */
+	public Adapter createUtilityAdapter() {
 		return null;
 	}
 
@@ -216,6 +237,20 @@ public class CongabaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createServiceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link congabase.RecommenderOption <em>Recommender Option</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see congabase.RecommenderOption
+	 * @generated
+	 */
+	public Adapter createRecommenderOptionAdapter() {
 		return null;
 	}
 

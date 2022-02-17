@@ -4,9 +4,10 @@ package congabase.impl;
 
 import congabase.AQuestion;
 import congabase.CongabasePackage;
+import congabase.RecommenderOption;
 import congabase.RelevanceLevel;
+
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -21,8 +22,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
-import recommenderQuestionnaire.Questionnaire;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object
@@ -250,14 +249,14 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	}
 
 	@Override
-	public double getScore(Tool t) {
+	public double getScore(RecommenderOption ro) {
 		double value = 0;
 		for (Option opt : getSelecteds()) {
-			if (opt.getAvailable().contains(t)) {
+			if (ro.getAvailable().contains(opt)) {
 				value += 1;
-			} else if (opt.getPossible().contains(t)) {
+			} else if (ro.getPossible().contains(opt)) {
 				value += 0.75;
-			} else if (opt.getUnknown().contains(t)) {
+			} else if (ro.getUnknown().contains(opt)) {
 				value += 0.5;
 			}
 		}
@@ -267,8 +266,8 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 		return value / getSelecteds().size();
 	}
 
-	@Override
-	public double getScore(String tool) {
+	/*@Override
+	public double getScore(String tool, String user, String version) {
 		if (this.getQuestion().eContainer() instanceof Questionnaire) {
 
 			List<Tool> tools = ((Questionnaire)this.getQuestion().eContainer()).getTools();
@@ -280,6 +279,6 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 			}
 		}
 		return 0;
-	}
+	}*/
 
 } // AQuestionImpl

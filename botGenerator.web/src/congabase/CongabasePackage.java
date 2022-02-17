@@ -122,13 +122,22 @@ public interface CongabasePackage extends EPackage {
 	int CONGA_SYSTEM__VALIDATORS = 5;
 
 	/**
+	 * The feature id for the '<em><b>QOptions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONGA_SYSTEM__QOPTIONS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Conga System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONGA_SYSTEM_FEATURE_COUNT = 6;
+	int CONGA_SYSTEM_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Conga System</em>' class.
@@ -177,13 +186,13 @@ public interface CongabasePackage extends EPackage {
 	int USER__PROJECTS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Services</b></em>' reference list.
+	 * The feature id for the '<em><b>Utilities</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER__SERVICES = 3;
+	int USER__UTILITIES = 3;
 
 	/**
 	 * The number of structural features of the '<em>User</em>' class.
@@ -387,14 +396,14 @@ public interface CongabasePackage extends EPackage {
 	int AQUESTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link congabase.impl.ToolToDoubleImpl <em>Tool To Double</em>}' class.
+	 * The meta object id for the '{@link congabase.impl.ROptionToDoubleImpl <em>ROption To Double</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see congabase.impl.ToolToDoubleImpl
-	 * @see congabase.impl.CongabasePackageImpl#getToolToDouble()
+	 * @see congabase.impl.ROptionToDoubleImpl
+	 * @see congabase.impl.CongabasePackageImpl#getROptionToDouble()
 	 * @generated
 	 */
-	int TOOL_TO_DOUBLE = 5;
+	int ROPTION_TO_DOUBLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
@@ -403,7 +412,7 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOOL_TO_DOUBLE__KEY = 0;
+	int ROPTION_TO_DOUBLE__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -412,25 +421,89 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOOL_TO_DOUBLE__VALUE = 1;
+	int ROPTION_TO_DOUBLE__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Tool To Double</em>' class.
+	 * The number of structural features of the '<em>ROption To Double</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOOL_TO_DOUBLE_FEATURE_COUNT = 2;
+	int ROPTION_TO_DOUBLE_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Tool To Double</em>' class.
+	 * The number of operations of the '<em>ROption To Double</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOOL_TO_DOUBLE_OPERATION_COUNT = 0;
+	int ROPTION_TO_DOUBLE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link congabase.impl.UtilityImpl <em>Utility</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.impl.UtilityImpl
+	 * @see congabase.impl.CongabasePackageImpl#getUtility()
+	 * @generated
+	 */
+	int UTILITY = 6;
+
+	/**
+	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY__SERVICE_ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tool</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY__TOOL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY__VERSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>User</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY__USER = 3;
+
+	/**
+	 * The number of structural features of the '<em>Utility</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Utility</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILITY_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link congabase.impl.ServiceImpl <em>Service</em>}' class.
@@ -440,88 +513,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getService()
 	 * @generated
 	 */
-	int SERVICE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__URL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Tool</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__TOOL = 1;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__STATUS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__VERSION = 4;
-
-	/**
-	 * The feature id for the '<em><b>User</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__USER = 5;
-
-	/**
-	 * The feature id for the '<em><b>Basic Auth</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__BASIC_AUTH = 6;
-
-	/**
-	 * The feature id for the '<em><b>Headers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__HEADERS = 7;
-
-	/**
-	 * The feature id for the '<em><b>Last Access</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SERVICE__LAST_ACCESS = 8;
+	int SERVICE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
@@ -530,7 +522,88 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE__SERVICE_ID = 9;
+	int SERVICE__SERVICE_ID = UTILITY__SERVICE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Tool</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TOOL = UTILITY__TOOL;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__VERSION = UTILITY__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>User</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__USER = UTILITY__USER;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__URL = UTILITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TYPE = UTILITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__STATUS = UTILITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Basic Auth</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__BASIC_AUTH = UTILITY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Headers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__HEADERS = UTILITY_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Last Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__LAST_ACCESS = UTILITY_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Service</em>' class.
@@ -539,7 +612,7 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = 10;
+	int SERVICE_FEATURE_COUNT = UTILITY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Service</em>' class.
@@ -548,7 +621,107 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_OPERATION_COUNT = 0;
+	int SERVICE_OPERATION_COUNT = UTILITY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link congabase.impl.RecommenderOptionImpl <em>Recommender Option</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see congabase.impl.RecommenderOptionImpl
+	 * @see congabase.impl.CongabasePackageImpl#getRecommenderOption()
+	 * @generated
+	 */
+	int RECOMMENDER_OPTION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__SERVICE_ID = UTILITY__SERVICE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Tool</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__TOOL = UTILITY__TOOL;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__VERSION = UTILITY__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>User</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__USER = UTILITY__USER;
+
+	/**
+	 * The feature id for the '<em><b>Available</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__AVAILABLE = UTILITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Unavailable</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__UNAVAILABLE = UTILITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Unknown</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__UNKNOWN = UTILITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Possible</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION__POSSIBLE = UTILITY_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Recommender Option</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION_FEATURE_COUNT = UTILITY_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Recommender Option</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMMENDER_OPTION_OPERATION_COUNT = UTILITY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link congabase.impl.KeyValueImpl <em>Key Value</em>}' class.
@@ -558,7 +731,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 7;
+	int KEY_VALUE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -604,7 +777,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getRelevanceLevel()
 	 * @generated
 	 */
-	int RELEVANCE_LEVEL = 8;
+	int RELEVANCE_LEVEL = 10;
 
 
 	/**
@@ -615,7 +788,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getServiceStatus()
 	 * @generated
 	 */
-	int SERVICE_STATUS = 9;
+	int SERVICE_STATUS = 11;
 
 	/**
 	 * The meta object id for the '{@link congabase.ServiceType <em>Service Type</em>}' enum.
@@ -625,7 +798,7 @@ public interface CongabasePackage extends EPackage {
 	 * @see congabase.impl.CongabasePackageImpl#getServiceType()
 	 * @generated
 	 */
-	int SERVICE_TYPE = 10;
+	int SERVICE_TYPE = 12;
 
 
 	/**
@@ -705,6 +878,17 @@ public interface CongabasePackage extends EPackage {
 	EReference getCongaSystem_Validators();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link congabase.CongaSystem#getQOptions <em>QOptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>QOptions</em>'.
+	 * @see congabase.CongaSystem#getQOptions()
+	 * @see #getCongaSystem()
+	 * @generated
+	 */
+	EReference getCongaSystem_QOptions();
+
+	/**
 	 * Returns the meta object for class '{@link congabase.User <em>User</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -748,15 +932,15 @@ public interface CongabasePackage extends EPackage {
 	EReference getUser_Projects();
 
 	/**
-	 * Returns the meta object for the reference list '{@link congabase.User#getServices <em>Services</em>}'.
+	 * Returns the meta object for the reference list '{@link congabase.User#getUtilities <em>Utilities</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Services</em>'.
-	 * @see congabase.User#getServices()
+	 * @return the meta object for the reference list '<em>Utilities</em>'.
+	 * @see congabase.User#getUtilities()
 	 * @see #getUser()
 	 * @generated
 	 */
-	EReference getUser_Services();
+	EReference getUser_Utilities();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.Project <em>Project</em>}'.
@@ -910,16 +1094,16 @@ public interface CongabasePackage extends EPackage {
 	EAttribute getAQuestion_Relevance();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Tool To Double</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>ROption To Double</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tool To Double</em>'.
+	 * @return the meta object for class '<em>ROption To Double</em>'.
 	 * @see java.util.Map.Entry
-	 * @model keyType="recommenderQuestionnaire.Tool" keyRequired="true"
+	 * @model keyType="congabase.RecommenderOption" keyRequired="true"
 	 *        valueDataType="org.eclipse.emf.ecore.EDoubleObject" valueRequired="true"
 	 * @generated
 	 */
-	EClass getToolToDouble();
+	EClass getROptionToDouble();
 
 	/**
 	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
@@ -927,10 +1111,10 @@ public interface CongabasePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Key</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getToolToDouble()
+	 * @see #getROptionToDouble()
 	 * @generated
 	 */
-	EReference getToolToDouble_Key();
+	EReference getROptionToDouble_Key();
 
 	/**
 	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
@@ -938,10 +1122,64 @@ public interface CongabasePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getToolToDouble()
+	 * @see #getROptionToDouble()
 	 * @generated
 	 */
-	EAttribute getToolToDouble_Value();
+	EAttribute getROptionToDouble_Value();
+
+	/**
+	 * Returns the meta object for class '{@link congabase.Utility <em>Utility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Utility</em>'.
+	 * @see congabase.Utility
+	 * @generated
+	 */
+	EClass getUtility();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Utility#getServiceId <em>Service Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Service Id</em>'.
+	 * @see congabase.Utility#getServiceId()
+	 * @see #getUtility()
+	 * @generated
+	 */
+	EAttribute getUtility_ServiceId();
+
+	/**
+	 * Returns the meta object for the reference '{@link congabase.Utility#getTool <em>Tool</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Tool</em>'.
+	 * @see congabase.Utility#getTool()
+	 * @see #getUtility()
+	 * @generated
+	 */
+	EReference getUtility_Tool();
+
+	/**
+	 * Returns the meta object for the attribute '{@link congabase.Utility#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see congabase.Utility#getVersion()
+	 * @see #getUtility()
+	 * @generated
+	 */
+	EAttribute getUtility_Version();
+
+	/**
+	 * Returns the meta object for the reference '{@link congabase.Utility#getUser <em>User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>User</em>'.
+	 * @see congabase.Utility#getUser()
+	 * @see #getUtility()
+	 * @generated
+	 */
+	EReference getUtility_User();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.Service <em>Service</em>}'.
@@ -965,17 +1203,6 @@ public interface CongabasePackage extends EPackage {
 	EAttribute getService_Url();
 
 	/**
-	 * Returns the meta object for the reference '{@link congabase.Service#getTool <em>Tool</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Tool</em>'.
-	 * @see congabase.Service#getTool()
-	 * @see #getService()
-	 * @generated
-	 */
-	EReference getService_Tool();
-
-	/**
 	 * Returns the meta object for the attribute '{@link congabase.Service#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -996,28 +1223,6 @@ public interface CongabasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getService_Status();
-
-	/**
-	 * Returns the meta object for the attribute '{@link congabase.Service#getVersion <em>Version</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see congabase.Service#getVersion()
-	 * @see #getService()
-	 * @generated
-	 */
-	EAttribute getService_Version();
-
-	/**
-	 * Returns the meta object for the reference '{@link congabase.Service#getUser <em>User</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>User</em>'.
-	 * @see congabase.Service#getUser()
-	 * @see #getService()
-	 * @generated
-	 */
-	EReference getService_User();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link congabase.Service#getBasicAuth <em>Basic Auth</em>}'.
@@ -1053,15 +1258,58 @@ public interface CongabasePackage extends EPackage {
 	EAttribute getService_LastAccess();
 
 	/**
-	 * Returns the meta object for the attribute '{@link congabase.Service#getServiceId <em>Service Id</em>}'.
+	 * Returns the meta object for class '{@link congabase.RecommenderOption <em>Recommender Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Service Id</em>'.
-	 * @see congabase.Service#getServiceId()
-	 * @see #getService()
+	 * @return the meta object for class '<em>Recommender Option</em>'.
+	 * @see congabase.RecommenderOption
 	 * @generated
 	 */
-	EAttribute getService_ServiceId();
+	EClass getRecommenderOption();
+
+	/**
+	 * Returns the meta object for the reference list '{@link congabase.RecommenderOption#getAvailable <em>Available</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Available</em>'.
+	 * @see congabase.RecommenderOption#getAvailable()
+	 * @see #getRecommenderOption()
+	 * @generated
+	 */
+	EReference getRecommenderOption_Available();
+
+	/**
+	 * Returns the meta object for the reference list '{@link congabase.RecommenderOption#getUnavailable <em>Unavailable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Unavailable</em>'.
+	 * @see congabase.RecommenderOption#getUnavailable()
+	 * @see #getRecommenderOption()
+	 * @generated
+	 */
+	EReference getRecommenderOption_Unavailable();
+
+	/**
+	 * Returns the meta object for the reference list '{@link congabase.RecommenderOption#getUnknown <em>Unknown</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Unknown</em>'.
+	 * @see congabase.RecommenderOption#getUnknown()
+	 * @see #getRecommenderOption()
+	 * @generated
+	 */
+	EReference getRecommenderOption_Unknown();
+
+	/**
+	 * Returns the meta object for the reference list '{@link congabase.RecommenderOption#getPossible <em>Possible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Possible</em>'.
+	 * @see congabase.RecommenderOption#getPossible()
+	 * @see #getRecommenderOption()
+	 * @generated
+	 */
+	EReference getRecommenderOption_Possible();
 
 	/**
 	 * Returns the meta object for class '{@link congabase.KeyValue <em>Key Value</em>}'.
@@ -1207,6 +1455,14 @@ public interface CongabasePackage extends EPackage {
 		EReference CONGA_SYSTEM__VALIDATORS = eINSTANCE.getCongaSystem_Validators();
 
 		/**
+		 * The meta object literal for the '<em><b>QOptions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONGA_SYSTEM__QOPTIONS = eINSTANCE.getCongaSystem_QOptions();
+
+		/**
 		 * The meta object literal for the '{@link congabase.impl.UserImpl <em>User</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1241,12 +1497,12 @@ public interface CongabasePackage extends EPackage {
 		EReference USER__PROJECTS = eINSTANCE.getUser_Projects();
 
 		/**
-		 * The meta object literal for the '<em><b>Services</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Utilities</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference USER__SERVICES = eINSTANCE.getUser_Services();
+		EReference USER__UTILITIES = eINSTANCE.getUser_Utilities();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.ProjectImpl <em>Project</em>}' class.
@@ -1367,14 +1623,14 @@ public interface CongabasePackage extends EPackage {
 		EAttribute AQUESTION__RELEVANCE = eINSTANCE.getAQuestion_Relevance();
 
 		/**
-		 * The meta object literal for the '{@link congabase.impl.ToolToDoubleImpl <em>Tool To Double</em>}' class.
+		 * The meta object literal for the '{@link congabase.impl.ROptionToDoubleImpl <em>ROption To Double</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see congabase.impl.ToolToDoubleImpl
-		 * @see congabase.impl.CongabasePackageImpl#getToolToDouble()
+		 * @see congabase.impl.ROptionToDoubleImpl
+		 * @see congabase.impl.CongabasePackageImpl#getROptionToDouble()
 		 * @generated
 		 */
-		EClass TOOL_TO_DOUBLE = eINSTANCE.getToolToDouble();
+		EClass ROPTION_TO_DOUBLE = eINSTANCE.getROptionToDouble();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
@@ -1382,7 +1638,7 @@ public interface CongabasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOOL_TO_DOUBLE__KEY = eINSTANCE.getToolToDouble_Key();
+		EReference ROPTION_TO_DOUBLE__KEY = eINSTANCE.getROptionToDouble_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1390,7 +1646,49 @@ public interface CongabasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TOOL_TO_DOUBLE__VALUE = eINSTANCE.getToolToDouble_Value();
+		EAttribute ROPTION_TO_DOUBLE__VALUE = eINSTANCE.getROptionToDouble_Value();
+
+		/**
+		 * The meta object literal for the '{@link congabase.impl.UtilityImpl <em>Utility</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.impl.UtilityImpl
+		 * @see congabase.impl.CongabasePackageImpl#getUtility()
+		 * @generated
+		 */
+		EClass UTILITY = eINSTANCE.getUtility();
+
+		/**
+		 * The meta object literal for the '<em><b>Service Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UTILITY__SERVICE_ID = eINSTANCE.getUtility_ServiceId();
+
+		/**
+		 * The meta object literal for the '<em><b>Tool</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UTILITY__TOOL = eINSTANCE.getUtility_Tool();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UTILITY__VERSION = eINSTANCE.getUtility_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>User</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UTILITY__USER = eINSTANCE.getUtility_User();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.ServiceImpl <em>Service</em>}' class.
@@ -1411,14 +1709,6 @@ public interface CongabasePackage extends EPackage {
 		EAttribute SERVICE__URL = eINSTANCE.getService_Url();
 
 		/**
-		 * The meta object literal for the '<em><b>Tool</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SERVICE__TOOL = eINSTANCE.getService_Tool();
-
-		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1433,22 +1723,6 @@ public interface CongabasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SERVICE__STATUS = eINSTANCE.getService_Status();
-
-		/**
-		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SERVICE__VERSION = eINSTANCE.getService_Version();
-
-		/**
-		 * The meta object literal for the '<em><b>User</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SERVICE__USER = eINSTANCE.getService_User();
 
 		/**
 		 * The meta object literal for the '<em><b>Basic Auth</b></em>' containment reference feature.
@@ -1475,12 +1749,46 @@ public interface CongabasePackage extends EPackage {
 		EAttribute SERVICE__LAST_ACCESS = eINSTANCE.getService_LastAccess();
 
 		/**
-		 * The meta object literal for the '<em><b>Service Id</b></em>' attribute feature.
+		 * The meta object literal for the '{@link congabase.impl.RecommenderOptionImpl <em>Recommender Option</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see congabase.impl.RecommenderOptionImpl
+		 * @see congabase.impl.CongabasePackageImpl#getRecommenderOption()
+		 * @generated
+		 */
+		EClass RECOMMENDER_OPTION = eINSTANCE.getRecommenderOption();
+
+		/**
+		 * The meta object literal for the '<em><b>Available</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SERVICE__SERVICE_ID = eINSTANCE.getService_ServiceId();
+		EReference RECOMMENDER_OPTION__AVAILABLE = eINSTANCE.getRecommenderOption_Available();
+
+		/**
+		 * The meta object literal for the '<em><b>Unavailable</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECOMMENDER_OPTION__UNAVAILABLE = eINSTANCE.getRecommenderOption_Unavailable();
+
+		/**
+		 * The meta object literal for the '<em><b>Unknown</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECOMMENDER_OPTION__UNKNOWN = eINSTANCE.getRecommenderOption_Unknown();
+
+		/**
+		 * The meta object literal for the '<em><b>Possible</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECOMMENDER_OPTION__POSSIBLE = eINSTANCE.getRecommenderOption_Possible();
 
 		/**
 		 * The meta object literal for the '{@link congabase.impl.KeyValueImpl <em>Key Value</em>}' class.

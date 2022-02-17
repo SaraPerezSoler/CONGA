@@ -69,7 +69,9 @@ public class EndQuestionnaire extends HttpServlet {
 				String relevanceString = request.getParameter(name + "-Relevant");
 				RelevanceLevel level = RelevanceLevel.get(relevanceString);
 				if (level != RelevanceLevel.IRRELEVANT && optionsList.isEmpty()) {
-					// Enviar error!!! poner alerta
+					getServletContext().setAttribute("msg", "There are options which are not selected and not marked as irrelevant");
+					request.getRequestDispatcher("questionnaire2.jsp").forward(request, response);
+					return;
 				}
 
 				conga.addAnswer(project, question, optionsList, level);

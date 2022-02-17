@@ -14,6 +14,8 @@
         eType="#//Service" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="validators" upperBound="-1"
         eType="#//Service" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qOptions" upperBound="-1"
+        eType="#//RecommenderOption" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="User">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nick" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -21,8 +23,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="projects" upperBound="-1"
         eType="#//Project" eOpposite="#//Project/owner"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
-        eType="#//Service" eOpposite="#//Service/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="utilities" upperBound="-1"
+        eType="#//Utility" eOpposite="#//Utility/user"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Project">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -39,7 +41,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="answers" upperBound="-1"
         eType="#//AQuestion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ranking" upperBound="-1"
-        eType="#//ToolToDouble" containment="true"/>
+        eType="#//ROptionToDouble" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AQuestion">
@@ -58,26 +60,38 @@
     <eLiterals name="CRITICAL_ALL" value="4" literal="Critical (all options)"/>
     <eLiterals name="CRITICAL" value="5" literal="Critical"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ToolToDouble" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="ecore:EClass RecommenderQuestionnaire.ecore#//Tool"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ROptionToDouble" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//RecommenderOption"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Service">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Utility">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tool" lowerBound="1" eType="ecore:EClass RecommenderQuestionnaire.ecore#//Tool"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"
+        eOpposite="#//User/utilities"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service" eSuperTypes="#//Utility">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//ServiceType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//ServiceStatus"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"
-        eOpposite="#//User/services"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="basicAuth" eType="#//KeyValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headers" upperBound="-1"
         eType="#//KeyValue" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastAccess" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecommenderOption" eSuperTypes="#//Utility">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="available" upperBound="-1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Option"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unavailable" upperBound="-1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Option"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unknown" upperBound="-1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Option"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="possible" upperBound="-1"
+        eType="ecore:EClass RecommenderQuestionnaire.ecore#//Option"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ServiceStatus">
     <eLiterals name="ON"/>

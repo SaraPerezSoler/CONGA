@@ -7,7 +7,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,7 +87,7 @@ public interface AQuestion extends EObject {
 	 */
 	void setRelevance(RelevanceLevel value);
 
-	double getScore(Tool t);
-	double getScore(String tool);
+	double getScore(RecommenderOption ro);
+	//double getScore(String tool);
 
 } // AQuestion

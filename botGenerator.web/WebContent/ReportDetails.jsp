@@ -1,3 +1,4 @@
+<%@page import="congabase.RecommenderOption"%>
 <%@page import="recommenderQuestionnaire.Evaluation"%>
 <%@page import="recommenderQuestionnaire.Option"%>
 <%@page import="congabase.AQuestion"%>
@@ -118,7 +119,8 @@
 									</div>
 									<div class="col-md-1">
 										<%
-											double score = question.getScore(tool);
+											RecommenderOption ro = conga.getToolOptions(tool);
+											double score = question.getScore(ro);
 														if (score == -1) {
 										%>
 										-
@@ -137,17 +139,17 @@
 										<ul class="list-group">
 											<%
 											for (Option option : question.getSelecteds()) {
-																									if (option.isAvailable(tool)) {
+												if (ro.isAvailable(option)) {
 											%>
 											<li class="list-group-item list-group-item-success"><%=option.getText()%>
 												(available)</li>
 											<%
-											} else if (option.isUnavailable(tool)) {
+											} else if (ro.isUnavailable(option)) {
 											%>
 											<li class="list-group-item list-group-item-danger"><%=option.getText()%>
 												(unavailable)</li>
 											<%
-											} else if (option.isPossible(tool)) {
+											} else if (ro.isPossible(option)) {
 											%>
 											<li class="list-group-item list-group-item-info"><%=option.getText()%>
 												(possible)</li>

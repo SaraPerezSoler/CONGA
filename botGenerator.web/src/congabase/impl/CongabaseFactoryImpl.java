@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,8 +63,10 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 			case CongabasePackage.PROJECT: return createProject();
 			case CongabasePackage.USER_ANSWER: return createUserAnswer();
 			case CongabasePackage.AQUESTION: return createAQuestion();
-			case CongabasePackage.TOOL_TO_DOUBLE: return (EObject)createToolToDouble();
+			case CongabasePackage.ROPTION_TO_DOUBLE: return (EObject)createROptionToDouble();
+			case CongabasePackage.UTILITY: return createUtility();
 			case CongabasePackage.SERVICE: return createService();
+			case CongabasePackage.RECOMMENDER_OPTION: return createRecommenderOption();
 			case CongabasePackage.KEY_VALUE: return createKeyValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -166,9 +167,19 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<Tool, Double> createToolToDouble() {
-		ToolToDoubleImpl toolToDouble = new ToolToDoubleImpl();
-		return toolToDouble;
+	public Map.Entry<RecommenderOption, Double> createROptionToDouble() {
+		ROptionToDoubleImpl rOptionToDouble = new ROptionToDoubleImpl();
+		return rOptionToDouble;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Utility createUtility() {
+		UtilityImpl utility = new UtilityImpl();
+		return utility;
 	}
 
 	/**
@@ -179,6 +190,16 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	public Service createService() {
 		ServiceImpl service = new ServiceImpl();
 		return service;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RecommenderOption createRecommenderOption() {
+		RecommenderOptionImpl recommenderOption = new RecommenderOptionImpl();
+		return recommenderOption;
 	}
 
 	/**

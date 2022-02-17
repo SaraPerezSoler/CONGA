@@ -5,10 +5,7 @@ package congabase;
 import java.io.File;
 import java.util.Date;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
-
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,22 +17,18 @@ import recommenderQuestionnaire.Tool;
  * </p>
  * <ul>
  *   <li>{@link congabase.Service#getUrl <em>Url</em>}</li>
- *   <li>{@link congabase.Service#getTool <em>Tool</em>}</li>
  *   <li>{@link congabase.Service#getType <em>Type</em>}</li>
  *   <li>{@link congabase.Service#getStatus <em>Status</em>}</li>
- *   <li>{@link congabase.Service#getVersion <em>Version</em>}</li>
- *   <li>{@link congabase.Service#getUser <em>User</em>}</li>
  *   <li>{@link congabase.Service#getBasicAuth <em>Basic Auth</em>}</li>
  *   <li>{@link congabase.Service#getHeaders <em>Headers</em>}</li>
  *   <li>{@link congabase.Service#getLastAccess <em>Last Access</em>}</li>
- *   <li>{@link congabase.Service#getServiceId <em>Service Id</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getService()
  * @model
  * @generated
  */
-public interface Service extends EObject {
+public interface Service extends Utility {
 	/**
 	 * Returns the value of the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -58,28 +51,6 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	void setUrl(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Tool</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tool</em>' reference.
-	 * @see #setTool(Tool)
-	 * @see congabase.CongabasePackage#getService_Tool()
-	 * @model required="true"
-	 * @generated
-	 */
-	Tool getTool();
-
-	/**
-	 * Sets the value of the '{@link congabase.Service#getTool <em>Tool</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tool</em>' reference.
-	 * @see #getTool()
-	 * @generated
-	 */
-	void setTool(Tool value);
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
@@ -130,52 +101,6 @@ public interface Service extends EObject {
 	 * @generated
 	 */
 	void setStatus(ServiceStatus value);
-
-	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see #setVersion(String)
-	 * @see congabase.CongabasePackage#getService_Version()
-	 * @model
-	 * @generated
-	 */
-	String getVersion();
-
-	/**
-	 * Sets the value of the '{@link congabase.Service#getVersion <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Version</em>' attribute.
-	 * @see #getVersion()
-	 * @generated
-	 */
-	void setVersion(String value);
-
-	/**
-	 * Returns the value of the '<em><b>User</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link congabase.User#getServices <em>Services</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>User</em>' reference.
-	 * @see #setUser(User)
-	 * @see congabase.CongabasePackage#getService_User()
-	 * @see congabase.User#getServices
-	 * @model opposite="services" required="true"
-	 * @generated
-	 */
-	User getUser();
-
-	/**
-	 * Sets the value of the '{@link congabase.Service#getUser <em>User</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>User</em>' reference.
-	 * @see #getUser()
-	 * @generated
-	 */
-	void setUser(User value);
 
 	/**
 	 * Returns the value of the '<em><b>Basic Auth</b></em>' containment reference.
@@ -233,27 +158,6 @@ public interface Service extends EObject {
 	 */
 	void setLastAccess(Date value);
 
-	/**
-	 * Returns the value of the '<em><b>Service Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Service Id</em>' attribute.
-	 * @see #setServiceId(long)
-	 * @see congabase.CongabasePackage#getService_ServiceId()
-	 * @model required="true"
-	 * @generated
-	 */
-	long getServiceId();
-
-	/**
-	 * Sets the value of the '{@link congabase.Service#getServiceId <em>Service Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Service Id</em>' attribute.
-	 * @see #getServiceId()
-	 * @generated
-	 */
-	void setServiceId(long value);
 	File sendAndGetFile(File f, String botName);
 	JSONObject sendAndGetJSON(File file, String name);
 
