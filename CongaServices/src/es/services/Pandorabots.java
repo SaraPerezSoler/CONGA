@@ -17,8 +17,8 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.PandorabotsGenerator;
+import es.main.parser.pandorabots.ReadPandorabotsAgent;
 import generator.Bot;
-import es.main.reverse.pandorabots.ReadPandorabotsAgent;
 
 @Path("/pandorabots")
 public class Pandorabots {

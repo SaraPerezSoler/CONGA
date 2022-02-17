@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.EClass;
  * An implementation of the model object '<em><b>Empty</b></em>'.
  * <!-- end-user-doc -->
  *
- * @generated
+ * @generated NOT
  */
-public class EmptyImpl extends ActionImpl implements Empty {
+public class EmptyImpl extends ActionImpl implements Empty, Comparable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

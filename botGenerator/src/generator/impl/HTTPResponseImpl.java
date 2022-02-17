@@ -35,9 +35,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link generator.impl.HTTPResponseImpl#getHTTPRequest <em>HTTP Request</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT
  */
-public class HTTPResponseImpl extends ActionImpl implements HTTPResponse {
+public class HTTPResponseImpl extends ActionImpl implements HTTPResponse, Comparable{
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

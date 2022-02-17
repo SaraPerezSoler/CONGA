@@ -35,6 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link generator.impl.BotInteractionImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link generator.impl.BotInteractionImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link generator.impl.BotInteractionImpl#getOutcoming <em>Outcoming</em>}</li>
+ *   <li>{@link generator.impl.BotInteractionImpl#getBackTo <em>Back To</em>}</li>
+ *   <li>{@link generator.impl.BotInteractionImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,6 +62,38 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	 */
 	protected EList<UserInteraction> outcoming;
 	
+
+	/**
+	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBackTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<UserInteraction> backTo;
+
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +188,42 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EList<UserInteraction> getBackTo() {
+		if (backTo == null) {
+			backTo = new EObjectResolvingEList<UserInteraction>(UserInteraction.class, this, GeneratorPackage.BOT_INTERACTION__BACK_TO);
+		}
+		return backTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.BOT_INTERACTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -212,6 +282,10 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				return getIncoming();
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				return getOutcoming();
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				return getBackTo();
+			case GeneratorPackage.BOT_INTERACTION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -236,6 +310,13 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				getOutcoming().clear();
 				getOutcoming().addAll((Collection<? extends UserInteraction>)newValue);
 				return;
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				getBackTo().clear();
+				getBackTo().addAll((Collection<? extends UserInteraction>)newValue);
+				return;
+			case GeneratorPackage.BOT_INTERACTION__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -257,6 +338,12 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				getOutcoming().clear();
 				return;
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				getBackTo().clear();
+				return;
+			case GeneratorPackage.BOT_INTERACTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -275,8 +362,28 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 				return getIncoming() != null;
 			case GeneratorPackage.BOT_INTERACTION__OUTCOMING:
 				return outcoming != null && !outcoming.isEmpty();
+			case GeneratorPackage.BOT_INTERACTION__BACK_TO:
+				return backTo != null && !backTo.isEmpty();
+			case GeneratorPackage.BOT_INTERACTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override

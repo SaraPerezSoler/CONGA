@@ -14,7 +14,7 @@ Bot returns Bot:
 
 
 Action returns Action:
-	Text | HTTPRequest | Image | HTTPResponse | Empty;
+	Text | HTTPRequest | Image | HTTPResponse | Empty | ButtonAction;
 
 Token returns Token:
 	Literal | EntityToken | ParameterToken | ParameterRefenceToken;
@@ -41,16 +41,23 @@ IntentLanguageInputs returns IntentLanguageInputs:
 ;
 
 Transition returns UserInteraction:
-	'user' intent=[Intent|EString]('=>'target=(State|State2))?
+	(name=EString':')?'user' intent=[Intent|EString] ('=>'(target=(State2|State) |  backTo=BackToBot))?
 ;
-State returns BotInteraction:
-	'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'outcoming+=Transition)? 
+
+BackToBot returns BackToBot:
+	('chatbot' (previous+=[Action| EString])+)? 'back' 'to' backTo=[BotInteraction|EString]
 ;
+
 State2 returns BotInteraction:
-	'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*'{'
-	  ('=>' outcoming+=Transition';')+
-	 '}'
+	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('{'
+	  ('=>' ((outcoming+=Transition)| ('back' 'to' backTo+=[UserInteraction|EString]))';')+
+	 '}')?
 ;
+
+State returns BotInteraction:
+	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | ('back' 'to' backTo+=[UserInteraction|EString]))) 
+;
+
 IntentInput returns IntentInput:
 	TrainingPhrase | RegexInput
 ;
@@ -143,7 +150,7 @@ SimpleInput returns SimpleInput:
 	name=EString ('synonyms'  values+=EString ( "," values+=EString)* )? ;
 
 Text returns Text:
-	'text' 'response' name=EString':'
+	('Text'|'text') 'response' name=EString':'
 	(inputs+=TextLanguageInput)+
 		 ;
 TextLanguageInput returns TextLanguageInput:
@@ -163,13 +170,30 @@ HTTPRequest returns HTTPRequest:
 		('data'':'  data+=Data ( "," data+=Data)*';'  
 		 'dataType'':'  dataType=DataType';')?;
 Image returns Image:
-	'image' 'response' name=EString':'
+	('Image'|'mage') 'response' name=EString':'
 		'URL'':' URL=EString
 		('caption'':' caption=EString)?
 ;
 
 Empty returns Empty:
-	'empty' 'response' name=EString
+	'Empty' 'response' name=EString
+;
+
+ButtonAction returns ButtonAction:
+	'Button' 'response' name=EString':'
+	inputs+=ButtonLanguageInput
+;
+
+ButtonLanguageInput returns ButtonsLanguageInputs:
+	('inputs'('in' language=Language)?)?'{'
+		'text:' text= TextInputText 
+		'buttons:'
+		(buttons+=Button)+	
+	'}'
+;
+Button returns Button: 
+	'-' 'value:' value=EString
+	('action:' action=EString)?
 ;
 
 

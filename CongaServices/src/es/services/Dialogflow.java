@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.DialogflowGenerator;
-import es.main.reverse.DialogflowReverse;
+import es.main.parser.DialogflowReverse;
 import es.main.validator.DialogflowValidator;
 import generator.Bot;
 import validation.problems.Problem;

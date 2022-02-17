@@ -31,9 +31,10 @@ import recommenderQuestionnaire.Tool;
  * </p>
  * <ul>
  *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getText <em>Text</em>}</li>
- *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getAcceptedTools <em>Accepted Tools</em>}</li>
- *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getRefusedTools <em>Refused Tools</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getAvailable <em>Available</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getUnavailable <em>Unavailable</em>}</li>
  *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getUnknown <em>Unknown</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.OptionImpl#getPossible <em>Possible</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,24 +61,24 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	protected String text = TEXT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAcceptedTools() <em>Accepted Tools</em>}' reference list.
+	 * The cached value of the '{@link #getAvailable() <em>Available</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAcceptedTools()
+	 * @see #getAvailable()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tool> acceptedTools;
+	protected EList<Tool> available;
 
 	/**
-	 * The cached value of the '{@link #getRefusedTools() <em>Refused Tools</em>}' reference list.
+	 * The cached value of the '{@link #getUnavailable() <em>Unavailable</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRefusedTools()
+	 * @see #getUnavailable()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tool> refusedTools;
+	protected EList<Tool> unavailable;
 
 	/**
 	 * The cached value of the '{@link #getUnknown() <em>Unknown</em>}' reference list.
@@ -88,6 +89,16 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	 * @ordered
 	 */
 	protected EList<Tool> unknown;
+
+	/**
+	 * The cached value of the '{@link #getPossible() <em>Possible</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPossible()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Tool> possible;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,11 +145,11 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tool> getAcceptedTools() {
-		if (acceptedTools == null) {
-			acceptedTools = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS, RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS);
+	public EList<Tool> getAvailable() {
+		if (available == null) {
+			available = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__AVAILABLE, RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS);
 		}
-		return acceptedTools;
+		return available;
 	}
 
 	/**
@@ -146,11 +157,11 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tool> getRefusedTools() {
-		if (refusedTools == null) {
-			refusedTools = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS, RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS);
+	public EList<Tool> getUnavailable() {
+		if (unavailable == null) {
+			unavailable = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__UNAVAILABLE, RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS);
 		}
-		return refusedTools;
+		return unavailable;
 	}
 
 	/**
@@ -160,9 +171,21 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	 */
 	public EList<Tool> getUnknown() {
 		if (unknown == null) {
-			unknown = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__UNKNOWN, RecommenderQuestionnairePackage.TOOL__UNKNOWN);
+			unknown = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__UNKNOWN, RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS);
 		}
 		return unknown;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Tool> getPossible() {
+		if (possible == null) {
+			possible = new EObjectWithInverseResolvingEList.ManyInverse<Tool>(Tool.class, this, RecommenderQuestionnairePackage.OPTION__POSSIBLE, RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS);
+		}
+		return possible;
 	}
 
 	/**
@@ -174,12 +197,14 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAcceptedTools()).basicAdd(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRefusedTools()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAvailable()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUnavailable()).basicAdd(otherEnd, msgs);
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUnknown()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPossible()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -192,12 +217,14 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				return ((InternalEList<?>)getAcceptedTools()).basicRemove(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				return ((InternalEList<?>)getRefusedTools()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				return ((InternalEList<?>)getAvailable()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				return ((InternalEList<?>)getUnavailable()).basicRemove(otherEnd, msgs);
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				return ((InternalEList<?>)getUnknown()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				return ((InternalEList<?>)getPossible()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -212,12 +239,14 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 		switch (featureID) {
 			case RecommenderQuestionnairePackage.OPTION__TEXT:
 				return getText();
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				return getAcceptedTools();
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				return getRefusedTools();
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				return getAvailable();
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				return getUnavailable();
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				return getUnknown();
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				return getPossible();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,17 +263,21 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 			case RecommenderQuestionnairePackage.OPTION__TEXT:
 				setText((String)newValue);
 				return;
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				getAcceptedTools().clear();
-				getAcceptedTools().addAll((Collection<? extends Tool>)newValue);
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				getAvailable().clear();
+				getAvailable().addAll((Collection<? extends Tool>)newValue);
 				return;
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				getRefusedTools().clear();
-				getRefusedTools().addAll((Collection<? extends Tool>)newValue);
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				getUnavailable().clear();
+				getUnavailable().addAll((Collection<? extends Tool>)newValue);
 				return;
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				getUnknown().clear();
 				getUnknown().addAll((Collection<? extends Tool>)newValue);
+				return;
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				getPossible().clear();
+				getPossible().addAll((Collection<? extends Tool>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -261,14 +294,17 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 			case RecommenderQuestionnairePackage.OPTION__TEXT:
 				setText(TEXT_EDEFAULT);
 				return;
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				getAcceptedTools().clear();
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				getAvailable().clear();
 				return;
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				getRefusedTools().clear();
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				getUnavailable().clear();
 				return;
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				getUnknown().clear();
+				return;
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				getPossible().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -284,12 +320,14 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 		switch (featureID) {
 			case RecommenderQuestionnairePackage.OPTION__TEXT:
 				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
-			case RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS:
-				return acceptedTools != null && !acceptedTools.isEmpty();
-			case RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS:
-				return refusedTools != null && !refusedTools.isEmpty();
+			case RecommenderQuestionnairePackage.OPTION__AVAILABLE:
+				return available != null && !available.isEmpty();
+			case RecommenderQuestionnairePackage.OPTION__UNAVAILABLE:
+				return unavailable != null && !unavailable.isEmpty();
 			case RecommenderQuestionnairePackage.OPTION__UNKNOWN:
 				return unknown != null && !unknown.isEmpty();
+			case RecommenderQuestionnairePackage.OPTION__POSSIBLE:
+				return possible != null && !possible.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -311,8 +349,8 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	}
 
 	@Override
-	public boolean isAccepted(String tool) {
-		for (Tool t: getAcceptedTools()) {
+	public boolean isAvailable(String tool) {
+		for (Tool t: getAvailable()) {
 			if (t.getName().equals(tool)) {
 				return true;
 			}
@@ -321,8 +359,8 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	}
 
 	@Override
-	public boolean isRefused(String tool) {
-		for (Tool t: getRefusedTools()) {
+	public boolean isUnavailable(String tool) {
+		for (Tool t: getUnavailable()) {
 			if (t.getName().equals(tool)) {
 				return true;
 			}
@@ -333,6 +371,16 @@ public class OptionImpl extends MinimalEObjectImpl.Container implements Option {
 	@Override
 	public boolean isUnknow(String tool) {
 		for (Tool t: getUnknown()) {
+			if (t.getName().equals(tool)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isPossible(String tool) {
+		for (Tool t: getPossible()) {
 			if (t.getName().equals(tool)) {
 				return true;
 			}

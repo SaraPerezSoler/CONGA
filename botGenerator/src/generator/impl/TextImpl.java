@@ -31,9 +31,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link generator.impl.TextImpl#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT 
  */
-public class TextImpl extends ActionImpl implements Text {
+public class TextImpl extends ActionImpl implements Text, Comparable {
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

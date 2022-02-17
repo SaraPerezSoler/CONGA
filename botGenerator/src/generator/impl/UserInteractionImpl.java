@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.BackToBot;
 import generator.BotInteraction;
 import generator.GeneratorPackage;
 import generator.Intent;
@@ -28,6 +29,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link generator.impl.UserInteractionImpl#getIntent <em>Intent</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getSrc <em>Src</em>}</li>
  *   <li>{@link generator.impl.UserInteractionImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link generator.impl.UserInteractionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link generator.impl.UserInteractionImpl#getBackTo <em>Back To</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,6 +55,36 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @ordered
 	 */
 	protected BotInteraction target;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBackTo() <em>Back To</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBackTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected BackToBot backTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,6 +239,74 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 	 * @generated
 	 */
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BackToBot getBackTo() {
+		return backTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBackTo(BackToBot newBackTo, NotificationChain msgs) {
+		BackToBot oldBackTo = backTo;
+		backTo = newBackTo;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, oldBackTo, newBackTo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setBackTo(BackToBot newBackTo) {
+		if (newBackTo != backTo) {
+			NotificationChain msgs = null;
+			if (backTo != null)
+				msgs = ((InternalEObject)backTo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.USER_INTERACTION__BACK_TO, null, msgs);
+			if (newBackTo != null)
+				msgs = ((InternalEObject)newBackTo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.USER_INTERACTION__BACK_TO, null, msgs);
+			msgs = basicSetBackTo(newBackTo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.USER_INTERACTION__BACK_TO, newBackTo, newBackTo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.USER_INTERACTION__SRC:
@@ -232,6 +333,8 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return basicSetSrc(null, msgs);
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return basicSetTarget(null, msgs);
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				return basicSetBackTo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -265,6 +368,10 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return getSrc();
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return getTarget();
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				return getName();
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				return getBackTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,6 +392,12 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return;
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				setTarget((BotInteraction)newValue);
+				return;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				setName((String)newValue);
+				return;
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				setBackTo((BackToBot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -307,6 +420,12 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				setTarget((BotInteraction)null);
 				return;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				setBackTo((BackToBot)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -325,8 +444,28 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 				return getSrc() != null;
 			case GeneratorPackage.USER_INTERACTION__TARGET:
 				return target != null;
+			case GeneratorPackage.USER_INTERACTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case GeneratorPackage.USER_INTERACTION__BACK_TO:
+				return backTo != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override

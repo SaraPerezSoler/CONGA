@@ -49,6 +49,15 @@ public interface GeneratorFactory extends EFactory {
 	UserInteraction createUserInteraction();
 
 	/**
+	 * Returns a new object of class '<em>Back To Bot</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Back To Bot</em>'.
+	 * @generated
+	 */
+	BackToBot createBackToBot();
+
+	/**
 	 * Returns a new object of class '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -209,6 +218,33 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	Text createText();
+
+	/**
+	 * Returns a new object of class '<em>Button Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Button Action</em>'.
+	 * @generated
+	 */
+	ButtonAction createButtonAction();
+
+	/**
+	 * Returns a new object of class '<em>Buttons Language Inputs</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Buttons Language Inputs</em>'.
+	 * @generated
+	 */
+	ButtonsLanguageInputs createButtonsLanguageInputs();
+
+	/**
+	 * Returns a new object of class '<em>Button</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Button</em>'.
+	 * @generated
+	 */
+	Button createButton();
 
 	/**
 	 * Returns a new object of class '<em>Text Language Input</em>'.

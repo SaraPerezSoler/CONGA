@@ -11,7 +11,7 @@ package generator;
  *
  * @see generator.GeneratorPackage#getAction()
  * @model abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface Action extends Element, Comparable {
 } // Action

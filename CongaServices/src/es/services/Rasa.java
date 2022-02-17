@@ -16,7 +16,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.RasaGenerator;
-import es.main.reverse.RasaReverse;
+import es.main.parser.RasaReverse;
 import generator.Bot;
 
 @Path("/rasa")

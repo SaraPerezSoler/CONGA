@@ -26,43 +26,54 @@ import recommenderQuestionnaire.Tool;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getAcceptedOptions <em>Accepted Options</em>}</li>
- *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getUnknown <em>Unknown</em>}</li>
- *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getRefusedOptions <em>Refused Options</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getAvailableOptions <em>Available Options</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getUnknownOptions <em>Unknown Options</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getUnavailableOptions <em>Unavailable Options</em>}</li>
+ *   <li>{@link recommenderQuestionnaire.impl.ToolImpl#getPossibleOptions <em>Possible Options</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ToolImpl extends WithNameImpl implements Tool {
 	/**
-	 * The cached value of the '{@link #getAcceptedOptions() <em>Accepted Options</em>}' reference list.
+	 * The cached value of the '{@link #getAvailableOptions() <em>Available Options</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAcceptedOptions()
+	 * @see #getAvailableOptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Option> acceptedOptions;
+	protected EList<Option> availableOptions;
 
 	/**
-	 * The cached value of the '{@link #getUnknown() <em>Unknown</em>}' reference list.
+	 * The cached value of the '{@link #getUnknownOptions() <em>Unknown Options</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUnknown()
+	 * @see #getUnknownOptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Option> unknown;
+	protected EList<Option> unknownOptions;
 
 	/**
-	 * The cached value of the '{@link #getRefusedOptions() <em>Refused Options</em>}' reference list.
+	 * The cached value of the '{@link #getUnavailableOptions() <em>Unavailable Options</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRefusedOptions()
+	 * @see #getUnavailableOptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Option> refusedOptions;
+	protected EList<Option> unavailableOptions;
+
+	/**
+	 * The cached value of the '{@link #getPossibleOptions() <em>Possible Options</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPossibleOptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Option> possibleOptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,11 +99,11 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Option> getAcceptedOptions() {
-		if (acceptedOptions == null) {
-			acceptedOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS, RecommenderQuestionnairePackage.OPTION__ACCEPTED_TOOLS);
+	public EList<Option> getAvailableOptions() {
+		if (availableOptions == null) {
+			availableOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS, RecommenderQuestionnairePackage.OPTION__AVAILABLE);
 		}
-		return acceptedOptions;
+		return availableOptions;
 	}
 
 	/**
@@ -100,11 +111,11 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Option> getUnknown() {
-		if (unknown == null) {
-			unknown = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__UNKNOWN, RecommenderQuestionnairePackage.OPTION__UNKNOWN);
+	public EList<Option> getUnknownOptions() {
+		if (unknownOptions == null) {
+			unknownOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS, RecommenderQuestionnairePackage.OPTION__UNKNOWN);
 		}
-		return unknown;
+		return unknownOptions;
 	}
 
 	/**
@@ -112,11 +123,23 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Option> getRefusedOptions() {
-		if (refusedOptions == null) {
-			refusedOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS, RecommenderQuestionnairePackage.OPTION__REFUSED_TOOLS);
+	public EList<Option> getUnavailableOptions() {
+		if (unavailableOptions == null) {
+			unavailableOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS, RecommenderQuestionnairePackage.OPTION__UNAVAILABLE);
 		}
-		return refusedOptions;
+		return unavailableOptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Option> getPossibleOptions() {
+		if (possibleOptions == null) {
+			possibleOptions = new EObjectWithInverseResolvingEList.ManyInverse<Option>(Option.class, this, RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS, RecommenderQuestionnairePackage.OPTION__POSSIBLE);
+		}
+		return possibleOptions;
 	}
 
 	/**
@@ -128,12 +151,14 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAcceptedOptions()).basicAdd(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUnknown()).basicAdd(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRefusedOptions()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAvailableOptions()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUnknownOptions()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUnavailableOptions()).basicAdd(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPossibleOptions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -146,12 +171,14 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				return ((InternalEList<?>)getAcceptedOptions()).basicRemove(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				return ((InternalEList<?>)getUnknown()).basicRemove(otherEnd, msgs);
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				return ((InternalEList<?>)getRefusedOptions()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				return ((InternalEList<?>)getAvailableOptions()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				return ((InternalEList<?>)getUnknownOptions()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				return ((InternalEList<?>)getUnavailableOptions()).basicRemove(otherEnd, msgs);
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				return ((InternalEList<?>)getPossibleOptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -164,12 +191,14 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				return getAcceptedOptions();
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				return getUnknown();
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				return getRefusedOptions();
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				return getAvailableOptions();
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				return getUnknownOptions();
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				return getUnavailableOptions();
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				return getPossibleOptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,17 +212,21 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				getAcceptedOptions().clear();
-				getAcceptedOptions().addAll((Collection<? extends Option>)newValue);
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				getAvailableOptions().clear();
+				getAvailableOptions().addAll((Collection<? extends Option>)newValue);
 				return;
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				getUnknown().clear();
-				getUnknown().addAll((Collection<? extends Option>)newValue);
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				getUnknownOptions().clear();
+				getUnknownOptions().addAll((Collection<? extends Option>)newValue);
 				return;
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				getRefusedOptions().clear();
-				getRefusedOptions().addAll((Collection<? extends Option>)newValue);
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				getUnavailableOptions().clear();
+				getUnavailableOptions().addAll((Collection<? extends Option>)newValue);
+				return;
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				getPossibleOptions().clear();
+				getPossibleOptions().addAll((Collection<? extends Option>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -207,14 +240,17 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				getAcceptedOptions().clear();
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				getAvailableOptions().clear();
 				return;
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				getUnknown().clear();
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				getUnknownOptions().clear();
 				return;
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				getRefusedOptions().clear();
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				getUnavailableOptions().clear();
+				return;
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				getPossibleOptions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,12 +264,14 @@ public class ToolImpl extends WithNameImpl implements Tool {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RecommenderQuestionnairePackage.TOOL__ACCEPTED_OPTIONS:
-				return acceptedOptions != null && !acceptedOptions.isEmpty();
-			case RecommenderQuestionnairePackage.TOOL__UNKNOWN:
-				return unknown != null && !unknown.isEmpty();
-			case RecommenderQuestionnairePackage.TOOL__REFUSED_OPTIONS:
-				return refusedOptions != null && !refusedOptions.isEmpty();
+			case RecommenderQuestionnairePackage.TOOL__AVAILABLE_OPTIONS:
+				return availableOptions != null && !availableOptions.isEmpty();
+			case RecommenderQuestionnairePackage.TOOL__UNKNOWN_OPTIONS:
+				return unknownOptions != null && !unknownOptions.isEmpty();
+			case RecommenderQuestionnairePackage.TOOL__UNAVAILABLE_OPTIONS:
+				return unavailableOptions != null && !unavailableOptions.isEmpty();
+			case RecommenderQuestionnairePackage.TOOL__POSSIBLE_OPTIONS:
+				return possibleOptions != null && !possibleOptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

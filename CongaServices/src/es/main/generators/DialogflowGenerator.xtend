@@ -30,15 +30,18 @@ import java.util.Map
 import java.util.HashMap
 import java.io.File
 import java.util.ArrayList
+import generator.ButtonAction
+import generator.GeneratorFactory
+import generator.Action
 
-class DialogflowGenerator extends BotGenerator{
-	
+class DialogflowGenerator extends BotGenerator {
+
 	Map<UserInteraction, String> affectedContext = new HashMap();
-	List <String> intentsNames = new ArrayList(); 
+	List<String> intentsNames = new ArrayList();
 
-	new(String botPath, String fileName,  String botName){
-		super (botPath+File.separator+fileName, botName)
-		
+	new(String botPath, String fileName, String botName) {
+		super(botPath + File.separator + fileName, botName)
+
 	}
 
 	override File doGenerate(Resource resource) {
@@ -47,7 +50,6 @@ class DialogflowGenerator extends BotGenerator{
 
 //		generateFolder('entities')
 //		generateFolder('intents')
-		
 		var f = generateFile('/package.json', "{\n \"version\": \"1.0.0\"\n}")
 		saveFileIntoZip(f, 'package.json')
 
@@ -57,14 +59,14 @@ class DialogflowGenerator extends BotGenerator{
 		} else {
 			f = generateFile('/agent.json', agentJSON(bot, null))
 		}
-		
+
 		saveFileIntoZip(f, 'agent.json')
 
 		var entities = resource.allContents.filter(Entity).toList;
 		for (Entity entity : entities) {
 
-			f = generateFile('entities'+File.separator + entity.name + '.json', entityFile(entity))
-			saveFileIntoZip(f, 'entities',  entity.name + '.json')
+			f = generateFile('entities' + File.separator + entity.name + '.json', entityFile(entity))
+			saveFileIntoZip(f, 'entities', entity.name + '.json')
 
 			var lan = Language.ENGLISH;
 
@@ -73,65 +75,98 @@ class DialogflowGenerator extends BotGenerator{
 				if (input.language != Language.EMPTY) {
 					lan = input.language
 				}
-				f = generateFile('entities'+File.separator + entity.name + '_entries_' + lan.languageAbbreviation + '.json',
-					entriesFile(input))
+				f = generateFile('entities' + File.separator + entity.name + '_entries_' + lan.languageAbbreviation +
+					'.json', entriesFile(input))
 				saveFileIntoZip(f, 'entities', entity.name + '_entries_' + lan.languageAbbreviation + '.json')
 			}
 		}
 
 		for (UserInteraction transition : bot.flows) {
+			refactorPath(transition);
 			createTransitionFiles(transition, new ArrayList(), bot)
 		}
 		close()
 		return getZipFile()
 
 	}
+
+	def void refactorPath(UserInteraction interaction) {
+		if (interaction.target !== null) {
+			if (!interaction.target.backTo.isEmpty) {
+				for (UserInteraction backTo : interaction.target.backTo) {
+					if (backTo.src === null) {
+						// Refactoring (backTo first element)
+						var newInteraction = GeneratorFactory.eINSTANCE.createUserInteraction();
+						newInteraction.intent = backTo.intent
+						var newBotInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
+						for (Action act : backTo.target.actions) {
+							newBotInteraction.actions.add(act);
+						}
+						for (UserInteraction ui : backTo.target.outcoming) {
+							newBotInteraction.backTo.add(ui)
+						}
+						for (UserInteraction ui : backTo.target.backTo) {
+							newBotInteraction.backTo.add(ui)
+						}
+						newInteraction.target = newBotInteraction
+						interaction.target.backTo.remove(backTo);
+						interaction.target.outcoming.add(newInteraction);
+					}
+				}
+			}
+			for (UserInteraction child : interaction.target.outcoming) {
+				refactorPath(child);
+			}
+		}
+	}
+
 	public static int limit = 86;
 	public static int maxSize = 10;
-	def createIntentPrefix(List<String> prev){
-		if (prev.isEmpty){
+
+	def createIntentPrefix(List<String> prev) {
+		if (prev.isEmpty) {
 			return "";
 		}
-		var ret=""
+		var ret = ""
 		var i = 0;
 		var size = prev.size();
-		if (prev.size()>=(maxSize-1)){
-			 i  = prev.size()-(maxSize-1)
-			 size = (maxSize-1);
+		if (prev.size() >= (maxSize - 1)) {
+			i = prev.size() - (maxSize - 1)
+			size = (maxSize - 1);
 		}
-	
-		for (; i<prev.size();i++){
-				var value = prev.get(i);
-				var maxLength = ((limit/(size+1))-3)
-				if (value.length>maxLength){
-					value = value.substring(0,maxLength);
-				}
-				ret += value +" - " 
+
+		for (; i < prev.size(); i++) {
+			var value = prev.get(i);
+			var maxLength = ((limit / (size + 1)) - 3)
+			if (value.length > maxLength) {
+				value = value.substring(0, maxLength);
+			}
+			ret += value + " - "
 		}
 		return ret;
 	}
-	def createIntentName (List<String> prev, String name){
+
+	def createIntentName(List<String> prev, String name) {
 		var prefix = createIntentPrefix(prev)
 		var newName = name;
-		if (name.length>(limit-prefix.length-3)){
-			newName = newName.substring(0, limit-prefix.length-3)
+		if (name.length > (limit - prefix.length - 3)) {
+			newName = newName.substring(0, limit - prefix.length - 3)
 		}
 		var auxName = prefix + newName
 		var i = 0
-		while(intentsNames.contains(auxName)){
+		while (intentsNames.contains(auxName)) {
 			i++
 			auxName = prefix + newName + i
 		}
 		intentsNames.add(auxName)
 		return auxName
-		
+
 	}
 
 	def void createTransitionFiles(UserInteraction transition, List<String> prev, Bot bot) {
-		var name = createIntentName(prev, transition.intent.name) 
+		var name = createIntentName(prev, transition.intent.name)
 
-		var f = generateFile('/intents/' + name + '.json',
-			transition.intentFile(createIntentPrefix(prev), bot))
+		var f = generateFile('/intents/' + name + '.json', transition.intentFile(createIntentPrefix(prev), bot))
 		saveFileIntoZip(f, 'intents', name + '.json')
 
 		for (IntentLanguageInputs input : transition.intent.inputs) {
@@ -139,9 +174,7 @@ class DialogflowGenerator extends BotGenerator{
 			if (input.language != Language.EMPTY) {
 				lan = input.language
 			}
-			f = generateFile(
-				'/intents/' + name + '_usersays_' + lan.languageAbbreviation +
-					'.json', input.usersayFile)
+			f = generateFile('/intents/' + name + '_usersays_' + lan.languageAbbreviation + '.json', input.usersayFile)
 			saveFileIntoZip(f, 'intents', name + '_usersays_' + lan.languageAbbreviation + '.json')
 		}
 		if (transition.target !== null) {
@@ -171,21 +204,27 @@ class DialogflowGenerator extends BotGenerator{
 	def speechText(TextLanguageInput textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
-			ret += "\""
-			for (Token token : input.tokens) {
-				if (token instanceof Literal) {
-					ret += token.text + " "
-				} else if (token instanceof ParameterToken) {
-
-					ret += answerParam(token, transition)
-				}
-			}
-			ret += "\""
+			ret += input.speechText(transition)
 			if (!isTheLast(textAction.inputs, input)) {
 				ret += ","
 			}
 			ret += "\n"
 		}
+		return ret;
+	}
+
+	def speechText(TextInput input, UserInteraction transition) {
+		var ret = ""
+		ret += "\""
+		for (Token token : input.tokens) {
+			if (token instanceof Literal) {
+				ret += token.text.replaceAll("\n", "\\n") + " "
+			} else if (token instanceof ParameterToken) {
+
+				ret += answerParam(token, transition)
+			}
+		}
+		ret += "\""
 		return ret;
 	}
 
@@ -223,106 +262,167 @@ class DialogflowGenerator extends BotGenerator{
 		}
 	}
 
-	def intentFile(UserInteraction transition, String prefix, Bot bot) '''
-		«var webhook =false»
-		{
-			"id": "«UUID.randomUUID().toString»",
-			"name": "«prefix + transition.intent.name»",
-			"auto": true,
-			«IF transition.src!==null»
-				"contexts": ["«contextName(transition.src.incoming, prefix)»"],
-			«ELSE»
-				"contexts": [],
-			«ENDIF»
-			"responses": [
-				{
-					"resetContexts": false,
-					"affectedContexts": [
-						«IF transition.target!== null»
-							«IF !transition.target.outcoming.isEmpty»
+	def intentFile(UserInteraction transition, String prefix, Bot bot) {
+		var actions = new ArrayList();
+
+		if (transition.target !== null) {
+			actions.addAll(transition.target.actions);
+		} else if (transition.backTo !== null) {
+			actions.addAll(transition.backTo.previous);
+			actions.addAll(transition.backTo.backTo.actions)
+		}
+
+		'''
+			«var webhook =false»
+			«var contextComa = ""»
+			{
+				"id": "«UUID.randomUUID().toString»",
+				"name": "«prefix + transition.intent.name»",
+				"auto": true,
+				«IF transition.src!==null»
+					"contexts": ["«affectedContext.get(transition.src.incoming)»"],
+				«ELSE»
+					"contexts": [],
+				«ENDIF»
+				"responses": [
+					{
+						"resetContexts": false,
+						"affectedContexts": [
+							«IF transition.target!== null»
+								«IF !transition.target.outcoming.isEmpty»
+									{
+										"name": "«contextName(transition, prefix)»",
+										"parameters": {},
+										"lifespan": 2
+									}«{contextComa= ","; ""}»
+								«ENDIF»
+								«FOR UserInteraction backTo: transition.target.backTo»
+									«contextComa»
+									{
+										"name": "«affectedContext.get(backTo.src.incoming)»",
+										"parameters": {},
+										"lifespan": 2
+									}«{contextComa= ","; ""}»
+								«ENDFOR»
+							«ELSEIF transition.backTo !== null»
+								«contextComa»
 								{
-									"name": "«contextName(transition, prefix)»",
+									"name": "«affectedContext.get(transition.backTo.backTo.incoming)»",
 									"parameters": {},
 									"lifespan": 2
-								}
+								}«{contextComa= ","; ""}»
+								«FOR UserInteraction backTo: transition.backTo.backTo.backTo»
+									«contextComa»
+									{
+										"name": "«affectedContext.get(backTo.src.incoming)»",
+										"parameters": {},
+										"lifespan": 2
+									}«{contextComa= ","; ""}»
+								«ENDFOR»
 							«ENDIF»
-						«ENDIF»
-					],
-					"parameters": [
-						«FOR parameter : transition.intent.parameters»
-							{
-								"id": "«UUID.randomUUID().toString»",
-								"required": «parameter.required»,
-								"dataType": "«parameter.paramType()»",
-								"name": "«parameter.name»",
-								"value": "$«parameter.name»",
-								"prompts": [
-									«FOR prompt :parameter.prompts»
-										«FOR text : prompt.prompts»
+							
+							
+						],
+						"parameters": [
+							«FOR parameter : transition.intent.parameters»
+								{
+									"id": "«UUID.randomUUID().toString»",
+									"required": «parameter.required»,
+									"dataType": "«parameter.paramType()»",
+									"name": "«parameter.name»",
+									"value": "$«parameter.name»",
+									"prompts": [
+										«FOR prompt :parameter.prompts»
+											«FOR text : prompt.prompts»
+												{
+													«IF prompt.language != Language.EMPTY»
+														"lang": "«prompt.language.languageAbbreviation»",
+													«ELSE»
+														"lang": "«bot.languages.get(0).languageAbbreviation»",
+													«ENDIF»
+													"value": "«text»"
+												}«IF !isTheLast(parameter.prompts, prompt) || !isTheLast(prompt.prompts, text)»,«ENDIF»
+											«ENDFOR»
+										«ENDFOR»
+									],
+									"isList":«parameter.isList» 
+								}«IF !isTheLast(transition.intent.parameters, parameter)»,«ENDIF»
+							«ENDFOR»
+						],
+						"messages": [
+							«IF actions!==null»
+								«var coma=""»
+								«FOR action : actions»
+									«IF action instanceof Text»
+										«FOR texLanguage : action.inputs»
+											«coma»
 											{
-												«IF prompt.language != Language.EMPTY»
-													"lang": "«prompt.language.languageAbbreviation»",
+												"type": 0,
+												«IF texLanguage.language != Language.EMPTY»
+													"lang": "«texLanguage.language.languageAbbreviation»",
 												«ELSE»
 													"lang": "«bot.languages.get(0).languageAbbreviation»",
 												«ENDIF»
-												"value": "«text»"
-											}«IF !isTheLast(parameter.prompts, prompt) || !isTheLast(prompt.prompts, text)»,«ENDIF»
+												"condition": "",
+												"speech": [
+													«texLanguage.speechText(transition)»
+												]
+											}
+											«{coma=","; ""}»
 										«ENDFOR»
-									«ENDFOR»
-								],
-								"isList":«parameter.isList» 
-							}«IF !isTheLast(transition.intent.parameters, parameter)»,«ENDIF»
-						«ENDFOR»
-					],
-					"messages": [
-						«IF transition.target!==null»
-							«var coma=""»
-							«FOR action:transition.target.actions»
-								«IF action instanceof Text»
-									«FOR texLanguage : action.inputs»
+									«ELSEIF action instanceof Image»
 										«coma»
 										{
-											"type": 0,
-											«IF texLanguage.language != Language.EMPTY»
-												"lang": "«texLanguage.language.languageAbbreviation»",
-											«ELSE»
-												"lang": "«bot.languages.get(0).languageAbbreviation»",
-											«ENDIF»
+											"type": 3,
 											"condition": "",
-											"speech": [
-												«texLanguage.speechText(transition)»
-											]
+											"imageUrl": "«(action as Image).URL»"
 										}
 										«{coma=","; ""}»
-									«ENDFOR»
-								«ELSEIF action instanceof Image»
-									«coma»
-									{
-										"type": 3,
-										"condition": "",
-										"imageUrl": "«(action as Image).URL»"
-									}
-									«{coma=","; ""}»
-								«ELSEIF action instanceof HTTPRequest»
-									«{webhook=true; ""}»
-								«ENDIF»
-							«ENDFOR »
-			«ENDIF»
-			],
-			"defaultResponsePlatforms": {},
-			"speech": []
+									«ELSEIF action instanceof HTTPRequest»
+										«{webhook=true; ""}»
+									«ELSEIF action instanceof ButtonAction»
+										«FOR texLanguage : action.inputs»
+											«coma»
+											{
+												"type": 1,
+												«IF texLanguage.language != Language.EMPTY»
+													"lang": "«texLanguage.language.languageAbbreviation»",
+												«ELSE»
+													"lang": "«bot.languages.get(0).languageAbbreviation»",
+												«ENDIF»
+												"condition": "",
+												"subtitle": «texLanguage.text.speechText(transition)»,
+												"buttons": [ 
+												«FOR button: texLanguage.buttons»
+													{
+														"text": "«button.value»"«IF button.action!== null»,
+																"postback": "«button.action»"
+														«ENDIF»
+													}«IF !isTheLast(texLanguage.buttons, button)», «ENDIF»
+												«ENDFOR» 
+												]
+											}
+											«{coma=","; ""}»
+										«ENDFOR»
+									«ENDIF»
+								«ENDFOR »
+				«ENDIF»
+				],
+				"defaultResponsePlatforms": {},
+				"speech": []
+				}
+				],
+				"priority": 500000,
+				"webhookUsed": «webhook»,
+				"webhookForSlotFilling": false,
+				"fallbackIntent": «transition.intent.fallbackIntent»,
+				"events": [],
+				"conditionalResponses": [],
+				"condition": "",
+				"conditionalFollowupEvents": []
 			}
-			],
-			"priority": 500000,
-			"webhookUsed": «webhook»,
-			"webhookForSlotFilling": false,
-			"fallbackIntent": «transition.intent.fallbackIntent»,
-			"events": [],
-			"conditionalResponses": [],
-			"condition": "",
-			"conditionalFollowupEvents": []
-		}
-	'''
+		'''
+	}
 
 	def agentJSON(Bot bot, HTTPRequest request) '''
 		{

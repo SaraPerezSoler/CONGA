@@ -66,7 +66,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getElement()
 	 * @generated
 	 */
-	int ELEMENT = 4;
+	int ELEMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -243,13 +243,31 @@ public interface GeneratorPackage extends EPackage {
 	int BOT_INTERACTION__OUTCOMING = INTERACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Back To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOT_INTERACTION__BACK_TO = INTERACTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOT_INTERACTION__NAME = INTERACTION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Bot Interaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOT_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 3;
+	int BOT_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Bot Interaction</em>' class.
@@ -298,13 +316,31 @@ public interface GeneratorPackage extends EPackage {
 	int USER_INTERACTION__TARGET = INTERACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INTERACTION__NAME = INTERACTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Back To</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INTERACTION__BACK_TO = INTERACTION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>User Interaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 3;
+	int USER_INTERACTION_FEATURE_COUNT = INTERACTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>User Interaction</em>' class.
@@ -316,6 +352,52 @@ public interface GeneratorPackage extends EPackage {
 	int USER_INTERACTION_OPERATION_COUNT = INTERACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.BackToBotImpl <em>Back To Bot</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.BackToBotImpl
+	 * @see generator.impl.GeneratorPackageImpl#getBackToBot()
+	 * @generated
+	 */
+	int BACK_TO_BOT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Previous</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BACK_TO_BOT__PREVIOUS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Back To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BACK_TO_BOT__BACK_TO = 1;
+
+	/**
+	 * The number of structural features of the '<em>Back To Bot</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BACK_TO_BOT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Back To Bot</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BACK_TO_BOT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link generator.impl.WithLanguageImpl <em>With Language</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,7 +405,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getWithLanguage()
 	 * @generated
 	 */
-	int WITH_LANGUAGE = 5;
+	int WITH_LANGUAGE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -360,7 +442,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getEntity()
 	 * @generated
 	 */
-	int ENTITY = 6;
+	int ENTITY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -406,7 +488,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguageInput()
 	 * @generated
 	 */
-	int LANGUAGE_INPUT = 7;
+	int LANGUAGE_INPUT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -452,7 +534,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getInput()
 	 * @generated
 	 */
-	int INPUT = 12;
+	int INPUT = 13;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.SimpleInputImpl <em>Simple Input</em>}' class.
@@ -462,7 +544,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getSimpleInput()
 	 * @generated
 	 */
-	int SIMPLE_INPUT = 9;
+	int SIMPLE_INPUT = 10;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.CompositeInputImpl <em>Composite Input</em>}' class.
@@ -472,7 +554,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getCompositeInput()
 	 * @generated
 	 */
-	int COMPOSITE_INPUT = 10;
+	int COMPOSITE_INPUT = 11;
 
 	/**
 	 * The number of structural features of the '<em>Input</em>' class.
@@ -500,7 +582,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getEntityInput()
 	 * @generated
 	 */
-	int ENTITY_INPUT = 8;
+	int ENTITY_INPUT = 9;
 
 	/**
 	 * The number of structural features of the '<em>Entity Input</em>' class.
@@ -591,7 +673,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getRegexInput()
 	 * @generated
 	 */
-	int REGEX_INPUT = 11;
+	int REGEX_INPUT = 12;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.TokenImpl <em>Token</em>}' class.
@@ -601,7 +683,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getToken()
 	 * @generated
 	 */
-	int TOKEN = 13;
+	int TOKEN = 14;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.LiteralImpl <em>Literal</em>}' class.
@@ -611,7 +693,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLiteral()
 	 * @generated
 	 */
-	int LITERAL = 14;
+	int LITERAL = 15;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.EntityTokenImpl <em>Entity Token</em>}' class.
@@ -621,7 +703,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getEntityToken()
 	 * @generated
 	 */
-	int ENTITY_TOKEN = 15;
+	int ENTITY_TOKEN = 16;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ParameterTokenImpl <em>Parameter Token</em>}' class.
@@ -631,7 +713,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getParameterToken()
 	 * @generated
 	 */
-	int PARAMETER_TOKEN = 16;
+	int PARAMETER_TOKEN = 17;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ParameterReferenceTokenImpl <em>Parameter Reference Token</em>}' class.
@@ -641,7 +723,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getParameterReferenceToken()
 	 * @generated
 	 */
-	int PARAMETER_REFERENCE_TOKEN = 17;
+	int PARAMETER_REFERENCE_TOKEN = 18;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.HTTPRequestTokeImpl <em>HTTP Request Toke</em>}' class.
@@ -651,7 +733,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequestToke()
 	 * @generated
 	 */
-	int HTTP_REQUEST_TOKE = 18;
+	int HTTP_REQUEST_TOKE = 19;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.IntentImpl <em>Intent</em>}' class.
@@ -661,7 +743,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getIntent()
 	 * @generated
 	 */
-	int INTENT = 19;
+	int INTENT = 20;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.IntentLanguageInputsImpl <em>Intent Language Inputs</em>}' class.
@@ -671,7 +753,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getIntentLanguageInputs()
 	 * @generated
 	 */
-	int INTENT_LANGUAGE_INPUTS = 20;
+	int INTENT_LANGUAGE_INPUTS = 21;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
@@ -681,7 +763,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
 	 * @generated
 	 */
-	int INTENT_INPUT = 21;
+	int INTENT_INPUT = 22;
 
 	/**
 	 * The feature id for the '<em><b>Expresion</b></em>' attribute.
@@ -997,7 +1079,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTrainingPhrase()
 	 * @generated
 	 */
-	int TRAINING_PHRASE = 22;
+	int TRAINING_PHRASE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1034,7 +1116,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 23;
+	int PARAMETER = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1116,7 +1198,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getPromptLanguage()
 	 * @generated
 	 */
-	int PROMPT_LANGUAGE = 24;
+	int PROMPT_LANGUAGE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1162,7 +1244,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 25;
+	int ACTION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1199,7 +1281,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getImage()
 	 * @generated
 	 */
-	int IMAGE = 26;
+	int IMAGE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1254,7 +1336,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getEmpty()
 	 * @generated
 	 */
-	int EMPTY = 27;
+	int EMPTY = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1291,7 +1373,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getText()
 	 * @generated
 	 */
-	int TEXT = 28;
+	int TEXT = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1330,6 +1412,153 @@ public interface GeneratorPackage extends EPackage {
 	int TEXT_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.ButtonActionImpl <em>Button Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonActionImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButtonAction()
+	 * @generated
+	 */
+	int BUTTON_ACTION = 30;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION__INPUTS = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Button Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Button Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_ACTION_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonsLanguageInputsImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+	 * @generated
+	 */
+	int BUTTONS_LANGUAGE_INPUTS = 31;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Text</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__TEXT = WITH_LANGUAGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Buttons</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS__BUTTONS = WITH_LANGUAGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Buttons Language Inputs</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Buttons Language Inputs</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTONS_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.ButtonImpl
+	 * @see generator.impl.GeneratorPackageImpl#getButton()
+	 * @generated
+	 */
+	int BUTTON = 32;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Action</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ACTION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1337,7 +1566,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
 	 * @generated
 	 */
-	int TEXT_LANGUAGE_INPUT = 29;
+	int TEXT_LANGUAGE_INPUT = 33;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1383,7 +1612,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextInput()
 	 * @generated
 	 */
-	int TEXT_INPUT = 30;
+	int TEXT_INPUT = 34;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1420,7 +1649,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequest()
 	 * @generated
 	 */
-	int HTTP_REQUEST = 31;
+	int HTTP_REQUEST = 35;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1511,7 +1740,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPResponse()
 	 * @generated
 	 */
-	int HTTP_RESPONSE = 32;
+	int HTTP_RESPONSE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1566,7 +1795,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 33;
+	int KEY_VALUE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1612,7 +1841,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 34;
+	int DATA_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link generator.Method <em>Method</em>}' enum.
@@ -1622,7 +1851,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 35;
+	int METHOD = 39;
 
 	/**
 	 * The meta object id for the '{@link generator.Language <em>Language</em>}' enum.
@@ -1632,7 +1861,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguage()
 	 * @generated
 	 */
-	int LANGUAGE = 36;
+	int LANGUAGE = 40;
 
 	/**
 	 * The meta object id for the '{@link generator.HTTPReturnType <em>HTTP Return Type</em>}' enum.
@@ -1642,7 +1871,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPReturnType()
 	 * @generated
 	 */
-	int HTTP_RETURN_TYPE = 37;
+	int HTTP_RETURN_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link generator.DefaultEntity <em>Default Entity</em>}' enum.
@@ -1652,7 +1881,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDefaultEntity()
 	 * @generated
 	 */
-	int DEFAULT_ENTITY = 38;
+	int DEFAULT_ENTITY = 42;
 
 
 	/**
@@ -1774,6 +2003,28 @@ public interface GeneratorPackage extends EPackage {
 	EReference getBotInteraction_Outcoming();
 
 	/**
+	 * Returns the meta object for the reference list '{@link generator.BotInteraction#getBackTo <em>Back To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Back To</em>'.
+	 * @see generator.BotInteraction#getBackTo()
+	 * @see #getBotInteraction()
+	 * @generated
+	 */
+	EReference getBotInteraction_BackTo();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.BotInteraction#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see generator.BotInteraction#getName()
+	 * @see #getBotInteraction()
+	 * @generated
+	 */
+	EAttribute getBotInteraction_Name();
+
+	/**
 	 * Returns the meta object for class '{@link generator.UserInteraction <em>User Interaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1815,6 +2066,60 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUserInteraction_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.UserInteraction#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see generator.UserInteraction#getName()
+	 * @see #getUserInteraction()
+	 * @generated
+	 */
+	EAttribute getUserInteraction_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link generator.UserInteraction#getBackTo <em>Back To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Back To</em>'.
+	 * @see generator.UserInteraction#getBackTo()
+	 * @see #getUserInteraction()
+	 * @generated
+	 */
+	EReference getUserInteraction_BackTo();
+
+	/**
+	 * Returns the meta object for class '{@link generator.BackToBot <em>Back To Bot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Back To Bot</em>'.
+	 * @see generator.BackToBot
+	 * @generated
+	 */
+	EClass getBackToBot();
+
+	/**
+	 * Returns the meta object for the reference list '{@link generator.BackToBot#getPrevious <em>Previous</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Previous</em>'.
+	 * @see generator.BackToBot#getPrevious()
+	 * @see #getBackToBot()
+	 * @generated
+	 */
+	EReference getBackToBot_Previous();
+
+	/**
+	 * Returns the meta object for the reference '{@link generator.BackToBot#getBackTo <em>Back To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Back To</em>'.
+	 * @see generator.BackToBot#getBackTo()
+	 * @see #getBackToBot()
+	 * @generated
+	 */
+	EReference getBackToBot_BackTo();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Element <em>Element</em>}'.
@@ -2375,6 +2680,91 @@ public interface GeneratorPackage extends EPackage {
 	EReference getText_Inputs();
 
 	/**
+	 * Returns the meta object for class '{@link generator.ButtonAction <em>Button Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button Action</em>'.
+	 * @see generator.ButtonAction
+	 * @generated
+	 */
+	EClass getButtonAction();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link generator.ButtonAction#getInputs <em>Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
+	 * @see generator.ButtonAction#getInputs()
+	 * @see #getButtonAction()
+	 * @generated
+	 */
+	EReference getButtonAction_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link generator.ButtonsLanguageInputs <em>Buttons Language Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Buttons Language Inputs</em>'.
+	 * @see generator.ButtonsLanguageInputs
+	 * @generated
+	 */
+	EClass getButtonsLanguageInputs();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link generator.ButtonsLanguageInputs#getText <em>Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Text</em>'.
+	 * @see generator.ButtonsLanguageInputs#getText()
+	 * @see #getButtonsLanguageInputs()
+	 * @generated
+	 */
+	EReference getButtonsLanguageInputs_Text();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link generator.ButtonsLanguageInputs#getButtons <em>Buttons</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Buttons</em>'.
+	 * @see generator.ButtonsLanguageInputs#getButtons()
+	 * @see #getButtonsLanguageInputs()
+	 * @generated
+	 */
+	EReference getButtonsLanguageInputs_Buttons();
+
+	/**
+	 * Returns the meta object for class '{@link generator.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button</em>'.
+	 * @see generator.Button
+	 * @generated
+	 */
+	EClass getButton();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.Button#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see generator.Button#getValue()
+	 * @see #getButton()
+	 * @generated
+	 */
+	EAttribute getButton_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link generator.Button#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Action</em>'.
+	 * @see generator.Button#getAction()
+	 * @see #getButton()
+	 * @generated
+	 */
+	EAttribute getButton_Action();
+
+	/**
 	 * Returns the meta object for class '{@link generator.TextLanguageInput <em>Text Language Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2724,6 +3114,22 @@ public interface GeneratorPackage extends EPackage {
 		EReference BOT_INTERACTION__OUTCOMING = eINSTANCE.getBotInteraction_Outcoming();
 
 		/**
+		 * The meta object literal for the '<em><b>Back To</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOT_INTERACTION__BACK_TO = eINSTANCE.getBotInteraction_BackTo();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOT_INTERACTION__NAME = eINSTANCE.getBotInteraction_Name();
+
+		/**
 		 * The meta object literal for the '{@link generator.impl.UserInteractionImpl <em>User Interaction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2756,6 +3162,48 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USER_INTERACTION__TARGET = eINSTANCE.getUserInteraction_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_INTERACTION__NAME = eINSTANCE.getUserInteraction_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Back To</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference USER_INTERACTION__BACK_TO = eINSTANCE.getUserInteraction_BackTo();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.BackToBotImpl <em>Back To Bot</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.BackToBotImpl
+		 * @see generator.impl.GeneratorPackageImpl#getBackToBot()
+		 * @generated
+		 */
+		EClass BACK_TO_BOT = eINSTANCE.getBackToBot();
+
+		/**
+		 * The meta object literal for the '<em><b>Previous</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BACK_TO_BOT__PREVIOUS = eINSTANCE.getBackToBot_Previous();
+
+		/**
+		 * The meta object literal for the '<em><b>Back To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BACK_TO_BOT__BACK_TO = eINSTANCE.getBackToBot_BackTo();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.ElementImpl <em>Element</em>}' class.
@@ -3230,6 +3678,76 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEXT__INPUTS = eINSTANCE.getText_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonActionImpl <em>Button Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonActionImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButtonAction()
+		 * @generated
+		 */
+		EClass BUTTON_ACTION = eINSTANCE.getButtonAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTON_ACTION__INPUTS = eINSTANCE.getButtonAction_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonsLanguageInputsImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+		 * @generated
+		 */
+		EClass BUTTONS_LANGUAGE_INPUTS = eINSTANCE.getButtonsLanguageInputs();
+
+		/**
+		 * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTONS_LANGUAGE_INPUTS__TEXT = eINSTANCE.getButtonsLanguageInputs_Text();
+
+		/**
+		 * The meta object literal for the '<em><b>Buttons</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUTTONS_LANGUAGE_INPUTS__BUTTONS = eINSTANCE.getButtonsLanguageInputs_Buttons();
+
+		/**
+		 * The meta object literal for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.ButtonImpl
+		 * @see generator.impl.GeneratorPackageImpl#getButton()
+		 * @generated
+		 */
+		EClass BUTTON = eINSTANCE.getButton();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUTTON__VALUE = eINSTANCE.getButton_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUTTON__ACTION = eINSTANCE.getButton_Action();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.

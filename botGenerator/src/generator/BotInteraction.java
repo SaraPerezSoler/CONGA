@@ -16,6 +16,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link generator.BotInteraction#getActions <em>Actions</em>}</li>
  *   <li>{@link generator.BotInteraction#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link generator.BotInteraction#getOutcoming <em>Outcoming</em>}</li>
+ *   <li>{@link generator.BotInteraction#getBackTo <em>Back To</em>}</li>
+ *   <li>{@link generator.BotInteraction#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see generator.GeneratorPackage#getBotInteraction()
@@ -72,5 +74,39 @@ public interface BotInteraction extends Interaction {
 	 * @generated
 	 */
 	EList<UserInteraction> getOutcoming();
+
+	/**
+	 * Returns the value of the '<em><b>Back To</b></em>' reference list.
+	 * The list contents are of type {@link generator.UserInteraction}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Back To</em>' reference list.
+	 * @see generator.GeneratorPackage#getBotInteraction_BackTo()
+	 * @model
+	 * @generated
+	 */
+	EList<UserInteraction> getBackTo();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see generator.GeneratorPackage#getBotInteraction_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link generator.BotInteraction#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // BotInteraction

@@ -34,7 +34,14 @@ public class CreateFlowsDiagram {
 			+ "skinparam rankSep 30 " + ENTR /////// configura espacio vertical
 			+ "hide empty members   " + ENTR; /////// oculta la cajita de atributos si está vacía
 	public static final String END = ENTR + "@enduml";
-
+	public static final String CHOICE = "state c <<choice>>"+ENTR;
+	public static final String INITIAL_FINAL_STATE = "[*]";
+	public static final String CHOICE_STATE = "c";
+	public static final String START_NOTE  = "note on link"+ENTR;
+	public static final String END_NOTE  = "end note"+ENTR;
+	
+	
+	private String initialState = INITIAL_FINAL_STATE;
 	private Map<BotInteraction, String> stateName = new HashMap<>();
 	private List<BotInteraction> printed = new ArrayList<BotInteraction>();
 	//private List<String> names = new ArrayList<>();
@@ -50,6 +57,12 @@ public class CreateFlowsDiagram {
 			}
 		}
 		String cad = START_CLASS_DIAGRAM;
+		if (flows.size()>1) {
+			cad += CHOICE;
+			cad += INITIAL_FINAL_STATE +"-->"+CHOICE_STATE+ENTR;
+			initialState= CHOICE_STATE;
+		}
+		
 		for (UserInteraction flow : flows) {
 			cad += printFlow(flow);
 		}
@@ -69,6 +82,9 @@ public class CreateFlowsDiagram {
 				for (UserInteraction interaction : user.getTarget().getOutcoming()) {
 					flowString += printFlow(interaction);
 				}
+				for (UserInteraction interaction : user.getTarget().getBackTo()) {
+					flowString += printBackTo(interaction, user.getTarget());
+				}
 				
 			}
 		}
@@ -77,24 +93,56 @@ public class CreateFlowsDiagram {
 	}
 
 	private String printEndState(BotInteraction target) {
-		return stateName(target) + "-->[*]" + ENTR;
+		return stateName(target) + "-->"+INITIAL_FINAL_STATE + ENTR;
 	}
 
 	private String printState(UserInteraction userInteraction) {
 		String previousState;
 		String nextState;
+		String linkNote= "";
 		if (userInteraction.getSrc() == null) {
-			previousState = "[*]";
+			previousState = initialState;
 		} else {
 			previousState = stateName(userInteraction.getSrc());
 		}
 
 		if (userInteraction.getTarget() == null) {
-			nextState = "[*]";
+			if (userInteraction.getBackTo() == null) {
+				nextState = INITIAL_FINAL_STATE;
+			}else {
+				nextState = stateName(userInteraction.getBackTo().getBackTo());
+				if (!userInteraction.getBackTo().getPrevious().isEmpty()) {
+					linkNote = START_NOTE;
+					for (Action ac: userInteraction.getBackTo().getPrevious()) {
+						linkNote+= ac.getName().replace(" ", "").replace("-", "")+ENTR;
+					}
+					linkNote+= END_NOTE;
+				}
+			}
 		} else {
 			nextState = stateName(userInteraction.getTarget());
 		}
-		return previousState + "-->" + nextState + " : " + userInteraction.getIntent().getName() + ENTR;
+		String name="";
+		if (userInteraction.getName()!=null) {
+			name=userInteraction.getName()+"-";
+		}
+		return previousState + "-->" + nextState + " : "+name + userInteraction.getIntent().getName() + ENTR+linkNote;
+
+	}
+	private String printBackTo(UserInteraction userInteraction, BotInteraction from) {
+		String previousState;
+		String nextState;
+		previousState = stateName(from);
+		if (userInteraction.getTarget() == null) {
+			nextState = INITIAL_FINAL_STATE;
+		} else {
+			nextState = stateName(userInteraction.getTarget());
+		}
+		String name="";
+		if (userInteraction.getName()!=null) {
+			name=userInteraction.getName()+"-";
+		}
+		return previousState + "-->" + nextState + " : " + name+userInteraction.getIntent().getName() + ENTR;
 
 	}
 
@@ -115,18 +163,23 @@ public class CreateFlowsDiagram {
 		
 		int i = 0;
 		String name = interaction.getActions().get(0).getName().replace(" ", "").replace("-", "");
+		if (interaction.getName()!= null) {
+			name = interaction.getName().replace(" ", "").replace("-", "");
+		}
+		
 		
 		boolean flagContinue = false;
+		String aux = name;
 		do {
-			if (!stateName.containsValue(name)) {
-				stateName.put(interaction, name);
+			if (!stateName.containsValue(aux)) {
+				stateName.put(interaction, aux);
 				flagContinue = true;
 			}else {
 				i++;
-				name = name+i;
+				aux = name+i;
 			}
 		}while (flagContinue != true);
-		return name;
+		return aux;
 		
 		
 	}

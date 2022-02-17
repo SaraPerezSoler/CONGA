@@ -253,8 +253,10 @@ public class AQuestionImpl extends MinimalEObjectImpl.Container implements AQues
 	public double getScore(Tool t) {
 		double value = 0;
 		for (Option opt : getSelecteds()) {
-			if (opt.getAcceptedTools().contains(t)) {
+			if (opt.getAvailable().contains(t)) {
 				value += 1;
+			} else if (opt.getPossible().contains(t)) {
+				value += 0.75;
 			} else if (opt.getUnknown().contains(t)) {
 				value += 0.5;
 			}

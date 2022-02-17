@@ -84,6 +84,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createUserInteractionAdapter();
 			}
 			@Override
+			public Adapter caseBackToBot(BackToBot object) {
+				return createBackToBotAdapter();
+			}
+			@Override
 			public Adapter caseElement(Element object) {
 				return createElementAdapter();
 			}
@@ -184,6 +188,18 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createTextAdapter();
 			}
 			@Override
+			public Adapter caseButtonAction(ButtonAction object) {
+				return createButtonActionAdapter();
+			}
+			@Override
+			public Adapter caseButtonsLanguageInputs(ButtonsLanguageInputs object) {
+				return createButtonsLanguageInputsAdapter();
+			}
+			@Override
+			public Adapter caseButton(Button object) {
+				return createButtonAdapter();
+			}
+			@Override
 			public Adapter caseTextLanguageInput(TextLanguageInput object) {
 				return createTextLanguageInputAdapter();
 			}
@@ -276,6 +292,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserInteractionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.BackToBot <em>Back To Bot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.BackToBot
+	 * @generated
+	 */
+	public Adapter createBackToBotAdapter() {
 		return null;
 	}
 
@@ -626,6 +656,48 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.ButtonAction <em>Button Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.ButtonAction
+	 * @generated
+	 */
+	public Adapter createButtonActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.ButtonsLanguageInputs <em>Buttons Language Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.ButtonsLanguageInputs
+	 * @generated
+	 */
+	public Adapter createButtonsLanguageInputsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.Button
+	 * @generated
+	 */
+	public Adapter createButtonAdapter() {
 		return null;
 	}
 

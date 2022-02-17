@@ -3,8 +3,12 @@
 package generator.impl;
 
 import generator.Action;
+import generator.BackToBot;
 import generator.Bot;
 import generator.BotInteraction;
+import generator.Button;
+import generator.ButtonAction;
+import generator.ButtonsLanguageInputs;
 import generator.CompositeInput;
 import generator.DataType;
 import generator.DefaultEntity;
@@ -84,6 +88,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass userInteractionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass backToBotEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -259,6 +270,27 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass textEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass buttonActionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass buttonsLanguageInputsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass buttonEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -507,6 +539,26 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
+	public EReference getBotInteraction_BackTo() {
+		return (EReference)botInteractionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getBotInteraction_Name() {
+		return (EAttribute)botInteractionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getUserInteraction() {
 		return userInteractionEClass;
 	}
@@ -539,6 +591,56 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	@Override
 	public EReference getUserInteraction_Target() {
 		return (EReference)userInteractionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getUserInteraction_Name() {
+		return (EAttribute)userInteractionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getUserInteraction_BackTo() {
+		return (EReference)userInteractionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBackToBot() {
+		return backToBotEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBackToBot_Previous() {
+		return (EReference)backToBotEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBackToBot_BackTo() {
+		return (EReference)backToBotEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1077,6 +1179,86 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
+	public EClass getButtonAction() {
+		return buttonActionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getButtonAction_Inputs() {
+		return (EReference)buttonActionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getButtonsLanguageInputs() {
+		return buttonsLanguageInputsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getButtonsLanguageInputs_Text() {
+		return (EReference)buttonsLanguageInputsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getButtonsLanguageInputs_Buttons() {
+		return (EReference)buttonsLanguageInputsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getButton() {
+		return buttonEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getButton_Value() {
+		return (EAttribute)buttonEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getButton_Action() {
+		return (EAttribute)buttonEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTextLanguageInput() {
 		return textLanguageInputEClass;
 	}
@@ -1333,11 +1515,19 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(botInteractionEClass, BOT_INTERACTION__ACTIONS);
 		createEReference(botInteractionEClass, BOT_INTERACTION__INCOMING);
 		createEReference(botInteractionEClass, BOT_INTERACTION__OUTCOMING);
+		createEReference(botInteractionEClass, BOT_INTERACTION__BACK_TO);
+		createEAttribute(botInteractionEClass, BOT_INTERACTION__NAME);
 
 		userInteractionEClass = createEClass(USER_INTERACTION);
 		createEReference(userInteractionEClass, USER_INTERACTION__INTENT);
 		createEReference(userInteractionEClass, USER_INTERACTION__SRC);
 		createEReference(userInteractionEClass, USER_INTERACTION__TARGET);
+		createEAttribute(userInteractionEClass, USER_INTERACTION__NAME);
+		createEReference(userInteractionEClass, USER_INTERACTION__BACK_TO);
+
+		backToBotEClass = createEClass(BACK_TO_BOT);
+		createEReference(backToBotEClass, BACK_TO_BOT__PREVIOUS);
+		createEReference(backToBotEClass, BACK_TO_BOT__BACK_TO);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__NAME);
@@ -1416,6 +1606,17 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		textEClass = createEClass(TEXT);
 		createEReference(textEClass, TEXT__INPUTS);
+
+		buttonActionEClass = createEClass(BUTTON_ACTION);
+		createEReference(buttonActionEClass, BUTTON_ACTION__INPUTS);
+
+		buttonsLanguageInputsEClass = createEClass(BUTTONS_LANGUAGE_INPUTS);
+		createEReference(buttonsLanguageInputsEClass, BUTTONS_LANGUAGE_INPUTS__TEXT);
+		createEReference(buttonsLanguageInputsEClass, BUTTONS_LANGUAGE_INPUTS__BUTTONS);
+
+		buttonEClass = createEClass(BUTTON);
+		createEAttribute(buttonEClass, BUTTON__VALUE);
+		createEAttribute(buttonEClass, BUTTON__ACTION);
 
 		textLanguageInputEClass = createEClass(TEXT_LANGUAGE_INPUT);
 		createEReference(textLanguageInputEClass, TEXT_LANGUAGE_INPUT__INPUTS);
@@ -1501,6 +1702,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		imageEClass.getESuperTypes().add(this.getAction());
 		emptyEClass.getESuperTypes().add(this.getAction());
 		textEClass.getESuperTypes().add(this.getAction());
+		buttonActionEClass.getESuperTypes().add(this.getAction());
+		buttonsLanguageInputsEClass.getESuperTypes().add(this.getWithLanguage());
 		textLanguageInputEClass.getESuperTypes().add(this.getWithLanguage());
 		httpRequestEClass.getESuperTypes().add(this.getAction());
 		httpResponseEClass.getESuperTypes().add(this.getAction());
@@ -1519,11 +1722,19 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getBotInteraction_Actions(), this.getAction(), null, "actions", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBotInteraction_Incoming(), this.getUserInteraction(), this.getUserInteraction_Target(), "incoming", null, 1, 1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBotInteraction_Outcoming(), this.getUserInteraction(), this.getUserInteraction_Src(), "outcoming", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBotInteraction_BackTo(), this.getUserInteraction(), null, "backTo", null, 0, -1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBotInteraction_Name(), ecorePackage.getEString(), "name", null, 0, 1, BotInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userInteractionEClass, UserInteraction.class, "UserInteraction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUserInteraction_Intent(), this.getIntent(), null, "intent", null, 1, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserInteraction_Src(), this.getBotInteraction(), this.getBotInteraction_Outcoming(), "src", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUserInteraction_Target(), this.getBotInteraction(), this.getBotInteraction_Incoming(), "target", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUserInteraction_Name(), ecorePackage.getEString(), "name", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserInteraction_BackTo(), this.getBackToBot(), null, "backTo", null, 0, 1, UserInteraction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(backToBotEClass, BackToBot.class, "BackToBot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBackToBot_Previous(), this.getAction(), null, "previous", null, 0, -1, BackToBot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBackToBot_BackTo(), this.getBotInteraction(), null, "backTo", null, 1, 1, BackToBot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1602,6 +1813,17 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(textEClass, Text.class, "Text", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getText_Inputs(), this.getTextLanguageInput(), null, "inputs", null, 1, -1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(buttonActionEClass, ButtonAction.class, "ButtonAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getButtonAction_Inputs(), this.getButtonsLanguageInputs(), null, "inputs", null, 1, -1, ButtonAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(buttonsLanguageInputsEClass, ButtonsLanguageInputs.class, "ButtonsLanguageInputs", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getButtonsLanguageInputs_Text(), this.getTextInput(), null, "text", null, 1, 1, ButtonsLanguageInputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getButtonsLanguageInputs_Buttons(), this.getButton(), null, "buttons", null, 1, -1, ButtonsLanguageInputs.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getButton_Value(), ecorePackage.getEString(), "value", null, 1, 1, Button.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getButton_Action(), ecorePackage.getEString(), "action", null, 0, 1, Button.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(textLanguageInputEClass, TextLanguageInput.class, "TextLanguageInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTextLanguageInput_Inputs(), this.getTextInput(), null, "inputs", null, 1, -1, TextLanguageInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
