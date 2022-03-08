@@ -71,7 +71,8 @@ import recommenderQuestionnaire.evaluations.Evaluator;
 public class CongaData {
 
 	private static final String FILENAME = "CONGA.xmi";
-	private static final String RECOMMENDER_FILE = "RecomenderModel.xmi";
+	//private static final String RECOMMENDER_FILE = "RecomenderModel.xmi";
+	private static final String CONGA_BASE = "CONGA_base.xmi";
 	private static ResourceSet resourceSet = null;
 	private static CongaData congaData;
 	private static String PATH;
@@ -131,6 +132,7 @@ public class CongaData {
 				services.add(service);
 			}
 		}
+		
 		return ret;
 	}
 
@@ -183,17 +185,21 @@ public class CongaData {
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new FatalException("In class " + this.getClass().getName() + ": the file " + path + "/" + FILENAME
-						+ " can be opened: ");
+						+ " can not be opened: ");
 			}
 		} else {
 			this.resource = getResourceSet().createResource(URI.createURI(path + "/" + FILENAME));
-			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
+			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + CONGA_BASE), true);
+			conga = (CongaSystem) qresource.getContents().get(0);
 			resource.getContents().add(conga);
-			newUser("admin", "adminadmin");
-			newUser("Sara", "friends");
-			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
-			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
-			conga.setQuestionnaire(questionnaire);
+			
+//			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
+//			resource.getContents().add(conga);
+//			newUser("admin", "adminadmin");
+//			newUser("Sara", "friends");
+//			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
+//			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
+//			conga.setQuestionnaire(questionnaire);
 		}
 		Questionnaire questionnaire = conga.getQuestionnaire();
 		try {
