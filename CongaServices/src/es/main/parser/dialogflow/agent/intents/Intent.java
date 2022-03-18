@@ -108,7 +108,7 @@ public class Intent {
 		}
 
 		for (UserSaysLanguage usersays : getUsersays()) {
-			IntentLanguageInputs languageInput = usersays.getBotLanguageInput(intent);
+			IntentLanguageInputs languageInput = usersays.getBotLanguageInput(intent, bot);
 			intent.getInputs().add(languageInput);
 		}
 		

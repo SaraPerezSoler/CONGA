@@ -2,6 +2,9 @@ package es.main.parser.dialogflow.agent.intents;
 
 import java.util.List;
 
+import generator.Bot;
+import generator.DefaultEntity;
+import generator.Entity;
 import generator.GeneratorFactory;
 import generator.Literal;
 import generator.ParameterReferenceToken;
@@ -22,7 +25,7 @@ public class TrainingPhrase {
 	public void setTemplate(boolean isTemplate) {
 		this.isTemplate = isTemplate;
 	}
-	public generator.TrainingPhrase getBotTrainingPhrase(generator.Intent intent) {
+	public generator.TrainingPhrase getBotTrainingPhrase(generator.Intent intent, Bot bot) {
 		generator.TrainingPhrase training = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 		String text = "";
 		for (Data data : getData()) {
@@ -34,6 +37,10 @@ public class TrainingPhrase {
 					text = "";
 				}
 				generator.Parameter param = intent.getParameter(data.getAlias());
+				if (param == null) {
+					param = createParam(data, bot);
+					intent.getParameters().add(param);
+				}
 				ParameterReferenceToken reference = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 				reference.setTextReference(data.getText());
 				reference.setParameter(param);
@@ -49,6 +56,21 @@ public class TrainingPhrase {
 			text = "";
 		}
 		return training;
+	}
+	
+	private generator.Parameter createParam (Data data, Bot bot) {
+		generator.Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
+		parameter.setName(data.getAlias());
+		
+		String type = data.getMeta().replace("@", "");
+		Entity entity = bot.getEntity(type);
+		if (entity == null) {
+			DefaultEntity default_ = Parameter.getDefaultEntity(type);
+			parameter.setDefaultEntity(default_);
+		} else {
+			parameter.setEntity(entity);
+		}
+		return parameter;
 	}
 	
 }
