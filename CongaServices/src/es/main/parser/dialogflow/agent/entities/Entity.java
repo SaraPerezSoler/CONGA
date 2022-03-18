@@ -7,12 +7,14 @@ import es.main.parser.dialogflow.agent.Agent;
 import generator.EntityInput;
 import generator.GeneratorFactory;
 import generator.LanguageInput;
+import generator.RegexInput;
 import generator.SimpleInput;
 
 public class Entity {
 
 	private String name;
 	private boolean isEnum;
+	private boolean isRegexp;
 	private List<EntryLanguage> entriesLanguage;
 
 	public String getName() {
@@ -23,12 +25,20 @@ public class Entity {
 		this.name = name;
 	}
 
-	public boolean isEnum() {
+	public boolean getIsEnum() {
 		return isEnum;
 	}
 
-	public void setEnum(boolean isEnum) {
+	public void setIsEnum(boolean isEnum) {
 		this.isEnum = isEnum;
+	}
+
+	public boolean getIsRegexp() {
+		return isRegexp;
+	}
+
+	public void setIsRegexp(boolean isRegexp) {
+		this.isRegexp = isRegexp;
 	}
 
 	public List<EntryLanguage> getEntriesLanguage() {
@@ -50,7 +60,22 @@ public class Entity {
 	}
 
 	public generator.Entity getBotEntity() {
-		if (isEnum() == false) {
+		if (getIsRegexp() == true) {
+			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
+			ret.setName(getName());
+			for (EntryLanguage entryLan : getEntriesLanguage()) {
+				LanguageInput input = GeneratorFactory.eINSTANCE.createLanguageInput();
+				input.setLanguage(Agent.castLanguage(entryLan.getLanguage()));
+				for (Entry entry : entryLan.getEntries()) {
+					RegexInput regex = GeneratorFactory.eINSTANCE.createRegexInput();
+					regex.setExpresion(entry.getValue());
+					input.getInputs().add(regex);
+				}
+				ret.getInputs().add(input);
+			}
+			return ret;
+
+		} else if (getIsEnum() == false) {
 			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
 			ret.setName(getName());
 			for (EntryLanguage entryLan : getEntriesLanguage()) {
