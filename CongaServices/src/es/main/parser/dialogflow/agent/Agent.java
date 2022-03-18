@@ -159,8 +159,11 @@ public class Agent extends Chatbot {
 		int i = 0;
 		for (Intent intent : getIntents()) {
 			if (intent.getContexts().isEmpty()) {
-				bot.getFlows().add(startFlow(intent, bot, i));
-				i++;
+				UserInteraction interaction = startFlow(intent, bot, i);
+				if (!bot.getFlows().contains(interaction)) {
+					bot.getFlows().add(interaction);
+					i++;
+				}
 			}
 		}
 
