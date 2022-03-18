@@ -260,7 +260,8 @@ public class Agent extends Chatbot{
 		if (botInteraction.getActions().isEmpty()) {
 			Action empty = Message.emptyAction(intent.getBotIntent(bot), bot);
 			saveAction(empty, bot);
-			botInteraction.getActions().add(empty);
+			Action aux = getAction(empty);
+			botInteraction.getActions().add(aux);
 		}
 		interaction.setTarget(botInteraction);
 		
