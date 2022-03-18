@@ -76,7 +76,7 @@ public class Parameter{
 		return parameter;
 	}
 	
-	private DefaultEntity getDefaultEntity(String dataType) {
+	public static DefaultEntity getDefaultEntity(String dataType) {
 		switch (dataType) {
 		case "@sys.number-integer":
 			return DefaultEntity.NUMBER;
