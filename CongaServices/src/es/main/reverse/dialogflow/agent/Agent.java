@@ -38,6 +38,8 @@ public class Agent extends Chatbot{
 	private Map<Action, List<Action>> similarActions = new HashMap<Action, List<Action>>();
 	private Map<generator.Intent, List<generator.Intent>> similarIntents = new HashMap<>();
 
+	
+	private Map<String, Map<Intent, UserInteraction>> flow_intent = new HashMap<String, Map<Intent, UserInteraction>>();
 	public Agent() {
 	}
 
@@ -154,10 +156,14 @@ public class Agent extends Chatbot{
 				saveAction(action, bot);
 			}
 		}
-
+		int i = 0;
 		for (Intent intent : getIntents()) {
 			if (intent.getContexts().isEmpty()) {
-				bot.getFlows().add(startFlow(intent, bot));
+				UserInteraction interaction = startFlow(intent, bot, i);
+				if (!bot.getFlows().contains(interaction)) {
+					bot.getFlows().add(interaction);
+					i++;
+				}
 			}
 		}
 
@@ -237,21 +243,29 @@ public class Agent extends Chatbot{
 		return null;
 	}
 
-	private UserInteraction startFlow(Intent intent, Bot bot) {
+	private UserInteraction startFlow(Intent intent, Bot bot, int numPath) {
 		UserInteraction interaction = null;
 		for (UserInteraction aux : bot.getFlows()) {
 			if (aux.getIntent().equals(getIntent(intent.getBotIntent(bot)))) {
 				interaction = aux;
+				numPath = bot.getFlows().indexOf(aux);
 				break;
 			}
 		}
-		return completeInteraction(interaction, intent, bot);
+		
+		return completeInteraction(interaction, intent, bot, numPath+"", 3);
 
 	}
-	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot){
+
+	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot, String numPath, int times) {
 		if (interaction == null) {
 			interaction = GeneratorFactory.eINSTANCE.createUserInteraction();
 			interaction.setIntent(getIntent(intent.getBotIntent(bot)));
+			
+			if (flow_intent.get(numPath)==null) {
+				flow_intent.put(numPath, new HashMap<Intent, UserInteraction>());
+			}
+			flow_intent.get(numPath).put(intent, interaction);
 		}
 		BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
 		for (Action act : intent.getBotIntentActions(bot, this)) {
@@ -264,17 +278,45 @@ public class Agent extends Chatbot{
 			botInteraction.getActions().add(aux);
 		}
 		interaction.setTarget(botInteraction);
-		
+
 		List<Context> affectedContext = new ArrayList<>();
-		intent.getResponses().forEach((r)->affectedContext.addAll(r.getAffectedContexts()));
+		intent.getResponses().forEach((r) -> affectedContext.addAll(r.getAffectedContexts()));
 		for (Context context : affectedContext) {
+			int i = 0;
 			for (Intent followUp : getIntents(context)) {
-				botInteraction.getOutcoming().add(continueFlow(followUp, bot, botInteraction));
+				UserInteraction aux = getInPath(numPath, followUp);
+				if (aux != null) {
+					if (times>0) {
+						aux = continueFlow(followUp, bot, botInteraction, numPath, --times);
+						botInteraction.getOutcoming().add(aux);
+					}
+				} else {
+					aux = continueFlow(followUp, bot, botInteraction, numPath+"_"+i, times);
+					botInteraction.getOutcoming().add(aux);
+					i++;
+				}
 			}
 		}
 		return interaction;
 	}
-	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction) {
+		
+	private UserInteraction getInPath(String numPath, Intent followUp) {
+		String[] nums = numPath.split("_");
+		String path="";
+		String sep = "";
+		for (String n: nums) {
+			path += sep+n;
+			sep = "_";
+			if (flow_intent.get(path)!= null) {
+				if (flow_intent.get(path).containsKey(followUp)) {
+					return flow_intent.get(path).get(followUp);
+				}
+			}
+		}
+		return null;
+	}
+
+	private UserInteraction continueFlow(Intent intent, Bot bot, BotInteraction prevBotInteraction, String numPath, int times) {
 		UserInteraction interaction = null;
 		for (UserInteraction aux : prevBotInteraction.getOutcoming()) {
 			if (aux.getIntent().equals(getIntent(intent.getBotIntent(bot)))) {
@@ -282,8 +324,9 @@ public class Agent extends Chatbot{
 				break;
 			}
 		}
-		return completeInteraction(interaction, intent, bot);
+		return completeInteraction(interaction, intent, bot, numPath, times);
 	}
+
 	
 	public static Language castLanguage(String language) {
 		if (language == null) {
