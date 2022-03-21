@@ -44,6 +44,9 @@ public class Nlu {
 			} else if (element.text().startsWith("synonym:")) {
 				String name = element.text().replace("synonym:", "");
 				saveSynonyms(name, ul);
+			} else if (element.text().startsWith("lookup:")) {
+				String name = element.text().replace("lookup:", "");
+				saveSynonyms(name, ul);
 			}
 		}
 		
