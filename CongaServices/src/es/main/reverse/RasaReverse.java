@@ -1,7 +1,10 @@
 package es.main.reverse;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,7 +72,9 @@ public class RasaReverse extends Reverse{
 							String info = readFile(f);
 							if (info.contains("## intent:") || info.contains("## synonym:")
 									|| info.contains("## regex:") || info.contains("## lookup:")) {
-								Node document = parser.parse(readFile(f));
+								String fileString = readFile(f);
+								fileString = fileString.replaceAll("<!--.*-->", "");
+								Node document = parser.parse(fileString);
 								HtmlRenderer renderer = HtmlRenderer.builder().build();
 								org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document));
 								rasaBot.setNlu(html);
@@ -83,7 +88,7 @@ public class RasaReverse extends Reverse{
 						} else if (f.getName().equals("domain.yml")) {
 							rasaBot.setDomain(om.readValue(f, Domain.class));
 							hasDomain = true;
-						} else if (f.getName().equals("config.yml")) {
+						} else if (f.getName().equals("config.yml") || f.getName().equals("nlu_config.yml")) {
 							rasaBot.setConfig(om.readValue(f, Config.class));
 							hasConfig = true;
 						} else if (f.isDirectory()) {
@@ -103,15 +108,28 @@ public class RasaReverse extends Reverse{
 	private String readFile(File f) {
 		String text = "";
 		if (f.isFile()) {
+			BufferedReader br = null;
 			try {
-				Scanner myReader = new Scanner(f);
-				while (myReader.hasNextLine()) {
-					text += myReader.nextLine() + "\n";
-				}
-				myReader.close();
-			} catch (FileNotFoundException e) {
-				System.out.println("An error occurred.");
+				br = new BufferedReader(new FileReader(f));
+			    StringBuilder sb = new StringBuilder();
+			    String line = br.readLine();
+
+			    while (line != null) {
+			        sb.append(line);
+			        sb.append(System.lineSeparator());
+			        line = br.readLine();
+			    }
+			    text = sb.toString();
+			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				if (br!=null) {
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		return text;
