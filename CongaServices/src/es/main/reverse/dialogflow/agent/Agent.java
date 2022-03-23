@@ -31,6 +31,7 @@ public class Agent extends Chatbot {
 	private List<String> supportedLanguages = new ArrayList<>();
 	private List<Intent> intents = new ArrayList<>();
 	private List<Entity> entities = new ArrayList<>();
+	private boolean haveLoops = false;
 
 	private HTTPRequest request;
 	private HTTPResponse response;
@@ -288,7 +289,8 @@ public class Agent extends Chatbot {
 				UserInteraction aux = getInPath(numPath, followUp);
 				if (aux != null) {
 					if (times > 0) {
-						System.out.println(aux.getIntent().getName() + " : " + times);
+						haveLoops = true;
+						//System.out.println(aux.getIntent().getName() + " : " + times);
 						String pathAux = getPathFrom(aux);
 						if (pathAux == null) {
 							pathAux = numPath;
@@ -415,6 +417,14 @@ public class Agent extends Chatbot {
 		languages.add(getLanguage());
 		languages.addAll(getSupportedLanguages());
 		return languages;
+	}
+
+	public boolean isHaveLoops() {
+		return haveLoops;
+	}
+
+	public void setHaveLoops(boolean haveLoops) {
+		this.haveLoops = haveLoops;
 	}
 
 }

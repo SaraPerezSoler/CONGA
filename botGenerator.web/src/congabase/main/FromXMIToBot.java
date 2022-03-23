@@ -21,9 +21,9 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class FromXMIToBot {
-	private static final String INPUT_URI = "D:/Git/asymob/chatbots";
+	private static final String INPUT_URI = "D:\\Desktop\\Chatbots\\xmi";
 	private static final String [] IGNORE_FILES = {"D:/Git/asymob/chatbots/botsInDSL"};
-	private static final String OUTPUT_URI = "D:/Git/asymob/chatbots/botsInDSL";
+	private static final String OUTPUT_URI = "D:\\Desktop\\Chatbots\\xmi";
 	private static String baseInputFile;
 	private ResourceSet resourceSet;
 	private Injector injector;
@@ -59,9 +59,13 @@ public class FromXMIToBot {
 					files.add(f1);
 				}
 			} else if (f.getName().endsWith(".xmi") || f.getName().endsWith(".XMI")) {
+				try {
 				String filepath = extract(f.getAbsolutePath(), "");
 				String fileName = extract(filepath, baseInputFile);
 				parser.XmiToDsl(f.getAbsolutePath(), OUTPUT_URI+"/"+fileName.replace(".xmi", ".bot"));
+				}catch (Exception e) {
+					System.out.println("Error in "+ f.getName());
+				}
 			}
 
 			files.remove(f);
