@@ -78,7 +78,7 @@ public class BotInteraction {
 		}
 		botInteraction.getActions().addAll(actions);
 		if (next != null) {
-			botInteraction.getOutcoming().add(next.getBotUserInteraction(bot));
+			botInteraction.getOutcoming().addAll(next.getBotUserInteraction(bot));
 		}
 		this.generated = botInteraction;
 		return botInteraction;

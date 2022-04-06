@@ -2,15 +2,19 @@ package es.main;
 
 import java.io.File;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import es.main.reverse.DialogflowReverse;
+import es.main.reverse.RasaReverse;
 import es.main.reverse.dialogflow.agent.Agent;
+import es.main.reverse.rasa.bot.RasaBot;
 import generator.Bot;
 
-public class ConverDialogflow {
+public class ConverRasa {
 
-	private static final String FOLDER = "D:\\Desktop\\Dialogflow - copia\\xmi";
-	private static final String FOLDER_BASE = "D:\\Desktop\\Dialogflow - copia";
+	private static final String FOLDER = "D:\\Desktop\\Rasa Chatbots - copia\\xmi";
+	private static final String FOLDER_BASE = "D:\\Desktop\\Rasa Chatbots - copia";
 
 	public static void main(String[] args) {
 		String folderPath = FOLDER;
@@ -24,8 +28,8 @@ public class ConverDialogflow {
 
 			try {
 				ToolFiles tf = new ToolFiles(folderPath, file, file.getName());
-				DialogflowReverse parser = new DialogflowReverse();
-				Agent agent = parser.getChatbot(tf.getFile());
+				RasaReverse parser = new RasaReverse();
+				RasaBot agent = parser.getChatbot(tf.getFile());
 				if (agent.getLanguage().equals("en")) {
 					Bot bot = agent.getBot();
 					File f = tf.createResource(bot);
