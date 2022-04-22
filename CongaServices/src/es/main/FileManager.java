@@ -78,7 +78,7 @@ public abstract class FileManager {
 
 	}
 
-	private void removeFile(File file) {
+	protected void removeFile(File file) {
 		File[] contents = file.listFiles();
 		if (contents != null) {
 			for (File f : contents) {

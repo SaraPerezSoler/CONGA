@@ -2,7 +2,6 @@ package es.main;
 
 import java.io.File;
 
-
 import es.main.reverse.DialogflowReverse;
 import es.main.reverse.dialogflow.agent.Agent;
 import generator.Bot;
@@ -21,22 +20,44 @@ public class ConverDialogflow {
 		}
 		for (File file : folderBase.listFiles()) {
 			boolean run = false;
-
+			Agent agent = null;
+			ToolFiles tf = null;
+			boolean err = false;
 			try {
-				ToolFiles tf = new ToolFiles(folderPath, file, file.getName());
+				tf = new ToolFiles(folderPath, file, file.getName());
 				DialogflowReverse parser = new DialogflowReverse();
-				Agent agent = parser.getChatbot(tf.getFile());
-				if (agent.getLanguage().equals("en")) {
-					Bot bot = agent.getBot();
-					File f = tf.createResource(bot);
-					run = true;
-				}
-				System.out.println(agent.getName()+"\t"+agent.getLanguage()+"\t"+run+"\t"+agent.isHaveLoops());
+				agent = parser.getChatbot(tf.getFile());
 			} catch (Exception e) {
-				System.out.println(file.getName()+"\t-\tERR\t");
+				err=true;
+				System.out.println(file.getName().replace(".zip", "") + "\t-\t-\tN");
 			}
-			
-			
+			if (!err) {
+				try {
+					if (agent.getLanguage().equals("en")) {
+						Bot bot = agent.getBot();
+						File f = tf.createResource(bot);
+						run = true;
+					}
+					String have_loops = "N";
+					if (agent.isHaveLoops()) {
+						have_loops = "Y";
+					}
+					String runString = "-";
+					if (run) {
+						runString = "Y";
+					}
+					
+					System.out.println(
+							agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString);
+				} catch (Exception e) {
+					if (agent != null) {
+						System.out.println(agent.getName() + "\t" + agent.getLanguage() + "\t-\tN");
+					} else {
+						System.out.println(file.getName().replace(".zip", "") + "\t-\t-\tN");
+					}
+				}
+			}
+
 		}
 	}
 

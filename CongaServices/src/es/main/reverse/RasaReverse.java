@@ -102,6 +102,7 @@ public class RasaReverse extends Reverse{
 			}
 			files.remove(currentFile);
 		}
+		removeFile(agentFiles);
 		return rasaBot;
 	}
 
