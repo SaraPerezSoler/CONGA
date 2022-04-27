@@ -37,7 +37,7 @@ Intent1 returns Intent:
 	;
 	
 IntentLanguageInputs returns IntentLanguageInputs: 
-	'inputs' ('in' language=Language)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
+	('inputs'('in' language=Language)?)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
 ;
 
 Transition returns UserInteraction:

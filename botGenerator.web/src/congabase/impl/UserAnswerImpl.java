@@ -309,4 +309,5 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 		}
 	}
 
+
 } //UserAnswerImpl

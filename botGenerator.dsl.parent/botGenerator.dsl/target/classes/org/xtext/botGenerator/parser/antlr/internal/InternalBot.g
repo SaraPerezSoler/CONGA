@@ -669,43 +669,45 @@ ruleIntentLanguageInputs returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='inputs'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0());
-		}
 		(
-			otherlv_1='in'
+			otherlv_0='inputs'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getIntentLanguageInputsAccess().getInKeyword_1_0());
+				newLeafNode(otherlv_0, grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0_0());
 			}
 			(
+				otherlv_1='in'
+				{
+					newLeafNode(otherlv_1, grammarAccess.getIntentLanguageInputsAccess().getInKeyword_0_1_0());
+				}
 				(
-					{
-						newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_1_1_0());
-					}
-					lv_language_2_0=ruleLanguage
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getIntentLanguageInputsRule());
+					(
+						{
+							newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_0_1_1_0());
 						}
-						set(
-							$current,
-							"language",
-							lv_language_2_0,
-							"org.xtext.botGenerator.Bot.Language");
-						afterParserOrEnumRuleCall();
-					}
+						lv_language_2_0=ruleLanguage
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getIntentLanguageInputsRule());
+							}
+							set(
+								$current,
+								"language",
+								lv_language_2_0,
+								"org.xtext.botGenerator.Bot.Language");
+							afterParserOrEnumRuleCall();
+						}
+					)
 				)
-			)
+			)?
 		)?
 		otherlv_3='{'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_2());
+			newLeafNode(otherlv_3, grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_2_0());
 				}
 				lv_inputs_4_0=ruleIntentInput
 				{
@@ -724,12 +726,12 @@ ruleIntentLanguageInputs returns [EObject current=null]
 		(
 			otherlv_5=','
 			{
-				newLeafNode(otherlv_5, grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_4_0());
+				newLeafNode(otherlv_5, grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_4_1_0());
+						newCompositeNode(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_1_0());
 					}
 					lv_inputs_6_0=ruleIntentInput
 					{
@@ -748,7 +750,7 @@ ruleIntentLanguageInputs returns [EObject current=null]
 		)*
 		otherlv_7='}'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_7, grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_4());
 		}
 	)
 ;

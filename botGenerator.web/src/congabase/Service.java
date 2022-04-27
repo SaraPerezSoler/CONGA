@@ -156,7 +156,7 @@ public interface Service extends Utility {
 	 * @see #getLastAccess()
 	 * @generated
 	 */
-	void setLastAccess(Date value);
+	//void setLastAccess(Date value);
 
 	File sendAndGetFile(File f, String botName);
 	JSONObject sendAndGetJSON(File file, String name);

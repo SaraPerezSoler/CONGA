@@ -64,7 +64,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//RecommenderOption"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Utility">
+  <eClassifiers xsi:type="ecore:EClass" name="Utility" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tool" lowerBound="1" eType="ecore:EClass RecommenderQuestionnaire.ecore#//Tool"/>

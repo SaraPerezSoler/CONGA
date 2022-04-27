@@ -22,7 +22,7 @@ import recommenderQuestionnaire.Tool;
  * </ul>
  *
  * @see congabase.CongabasePackage#getUtility()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Utility extends EObject {
@@ -115,5 +115,11 @@ public interface Utility extends EObject {
 	 * @generated
 	 */
 	void setUser(User value);
+	
+	String getTypeString();
+	String getSortURL();
+	String getLastAccessString();
+	String getStatusString();
+
 
 } // Utility

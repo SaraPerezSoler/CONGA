@@ -33,7 +33,7 @@ import recommenderQuestionnaire.Tool;
  *
  * @generated
  */
-public class UtilityImpl extends MinimalEObjectImpl.Container implements Utility {
+public abstract class UtilityImpl extends MinimalEObjectImpl.Container implements Utility {
 	/**
 	 * The default value of the '{@link #getServiceId() <em>Service Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -390,5 +390,8 @@ public class UtilityImpl extends MinimalEObjectImpl.Container implements Utility
 		result.append(')');
 		return result.toString();
 	}
+
+	@Override
+	public abstract String getTypeString();
 
 } //UtilityImpl

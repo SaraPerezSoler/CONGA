@@ -69,7 +69,6 @@ public interface UserAnswer extends EObject {
 	 */
 	Date getDate();
 
-
 	/**
 	 * Sets the value of the '{@link congabase.UserAnswer#getDate <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc -->

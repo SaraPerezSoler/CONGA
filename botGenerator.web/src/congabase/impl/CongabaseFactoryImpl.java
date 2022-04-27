@@ -64,7 +64,6 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 			case CongabasePackage.USER_ANSWER: return createUserAnswer();
 			case CongabasePackage.AQUESTION: return createAQuestion();
 			case CongabasePackage.ROPTION_TO_DOUBLE: return (EObject)createROptionToDouble();
-			case CongabasePackage.UTILITY: return createUtility();
 			case CongabasePackage.SERVICE: return createService();
 			case CongabasePackage.RECOMMENDER_OPTION: return createRecommenderOption();
 			case CongabasePackage.KEY_VALUE: return createKeyValue();
@@ -170,16 +169,6 @@ public class CongabaseFactoryImpl extends EFactoryImpl implements CongabaseFacto
 	public Map.Entry<RecommenderOption, Double> createROptionToDouble() {
 		ROptionToDoubleImpl rOptionToDouble = new ROptionToDoubleImpl();
 		return rOptionToDouble;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Utility createUtility() {
-		UtilityImpl utility = new UtilityImpl();
-		return utility;
 	}
 
 	/**

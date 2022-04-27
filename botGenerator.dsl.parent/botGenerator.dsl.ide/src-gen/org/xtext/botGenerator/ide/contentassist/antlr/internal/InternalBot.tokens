@@ -55,7 +55,7 @@
 'id'=28
 'image'=20
 'in'=66
-'inputs'=63
+'inputs'=65
 'intents'=55
 'isList'=102
 'it'=29
@@ -89,8 +89,8 @@
 'user'=67
 'value:'=99
 'zh'=41
-'{'=64
-'}'=65
+'{'=63
+'}'=64
 RULE_ANY_OTHER=10
 RULE_ID=5
 RULE_INT=6

@@ -3,6 +3,7 @@ package botGenerator.web.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -104,6 +105,7 @@ public class LoadProject extends HttpServlet {
 				delete(dst.getParentFile());
 
 				getServletContext().setAttribute("project", project);
+				//service.setLastAccess(new Date());
 				request.getRequestDispatcher("editor.jsp").forward(request, response);
 			}
 		} catch (Exception e) {

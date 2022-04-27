@@ -10,6 +10,7 @@ import congabase.UserAnswer;
 import validation.problems.ProblemSet;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -118,6 +119,8 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 	private Service currentValidator = null;
 	private ProblemSet set = null;
 
+	private String pattern = "dd/MM/yyyy hh:mm:ss";
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -452,6 +455,26 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 
 	public ProblemSet getProblemSet() {
 		return set;
+	}
+
+
+	@Override
+	public String getCreationDateString() {
+		return simpleDateFormat.format(getCreationDate());
+	}
+
+	@Override
+	public String getModificationDateString() {
+		return simpleDateFormat.format(getModificationDate());
+	}
+
+	@Override
+	public String getQuestionnaireDateString() {
+		if (getQuestionnaire()!=null) {
+			return simpleDateFormat.format(getQuestionnaire().getDate());
+		}else {
+			return "-";
+		}
 	}
 
 } // ProjectImpl

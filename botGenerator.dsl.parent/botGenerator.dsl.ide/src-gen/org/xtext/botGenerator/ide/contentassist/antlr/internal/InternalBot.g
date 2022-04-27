@@ -3052,9 +3052,9 @@ rule__IntentLanguageInputs__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0()); }
-	'inputs'
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getGroup_0()); }
+	(rule__IntentLanguageInputs__Group_0__0)?
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getGroup_0()); }
 )
 ;
 finally {
@@ -3079,9 +3079,9 @@ rule__IntentLanguageInputs__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getGroup_1()); }
-	(rule__IntentLanguageInputs__Group_1__0)?
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getGroup_1()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_1()); }
+	'{'
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_1()); }
 )
 ;
 finally {
@@ -3106,9 +3106,9 @@ rule__IntentLanguageInputs__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_2()); }
-	'{'
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getLeftCurlyBracketKeyword_2()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_2()); }
+	(rule__IntentLanguageInputs__InputsAssignment_2)
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_2()); }
 )
 ;
 finally {
@@ -3133,9 +3133,9 @@ rule__IntentLanguageInputs__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3()); }
-	(rule__IntentLanguageInputs__InputsAssignment_3)
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getGroup_3()); }
+	(rule__IntentLanguageInputs__Group_3__0)*
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getGroup_3()); }
 )
 ;
 finally {
@@ -3148,7 +3148,6 @@ rule__IntentLanguageInputs__Group__4
 	}
 :
 	rule__IntentLanguageInputs__Group__4__Impl
-	rule__IntentLanguageInputs__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3160,35 +3159,9 @@ rule__IntentLanguageInputs__Group__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getGroup_4()); }
-	(rule__IntentLanguageInputs__Group_4__0)*
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getGroup_4()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__IntentLanguageInputs__Group__5
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__IntentLanguageInputs__Group__5__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__IntentLanguageInputs__Group__5__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_5()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_4()); }
 	'}'
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_5()); }
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getRightCurlyBracketKeyword_4()); }
 )
 ;
 finally {
@@ -3196,53 +3169,107 @@ finally {
 }
 
 
-rule__IntentLanguageInputs__Group_1__0
+rule__IntentLanguageInputs__Group_0__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__IntentLanguageInputs__Group_1__0__Impl
-	rule__IntentLanguageInputs__Group_1__1
+	rule__IntentLanguageInputs__Group_0__0__Impl
+	rule__IntentLanguageInputs__Group_0__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_1__0__Impl
+rule__IntentLanguageInputs__Group_0__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getInKeyword_1_0()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0_0()); }
+	'inputs'
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IntentLanguageInputs__Group_0__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__IntentLanguageInputs__Group_0__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IntentLanguageInputs__Group_0__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getGroup_0_1()); }
+	(rule__IntentLanguageInputs__Group_0_1__0)?
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getGroup_0_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__IntentLanguageInputs__Group_0_1__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__IntentLanguageInputs__Group_0_1__0__Impl
+	rule__IntentLanguageInputs__Group_0_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IntentLanguageInputs__Group_0_1__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getInKeyword_0_1_0()); }
 	'in'
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getInKeyword_1_0()); }
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getInKeyword_0_1_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_1__1
+rule__IntentLanguageInputs__Group_0_1__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__IntentLanguageInputs__Group_1__1__Impl
+	rule__IntentLanguageInputs__Group_0_1__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_1__1__Impl
+rule__IntentLanguageInputs__Group_0_1__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_1_1()); }
-	(rule__IntentLanguageInputs__LanguageAssignment_1_1)
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_1_1()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_0_1_1()); }
+	(rule__IntentLanguageInputs__LanguageAssignment_0_1_1)
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_0_1_1()); }
 )
 ;
 finally {
@@ -3250,53 +3277,53 @@ finally {
 }
 
 
-rule__IntentLanguageInputs__Group_4__0
+rule__IntentLanguageInputs__Group_3__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__IntentLanguageInputs__Group_4__0__Impl
-	rule__IntentLanguageInputs__Group_4__1
+	rule__IntentLanguageInputs__Group_3__0__Impl
+	rule__IntentLanguageInputs__Group_3__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_4__0__Impl
+rule__IntentLanguageInputs__Group_3__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_4_0()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_3_0()); }
 	','
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_4_0()); }
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getCommaKeyword_3_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_4__1
+rule__IntentLanguageInputs__Group_3__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__IntentLanguageInputs__Group_4__1__Impl
+	rule__IntentLanguageInputs__Group_3__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__Group_4__1__Impl
+rule__IntentLanguageInputs__Group_3__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_4_1()); }
-	(rule__IntentLanguageInputs__InputsAssignment_4_1)
-	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_4_1()); }
+	{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3_1()); }
+	(rule__IntentLanguageInputs__InputsAssignment_3_1)
+	{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3_1()); }
 )
 ;
 finally {
@@ -10583,45 +10610,45 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__LanguageAssignment_1_1
+rule__IntentLanguageInputs__LanguageAssignment_0_1_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_1_1_0()); }
+		{ before(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_0_1_1_0()); }
 		ruleLanguage
-		{ after(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_1_1_0()); }
+		{ after(grammarAccess.getIntentLanguageInputsAccess().getLanguageLanguageEnumRuleCall_0_1_1_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__InputsAssignment_3
+rule__IntentLanguageInputs__InputsAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_0()); }
+		{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_2_0()); }
 		ruleIntentInput
-		{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_0()); }
+		{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__IntentLanguageInputs__InputsAssignment_4_1
+rule__IntentLanguageInputs__InputsAssignment_3_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_4_1_0()); }
+		{ before(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_1_0()); }
 		ruleIntentInput
-		{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_4_1_0()); }
+		{ after(grammarAccess.getIntentLanguageInputsAccess().getInputsIntentInputParserRuleCall_3_1_0()); }
 	)
 ;
 finally {

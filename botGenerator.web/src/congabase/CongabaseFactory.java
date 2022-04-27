@@ -67,15 +67,6 @@ public interface CongabaseFactory extends EFactory {
 	AQuestion createAQuestion();
 
 	/**
-	 * Returns a new object of class '<em>Utility</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Utility</em>'.
-	 * @generated
-	 */
-	Utility createUtility();
-
-	/**
 	 * Returns a new object of class '<em>Service</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

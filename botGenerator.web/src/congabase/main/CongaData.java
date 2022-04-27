@@ -451,14 +451,14 @@ public class CongaData {
 		save();
 	}
 
-	public void addLastDateService(String userString, String serviceId, Date date) {
-		Service selected = getService(userString, serviceId);
-		if (selected != null) {
-			selected.setLastAccess(date);
-		}
-		save();
-
-	}
+//	public void addLastDateService(String userString, String serviceId, Date date) {
+//		Service selected = getService(userString, serviceId);
+//		if (selected != null) {
+//			selected.setLastAccess(date);
+//		}
+//		save();
+//
+//	}
 
 	public Service getService(String userString, String serviceId) {
 		User user = getUser(userString);
@@ -667,7 +667,7 @@ public class CongaData {
 	public Project getProject(Resource resource) {
 		for (Project p : conga.getProjects()) {
 			Resource resource2 = getProjectResource(p);
-			String uri1 = resource.getURI().toString().replace("\\", "/");
+			String uri1 = resource.getURI().toString().replace("\\", "/").replace("%20", " ");
 			String uri2 = resource2.getURI().toString().replace("\\", "/");
 			if (uri1.equals(uri2)) {
 				return p;
@@ -963,6 +963,9 @@ public class CongaData {
 
 	public String getWinner(Project project) {
 		Map<String, Double> ranking = getRanking(project.getOwner().getNick(), project.getName());
+		if (ranking.isEmpty()) {
+			return "-";
+		}
 		String tool = ranking.keySet().iterator().next();
 		return tool + " (" + String.format("%.2f", ranking.get(tool) * 100) + "%)";
 	}

@@ -88,6 +88,7 @@ public interface Project extends EObject {
 	 */
 	UserAnswer getQuestionnaire();
 
+	String getQuestionnaireDateString();
 	/**
 	 * Sets the value of the '{@link congabase.Project#getQuestionnaire <em>Questionnaire</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -109,6 +110,8 @@ public interface Project extends EObject {
 	 * @generated
 	 */
 	Date getCreationDate();
+	
+	String getCreationDateString();
 
 	/**
 	 * Sets the value of the '{@link congabase.Project#getCreationDate <em>Creation Date</em>}' attribute.
@@ -131,6 +134,7 @@ public interface Project extends EObject {
 	 * @generated
 	 */
 	Date getModificationDate();
+	String getModificationDateString();
 
 	/**
 	 * Sets the value of the '{@link congabase.Project#getModificationDate <em>Modification Date</em>}' attribute.

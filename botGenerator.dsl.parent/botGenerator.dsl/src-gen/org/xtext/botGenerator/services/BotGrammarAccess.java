@@ -405,66 +405,70 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	public class IntentLanguageInputsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.IntentLanguageInputs");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cInputsKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cInKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cLanguageAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cLanguageLanguageEnumRuleCall_1_1_0 = (RuleCall)cLanguageAssignment_1_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cInputsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cInputsIntentInputParserRuleCall_3_0 = (RuleCall)cInputsAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cInputsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cInputsIntentInputParserRuleCall_4_1_0 = (RuleCall)cInputsAssignment_4_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cInputsKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cInKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cLanguageAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cLanguageLanguageEnumRuleCall_0_1_1_0 = (RuleCall)cLanguageAssignment_0_1_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cInputsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cInputsIntentInputParserRuleCall_2_0 = (RuleCall)cInputsAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cInputsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cInputsIntentInputParserRuleCall_3_1_0 = (RuleCall)cInputsAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//IntentLanguageInputs returns IntentLanguageInputs:
-		//    'inputs' ('in' language=Language)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
+		//    ('inputs'('in' language=Language)?)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'inputs' ('in' language=Language)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
+		//('inputs'('in' language=Language)?)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
 		public Group getGroup() { return cGroup; }
 		
+		//('inputs'('in' language=Language)?)?
+		public Group getGroup_0() { return cGroup_0; }
+		
 		//'inputs'
-		public Keyword getInputsKeyword_0() { return cInputsKeyword_0; }
+		public Keyword getInputsKeyword_0_0() { return cInputsKeyword_0_0; }
 		
 		//('in' language=Language)?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_0_1() { return cGroup_0_1; }
 		
 		//'in'
-		public Keyword getInKeyword_1_0() { return cInKeyword_1_0; }
+		public Keyword getInKeyword_0_1_0() { return cInKeyword_0_1_0; }
 		
 		//language=Language
-		public Assignment getLanguageAssignment_1_1() { return cLanguageAssignment_1_1; }
+		public Assignment getLanguageAssignment_0_1_1() { return cLanguageAssignment_0_1_1; }
 		
 		//Language
-		public RuleCall getLanguageLanguageEnumRuleCall_1_1_0() { return cLanguageLanguageEnumRuleCall_1_1_0; }
+		public RuleCall getLanguageLanguageEnumRuleCall_0_1_1_0() { return cLanguageLanguageEnumRuleCall_0_1_1_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
 		//inputs+=IntentInput
-		public Assignment getInputsAssignment_3() { return cInputsAssignment_3; }
+		public Assignment getInputsAssignment_2() { return cInputsAssignment_2; }
 		
 		//IntentInput
-		public RuleCall getInputsIntentInputParserRuleCall_3_0() { return cInputsIntentInputParserRuleCall_3_0; }
+		public RuleCall getInputsIntentInputParserRuleCall_2_0() { return cInputsIntentInputParserRuleCall_2_0; }
 		
 		//( "," inputs+=IntentInput)*
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_3() { return cGroup_3; }
 		
 		//","
-		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 		
 		//inputs+=IntentInput
-		public Assignment getInputsAssignment_4_1() { return cInputsAssignment_4_1; }
+		public Assignment getInputsAssignment_3_1() { return cInputsAssignment_3_1; }
 		
 		//IntentInput
-		public RuleCall getInputsIntentInputParserRuleCall_4_1_0() { return cInputsIntentInputParserRuleCall_4_1_0; }
+		public RuleCall getInputsIntentInputParserRuleCall_3_1_0() { return cInputsIntentInputParserRuleCall_3_1_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.Transition");
@@ -3171,7 +3175,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//IntentLanguageInputs returns IntentLanguageInputs:
-	//    'inputs' ('in' language=Language)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
+	//    ('inputs'('in' language=Language)?)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
 	//;
 	public IntentLanguageInputsElements getIntentLanguageInputsAccess() {
 		return pIntentLanguageInputs;

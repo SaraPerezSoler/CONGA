@@ -65,8 +65,9 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getIntent2Access().getGroup_4_2(), "rule__Intent2__Group_4_2__0");
 			builder.put(grammarAccess.getIntent1Access().getGroup(), "rule__Intent1__Group__0");
 			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup(), "rule__IntentLanguageInputs__Group__0");
-			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup_1(), "rule__IntentLanguageInputs__Group_1__0");
-			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup_4(), "rule__IntentLanguageInputs__Group_4__0");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup_0(), "rule__IntentLanguageInputs__Group_0__0");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup_0_1(), "rule__IntentLanguageInputs__Group_0_1__0");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getGroup_3(), "rule__IntentLanguageInputs__Group_3__0");
 			builder.put(grammarAccess.getTransitionAccess().getGroup(), "rule__Transition__Group__0");
 			builder.put(grammarAccess.getTransitionAccess().getGroup_0(), "rule__Transition__Group_0__0");
 			builder.put(grammarAccess.getTransitionAccess().getGroup_3(), "rule__Transition__Group_3__0");
@@ -157,9 +158,9 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getIntent2Access().getParametersAssignment_4_2_1(), "rule__Intent2__ParametersAssignment_4_2_1");
 			builder.put(grammarAccess.getIntent1Access().getNameAssignment_0(), "rule__Intent1__NameAssignment_0");
 			builder.put(grammarAccess.getIntent1Access().getFallbackIntentAssignment_1(), "rule__Intent1__FallbackIntentAssignment_1");
-			builder.put(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_1_1(), "rule__IntentLanguageInputs__LanguageAssignment_1_1");
-			builder.put(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3(), "rule__IntentLanguageInputs__InputsAssignment_3");
-			builder.put(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_4_1(), "rule__IntentLanguageInputs__InputsAssignment_4_1");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getLanguageAssignment_0_1_1(), "rule__IntentLanguageInputs__LanguageAssignment_0_1_1");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_2(), "rule__IntentLanguageInputs__InputsAssignment_2");
+			builder.put(grammarAccess.getIntentLanguageInputsAccess().getInputsAssignment_3_1(), "rule__IntentLanguageInputs__InputsAssignment_3_1");
 			builder.put(grammarAccess.getTransitionAccess().getNameAssignment_0_0(), "rule__Transition__NameAssignment_0_0");
 			builder.put(grammarAccess.getTransitionAccess().getIntentAssignment_2(), "rule__Transition__IntentAssignment_2");
 			builder.put(grammarAccess.getTransitionAccess().getTargetAssignment_3_1_0(), "rule__Transition__TargetAssignment_3_1_0");

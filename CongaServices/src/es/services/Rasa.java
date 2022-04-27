@@ -1,6 +1,8 @@
 package es.services;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
@@ -13,11 +15,15 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import es.main.CongaResource;
 import es.main.ToolFiles;
 import es.main.generators.RasaGenerator;
 import es.main.parser.RasaReverse;
+import es.main.validator.DialogflowValidator;
 import generator.Bot;
+import validation.problems.Problem;
 
 @Path("/rasa")
 public class Rasa {
@@ -50,6 +56,23 @@ public class Rasa {
 		tf.destroy();
 		return Response.ok(f, MediaType.APPLICATION_OCTET_STREAM)
 				.header("Content-Disposition", "attachment; filename=\"" + f.getName() + "\"").build();
+		
+	}
+	
+	@POST
+	@Path("/validate")
+	@Consumes (MediaType.MULTIPART_FORM_DATA)
+	@Produces (MediaType.APPLICATION_JSON)
+	public Response validate (@Context ServletContext context, @FormDataParam("file") File file, @FormDataParam("name") String fileName) throws IOException {
+		String folderPath = context.getInitParameter("ServicePath");
+		CongaResource cs = new CongaResource(folderPath, file, fileName);
+		DialogflowValidator validator = new DialogflowValidator();
+		List<Problem> problems = validator.validate(cs.getResource()); 
+		ObjectMapper mapper = new ObjectMapper();
+		String objects = mapper.writeValueAsString(problems);
+		System.out.println(objects);
+		cs.destroy();
+		return Response.ok(objects, MediaType.APPLICATION_JSON).build();
 		
 	}
 }

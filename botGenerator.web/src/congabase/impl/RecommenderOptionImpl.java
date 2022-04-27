@@ -263,5 +263,20 @@ public class RecommenderOptionImpl extends UtilityImpl implements RecommenderOpt
 		}
 		return false;
 	}
+	
+	public String getTypeString() {
+		return "recommender";
+	}
+	
+	public String getSortURL() {
+		return "-";
+	}
+	
+	public String getLastAccessString() {
+		return "-";
+	}
+	public String getStatusString() {
+		return "-";
+	}
 
 } //RecommenderOptionImpl
