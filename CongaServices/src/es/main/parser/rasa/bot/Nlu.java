@@ -58,9 +58,10 @@ public class Nlu {
 		while (regexs.hasNext()) {
 			Element nextRegex = regexs.next();
 			try {
-				Pattern.compile(nextRegex.text());
+				//Pattern.compile(nextRegex.text());
 				regexsList.add(nextRegex.text());
 			} catch (PatternSyntaxException e) {
+				//System.out.println("Error:"+);
 			}
 		}
 		this.regex.put(name, regexsList);
