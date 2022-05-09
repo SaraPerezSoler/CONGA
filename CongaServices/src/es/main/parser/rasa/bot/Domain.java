@@ -13,7 +13,6 @@ import generator.Bot;
 import generator.Empty;
 import generator.GeneratorFactory;
 import generator.Image;
-import generator.Intent;
 import generator.Text;
 import generator.TextLanguageInput;
 
@@ -55,10 +54,15 @@ public class Domain {
 		return forms;
 	}
 
-	public void setForms(List<String> forms) {
-		this.forms = forms;
+	public void setForms(Object forms) {
+		
+		/*this.forms = forms;*/
 	}
-
+	
+	/*public void setForms(Map<String, Object> forms) {
+		this.forms = new ArrayList<>();
+		this.forms.addAll(forms.keySet());
+	}*/
 	public Map<String, Slot> getSlots() {
 		return slots;
 	}

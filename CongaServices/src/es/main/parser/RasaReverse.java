@@ -2,7 +2,6 @@ package es.main.parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,12 +21,18 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.jsoup.Jsoup;
 
 public class RasaReverse extends Reverse{
-	List<String> fileIgnore = new ArrayList<>();
-
+	private List<String> fileIgnore = new ArrayList<>();
+	private static final String[] ignore = {"README.md", "readme.md", "Readme.md", "test_stories.yml"};
 	public RasaReverse() {
+		for (String s: ignore) {
+			fileIgnore.add(s);
+		}
 	}
 
 	public RasaReverse(List<String> fileIgnore) {
+		for (String s: ignore) {
+			fileIgnore.add(s);
+		}
 		this.fileIgnore.addAll(fileIgnore);
 	}
 
