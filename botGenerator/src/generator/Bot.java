@@ -95,6 +95,8 @@ public interface Bot extends Element {
 
 	Intent getIntent(String name);
 
+	List<Intent> getIntentStartsWith(String start);
+	
 	List<Action> getActionStartWith(String name);
 
 	boolean containsElement(String name);

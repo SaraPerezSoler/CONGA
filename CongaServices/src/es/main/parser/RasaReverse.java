@@ -23,7 +23,7 @@ import org.jsoup.Jsoup;
 
 public class RasaReverse extends Reverse{
 	private List<String> fileIgnore = new ArrayList<>();
-	private static final String[] ignore = {"README.md", "readme.md", "Readme.md", "test_stories.yml"};
+	private static final String[] ignore = {"README.md", "readme.md", "Readme.md", "test_stories.yml", "test"};
 	public RasaReverse() {
 		for (String s: ignore) {
 			fileIgnore.add(s);
@@ -77,10 +77,10 @@ public class RasaReverse extends Reverse{
 								org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document));
 								rasaBot.setNlu(html);
 								// rasaBot.setNlu(readFile(f));
-								hasNLU = true;
+								//hasNLU = true;
 							} else {
 								rasaBot.setStories(info);
-								hasStories = true;
+								//hasStories = true;
 							}
 
 						} else if (f.getName().equals("domain.yml")) {

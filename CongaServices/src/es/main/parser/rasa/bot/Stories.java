@@ -36,18 +36,19 @@ public class Stories {
 
 	public void saveBotFlows(Bot bot) {
 		for (UserInteraction path : paths) {
-			generator.UserInteraction currentInteraction = path.getBotUserInteraction(bot);
+			List<generator.UserInteraction> currentInteractions = path.getBotUserInteraction(bot);
 			boolean hasSimilarPath = false;
-			for (generator.UserInteraction userInteraction : bot.getFlows()) {
-				if (compareUserInteraction(userInteraction, currentInteraction)) {
-					hasSimilarPath = true;
-					break;
+			for (generator.UserInteraction ci : currentInteractions) {
+				for (generator.UserInteraction userInteraction : bot.getFlows()) {
+					if (compareUserInteraction(userInteraction, ci)) {
+						hasSimilarPath = true;
+						break;
+					}
+				}
+				if (!hasSimilarPath) {
+					bot.getFlows().add(ci);
 				}
 			}
-			if (!hasSimilarPath) {
-				bot.getFlows().add(currentInteraction);
-			}
-
 		}
 	}
 

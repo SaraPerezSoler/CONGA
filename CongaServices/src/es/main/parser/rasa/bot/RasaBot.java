@@ -77,5 +77,21 @@ public class RasaBot extends Chatbot{
 			this.nlu = new Nlu(html);
 		}
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguage() {
+		return getConfig().getLanguage();
+	}
+
+	public String isHaveLoops() {
+		return "N";
+	}
 
 }
