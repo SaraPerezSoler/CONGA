@@ -2,35 +2,37 @@
  */
 package generator.impl;
 
-import generator.CompositeInput;
-import generator.Entity;
+import generator.Comparable;
 import generator.GeneratorPackage;
-import generator.LanguageEntity;
-import generator.RegexInput;
-import generator.SimpleInput;
+import generator.LanguageText;
+import generator.TextInput;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Entity</b></em>'.
+ * An implementation of the model object '<em><b>Language Text</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link generator.impl.EntityImpl#getInputs <em>Inputs</em>}</li>
+ *   <li>{@link generator.impl.LanguageTextImpl#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EntityImpl extends ElementImpl implements Entity {
+public class LanguageTextImpl extends LanguageInputImpl implements LanguageText {
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -39,14 +41,14 @@ public class EntityImpl extends ElementImpl implements Entity {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<LanguageEntity> inputs;
+	protected EList<TextInput> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EntityImpl() {
+	protected LanguageTextImpl() {
 		super();
 	}
 
@@ -57,7 +59,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.ENTITY;
+		return GeneratorPackage.Literals.LANGUAGE_TEXT;
 	}
 
 	/**
@@ -66,9 +68,9 @@ public class EntityImpl extends ElementImpl implements Entity {
 	 * @generated
 	 */
 	@Override
-	public EList<LanguageEntity> getInputs() {
+	public EList<TextInput> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<LanguageEntity>(LanguageEntity.class, this, GeneratorPackage.ENTITY__INPUTS);
+			inputs = new EObjectContainmentEList<TextInput>(TextInput.class, this, GeneratorPackage.LANGUAGE_TEXT__INPUTS);
 		}
 		return inputs;
 	}
@@ -81,7 +83,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.ENTITY__INPUTS:
+			case GeneratorPackage.LANGUAGE_TEXT__INPUTS:
 				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -95,7 +97,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.ENTITY__INPUTS:
+			case GeneratorPackage.LANGUAGE_TEXT__INPUTS:
 				return getInputs();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,9 +112,9 @@ public class EntityImpl extends ElementImpl implements Entity {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.ENTITY__INPUTS:
+			case GeneratorPackage.LANGUAGE_TEXT__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends LanguageEntity>)newValue);
+				getInputs().addAll((Collection<? extends TextInput>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,7 +128,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.ENTITY__INPUTS:
+			case GeneratorPackage.LANGUAGE_TEXT__INPUTS:
 				getInputs().clear();
 				return;
 		}
@@ -141,43 +143,27 @@ public class EntityImpl extends ElementImpl implements Entity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.ENTITY__INPUTS:
+			case GeneratorPackage.LANGUAGE_TEXT__INPUTS:
 				return inputs != null && !inputs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	@Override
-	public boolean isRegex() {
-		if (getInputs().isEmpty())
+	public boolean isSimilarTo(Comparable obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		if (getInputs().get(0).getInputs().isEmpty())
+		if (getClass() != obj.getClass())
 			return false;
-		if (!(getInputs().get(0).getInputs().get(0) instanceof RegexInput))
-			return false;
-		return true;
-	}
-
-	@Override
-	public boolean isComposite() {
-		if (getInputs().isEmpty())
-			return false;
-		if (getInputs().get(0).getInputs().isEmpty())
-			return false;
-		if (!(getInputs().get(0).getInputs().get(0) instanceof CompositeInput))
+		LanguageText other = (LanguageText) obj;
+		if (getInputs() == null) {
+			if (other.getInputs() != null)
+				return false;
+		} else if (!isSimilar(getInputs(), other.getInputs()))
 			return false;
 		return true;
 	}
 
-	@Override
-	public boolean isSimple() {
-		if (getInputs().isEmpty())
-			return false;
-		if (getInputs().get(0).getInputs().isEmpty())
-			return false;
-		if (!(getInputs().get(0).getInputs().get(0) instanceof SimpleInput))
-			return false;
-		return true;
-	}
-
-} //EntityImpl
+} //LanguageTextImpl

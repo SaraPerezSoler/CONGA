@@ -10,7 +10,7 @@ import generator.Parameter;
 import generator.ParameterToken;
 import generator.Text;
 import generator.TextInput;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 import generator.Token;
 import generator.UserInteraction;
 
@@ -63,7 +63,7 @@ public class ParameterStorage extends Evaluator {
 		for (Action action : interaction.getTarget().getActions()) {
 			if (action instanceof Text) {
 				Text textAction = (Text) action;
-				for (TextLanguageInput language : textAction.getInputs()) {
+				for (LanguageText language : textAction.getInputs()) {
 					for (TextInput input : language.getInputs()) {
 						for (Token token : input.getTokens()) {
 							if (token instanceof ParameterToken) {

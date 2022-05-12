@@ -21,19 +21,19 @@ import org.xtext.botGenerator.services.BotGrammarAccess;
 public class BotSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected BotGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ButtonLanguageInput_InputsKeyword_0_0_q;
 	protected AbstractElementAlias match_Image_ImageKeyword_0_0_or_MageKeyword_0_1;
-	protected AbstractElementAlias match_IntentLanguageInputs_InputsKeyword_0_0_q;
-	protected AbstractElementAlias match_TextLanguageInput_InputsKeyword_0_0_q;
+	protected AbstractElementAlias match_LanguageButton_InputsKeyword_0_0_q;
+	protected AbstractElementAlias match_LanguageIntent_InputsKeyword_0_0_q;
+	protected AbstractElementAlias match_LanguageText_InputsKeyword_0_0_q;
 	protected AbstractElementAlias match_Text_TextKeyword_0_0_or_TextKeyword_0_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (BotGrammarAccess) access;
-		match_ButtonLanguageInput_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getButtonLanguageInputAccess().getInputsKeyword_0_0());
 		match_Image_ImageKeyword_0_0_or_MageKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getImageAccess().getImageKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getImageAccess().getMageKeyword_0_1()));
-		match_IntentLanguageInputs_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getIntentLanguageInputsAccess().getInputsKeyword_0_0());
-		match_TextLanguageInput_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getTextLanguageInputAccess().getInputsKeyword_0_0());
+		match_LanguageButton_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getLanguageButtonAccess().getInputsKeyword_0_0());
+		match_LanguageIntent_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getLanguageIntentAccess().getInputsKeyword_0_0());
+		match_LanguageText_InputsKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getLanguageTextAccess().getInputsKeyword_0_0());
 		match_Text_TextKeyword_0_0_or_TextKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getTextAccess().getTextKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getTextAccess().getTextKeyword_0_1()));
 	}
 	
@@ -49,31 +49,20 @@ public class BotSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ButtonLanguageInput_InputsKeyword_0_0_q.equals(syntax))
-				emit_ButtonLanguageInput_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Image_ImageKeyword_0_0_or_MageKeyword_0_1.equals(syntax))
+			if (match_Image_ImageKeyword_0_0_or_MageKeyword_0_1.equals(syntax))
 				emit_Image_ImageKeyword_0_0_or_MageKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_IntentLanguageInputs_InputsKeyword_0_0_q.equals(syntax))
-				emit_IntentLanguageInputs_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_TextLanguageInput_InputsKeyword_0_0_q.equals(syntax))
-				emit_TextLanguageInput_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_LanguageButton_InputsKeyword_0_0_q.equals(syntax))
+				emit_LanguageButton_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_LanguageIntent_InputsKeyword_0_0_q.equals(syntax))
+				emit_LanguageIntent_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_LanguageText_InputsKeyword_0_0_q.equals(syntax))
+				emit_LanguageText_InputsKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Text_TextKeyword_0_0_or_TextKeyword_0_1.equals(syntax))
 				emit_Text_TextKeyword_0_0_or_TextKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     'inputs'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '{' 'text:' text=TextInputText
-	 */
-	protected void emit_ButtonLanguageInput_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 	/**
 	 * Ambiguous syntax:
 	 *     'Image' | 'mage'
@@ -90,9 +79,20 @@ public class BotSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'inputs'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '{' inputs+=IntentInput
+	 *     (rule start) (ambiguity) '{' 'text:' '-' inputs+=TextInputText
 	 */
-	protected void emit_IntentLanguageInputs_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_LanguageButton_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'inputs'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '{' inputs+=TrainingPhrase
+	 */
+	protected void emit_LanguageIntent_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -103,7 +103,7 @@ public class BotSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '{' inputs+=TextInputText
 	 */
-	protected void emit_TextLanguageInput_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_LanguageText_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

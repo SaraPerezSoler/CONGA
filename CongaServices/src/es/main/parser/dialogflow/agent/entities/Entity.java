@@ -6,7 +6,7 @@ import java.util.List;
 import es.main.parser.dialogflow.agent.Agent;
 import generator.EntityInput;
 import generator.GeneratorFactory;
-import generator.LanguageInput;
+import generator.LanguageEntity;
 import generator.RegexInput;
 import generator.SimpleInput;
 
@@ -64,7 +64,7 @@ public class Entity {
 			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
 			ret.setName(getName());
 			for (EntryLanguage entryLan : getEntriesLanguage()) {
-				LanguageInput input = GeneratorFactory.eINSTANCE.createLanguageInput();
+				LanguageEntity input = GeneratorFactory.eINSTANCE.createLanguageEntity();
 				input.setLanguage(Agent.castLanguage(entryLan.getLanguage()));
 				for (Entry entry : entryLan.getEntries()) {
 					RegexInput regex = GeneratorFactory.eINSTANCE.createRegexInput();
@@ -79,7 +79,7 @@ public class Entity {
 			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
 			ret.setName(getName());
 			for (EntryLanguage entryLan : getEntriesLanguage()) {
-				LanguageInput input = GeneratorFactory.eINSTANCE.createLanguageInput();
+				LanguageEntity input = GeneratorFactory.eINSTANCE.createLanguageEntity();
 				input.setLanguage(Agent.castLanguage(entryLan.getLanguage()));
 				for (Entry entry : entryLan.getEntries()) {
 					EntityInput aux;

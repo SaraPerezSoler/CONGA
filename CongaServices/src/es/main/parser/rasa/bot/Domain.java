@@ -14,7 +14,7 @@ import generator.Empty;
 import generator.GeneratorFactory;
 import generator.Image;
 import generator.Text;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 
 public class Domain {
 
@@ -116,7 +116,7 @@ public class Domain {
 							String name = actionName + "_text";
 							text = GeneratorFactory.eINSTANCE.createText();
 							text.setName(name);
-							TextLanguageInput input = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+							LanguageText input = GeneratorFactory.eINSTANCE.createLanguageText();
 							input.setLanguage(bot.getLanguages().get(0));
 							text.getInputs().add(input);
 							bot.getActions().add(text);

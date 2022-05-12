@@ -48,15 +48,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WithLanguage" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageInput" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//Language"
         defaultValueLiteral="EMPTY"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//LanguageInput" containment="true"/>
+        upperBound="-1" eType="#//LanguageEntity" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LanguageInput" eSuperTypes="#//WithLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageEntity" eSuperTypes="#//LanguageInput">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
         eType="#//EntityInput" containment="true"/>
   </eClassifiers>
@@ -69,7 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expresion" lowerBound="1"
         upperBound="-1" eType="#//Token" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RegexInput" eSuperTypes="#//EntityInput #//IntentInput">
+  <eClassifiers xsi:type="ecore:EClass" name="RegexInput" eSuperTypes="#//EntityInput">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expresion" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -98,18 +98,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Intent" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
-        eType="#//IntentLanguageInputs" containment="true"/>
+        eType="#//LanguageIntent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fallbackIntent" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntentLanguageInputs" eSuperTypes="#//WithLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageIntent" eSuperTypes="#//LanguageInput">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//IntentInput" containment="true"/>
+        upperBound="-1" eType="#//TrainingPhrase" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntentInput" abstract="true" eSuperTypes="#//Input"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TrainingPhrase" eSuperTypes="#//IntentInput">
+  <eClassifiers xsi:type="ecore:EClass" name="TrainingPhrase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
         eType="#//Token" containment="true"/>
   </eClassifiers>
@@ -121,9 +120,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isList" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="prompts" upperBound="-1"
-        eType="#//PromptLanguage" containment="true"/>
+        eType="#//LanguagePrompt" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PromptLanguage" eSuperTypes="#//WithLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguagePrompt" eSuperTypes="#//LanguageInput">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prompts" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -135,15 +134,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="Empty" eSuperTypes="#//Action"/>
   <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//TextLanguageInput" containment="true"/>
+        upperBound="-1" eType="#//LanguageText" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ButtonAction" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//ButtonsLanguageInputs" containment="true"/>
+        upperBound="-1" eType="#//LanguageButton" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ButtonsLanguageInputs" eSuperTypes="#//WithLanguage">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="text" lowerBound="1" eType="#//TextInput"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageButton" eSuperTypes="#//LanguageText">
     <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" lowerBound="1"
         upperBound="-1" eType="#//Button" containment="true"/>
   </eClassifiers>
@@ -151,7 +148,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TextLanguageInput" eSuperTypes="#//WithLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="LanguageText" eSuperTypes="#//LanguageInput">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
         upperBound="-1" eType="#//TextInput" containment="true"/>
   </eClassifiers>
@@ -174,7 +171,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HTTPResponse" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" lowerBound="1"
-        upperBound="-1" eType="#//TextLanguageInput" containment="true"/>
+        upperBound="-1" eType="#//LanguageText" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="HTTPRequest" lowerBound="1"
         eType="#//HTTPRequest"/>
   </eClassifiers>

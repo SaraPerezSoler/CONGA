@@ -13,9 +13,9 @@ import generator.Entity;
 import generator.GeneratorFactory;
 import generator.HTTPRequest;
 import generator.Intent;
-import generator.IntentLanguageInputs;
+import generator.LanguageIntent;
 import generator.Language;
-import generator.LanguageInput;
+import generator.LanguageEntity;
 import generator.Literal;
 import generator.SimpleInput;
 import generator.Text;
@@ -223,7 +223,7 @@ public class Agent {
 		if (mapFiles != null) {
 			for (MapFile map : mapFiles) {
 				Entity entity = GeneratorFactory.eINSTANCE.createEntity();
-				LanguageInput languageInput = GeneratorFactory.eINSTANCE.createLanguageInput();
+				LanguageEntity languageInput = GeneratorFactory.eINSTANCE.createLanguageEntity();
 	
 				entity.setName(map.name);
 				languageInput.setLanguage(Language.ENGLISH);
@@ -290,13 +290,13 @@ public class Agent {
 
 		if (fallbackFlag == 0) {
 			Intent fallbackIntent = GeneratorFactory.eINSTANCE.createIntent();
-			IntentLanguageInputs fallbackLanguageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+			LanguageIntent fallbackLanguageEntity = GeneratorFactory.eINSTANCE.createLanguageIntent();
 			TrainingPhrase fallbackPhrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 			Literal fallbackLiteral = GeneratorFactory.eINSTANCE.createLiteral();
 			fallbackLiteral.setText("*");
 			fallbackPhrase.getTokens().add(fallbackLiteral);
-			fallbackLanguageInput.getInputs().add(fallbackPhrase);
-			fallbackIntent.getInputs().add(fallbackLanguageInput);
+			fallbackLanguageEntity.getInputs().add(fallbackPhrase);
+			fallbackIntent.getInputs().add(fallbackLanguageEntity);
 			fallbackIntent.setFallbackIntent(true);
 			fallbackIntent.setName("Fallback");
 			intents.add(fallbackIntent);

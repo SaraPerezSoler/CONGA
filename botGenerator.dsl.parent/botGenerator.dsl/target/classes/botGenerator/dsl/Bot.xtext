@@ -29,15 +29,15 @@ Intent returns Intent:
 
 Intent2 returns Intent:
 	name=EString (fallbackIntent?='Fallback')? ':'
-		(inputs+=IntentLanguageInputs)*
+		(inputs+=LanguageIntent)*
 		('parameters'':'  ((parameters+=Parameter2)* parameters+=Parameter )+)?
 	;
 Intent1 returns Intent:
 	name=EString (fallbackIntent?='Fallback')?
 	;
 	
-IntentLanguageInputs returns IntentLanguageInputs: 
-	('inputs'('in' language=Language)?)? '{'  inputs+=IntentInput ( "," inputs+=IntentInput)*'}'
+LanguageIntent returns LanguageIntent: 
+	('inputs'('in' language=Language)?)? '{'  inputs+=TrainingPhrase ( "," inputs+=TrainingPhrase)*'}'
 ;
 
 Transition returns UserInteraction:
@@ -58,10 +58,6 @@ State returns BotInteraction:
 	(name=EString':')? 'chatbot' actions+=[Action|EString](','actions+=[Action|EString])*('=>'(outcoming+=Transition | ('back' 'to' backTo+=[UserInteraction|EString]))) 
 ;
 
-IntentInput returns IntentInput:
-	TrainingPhrase | RegexInput
-;
-
 TrainingPhrase returns TrainingPhrase:
 	{TrainingPhrase}
 	tokens+=(Literal | ParameterRefenceToken)+;
@@ -71,13 +67,13 @@ Parameter returns Parameter:
 		'entity' (entity=[Entity|EString] | defaultEntity=DefaultEntity) 
 		(','isList?='isList')?
 		(',' required?='required')?
-		(','  (prompts+=PromptLanguage)+)?
+		(','  (prompts+=LanguagePrompt)+)?
 		 ';';
 
 Parameter2 returns Parameter:
 	 name=EString ',';
 		
-PromptLanguage returns PromptLanguage:
+LanguagePrompt returns LanguagePrompt:
 	'prompts'('in' language=Language)?'['prompts+=EString (','prompts+=EString)*']' 
 ;
 
@@ -108,28 +104,28 @@ Entity returns Entity:
 
 SimpleEntity returns Entity:
 	'Simple''entity' name=EString ':'
-		(inputs+= SLanguageInput)+	
+		(inputs+= SLanguageEntity)+	
 	;
 ComplexEntity returns Entity:
 	'Composite''entity' name=EString ':'
-		(inputs+= CLanguageInput)+	
+		(inputs+= CLanguageEntity)+	
 	;
 RegexEntity returns Entity:
 	'Regex''entity' name=EString ':'
-		(inputs+= RLanguageInput)+	
+		(inputs+= RLanguageEntity)+	
 	;
 
-SLanguageInput returns LanguageInput: 
+SLanguageEntity returns LanguageEntity: 
 	('inputs' 'in' language=Language)? '{'
 		(inputs+=SimpleInput (inputs+= SimpleInput)* )
 	'}'
 ;
-CLanguageInput returns LanguageInput: 
+CLanguageEntity returns LanguageEntity: 
 	('inputs' 'in' language=Language)? '{'
 		(inputs+=CompositeInput (inputs+= CompositeInput)* )
 	'}'
 ;
-RLanguageInput returns LanguageInput: 
+RLanguageEntity returns LanguageEntity: 
 	('inputs' 'in' language=Language)? '{'
 		(inputs+=RegexInput (inputs+= RegexInput)* )
 	'}'
@@ -151,16 +147,16 @@ SimpleInput returns SimpleInput:
 
 Text returns Text:
 	('Text'|'text') 'response' name=EString':'
-	(inputs+=TextLanguageInput)+
+	(inputs+=LanguageText)+
 		 ;
-TextLanguageInput returns TextLanguageInput:
+LanguageText returns LanguageText:
 	('inputs'('in' language=Language)?)?'{'inputs+=TextInputText (',' inputs+=TextInputText)* '}'
 ;
 
 HTTPResponse returns HTTPResponse:
 	'Response' name=EString ':'
 		'Request'':' HTTPRequest=[HTTPRequest|EString]';'
-		(inputs+=TextLanguageInputHttpResponse)+;
+		(inputs+=LanguageTextHttpResponse)+;
 		
 HTTPRequest returns HTTPRequest:
 	'Request' method=Method name=EString ':'
@@ -181,12 +177,12 @@ Empty returns Empty:
 
 ButtonAction returns ButtonAction:
 	'Button' 'response' name=EString':'
-	inputs+=ButtonLanguageInput
+	inputs+=LanguageButton
 ;
 
-ButtonLanguageInput returns ButtonsLanguageInputs:
+LanguageButton returns LanguageButton:
 	('inputs'('in' language=Language)?)?'{'
-		'text:' text= TextInputText 
+		'text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)* 
 		'buttons:'
 		(buttons+=Button)+	
 	'}'
@@ -197,7 +193,7 @@ Button returns Button:
 ;
 
 
-TextLanguageInputHttpResponse returns TextLanguageInput:
+LanguageTextHttpResponse returns LanguageText:
 	'inputs'('in' language=Language)?'{'inputs+=TextInputHttpResponse (',' inputs+=TextInputHttpResponse)* '}';
 	
 	

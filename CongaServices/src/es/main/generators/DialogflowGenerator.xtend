@@ -15,9 +15,9 @@ import generator.ParameterReferenceToken
 import generator.ParameterToken
 import generator.TextInput
 import generator.Language
-import generator.IntentLanguageInputs
-import generator.TextLanguageInput
-import generator.LanguageInput
+import generator.LanguageIntent
+import generator.LanguageText
+import generator.LanguageEntity
 import generator.EntityInput
 import generator.RegexInput
 import generator.SimpleInput
@@ -70,7 +70,7 @@ class DialogflowGenerator extends BotGenerator {
 
 			var lan = Language.ENGLISH;
 
-			for (LanguageInput input : entity.inputs) {
+			for (LanguageEntity input : entity.inputs) {
 				lan = bot.languages.get(0);
 				if (input.language != Language.EMPTY) {
 					lan = input.language
@@ -169,7 +169,7 @@ class DialogflowGenerator extends BotGenerator {
 		var f = generateFile('/intents/' + name + '.json', transition.intentFile(createIntentPrefix(prev), bot))
 		saveFileIntoZip(f, 'intents', name + '.json')
 
-		for (IntentLanguageInputs input : transition.intent.inputs) {
+		for (LanguageIntent input : transition.intent.inputs) {
 			var lan = bot.languages.get(0)
 			if (input.language != Language.EMPTY) {
 				lan = input.language
@@ -201,7 +201,7 @@ class DialogflowGenerator extends BotGenerator {
 	 * 	name = name.replaceAll(" ", "");
 	 * 	return name
 	 }*/
-	def speechText(TextLanguageInput textAction, UserInteraction transition) {
+	def speechText(LanguageText textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
 			ret += input.speechText(transition)
@@ -391,7 +391,7 @@ class DialogflowGenerator extends BotGenerator {
 													"lang": "«bot.languages.get(0).languageAbbreviation»",
 												«ENDIF»
 												"condition": "",
-												"subtitle": «texLanguage.text.speechText(transition)»,
+												"subtitle": «texLanguage.speechText(transition)»,
 												"buttons": [ 
 												«FOR button: texLanguage.buttons»
 													{
@@ -467,7 +467,7 @@ class DialogflowGenerator extends BotGenerator {
 		
 	'''
 
-	def usersayFile(IntentLanguageInputs intent) '''
+	def usersayFile(LanguageIntent intent) '''
 		[
 		«FOR phrase : intent.inputs»
 			«IF phrase instanceof TrainingPhrase»
@@ -585,7 +585,7 @@ class DialogflowGenerator extends BotGenerator {
 	def entityIsSimple(Entity entity) {
 	}
 
-	def entriesFile(LanguageInput entity) '''
+	def entriesFile(LanguageEntity entity) '''
 		[
 			«FOR entry : entity.inputs»
 				{

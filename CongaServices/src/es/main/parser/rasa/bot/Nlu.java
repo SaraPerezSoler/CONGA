@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.jsoup.nodes.Document;
@@ -16,7 +15,7 @@ import es.main.parser.rasa.bot.intents.Sentence;
 import generator.Bot;
 import generator.Entity;
 import generator.GeneratorFactory;
-import generator.LanguageInput;
+import generator.LanguageEntity;
 import generator.RegexInput;
 import generator.SimpleInput;
 
@@ -91,7 +90,7 @@ public class Nlu {
 			Entity entity = GeneratorFactory.eINSTANCE.createEntity();
 			entity.setName(key);
 
-			LanguageInput langInputs = GeneratorFactory.eINSTANCE.createLanguageInput();
+			LanguageEntity langInputs = GeneratorFactory.eINSTANCE.createLanguageEntity();
 			langInputs.setLanguage(bot.getLanguages().get(0));
 
 			for (String s : this.regex.get(key)) {
@@ -142,13 +141,13 @@ public class Nlu {
 		if (entity == null) {
 			entity = GeneratorFactory.eINSTANCE.createEntity();
 			entity.setName(entityName);
-			LanguageInput langInputs = GeneratorFactory.eINSTANCE.createLanguageInput();
+			LanguageEntity langInputs = GeneratorFactory.eINSTANCE.createLanguageEntity();
 			langInputs.setLanguage(bot.getLanguages().get(0));
 			entity.getInputs().add(langInputs);
 			bot.getEntities().add(entity);
 		}
 		if (!entity.isRegex()) {
-			LanguageInput langInputs = entity.getInputs().get(0);
+			LanguageEntity langInputs = entity.getInputs().get(0);
 			SimpleInput entry = (SimpleInput) langInputs.getInput(entryName);
 			if (entry == null) {
 				entry = GeneratorFactory.eINSTANCE.createSimpleInput();

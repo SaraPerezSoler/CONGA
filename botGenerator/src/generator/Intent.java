@@ -33,7 +33,7 @@ public interface Intent extends Element, Comparable {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<IntentLanguageInputs> getInputs();
+	EList<LanguageIntent> getInputs();
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

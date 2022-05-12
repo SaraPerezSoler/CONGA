@@ -5,8 +5,8 @@ package generator.impl;
 import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Language;
+import generator.LanguageText;
 import generator.Text;
-import generator.TextLanguageInput;
 
 import java.util.Collection;
 
@@ -42,7 +42,7 @@ public class TextImpl extends ActionImpl implements Text, Comparable {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TextLanguageInput> inputs;
+	protected EList<LanguageText> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +69,9 @@ public class TextImpl extends ActionImpl implements Text, Comparable {
 	 * @generated
 	 */
 	@Override
-	public EList<TextLanguageInput> getInputs() {
+	public EList<LanguageText> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<TextLanguageInput>(TextLanguageInput.class, this, GeneratorPackage.TEXT__INPUTS);
+			inputs = new EObjectContainmentEList<LanguageText>(LanguageText.class, this, GeneratorPackage.TEXT__INPUTS);
 		}
 		return inputs;
 	}
@@ -115,7 +115,7 @@ public class TextImpl extends ActionImpl implements Text, Comparable {
 		switch (featureID) {
 			case GeneratorPackage.TEXT__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends TextLanguageInput>)newValue);
+				getInputs().addAll((Collection<? extends LanguageText>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -151,8 +151,8 @@ public class TextImpl extends ActionImpl implements Text, Comparable {
 	}
 
 	@Override
-	public TextLanguageInput getInput(Language language) {
-		for (TextLanguageInput input: getInputs()) {
+	public LanguageText getInput(Language language) {
+		for (LanguageText input: getInputs()) {
 			if (input.getLanguage().equals(language)) {
 				return input;
 			}

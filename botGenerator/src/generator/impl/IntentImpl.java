@@ -5,7 +5,7 @@ package generator.impl;
 import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Intent;
-import generator.IntentLanguageInputs;
+import generator.LanguageIntent;
 import generator.Parameter;
 
 import java.util.Collection;
@@ -47,7 +47,7 @@ public class IntentImpl extends ElementImpl implements Intent {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<IntentLanguageInputs> inputs;
+	protected EList<LanguageIntent> inputs;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -104,9 +104,9 @@ public class IntentImpl extends ElementImpl implements Intent {
 	 * @generated
 	 */
 	@Override
-	public EList<IntentLanguageInputs> getInputs() {
+	public EList<LanguageIntent> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<IntentLanguageInputs>(IntentLanguageInputs.class, this, GeneratorPackage.INTENT__INPUTS);
+			inputs = new EObjectContainmentEList<LanguageIntent>(LanguageIntent.class, this, GeneratorPackage.INTENT__INPUTS);
 		}
 		return inputs;
 	}
@@ -192,7 +192,7 @@ public class IntentImpl extends ElementImpl implements Intent {
 		switch (featureID) {
 			case GeneratorPackage.INTENT__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends IntentLanguageInputs>)newValue);
+				getInputs().addAll((Collection<? extends LanguageIntent>)newValue);
 				return;
 			case GeneratorPackage.INTENT__PARAMETERS:
 				getParameters().clear();

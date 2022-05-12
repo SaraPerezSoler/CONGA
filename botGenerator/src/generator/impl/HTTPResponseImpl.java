@@ -6,7 +6,7 @@ import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.HTTPRequest;
 import generator.HTTPResponse;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 
 import java.util.Collection;
 
@@ -46,7 +46,7 @@ public class HTTPResponseImpl extends ActionImpl implements HTTPResponse, Compar
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TextLanguageInput> inputs;
+	protected EList<LanguageText> inputs;
 
 	/**
 	 * The cached value of the '{@link #getHTTPRequest() <em>HTTP Request</em>}' reference.
@@ -83,9 +83,9 @@ public class HTTPResponseImpl extends ActionImpl implements HTTPResponse, Compar
 	 * @generated
 	 */
 	@Override
-	public EList<TextLanguageInput> getInputs() {
+	public EList<LanguageText> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<TextLanguageInput>(TextLanguageInput.class, this, GeneratorPackage.HTTP_RESPONSE__INPUTS);
+			inputs = new EObjectContainmentEList<LanguageText>(LanguageText.class, this, GeneratorPackage.HTTP_RESPONSE__INPUTS);
 		}
 		return inputs;
 	}
@@ -172,7 +172,7 @@ public class HTTPResponseImpl extends ActionImpl implements HTTPResponse, Compar
 		switch (featureID) {
 			case GeneratorPackage.HTTP_RESPONSE__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends TextLanguageInput>)newValue);
+				getInputs().addAll((Collection<? extends LanguageText>)newValue);
 				return;
 			case GeneratorPackage.HTTP_RESPONSE__HTTP_REQUEST:
 				setHTTPRequest((HTTPRequest)newValue);

@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xtext.botGenerator.generator.BotGenerator;
 
 import com.google.inject.Injector;
 
@@ -168,8 +167,6 @@ public class CongaData {
 			if (path != null) {
 				PATH = path;
 				congaData = new CongaData(PATH);
-				BotGenerator.setIsPlugin(false);
-
 			}
 		}
 		return congaData;

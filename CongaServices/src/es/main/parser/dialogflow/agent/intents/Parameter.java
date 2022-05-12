@@ -8,7 +8,7 @@ import generator.Bot;
 import generator.DefaultEntity;
 import generator.Entity;
 import generator.GeneratorFactory;
-import generator.PromptLanguage;
+import generator.LanguagePrompt;
 
 public class Parameter{
 	private boolean required;
@@ -57,9 +57,9 @@ public class Parameter{
 		parameter.setRequired(isRequired());
 		
 		for (Prompt prompt : getPrompts()) {
-			PromptLanguage promptLan = parameter.getPrompt(Agent.castLanguage(prompt.getLang()));
+			LanguagePrompt promptLan = parameter.getPrompt(Agent.castLanguage(prompt.getLang()));
 			if (promptLan == null) {
-				promptLan = GeneratorFactory.eINSTANCE.createPromptLanguage();
+				promptLan = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 				promptLan.setLanguage(Agent.castLanguage(prompt.getLang()));
 				parameter.getPrompts().add(promptLan);
 			}

@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
 public interface ButtonAction extends Action {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link generator.ButtonsLanguageInputs}.
+	 * The list contents are of type {@link generator.LanguageButton}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -31,8 +31,8 @@ public interface ButtonAction extends Action {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<ButtonsLanguageInputs> getInputs();
+	EList<LanguageButton> getInputs();
 
-	ButtonsLanguageInputs getInput(Language lan);
+	LanguageButton getInput(Language lan);
 
 } // ButtonAction

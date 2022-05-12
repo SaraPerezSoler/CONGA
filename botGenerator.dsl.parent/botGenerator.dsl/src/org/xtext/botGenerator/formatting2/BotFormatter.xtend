@@ -10,15 +10,13 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.xtext.botGenerator.services.BotGrammarAccess
 import generator.GeneratorPackage
-import generator.IntentLanguageInputs
+import generator.LanguageIntent
 import generator.Parameter
-import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer
-import org.eclipse.xtext.formatting2.ITextReplacerContext
 import generator.Entity
-import generator.LanguageInput
+import generator.LanguageEntity
 import generator.Action
 import generator.Text
-import generator.TextLanguageInput
+import generator.LanguageText
 import generator.Image
 import generator.HTTPRequest
 import generator.HTTPResponse
@@ -127,7 +125,7 @@ class BotFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def dispatch void format(TextLanguageInput textLanInput, extension IFormattableDocument document) {
+	def dispatch void format(LanguageText textLanInput, extension IFormattableDocument document) {
 		textLanInput.prepend[newLine]
 		var open = textLanInput.regionFor.keyword("{")
 		var close = textLanInput.regionFor.keyword("}")
@@ -143,8 +141,8 @@ class BotFormatter extends AbstractFormatter2 {
 		intent.prepend[setNewLines(2, 2, 2)]
 		intent.interior[indent]
 		//intent.regionFor.feature(GeneratorPackage.Literals.ELEMENT__NAME).prepend[newLine]
-		for (intentLanguageInputs : intent.inputs) {
-			intentLanguageInputs.format
+		for (LanguageIntent : intent.inputs) {
+			LanguageIntent.format
 		}
 		intent.regionFor.keyword("parameters").prepend[newLine]
 		interior(intent.regionFor.keyword("parameters"), intent.parameters.last.regionFor.keyword(";"))[indent]
@@ -162,7 +160,7 @@ class BotFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def dispatch void format(LanguageInput lanInput, extension IFormattableDocument document) {
+	def dispatch void format(LanguageEntity lanInput, extension IFormattableDocument document) {
 		lanInput.prepend[newLine]
 		var open = lanInput.regionFor.keyword("{")
 		var close = lanInput.regionFor.keyword("}")
@@ -178,7 +176,7 @@ class BotFormatter extends AbstractFormatter2 {
 		parameter.prepend[newLine]
 	}
 
-	def dispatch void format(IntentLanguageInputs intentInput, extension IFormattableDocument document) {
+	def dispatch void format(LanguageIntent intentInput, extension IFormattableDocument document) {
 		intentInput.regionFor.keyword("inputs").prepend[newLine]
 		var open = intentInput.regionFor.keyword("{")
 		var close = intentInput.regionFor.keyword("}")
@@ -190,5 +188,5 @@ class BotFormatter extends AbstractFormatter2 {
 		}
 	}
 
-// TODO: implement for IntentLanguageInputs, UserInteraction, BotInteraction, TrainingPhrase, Parameter, Entity, LanguageInput, CompositeInput, Text, TextLanguageInput, HTTPResponse, HTTPRequest, TextInput, KeyValue
+// TODO: implement for LanguageIntent, UserInteraction, BotInteraction, TrainingPhrase, Parameter, Entity, LanguageEntity, CompositeInput, Text, LanguageText, HTTPResponse, HTTPRequest, TextInput, KeyValue
 }

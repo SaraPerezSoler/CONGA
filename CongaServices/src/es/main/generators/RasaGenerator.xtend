@@ -25,10 +25,10 @@ import java.util.ArrayList
 import generator.BotInteraction
 import generator.Interaction
 import generator.Language
-import generator.TextLanguageInput
+import generator.LanguageText
 import generator.SimpleInput
 import generator.RegexInput
-import generator.LanguageInput
+import generator.LanguageEntity
 import generator.EntityInput
 import java.io.File
 import generator.ButtonAction
@@ -367,7 +367,7 @@ class RasaGenerator extends BotGenerator{
 
 	def getHttpResponseText(HTTPResponse action, Language lan, Bot bot) {
 		var ret = ""
-		for (TextLanguageInput textLanguage : action.inputs) {
+		for (LanguageText textLanguage : action.inputs) {
 			if (textLanguage.language.compare(lan, bot)) {
 				for (token : textLanguage.inputs.get(0).tokens) {
 					if (token instanceof Literal) {
@@ -434,9 +434,9 @@ class RasaGenerator extends BotGenerator{
 		  «FOR action : actions»
 		  	«IF action instanceof Text»
 		  		«action.actionName»:
-		  		«FOR textLanguageInput: action.inputs»
-		  			«IF textLanguageInput.language.compare(lan, bot)»
-		  				«FOR input : textLanguageInput.inputs»	
+		  		«FOR textLanguageEntity: action.inputs»
+		  			«IF textLanguageEntity.language.compare(lan, bot)»
+		  				«FOR input : textLanguageEntity.inputs»	
 		  					- text: "«input.textActionInput»"
 		  				«ENDFOR»
 		  			«ENDIF»
@@ -446,12 +446,14 @@ class RasaGenerator extends BotGenerator{
 		  		- text: «IF (action as Image).caption !== null»"«(action as Image).caption»"«ELSE»""«ENDIF»
 		  		  image: "«(action as Image).URL»"
 		  	«ELSEIF action instanceof ButtonAction»
-		  		«FOR textLanguageInput: action.inputs»
+		  		«FOR textLanguageEntity: action.inputs»
 		  			«action.actionName»:
-		  			«IF textLanguageInput.language.compare(lan, bot)»
-		  			- text: "«textLanguageInput.text.textActionInput»"
+		  			«IF textLanguageEntity.language.compare(lan, bot)»
+		  			«FOR input : textLanguageEntity.inputs»	
+		  				- text: "«input.textActionInput»"
+		  			«ENDFOR»
 		  			buttons:
-		  			«FOR button: textLanguageInput.buttons»
+		  			«FOR button: textLanguageEntity.buttons»
 		  			- title: "«button.value»"
 		  			«IF button.action !== null»
 		  			payload: "«button.action»"
@@ -526,11 +528,11 @@ class RasaGenerator extends BotGenerator{
 
 	def nlu(List<Intent> intents, List<Entity> entities, Language lan, Bot bot) '''
 		«FOR intent : intents»
-			«FOR intentLanguageInput: intent.inputs»
-				«IF intentLanguageInput.language.compare(lan, bot)»
+			«FOR intentLanguageEntity: intent.inputs»
+				«IF intentLanguageEntity.language.compare(lan, bot)»
 					«IF intentType(intent) === BotGenerator.TRAINING»
 						## intent:«intent.name.getRasaValue»
-						«FOR input : intentLanguageInput.inputs»
+						«FOR input : intentLanguageEntity.inputs»
 							- «(input as TrainingPhrase).generate(lan, bot)»
 						«ENDFOR»
 					«ENDIF»
@@ -589,7 +591,7 @@ class RasaGenerator extends BotGenerator{
 	}
 
 	def getEntry(String string, Entity entity, Language lan, Bot bot) {
-		for (LanguageInput languageInput : entity.inputs) {
+		for (LanguageEntity languageInput : entity.inputs) {
 			if (languageInput.language.compare(lan, bot)) {
 				for (EntityInput input : languageInput.inputs) {
 					if (input instanceof SimpleInput) {

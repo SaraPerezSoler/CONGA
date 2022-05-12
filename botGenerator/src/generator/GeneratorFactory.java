@@ -67,13 +67,13 @@ public interface GeneratorFactory extends EFactory {
 	Entity createEntity();
 
 	/**
-	 * Returns a new object of class '<em>Language Input</em>'.
+	 * Returns a new object of class '<em>Language Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Language Input</em>'.
+	 * @return a new object of class '<em>Language Entity</em>'.
 	 * @generated
 	 */
-	LanguageInput createLanguageInput();
+	LanguageEntity createLanguageEntity();
 
 	/**
 	 * Returns a new object of class '<em>Simple Input</em>'.
@@ -157,13 +157,13 @@ public interface GeneratorFactory extends EFactory {
 	Intent createIntent();
 
 	/**
-	 * Returns a new object of class '<em>Intent Language Inputs</em>'.
+	 * Returns a new object of class '<em>Language Intent</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Intent Language Inputs</em>'.
+	 * @return a new object of class '<em>Language Intent</em>'.
 	 * @generated
 	 */
-	IntentLanguageInputs createIntentLanguageInputs();
+	LanguageIntent createLanguageIntent();
 
 	/**
 	 * Returns a new object of class '<em>Training Phrase</em>'.
@@ -184,13 +184,13 @@ public interface GeneratorFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
-	 * Returns a new object of class '<em>Prompt Language</em>'.
+	 * Returns a new object of class '<em>Language Prompt</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Prompt Language</em>'.
+	 * @return a new object of class '<em>Language Prompt</em>'.
 	 * @generated
 	 */
-	PromptLanguage createPromptLanguage();
+	LanguagePrompt createLanguagePrompt();
 
 	/**
 	 * Returns a new object of class '<em>Image</em>'.
@@ -229,13 +229,13 @@ public interface GeneratorFactory extends EFactory {
 	ButtonAction createButtonAction();
 
 	/**
-	 * Returns a new object of class '<em>Buttons Language Inputs</em>'.
+	 * Returns a new object of class '<em>Language Button</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Buttons Language Inputs</em>'.
+	 * @return a new object of class '<em>Language Button</em>'.
 	 * @generated
 	 */
-	ButtonsLanguageInputs createButtonsLanguageInputs();
+	LanguageButton createLanguageButton();
 
 	/**
 	 * Returns a new object of class '<em>Button</em>'.
@@ -247,13 +247,13 @@ public interface GeneratorFactory extends EFactory {
 	Button createButton();
 
 	/**
-	 * Returns a new object of class '<em>Text Language Input</em>'.
+	 * Returns a new object of class '<em>Language Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Text Language Input</em>'.
+	 * @return a new object of class '<em>Language Text</em>'.
 	 * @generated
 	 */
-	TextLanguageInput createTextLanguageInput();
+	LanguageText createLanguageText();
 
 	/**
 	 * Returns a new object of class '<em>Text Input</em>'.

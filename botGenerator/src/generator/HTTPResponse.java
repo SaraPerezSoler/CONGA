@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
 public interface HTTPResponse extends Action {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link generator.TextLanguageInput}.
+	 * The list contents are of type {@link generator.LanguageText}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -32,7 +32,7 @@ public interface HTTPResponse extends Action {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<TextLanguageInput> getInputs();
+	EList<LanguageText> getInputs();
 
 	/**
 	 * Returns the value of the '<em><b>HTTP Request</b></em>' reference.

@@ -7,7 +7,7 @@ import es.main.parser.dialogflow.agent.Agent;
 import generator.Action;
 import generator.Bot;
 import generator.ButtonAction;
-import generator.ButtonsLanguageInputs;
+import generator.LanguageButton;
 import generator.GeneratorFactory;
 import generator.Image;
 import generator.Intent;
@@ -16,7 +16,7 @@ import generator.Parameter;
 import generator.ParameterToken;
 import generator.Text;
 import generator.TextInput;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 
 public class Message {
 	private String type;
@@ -118,7 +118,7 @@ public class Message {
 			return ret;
 		}else if (getType() == CARD_TYPE && getButtons()!= null && !getButtons().isEmpty()) {
 			
-			ButtonsLanguageInputs buttonLang =  GeneratorFactory.eINSTANCE.createButtonsLanguageInputs();
+			LanguageButton buttonLang =  GeneratorFactory.eINSTANCE.createLanguageButton();
 			buttonLang.setLanguage(Agent.castLanguage(getLang()));
 			String title = "";
 			String subtitle = "";
@@ -128,7 +128,7 @@ public class Message {
 			if (getSubtitle()!=null) {
 				subtitle= getSubtitle();
 			}
-			buttonLang.setText(createTextInputs(title+subtitle, intent, agent, bot));
+			buttonLang.getInputs().add(createTextInputs(title+subtitle, intent, agent, bot));
 			 
 			for (Button button: getButtons()) {
 				buttonLang.getButtons().add(button.getBotButton());
@@ -138,7 +138,7 @@ public class Message {
 				String actionName = intent.getName() + "ButtonResp" + j;
 				Action ret = bot.getAction(actionName);
 				if (ret != null && ret instanceof ButtonAction) {
-					ButtonsLanguageInputs aux = ((ButtonAction) ret).getInput(Agent.castLanguage(getLang()));
+					LanguageButton aux = ((ButtonAction) ret).getInput(Agent.castLanguage(getLang()));
 					if (aux == null) {
 						((ButtonAction) ret).getInputs().add(buttonLang);
 						return ((ButtonAction) ret);
@@ -155,7 +155,7 @@ public class Message {
 			
 		} else {
 
-			TextLanguageInput textLang = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+			LanguageText textLang = GeneratorFactory.eINSTANCE.createLanguageText();
 			textLang.setLanguage(Agent.castLanguage(getLang()));
 			if (getSpeech().isEmpty()) {
 				textLang.getInputs().add(createTextInputs("", intent, agent, bot));
@@ -168,7 +168,7 @@ public class Message {
 				String actionName = intent.getName() + "TxtResp" + j;
 				Action ret = bot.getAction(actionName);
 				if (ret != null && ret instanceof Text) {
-					TextLanguageInput aux = ((Text) ret).getInput(Agent.castLanguage(getLang()));
+					LanguageText aux = ((Text) ret).getInput(Agent.castLanguage(getLang()));
 					if (aux == null) {
 						((Text) ret).getInputs().add(textLang);
 						return ((Text) ret);
@@ -244,7 +244,7 @@ public class Message {
 		Text ret = GeneratorFactory.eINSTANCE.createText();
 		ret.setName(actionName);
 
-		TextLanguageInput textLang = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+		LanguageText textLang = GeneratorFactory.eINSTANCE.createLanguageText();
 		textLang.setLanguage(bot.getLanguages().get(0));
 		textLang.getInputs().add(createTextInputs("", intent, null, bot));
 		((Text) ret).getInputs().add(textLang);

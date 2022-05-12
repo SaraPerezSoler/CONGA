@@ -4,7 +4,7 @@ package generator.impl;
 
 import generator.Comparable;
 import generator.GeneratorPackage;
-import generator.PromptLanguage;
+import generator.LanguagePrompt;
 
 import java.util.Collection;
 
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Prompt Language</b></em>'.
+ * An implementation of the model object '<em><b>Language Prompt</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link generator.impl.PromptLanguageImpl#getPrompts <em>Prompts</em>}</li>
+ *   <li>{@link generator.impl.LanguagePromptImpl#getPrompts <em>Prompts</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PromptLanguageImpl extends WithLanguageImpl implements PromptLanguage {
+public class LanguagePromptImpl extends LanguageInputImpl implements LanguagePrompt {
 	/**
 	 * The cached value of the '{@link #getPrompts() <em>Prompts</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PromptLanguageImpl() {
+	protected LanguagePromptImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.PROMPT_LANGUAGE;
+		return GeneratorPackage.Literals.LANGUAGE_PROMPT;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	@Override
 	public EList<String> getPrompts() {
 		if (prompts == null) {
-			prompts = new EDataTypeUniqueEList<String>(String.class, this, GeneratorPackage.PROMPT_LANGUAGE__PROMPTS);
+			prompts = new EDataTypeUniqueEList<String>(String.class, this, GeneratorPackage.LANGUAGE_PROMPT__PROMPTS);
 		}
 		return prompts;
 	}
@@ -78,7 +78,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.PROMPT_LANGUAGE__PROMPTS:
+			case GeneratorPackage.LANGUAGE_PROMPT__PROMPTS:
 				return getPrompts();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -93,7 +93,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.PROMPT_LANGUAGE__PROMPTS:
+			case GeneratorPackage.LANGUAGE_PROMPT__PROMPTS:
 				getPrompts().clear();
 				getPrompts().addAll((Collection<? extends String>)newValue);
 				return;
@@ -109,7 +109,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.PROMPT_LANGUAGE__PROMPTS:
+			case GeneratorPackage.LANGUAGE_PROMPT__PROMPTS:
 				getPrompts().clear();
 				return;
 		}
@@ -124,7 +124,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.PROMPT_LANGUAGE__PROMPTS:
+			case GeneratorPackage.LANGUAGE_PROMPT__PROMPTS:
 				return prompts != null && !prompts.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -145,7 +145,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 		result.append(')');
 		return result.toString();
 	}
-
+	
 	@Override
 	public boolean isSimilarTo(Comparable obj) {
 		if (this == obj)
@@ -154,7 +154,7 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PromptLanguage other = (PromptLanguage) obj;
+		LanguagePrompt other = (LanguagePrompt) obj;
 		if (getLanguage() != other.getLanguage()) {
 			return false;
 		}
@@ -166,4 +166,4 @@ public class PromptLanguageImpl extends WithLanguageImpl implements PromptLangua
 		return true;
 	}
 
-} //PromptLanguageImpl
+} //LanguagePromptImpl
