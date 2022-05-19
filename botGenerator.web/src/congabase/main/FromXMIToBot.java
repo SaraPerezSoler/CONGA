@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -78,7 +80,8 @@ public class FromXMIToBot {
 		injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		resourceSetXtext = injector.getInstance(XtextResourceSet.class);
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-
+		//resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
+		
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		}
@@ -91,12 +94,14 @@ public class FromXMIToBot {
 
 		// Create new target file
 		Resource resourceDsl = resourceSetXtext.createResource(createURI(outputUri, null));
-
+		
 		// Copy content
 		resourceDsl.getContents().addAll(resourceXmi.getContents());
 
 		try {
-			resourceDsl.save(Collections.emptyMap());
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XtextResource.OPTION_ENCODING, "UTF-8");
+			resourceDsl.save(options);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

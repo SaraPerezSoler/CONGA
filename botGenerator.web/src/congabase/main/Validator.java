@@ -109,6 +109,8 @@ public class Validator {
 		injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		resourceSetXtext = injector.getInstance(XtextResourceSet.class);
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
+		
 		validator = injector.getInstance(IResourceValidator.class);
 		
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {

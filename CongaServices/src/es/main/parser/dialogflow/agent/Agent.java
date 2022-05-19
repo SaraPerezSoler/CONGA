@@ -32,6 +32,7 @@ public class Agent extends Chatbot {
 	private List<Intent> intents = new ArrayList<>();
 	private List<Entity> entities = new ArrayList<>();
 	private boolean haveLoops = false;
+	private boolean haveeContainerLoops = false;
 
 	private HTTPRequest request;
 	private HTTPResponse response;
@@ -139,6 +140,7 @@ public class Agent extends Chatbot {
 			}
 			bot.getEntities().add(botEntity);
 		}
+		Entity.endBotCompositeEntity(bot);
 
 		if (getWebhook() != null) {
 			request = getWebhook().getRequestAction();
@@ -294,8 +296,12 @@ public class Agent extends Chatbot {
 			for (Intent followUp : getIntents(context)) {
 				UserInteraction aux = getInPath(numPath, followUp);
 				if (aux != null) {
-					haveLoops = true;
-					botInteraction.getBackTo().add(aux);
+//					if (botInteraction.eContainer().equals(aux)) {
+//						haveeContainerLoops=true;
+//					}else {
+						haveLoops = true;
+						botInteraction.getBackTo().add(aux);
+//					}
 				} else {
 					aux = continueFlow(followUp, bot, botInteraction, numPath + "_" + i);
 					botInteraction.getOutcoming().add(aux);
@@ -422,6 +428,14 @@ public class Agent extends Chatbot {
 
 	public void setHaveLoops(boolean haveLoops) {
 		this.haveLoops = haveLoops;
+	}
+
+	public boolean isHaveeContainerLoops() {
+		return haveeContainerLoops;
+	}
+
+	public void setHaveeContainerLoops(boolean haveeContainerLoops) {
+		this.haveeContainerLoops = haveeContainerLoops;
 	}
 
 }

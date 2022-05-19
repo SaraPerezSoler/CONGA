@@ -60,7 +60,7 @@ class BotValidator extends AbstractBotValidator {
 
 			for (Element i : elements) {
 				if ((!i.equals(e)) && i.name.equals(e.name)) {
-					error("Rule G1: There are several elements with the name " + i.name +
+					error("G1\tThere are several elements with the name " + i.name +
 						". The name of the elements must be unique", GeneratorPackage.Literals.ELEMENT__NAME)
 				}
 			}
@@ -76,7 +76,7 @@ class BotValidator extends AbstractBotValidator {
 		if (container instanceof Intent) {
 			for (Parameter p : container.parameters) {
 				if ((!param.equals(p)) && param.name.equals(p.name)) {
-					error("Rule G1: There are several parameters with the name " + p.name +
+					error("G1\tThere are several parameters with the name " + p.name +
 						" in this intent. The name of the parameters must be unique",
 						GeneratorPackage.Literals.ELEMENT__NAME)
 				}
@@ -94,7 +94,7 @@ class BotValidator extends AbstractBotValidator {
 			for (EntityInput i : container.inputs) {
 				if (i instanceof SimpleInput) {
 					if ((!input.equals(i)) && input.name.equals(i.name)) {
-						error("Rule G1: There are several entries with the name " + i.name +
+						error("G1\tThere are several entries with the name " + i.name +
 							" in this entity. The name of the entries must be unique",
 							GeneratorPackage.Literals.ELEMENT__NAME)
 					}
@@ -117,7 +117,7 @@ class BotValidator extends AbstractBotValidator {
 			language.language = bot.languages.get(0);
 		}
 		if (!bot.languages.contains(language.language)) {
-			error("Rule G2: The language must be must be among the chatbot language",
+			error("G2\tThe language must be must be among the chatbot language",
 				GeneratorPackage.Literals.LANGUAGE_INPUT__LANGUAGE)
 		}
 	}
@@ -164,7 +164,7 @@ class BotValidator extends AbstractBotValidator {
 				language2.language = bot.languages.get(0);
 			}
 			if (!language.equals(language2) && language.language.equals(language2.language)) {
-				error("Rule G3: There can not be several inputs with the same language in a element",
+				error("G3\tThere can not be several inputs with the same language in a element",
 					GeneratorPackage.Literals.LANGUAGE_INPUT__LANGUAGE)
 			}
 		}
@@ -180,7 +180,7 @@ class BotValidator extends AbstractBotValidator {
 			for (var j = i + 1; j < bot.flows.size; j++) {
 				var nexts = bot.flows.get(j)
 				if (current.intent === nexts.intent) {
-					error("Rule G4: Only one path can start with the intent " + current.intent.name,
+					error("G4\tOnly one path can start with the intent " + current.intent.name,
 						GeneratorPackage.Literals.BOT__FLOWS)
 				}
 			}
@@ -197,7 +197,7 @@ class BotValidator extends AbstractBotValidator {
 			for (var j = i + 1; j < state.outcoming.size; j++) {
 				var nexts = state.outcoming.get(j)
 				if (current.intent === nexts.intent) {
-					error("Rule G4: Only one path can start with the intent " + current.intent.name,
+					error("G4\tOnly one path can start with the intent " + current.intent.name,
 						GeneratorPackage.Literals.BOT_INTERACTION__OUTCOMING)
 				}
 			}
@@ -213,10 +213,10 @@ class BotValidator extends AbstractBotValidator {
 			if (action instanceof HTTPResponse) {
 				var index = interaction.actions.indexOf(action)
 				if (index == 0) {
-					error("Rule G5: Before an HttpResponse must go the HttpRequest which reference",
+					error("G5\tBefore an HttpResponse must go the HttpRequest which reference",
 						GeneratorPackage.Literals.BOT_INTERACTION__ACTIONS)
 				} else if (interaction.actions.get(index - 1) !== action.HTTPRequest) {
-					error("Rule G5: Before an HttpResponse must go the HttpRequest which reference",
+					error("G5\tBefore an HttpResponse must go the HttpRequest which reference",
 						GeneratorPackage.Literals.BOT_INTERACTION__ACTIONS)
 				}
 			}
@@ -230,7 +230,7 @@ class BotValidator extends AbstractBotValidator {
 	def loopsPath(UserInteraction interaction) {
 		if (interaction.backTo !== null) {
 			if (pathContainsBotInteraction(interaction, interaction.backTo.backTo) === false) {
-				error("Rule G6: Back to bot interaction must be in the same path, previously",
+				error("G6\tBack to bot interaction must be in the same path, previously",
 					GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
 			}
 		}
@@ -255,7 +255,7 @@ class BotValidator extends AbstractBotValidator {
 		if (interaction.backTo !== null) {
 			for (UserInteraction backTo : interaction.backTo) {
 				if (pathContainsUserInteraction(interaction, backTo) === false) {
-					error("Rule G6: Back to user interaction must be in the same path, previously",
+					error("G6\tBack to user interaction must be in the same path, previously",
 						GeneratorPackage.Literals.BOT_INTERACTION__BACK_TO)
 				}
 			}
@@ -288,7 +288,7 @@ class BotValidator extends AbstractBotValidator {
 		}
 		var intent = containercontainer as Intent
 		if (!intent.parameters.contains(references.parameter)) {
-			error("Rule G7: This parameter is not from the list of intents parameters",
+			error("G7\tThis parameter is not from the list of intents parameters",
 				GeneratorPackage.Literals.PARAMETER_REFERENCE_TOKEN__PARAMETER)
 		}
 	}
@@ -305,19 +305,19 @@ class BotValidator extends AbstractBotValidator {
 			for (EntityInput input : language.inputs) {
 				if (input instanceof RegexInput) {
 					if (has_simple || has_composite) {
-						error("Rule G8: Entities only can have one entry type, regex, simple or composite",
+						error("G8\tEntities only can have one entry type, regex, simple or composite",
 							GeneratorPackage.Literals.ENTITY__INPUTS)
 					}
 					has_regex = true
 				} else if (input instanceof SimpleInput) {
 					if (has_regex || has_composite) {
-						error("Rule G8: Entities only can have one entry type, regex, simple or composite",
+						error("G8\tEntities only can have one entry type, regex, simple or composite",
 							GeneratorPackage.Literals.ENTITY__INPUTS)
 					}
 					has_simple = true
 				} else {
 					if (has_regex || has_simple) {
-						error("Rule G8: Entities only can have one entry type, regex, simple or composite",
+						error("G8\tEntities only can have one entry type, regex, simple or composite",
 							GeneratorPackage.Literals.ENTITY__INPUTS)
 					}
 					has_composite = true
@@ -375,7 +375,7 @@ class BotValidator extends AbstractBotValidator {
 		for (language : bot.languages) {
 			if (!languages.contains(language)) {
 				if (!remove) {
-					warning("Rule G9: The chatbot supports " + language.literal.toLowerCase().toFirstUpper +
+					warning("G9\tThe chatbot supports " + language.literal.toLowerCase().toFirstUpper +
 						", but this element does not have an input in this language",
 						GeneratorPackage.Literals.ELEMENT__NAME)
 				}
@@ -391,7 +391,7 @@ class BotValidator extends AbstractBotValidator {
 		try {
 			Pattern.compile(input.expresion)
 		} catch (PatternSyntaxException exception) {
-			warning("Rule G10: " + exception.description, GeneratorPackage.Literals.REGEX_INPUT__EXPRESION)
+			warning("G10\t" + exception.description, GeneratorPackage.Literals.REGEX_INPUT__EXPRESION)
 		}
 	}
 
@@ -404,7 +404,7 @@ class BotValidator extends AbstractBotValidator {
 			if (!interaction.backTo.isEmpty) {
 				for (UserInteraction user : interaction.backTo) {
 					if (!hasStopCondition(user)) {
-						warning("Rule G11: There is an endless loop, ensure there is at least one path with end",
+						warning("G11\tThere is an endless loop, ensure there is at least one path with end",
 							GeneratorPackage.Literals.BOT_INTERACTION__BACK_TO)
 					}
 				}
@@ -432,7 +432,7 @@ class BotValidator extends AbstractBotValidator {
 	def loopsSeveralPaths(UserInteraction interaction) {
 		if (interaction.backTo !== null) {
 			if (!hasStopCondition(interaction.backTo.backTo)) {
-				warning("Rule G11: There is an endless loop, ensure there is at least one path with end",
+				warning("G11\tThere is an endless loop, ensure there is at least one path with end",
 					GeneratorPackage.Literals.USER_INTERACTION__BACK_TO)
 			}
 		}
@@ -465,7 +465,7 @@ class BotValidator extends AbstractBotValidator {
 		if (container instanceof Bot) {
 			var bot = container as Bot
 			if (!entity.isUsed(bot)) {
-				warning("Rule G12: This entity is never used in a parameter", GeneratorPackage.Literals.ELEMENT__NAME)
+				warning("G12\tThis entity is never used in a parameter", GeneratorPackage.Literals.ELEMENT__NAME)
 			}
 		}
 	}
@@ -490,7 +490,7 @@ class BotValidator extends AbstractBotValidator {
 		if (container instanceof Bot) {
 			var bot = container as Bot
 			if (!intent.isUsed(bot)) {
-				warning("Rule G13: This intent is never used in a flow", GeneratorPackage.Literals.ELEMENT__NAME)
+				warning("G13\tThis intent is never used in a flow", GeneratorPackage.Literals.ELEMENT__NAME)
 			}
 		}
 	}
@@ -529,9 +529,8 @@ class BotValidator extends AbstractBotValidator {
 			if (param.isRequired) {
 				for (LanguageIntent lanIntent : intent.inputs) {
 					if (!param.isUsed(lanIntent)) {
-						warning(
-							"Rule G14: This parameter is mandatory and not used in Training Phrases in the inputs in " +
-								lanIntent.language.literal.toLowerCase().toFirstUpper,
+						warning("G14\tThis parameter is mandatory and not used in Training Phrases in the inputs in " +
+							lanIntent.language.literal.toLowerCase().toFirstUpper,
 							GeneratorPackage.Literals.ELEMENT__NAME)
 					}
 				}
@@ -560,30 +559,56 @@ class BotValidator extends AbstractBotValidator {
 	@Check
 	def atLeastTreeTrainingPhrases(LanguageIntent intent) {
 		if (intent.inputs.length < 3) {
-			warning("Rule G15: The intents must contains at least tree training phrases or one regex per language",
+			warning("G15\tThe intents must contains at least tree training phrases or one regex per language",
 				GeneratorPackage.Literals.LANGUAGE_INTENT__INPUTS)
 		}
 	}
 
 	/**
-	 * Rule G16: Two Training Phrases cannot be equals in same or different intent
+	 * Rule G16: Two Training Phrases cannot be equals in different intent
 	 */
 	@Check
 	def similarPhrases(TrainingPhrase phrase) {
 		var bot = phrase.eContainer.eContainer.eContainer;
+		var intent = phrase.intent
 		if (bot instanceof Bot) {
 			var trainingPhrases = (bot as Bot).eAllContents.filter(TrainingPhrase).toList
 			for (tp : trainingPhrases) {
-				if (phrase.isSimilarTo(tp) && !phrase.equals(tp)) {
-					warning("Rule G16: Two training phrases should not be equals",
+				var intent2 = tp.intent
+				if (phrase.isSimilarTo(tp) && !phrase.equals(tp) && !intent.equals(intent2)) {
+					warning("G16\tTwo training phrases should not be equals in different intents",
 						GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
 				}
 			}
 		}
 	}
 
+	def getIntent(TrainingPhrase phrase) {
+		var eContainer = phrase.eContainer;
+		while (!(eContainer instanceof Intent)) {
+			eContainer = eContainer.eContainer
+		}
+		return eContainer as Intent
+	}
+
 	/**
-	 * Rule G17: Training Phrases should contains something more than a text parameter
+	 * Rule G17: Two Training Phrases cannot be equals in the same intent
+	 */
+	@Check
+	def similarPhrasesSameIntent(TrainingPhrase phrase) {
+		var intent = phrase.intent;
+
+		var trainingPhrases = intent.eAllContents.filter(TrainingPhrase).toList
+		for (tp : trainingPhrases) {
+			if (phrase.isSimilarTo(tp) && !phrase.equals(tp)) {
+				warning("G17\tTwo training phrases should not be equals in the same intent",
+					GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+			}
+		}
+	}
+
+	/**
+	 * Rule G18: Training Phrases should contains something more than a text parameter
 	 */
 	@Check
 	def trainingPhraseWithOnlyTextEntity(TrainingPhrase phrase) {
@@ -599,20 +624,29 @@ class BotValidator extends AbstractBotValidator {
 			}
 		}
 		if (onlyTextEntity) {
-			warning("Rule G17: Training phrases should contains something different to a text parameter",
+			warning("G18\tTraining phrases should contains something different to a text parameter",
 				GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
 		}
 	}
 
 	/**
-	 * Rule G18: The Chatbot should have a fallback intent
+	 * Rule G19: The Chatbot should have a fallback intent
 	 */
 	@Check
 	def fallBackIntent(Bot bot) {
+		for (Intent intent: bot.intents){
+			if (intent.fallbackIntent){
+				return;
+			}
+		}
+		warning("G19\tChatbot should contains at least one fallback intent",
+				GeneratorPackage.Literals.BOT__INTENTS)
+		
+		
 	}
 
 	/**
-	 * Rule G19: Mandatory parameters should have prompts
+	 * Rule G20: Mandatory parameters should have prompts
 	 */
 	@Check
 	def parametersPrompt(Parameter param) {
@@ -624,7 +658,7 @@ class BotValidator extends AbstractBotValidator {
 			var bot = aux as Bot
 			var languages = new ArrayList<Language>();
 			for (LanguageInput input : param.prompts) {
-				if (input.language == Language.EMPTY){
+				if (input.language == Language.EMPTY) {
 					input.language = bot.languages.get(0)
 				}
 				languages.add(input.language)
@@ -632,7 +666,7 @@ class BotValidator extends AbstractBotValidator {
 
 			for (language : bot.languages) {
 				if (!languages.contains(language)) {
-					warning("Rule G19: This mandatory parameter does no have prompts in " +
+					warning("G20\tThis mandatory parameter does no have prompts in " +
 						language.literal.toLowerCase().toFirstUpper, GeneratorPackage.Literals.ELEMENT__NAME)
 				}
 			}

@@ -42,13 +42,18 @@ public class ConverDialogflow {
 					if (agent.isHaveLoops()) {
 						have_loops = "Y";
 					}
+					
+					String have_econtainer_loops = "N";
+					if (agent.isHaveeContainerLoops()) {
+						have_econtainer_loops = "Y";
+					}
 					String runString = "-";
 					if (run) {
 						runString = "Y";
 					}
 					
 					System.out.println(
-							agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString);
+							agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString +"\t"+have_econtainer_loops);
 				} catch (Exception e) {
 					if (agent != null) {
 						System.out.println(agent.getName() + "\t" + agent.getLanguage() + "\t-\tN");
