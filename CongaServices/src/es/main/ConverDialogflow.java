@@ -53,7 +53,9 @@ public class ConverDialogflow {
 					}
 					
 					System.out.println(
-							agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString +"\t"+have_econtainer_loops);
+							agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString 
+							//+"\t"+have_econtainer_loops
+							);
 				} catch (Exception e) {
 					if (agent != null) {
 						System.out.println(agent.getName() + "\t" + agent.getLanguage() + "\t-\tN");

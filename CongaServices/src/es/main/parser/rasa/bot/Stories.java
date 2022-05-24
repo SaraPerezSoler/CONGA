@@ -21,7 +21,7 @@ public class Stories {
 		while (stories.contains("  ")) {
 			stories = stories.replace("  ", " ");
 		}
-		stories = stories.replace(" \n", "\n");
+		stories = stories.replace(" \n", "\n").replace("\r", "");
 		String[] pathsStrings = stories.split("##");
 		for (String p : pathsStrings) {
 			if (!p.isBlank() && !p.isEmpty()) {

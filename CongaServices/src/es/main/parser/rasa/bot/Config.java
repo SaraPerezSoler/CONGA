@@ -5,6 +5,7 @@ import generator.Language;
 public class Config {
 
 	private String language;
+	private Object policies;
 
 	public String getLanguage() {
 		return language;
@@ -62,6 +63,14 @@ public class Config {
 		default:
 			return Language.ENGLISH;
 		}
+	}
+
+	public Object getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(Object policies) {
+		this.policies = policies;
 	}
 	
 }

@@ -22,11 +22,14 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class Validator {
-	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
-	private static final String LOG_FILE = "D:\\Desktop\\Dialogflow - copia\\errors.txt";
-	private static final String[] IGNORE_FILES = { "D:/Git/asymob/chatbots/botsInDSL" };
+	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia\\xmi";
+	private static final String LOG_FILE = "D:\\Desktop\\Rasa - copia\\errors.txt";
 	
+//	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+//	private static final String LOG_FILE = "D:\\Desktop\\Dialogflow - copia\\errors.txt";
 
+	
+	private static final String[] IGNORE_FILES = { "D:/Git/asymob/chatbots/botsInDSL" };
 	private Injector injector;
 	private XtextResourceSet resourceSetXtext;
 	private IResourceValidator validator;

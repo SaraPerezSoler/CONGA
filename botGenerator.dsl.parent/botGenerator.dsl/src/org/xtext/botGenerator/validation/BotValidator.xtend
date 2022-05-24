@@ -559,28 +559,73 @@ class BotValidator extends AbstractBotValidator {
 	@Check
 	def atLeastTreeTrainingPhrases(LanguageIntent intent) {
 		if (intent.inputs.length < 3) {
-			warning("G15\tThe intents must contains at least tree training phrases or one regex per language",
+			warning("G15\tThe intents must contains at least tree training phrases",
 				GeneratorPackage.Literals.LANGUAGE_INTENT__INPUTS)
 		}
 	}
 
+//	/**
+//	 * Rule G16: Two Training Phrases should not be equals in different intent
+//	 */
+//	@Check
+//	def similarPhrases(TrainingPhrase phrase) {
+//		var bot = phrase.eContainer.eContainer.eContainer;
+//		var intent = phrase.intent
+//		if (bot instanceof Bot) {
+//			var trainingPhrases = (bot as Bot).eAllContents.filter(TrainingPhrase).toList
+//			for (tp : trainingPhrases) {
+//				var intent2 = tp.intent
+//				if (phrase.isSimilarTo(tp) && !phrase.equals(tp) && !intent.equals(intent2)) {
+//					warning("G16\tTwo training phrases should not be equals in different intents",
+//						GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+//				}
+//			}
+//		}
+//	}
 	/**
-	 * Rule G16: Two Training Phrases cannot be equals in different intent
+	 * Rule G16: Two Training Phrases should not be equals in two start paths
 	 */
 	@Check
-	def similarPhrases(TrainingPhrase phrase) {
-		var bot = phrase.eContainer.eContainer.eContainer;
-		var intent = phrase.intent
-		if (bot instanceof Bot) {
-			var trainingPhrases = (bot as Bot).eAllContents.filter(TrainingPhrase).toList
-			for (tp : trainingPhrases) {
-				var intent2 = tp.intent
-				if (phrase.isSimilarTo(tp) && !phrase.equals(tp) && !intent.equals(intent2)) {
-					warning("G16\tTwo training phrases should not be equals in different intents",
-						GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+	def similarPhrases(UserInteraction interaction) {
+		var intent = interaction.intent
+		var bot = intent.eContainer as Bot
+
+		if (interaction.src !== null) {
+			for (UserInteraction user1 : interaction.src.outcoming) {
+				if (!interaction.equals(user1)) {
+					if (hasSimilarTp(interaction.intent, user1.intent)) {
+						warning("G16\tTwo training phrases should not be equals in two start paths",
+							GeneratorPackage.Literals.USER_INTERACTION__INTENT)
+					}
+				}
+
+			}
+			
+		} else {
+			for (UserInteraction user1 : bot.flows) {
+				if (!interaction.equals(user1)) {
+					if (hasSimilarTp(interaction.intent, user1.intent)) {
+						warning("G16\tTwo training phrases should not be equals in two start paths",
+							GeneratorPackage.Literals.USER_INTERACTION__INTENT)
+					}
+				}
+
+			}
+		}
+
+	}
+
+	def hasSimilarTp(Intent intent1, Intent intent2) {
+		var trainingPhrases1 = intent1.eAllContents.filter(TrainingPhrase).toList
+		var trainingPhrases2 = intent2.eAllContents.filter(TrainingPhrase).toList
+		for (TrainingPhrase tp1 : trainingPhrases1) {
+			for (TrainingPhrase tp2 : trainingPhrases2) {
+				if (tp1.isSimilarTo(tp2)) {
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	def getIntent(TrainingPhrase phrase) {
@@ -634,15 +679,13 @@ class BotValidator extends AbstractBotValidator {
 	 */
 	@Check
 	def fallBackIntent(Bot bot) {
-		for (Intent intent: bot.intents){
-			if (intent.fallbackIntent){
+		for (Intent intent : bot.intents) {
+			if (intent.fallbackIntent) {
 				return;
 			}
 		}
-		warning("G19\tChatbot should contains at least one fallback intent",
-				GeneratorPackage.Literals.BOT__INTENTS)
-		
-		
+		warning("G19\tChatbot should contains at least one fallback intent", GeneratorPackage.Literals.BOT__INTENTS)
+
 	}
 
 	/**

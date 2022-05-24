@@ -64,9 +64,9 @@ class DialogflowGenerator extends BotGenerator {
 
 		var entities = resource.allContents.filter(Entity).toList;
 		for (Entity entity : entities) {
-
-			f = generateFile('entities' + File.separator + entity.name + '.json', entityFile(entity))
-			saveFileIntoZip(f, 'entities', entity.name + '.json')
+			var name = entity.name.replaceAll("[^a-zA-Z0-9'_-]", "");
+			f = generateFile('entities' + File.separator + name + '.json', entityFile(entity, name))
+			saveFileIntoZip(f, 'entities', name + '.json')
 
 			var lan = Language.ENGLISH;
 
@@ -75,9 +75,9 @@ class DialogflowGenerator extends BotGenerator {
 				if (input.language != Language.EMPTY) {
 					lan = input.language
 				}
-				f = generateFile('entities' + File.separator + entity.name + '_entries_' + lan.languageAbbreviation +
+				f = generateFile('entities' + File.separator + name + '_entries_' + lan.languageAbbreviation +
 					'.json', entriesFile(input))
-				saveFileIntoZip(f, 'entities', entity.name + '_entries_' + lan.languageAbbreviation + '.json')
+				saveFileIntoZip(f, 'entities', name + '_entries_' + lan.languageAbbreviation + '.json')
 			}
 		}
 
@@ -148,7 +148,7 @@ class DialogflowGenerator extends BotGenerator {
 
 	def createIntentName(List<String> prev, String name) {
 		var prefix = createIntentPrefix(prev)
-		var newName = name;
+		var newName = name.replaceAll("[^a-zA-Z0-9'_-]", "");
 		if (name.length > (limit - prefix.length - 3)) {
 			newName = newName.substring(0, limit - prefix.length - 3)
 		}
@@ -557,11 +557,11 @@ class DialogflowGenerator extends BotGenerator {
 		}
 	}
 
-	def entityFile(Entity entity) '''
+	def entityFile(Entity entity, String name) '''
 		
 		{
 			"id": "«UUID.randomUUID().toString»",
-			"name": "«entity.name»",
+			"name": "«name»",
 			"isOverridable": true,	  
 			«IF entityType(entity) === BotGenerator.REGEX»
 				"isEnum": false,

@@ -97,4 +97,12 @@ public class Intent {
 		}
 		return botIntent;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -88,6 +89,9 @@ public class CongaData {
 					new XMIResourceFactoryImpl());
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",
 					new XMIResourceFactoryImpl());
+
+			resourceSet.getLoadOptions().put(XMIResource.OPTION_ENCODING, "UTF-8");
+			
 			if (!EPackage.Registry.INSTANCE.containsKey(RecommenderQuestionnairePackage.eNS_URI)) {
 				EPackage.Registry.INSTANCE.put(RecommenderQuestionnairePackage.eNS_URI,
 						RecommenderQuestionnairePackage.eINSTANCE);
@@ -232,7 +236,9 @@ public class CongaData {
 
 	public void save() {
 		try {
-			resource.save(null);
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMIResource.OPTION_ENCODING, "UTF-8");
+			resource.save(options);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -624,6 +630,7 @@ public class CongaData {
 		Injector injector = BotServlet.getInjector();
 		XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 		Resource resource = resourceSetXtext.getResource(URI.createURI(getProjectFilePath(project)), true);
 		return resource;
 	}

@@ -90,8 +90,8 @@ public class RasaBot extends Chatbot{
 		return getConfig().getLanguage();
 	}
 
-	public String isHaveLoops() {
-		return "N";
+	public boolean isHaveLoops() {
+		return false;
 	}
 
 }

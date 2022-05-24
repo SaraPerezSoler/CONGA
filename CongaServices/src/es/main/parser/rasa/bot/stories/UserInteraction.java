@@ -15,7 +15,7 @@ public class UserInteraction {
 
 	public UserInteraction(String info) {
 		intent = info.substring(info.indexOf("* ") + "* ".length(), info.indexOf("\n"));
-		intent = intent.replaceAll("\\{.*\\}", "");
+		intent = intent.replaceAll("\\{.*\\}", "").replace("\r", " ").replace("\t", " ");
 		if (intent.contains(" ")) {
 			intent = intent.substring(0, intent.indexOf(" "));
 		}
@@ -47,7 +47,11 @@ public class UserInteraction {
 
 	public List<generator.UserInteraction> getBotUserInteraction(Bot bot) {
 		Intent intent = bot.getIntent(getIntent());
+		if (intent == null) {
+			intent = bot.getIntent(getIntent()+"Intent");
+		}
 		List<Intent> intents = new ArrayList<Intent>();
+		
 		if (intent == null) {
 			intents.addAll(bot.getIntentStartsWith(getIntent() + "/"));
 		} else {
@@ -55,8 +59,12 @@ public class UserInteraction {
 		}
 
 		if (intents.isEmpty()) {
+			String name = getIntent();
+			if (bot.containsElement(name)) {
+				name = name+"Intent";
+			}
 			intent = GeneratorFactory.eINSTANCE.createIntent();
-			intent.setName(getIntent());
+			intent.setName(name);
 			bot.getIntents().add(intent);
 			intents.add(intent);
 		}

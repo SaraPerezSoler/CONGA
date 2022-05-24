@@ -2,19 +2,14 @@ package es.main;
 
 import java.io.File;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import es.main.parser.DialogflowReverse;
 import es.main.parser.RasaReverse;
-import es.main.parser.dialogflow.agent.Agent;
 import es.main.parser.rasa.bot.RasaBot;
 import generator.Bot;
 
 public class ConverRasa {
 
-	private static final String FOLDER = "D:\\Desktop\\Rasa Chatbots - copia\\xmi";
-	private static final String FOLDER_BASE = "D:\\Desktop\\Rasa Chatbots - copia";
+	private static final String FOLDER = "D:\\Desktop\\Rasa - copia\\xmi";
+	private static final String FOLDER_BASE = "D:\\Desktop\\Rasa - copia";
 
 	public static void main(String[] args) {
 		String folderPath = FOLDER;
@@ -35,9 +30,20 @@ public class ConverRasa {
 					File f = tf.createResource(bot);
 					run = true;
 				}
-				System.out.println(agent.getName()+"\t"+agent.getLanguage()+"\t"+run+"\t"+agent.isHaveLoops());
+				
+				String runString = "-";
+				if (run) {
+					runString = "Y";
+				}
+				
+				String have_loops = "N";
+				if (agent.isHaveLoops()) {
+					have_loops = "Y";
+				}
+				//agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString
+				System.out.println(agent.getName()+"\t"+agent.getLanguage()+"\t"+have_loops+"\t"+ runString);
 			} catch (Exception e) {
-				System.out.println(file.getName()+"\t-\tERR\t");
+				System.out.println(file.getName().replace(".zip", "") + "\t-\tN\tN");
 			}
 			
 			
