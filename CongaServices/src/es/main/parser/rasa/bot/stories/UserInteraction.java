@@ -15,7 +15,7 @@ public class UserInteraction {
 
 	public UserInteraction(String info) {
 		intent = info.substring(info.indexOf("* ") + "* ".length(), info.indexOf("\n"));
-		intent = intent.replaceAll("\\{.*\\}", "").replace("\r", " ").replace("\t", " ");
+		intent = intent.replaceAll("\\{.*\\}", "").replaceAll("[^A-Za-z0-9_\\-/]", "");
 		if (intent.contains(" ")) {
 			intent = intent.substring(0, intent.indexOf(" "));
 		}

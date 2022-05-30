@@ -67,6 +67,8 @@ public class RasaBot extends Chatbot{
 		domain.saveBotActions(bot);
 		stories.saveBotFlows(bot);
 		stories.setParameters(bot);
+		config.setFallback(bot);
+		
 		return bot;
 	}
 

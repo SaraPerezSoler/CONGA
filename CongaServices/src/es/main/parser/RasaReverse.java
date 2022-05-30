@@ -21,17 +21,19 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.jsoup.Jsoup;
 
-public class RasaReverse extends Reverse{
+public class RasaReverse extends Reverse {
 	private List<String> fileIgnore = new ArrayList<>();
-	private static final String[] ignore = {"README.md", "readme.md", "Readme.md", "test_stories.yml", "test"};
+	private static final String[] ignore = { "README.md", "readme.md", "Readme.md", "test_stories.yml", "test_stories.md", "test",
+			"tests" };
+
 	public RasaReverse() {
-		for (String s: ignore) {
+		for (String s : ignore) {
 			fileIgnore.add(s);
 		}
 	}
 
 	public RasaReverse(List<String> fileIgnore) {
-		for (String s: ignore) {
+		for (String s : ignore) {
 			fileIgnore.add(s);
 		}
 		this.fileIgnore.addAll(fileIgnore);
@@ -63,24 +65,35 @@ public class RasaReverse extends Reverse{
 		Parser parser = Parser.builder().build();
 		while (agentCreated == false && !files.isEmpty()) {
 			File currentFile = files.get(0);
-			if (currentFile.isDirectory()) {
-				for (File f : currentFile.listFiles()) {
-					if (!fileIgnore.contains(f.getName())) {
+			if (!fileIgnore.contains(currentFile.getName())) {
+				if (currentFile.isDirectory()) {
+					for (File f : currentFile.listFiles()) {
+						files.add(f);
+					}
+				} else {
+					File f = currentFile;
+					if (!f.getName().contains("test")) {
 						if (f.getName().endsWith(".md")) {
 							String info = readFile(f);
+							info = info.replaceAll("##intent:", "## intent:").replaceAll("##synonym:", "## synonym:")
+									.replaceAll("##regex:", "## regex:").replaceAll("##lookup:", "## lookup:");
+
 							if (info.contains("## intent:") || info.contains("## synonym:")
 									|| info.contains("## regex:") || info.contains("## lookup:")) {
-								String fileString = readFile(f);
+								String fileString = info;
 								fileString = fileString.replaceAll("<!--.*-->", "");
+								fileString = fileString.replaceAll("\r", "").replaceAll("\n-", "\n- ").replaceAll("  ",
+										" ");
+
 								Node document = parser.parse(fileString);
 								HtmlRenderer renderer = HtmlRenderer.builder().build();
 								org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document));
 								rasaBot.setNlu(html);
 								// rasaBot.setNlu(readFile(f));
-								//hasNLU = true;
+								// hasNLU = true;
 							} else {
 								rasaBot.setStories(info);
-								//hasStories = true;
+								// hasStories = true;
 							}
 
 						} else if (f.getName().equals("domain.yml")) {
@@ -110,20 +123,20 @@ public class RasaReverse extends Reverse{
 			BufferedReader br = null;
 			try {
 				br = new BufferedReader(new FileReader(f));
-			    StringBuilder sb = new StringBuilder();
-			    String line = br.readLine();
+				StringBuilder sb = new StringBuilder();
+				String line = br.readLine();
 
-			    while (line != null) {
-			        sb.append(line);
-			        sb.append(System.lineSeparator());
-			        line = br.readLine();
-			    }
-			    text = sb.toString();
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = br.readLine();
+				}
+				text = sb.toString();
 			} catch (Exception e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
 			} finally {
-				if (br!=null) {
+				if (br != null) {
 					try {
 						br.close();
 					} catch (IOException e) {

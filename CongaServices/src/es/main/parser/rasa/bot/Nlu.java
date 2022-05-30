@@ -36,19 +36,19 @@ public class Nlu {
 			Element ul = element.nextElementSibling();
 			if (element.text().startsWith("intent:")) {
 				String name = element.text().replace("intent:", "");
-				name =name.replace(" ", "").replace("\r", "").replace("\t", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				intents.add(new Intent(name, ul));
 			} else if (element.text().startsWith("regex:")) {
 				String name = element.text().replace("regex:", "");
-				name =name.replace(" ", "").replace("\r", "").replace("\t", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				saveRegex(name, ul);
 			} else if (element.text().startsWith("synonym:")) {
 				String name = element.text().replace("synonym:", "");
-				name =name.replace(" ", "").replace("\r", "").replace("\t", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				saveSynonyms(name, ul);
 			} else if (element.text().startsWith("lookup:")) {
 				String name = element.text().replace("lookup:", "");
-				name =name.replace(" ", "").replace("\r", "").replace("\t", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				saveSynonyms(name, ul);
 			}
 		}
@@ -148,8 +148,9 @@ public class Nlu {
 					for (Sentence sentence : intent.getSentences()) {
 						in.getInputs().get(0).getInputs().add(sentence.createBotSentence(bot, in));
 					}
+				}else {
+					bot.getIntents().add(intent.createBotIntent(bot));
 				}
-				bot.getIntents().add(intent.createBotIntent(bot));
 			}
 		}
 	}
