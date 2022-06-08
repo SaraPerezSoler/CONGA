@@ -33,4 +33,6 @@ public interface LanguageIntent extends LanguageInput, Comparable {
 	 */
 	EList<TrainingPhrase> getInputs();
 
+	boolean contains(TrainingPhrase tp);
+
 } // LanguageIntent

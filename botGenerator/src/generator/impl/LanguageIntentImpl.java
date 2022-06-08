@@ -169,4 +169,14 @@ public class LanguageIntentImpl extends LanguageInputImpl implements LanguageInt
 		return true;
 	}
 
+	@Override
+	public boolean contains(TrainingPhrase tp) {
+		for (TrainingPhrase tp2: getInputs()) {
+			if (tp.isSimilarTo(tp2)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 } //LanguageIntentImpl
