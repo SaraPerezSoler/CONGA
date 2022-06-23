@@ -18,6 +18,7 @@ import generator.GeneratorFactory;
 import generator.LanguageEntity;
 import generator.RegexInput;
 import generator.SimpleInput;
+import generator.TrainingPhrase;
 
 public class Nlu {
 
@@ -138,7 +139,10 @@ public class Nlu {
 			generator.Intent in;
 			if ((in=bot.getIntent(intent.getName()))!= null) {
 				for (Sentence sentence : intent.getSentences()) {
-					in.getInputs().get(0).getInputs().add(sentence.createBotSentence(bot, in));
+					TrainingPhrase tp = sentence.createBotSentence(bot, in);
+					//if (in.getInputs().get(0).contains(tp)) {
+						in.getInputs().get(0).getInputs().add(tp);
+					//}
 				}
 			}else {
 				if (bot.containsElement(intent.getName())) {
@@ -146,7 +150,10 @@ public class Nlu {
 				}
 				if ((in=bot.getIntent(intent.getName()))!= null) {
 					for (Sentence sentence : intent.getSentences()) {
-						in.getInputs().get(0).getInputs().add(sentence.createBotSentence(bot, in));
+						TrainingPhrase tp = sentence.createBotSentence(bot, in);
+						//if (in.getInputs().get(0).contains(tp)) {
+							in.getInputs().get(0).getInputs().add(tp);
+						//}
 					}
 				}else {
 					bot.getIntents().add(intent.createBotIntent(bot));
