@@ -4,11 +4,16 @@ package generator.impl;
 
 import generator.Action;
 import generator.Bot;
+import generator.ButtonAction;
 import generator.Element;
+import generator.Empty;
 import generator.Entity;
 import generator.GeneratorPackage;
+import generator.HTTPRequest;
+import generator.Image;
 import generator.Intent;
 import generator.Language;
+import generator.Text;
 import generator.UserInteraction;
 
 import java.util.ArrayList;
@@ -401,5 +406,84 @@ public class BotImpl extends ElementImpl implements Bot {
 			}
 		}
 		return ret;
+	}
+
+	@Override
+	public List<ButtonAction> getButtons() {
+		List<ButtonAction> ret = new ArrayList<ButtonAction>();
+		for (Action act: getActions()) {
+			if (act instanceof ButtonAction) {
+				ret.add((ButtonAction)act);
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public List<Text> getTexts() {
+		List<Text> ret = new ArrayList<Text>();
+		for (Action act: getActions()) {
+			if (act instanceof Text) {
+				ret.add((Text)act);
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public List<Image> getImages() {
+		List<Image> ret = new ArrayList<Image>();
+		for (Action act: getActions()) {
+			if (act instanceof Image) {
+				ret.add((Image)act);
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public List<HTTPRequest> getHttpRequests() {
+		List<HTTPRequest> ret = new ArrayList<HTTPRequest>();
+		for (Action act: getActions()) {
+			if (act instanceof HTTPRequest) {
+				ret.add((HTTPRequest)act);
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public List<Empty> getEmpties() {
+		List<Empty> ret = new ArrayList<Empty>();
+		for (Action act: getActions()) {
+			if (act instanceof Empty) {
+				ret.add((Empty)act);
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public int getNumLoops() {
+		int ret = 0;
+		for (UserInteraction f: getFlows()) {
+			ret+=getPathLoops(f);
+		}
+		
+		return ret;
+	}
+	
+	private int getPathLoops(UserInteraction ui) {
+		int i=0;
+		if (ui.getBackTo()!=null) {
+			i+=1;
+		}
+		if (ui.getTarget()!=null) {
+			i+=ui.getTarget().getBackTo().size();
+			for (UserInteraction ui2: ui.getTarget().getOutcoming()) {
+				i+=getPathLoops(ui2);
+			}
+		}
+		return i;
 	}
 } //BotImpl

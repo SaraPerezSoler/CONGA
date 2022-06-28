@@ -103,4 +103,14 @@ public interface Bot extends Element {
 
 	List<Action> getActionsContains(String action);
 
+	List<ButtonAction> getButtons();
+	
+	List<Text> getTexts();
+	List<Image> getImages();
+	List<HTTPRequest> getHttpRequests();
+	List<Empty> getEmpties();
+
+	int getNumLoops();
+	
+
 } // Bot
