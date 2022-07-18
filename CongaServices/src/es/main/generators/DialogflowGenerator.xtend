@@ -218,7 +218,7 @@ class DialogflowGenerator extends BotGenerator {
 		ret += "\""
 		for (Token token : input.tokens) {
 			if (token instanceof Literal) {
-				ret += token.text.replaceAll("\n", "\\n") + " "
+				ret += token.text.replaceAll("\n", "\\\\n")
 			} else if (token instanceof ParameterToken) {
 
 				ret += answerParam(token, transition)
@@ -230,13 +230,13 @@ class DialogflowGenerator extends BotGenerator {
 
 	def answerParam(ParameterToken token, UserInteraction transition) {
 		if (transition.intent.parameters.contains(token.parameter)) {
-			return "$" + token.parameter.name + " "
+			return "$" + token.parameter.name
 		} else {
 			var aux = transition;
 			while (aux.src !== null) {
 				aux = aux.src.incoming
 				if (aux.intent.parameters.contains(token.parameter)) {
-					return "#" + affectedContext.get(aux) + "." + token.parameter.name + " "
+					return "#" + affectedContext.get(aux) + "." + token.parameter.name
 				}
 			}
 		}
@@ -371,6 +371,18 @@ class DialogflowGenerator extends BotGenerator {
 											«{coma=","; ""}»
 										«ENDFOR»
 									«ELSEIF action instanceof Image»
+										«IF action.caption!== null && !action.caption.isEmpty»
+										«coma»
+										{
+											"type": 0,
+											"lang": "«bot.languages.get(0).languageAbbreviation»",
+											"condition": "",
+											"speech": [
+												"«action.caption»"
+											]
+										}
+										«{coma=","; ""}»
+										«ENDIF»
 										«coma»
 										{
 											"type": 3,

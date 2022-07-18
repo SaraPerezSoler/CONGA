@@ -6,6 +6,7 @@ import java.util.List;
 import es.main.parser.rasa.bot.Domain;
 import generator.Action;
 import generator.Bot;
+import generator.ButtonAction;
 import generator.GeneratorFactory;
 import generator.Literal;
 import generator.Parameter;
@@ -32,7 +33,7 @@ public class BotInteraction {
 				.replace(" -", "-").split("-");
 		for (String act : actionsNames) {
 			if (!act.isBlank() && !act.isEmpty()) {
-				actions.add(act);
+				addAction(act);
 			}
 		}
 
@@ -47,10 +48,18 @@ public class BotInteraction {
 	}
 
 	public void setActions(List<String> actions) {
+		if (actions.contains("action_default_fallback")) {
+			int i = actions.indexOf("action_default_fallback");
+			actions.remove(i);
+			actions.add(i, "utter_default");
+		}
 		this.actions = actions;
 	}
 
 	public void addAction(String action) {
+		if (action.equals("action_default_fallback")) {
+			action = "utter_default";
+		}
 		actions.add(action);
 	}
 
@@ -88,6 +97,8 @@ public class BotInteraction {
 		for (Action action: this.generated.getActions()) {
 			if (action instanceof Text) {
 				getParameter((Text)action, this.generated);
+			}else if (action instanceof ButtonAction) {
+				getParameter((ButtonAction)action, this.generated);
 			}
 		}
 		if (next!=null) {
@@ -96,11 +107,16 @@ public class BotInteraction {
 		}
 	}
 	
-	
-	
 	private void getParameter(Text action, generator.BotInteraction interaction){
-		
-		for (TextInput input: action.getInputs().get(0).getInputs()) {
+		getParameter(action.getInputs().get(0).getInputs(), interaction);
+	}
+	
+	private void getParameter(ButtonAction action, generator.BotInteraction interaction){
+		getParameter(action.getInputs().get(0).getInputs(), interaction);
+	}
+	
+	private void getParameter(List<TextInput> textInputs, generator.BotInteraction interaction) {
+		for (TextInput input: textInputs) {
 			List<Token> list = new ArrayList<>();
 			list.addAll(input.getTokens());
 			input.getTokens().clear();

@@ -76,6 +76,7 @@ public class ConverRasa {
 						agent.getName() +";"+runString+ ";"+num_language+";" + languages + ";" + num_intents + ";" + num_entities+";"+ num_action+";"+num_flows+";"+num_buttons+";"+num_text+";"+num_image+";"+num_emptyAction+";"+external_service+";"+num_loops
 						);
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.out.println(file.getName().replace(".zip", "") + ";N3");
 			}
 			

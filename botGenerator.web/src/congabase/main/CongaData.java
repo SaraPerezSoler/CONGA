@@ -990,7 +990,9 @@ public class CongaData {
 		Resource xmiResource = getResourceSet().createResource(URI.createURI(getProjectXMIPath(p)));
 		xmiResource.getContents().add(bot);
 		try {
-			xmiResource.save(null);
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMIResource.OPTION_ENCODING, "UTF-8");
+			xmiResource.save(options);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
