@@ -1320,13 +1320,22 @@ public interface GeneratorPackage extends EPackage {
 	int EMPTY__NAME = ACTION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY__DESCRIPTION = ACTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Empty</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPTY_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+	int EMPTY_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Empty</em>' class.
@@ -2621,6 +2630,17 @@ public interface GeneratorPackage extends EPackage {
 	EClass getEmpty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link generator.Empty#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see generator.Empty#getDescription()
+	 * @see #getEmpty()
+	 * @generated
+	 */
+	EAttribute getEmpty_Description();
+
+	/**
 	 * Returns the meta object for class '{@link generator.Text <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3601,6 +3621,14 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EMPTY = eINSTANCE.getEmpty();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPTY__DESCRIPTION = eINSTANCE.getEmpty_Description();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TextImpl <em>Text</em>}' class.

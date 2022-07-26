@@ -5,6 +5,7 @@ import generator.GeneratorFactory;
 public class Button {
 	private String payload;
 	private String title;
+	private String text;
 	
 	public Button() {
 	}
@@ -27,7 +28,13 @@ public class Button {
 
 	public generator.Button getButton() {
 		generator.Button button = GeneratorFactory.eINSTANCE.createButton();
-		button.setValue(title);
+		if (title != null && !title.isEmpty()) {
+			button.setValue(title);
+		}else if (text != null && !text.isEmpty()) {
+			button.setValue(text);
+		}else {
+			button.setValue(payload);
+		}
 		button.setAction(payload);
 		return button;
 	}

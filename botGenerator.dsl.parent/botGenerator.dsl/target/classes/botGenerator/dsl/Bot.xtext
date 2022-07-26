@@ -172,7 +172,7 @@ Image returns Image:
 ;
 
 Empty returns Empty:
-	'Empty' 'response' name=EString
+	'Empty' 'response' name=EString ('{''description:' description=EString'}')?
 ;
 
 ButtonAction returns ButtonAction:
@@ -182,7 +182,7 @@ ButtonAction returns ButtonAction:
 
 LanguageButton returns LanguageButton:
 	('inputs'('in' language=Language)?)?'{'
-		'text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)* 
+		('text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*)?
 		'buttons:'
 		(buttons+=Button)+	
 	'}'

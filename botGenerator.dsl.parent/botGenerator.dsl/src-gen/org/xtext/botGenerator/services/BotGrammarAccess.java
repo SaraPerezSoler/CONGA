@@ -2185,13 +2185,19 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final Keyword cResponseKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameEStringParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cDescriptionKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cDescriptionAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cDescriptionEStringParserRuleCall_3_2_0 = (RuleCall)cDescriptionAssignment_3_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//Empty returns Empty:
-		//    'Empty' 'response' name=EString
+		//    'Empty' 'response' name=EString ('{''description:' description=EString'}')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Empty' 'response' name=EString
+		//'Empty' 'response' name=EString ('{''description:' description=EString'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//'Empty'
@@ -2205,6 +2211,24 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		
 		//EString
 		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
+		
+		//('{''description:' description=EString'}')?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
+		
+		//'description:'
+		public Keyword getDescriptionKeyword_3_1() { return cDescriptionKeyword_3_1; }
+		
+		//description=EString
+		public Assignment getDescriptionAssignment_3_2() { return cDescriptionAssignment_3_2; }
+		
+		//EString
+		public RuleCall getDescriptionEStringParserRuleCall_3_2_0() { return cDescriptionEStringParserRuleCall_3_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3_3() { return cRightCurlyBracketKeyword_3_3; }
 	}
 	public class ButtonActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.ButtonAction");
@@ -2258,23 +2282,24 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final Assignment cLanguageAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
 		private final RuleCall cLanguageLanguageEnumRuleCall_0_1_1_0 = (RuleCall)cLanguageAssignment_0_1_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cTextKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cHyphenMinusKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cInputsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cInputsTextInputTextParserRuleCall_4_0 = (RuleCall)cInputsAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cInputsAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cInputsTextInputTextParserRuleCall_5_2_0 = (RuleCall)cInputsAssignment_5_2.eContents().get(0);
-		private final Keyword cButtonsKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cButtonsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cButtonsButtonParserRuleCall_7_0 = (RuleCall)cButtonsAssignment_7.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cTextKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cInputsAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cInputsTextInputTextParserRuleCall_2_2_0 = (RuleCall)cInputsAssignment_2_2.eContents().get(0);
+		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
+		private final Keyword cCommaKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_2_3_1 = (Keyword)cGroup_2_3.eContents().get(1);
+		private final Assignment cInputsAssignment_2_3_2 = (Assignment)cGroup_2_3.eContents().get(2);
+		private final RuleCall cInputsTextInputTextParserRuleCall_2_3_2_0 = (RuleCall)cInputsAssignment_2_3_2.eContents().get(0);
+		private final Keyword cButtonsKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cButtonsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cButtonsButtonParserRuleCall_4_0 = (RuleCall)cButtonsAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//LanguageButton returns LanguageButton:
 		//    ('inputs'('in' language=Language)?)?'{'
-		//        'text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*
+		//        ('text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*)?
 		//        'buttons:'
 		//        (buttons+=Button)+
 		//    '}'
@@ -2282,7 +2307,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		@Override public ParserRule getRule() { return rule; }
 		
 		//('inputs'('in' language=Language)?)?'{'
-		//    'text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*
+		//    ('text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*)?
 		//    'buttons:'
 		//    (buttons+=Button)+
 		//'}'
@@ -2309,44 +2334,47 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
+		//('text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
 		//'text:'
-		public Keyword getTextKeyword_2() { return cTextKeyword_2; }
+		public Keyword getTextKeyword_2_0() { return cTextKeyword_2_0; }
 		
 		//'-'
-		public Keyword getHyphenMinusKeyword_3() { return cHyphenMinusKeyword_3; }
+		public Keyword getHyphenMinusKeyword_2_1() { return cHyphenMinusKeyword_2_1; }
 		
 		//inputs+=TextInputText
-		public Assignment getInputsAssignment_4() { return cInputsAssignment_4; }
+		public Assignment getInputsAssignment_2_2() { return cInputsAssignment_2_2; }
 		
 		//TextInputText
-		public RuleCall getInputsTextInputTextParserRuleCall_4_0() { return cInputsTextInputTextParserRuleCall_4_0; }
+		public RuleCall getInputsTextInputTextParserRuleCall_2_2_0() { return cInputsTextInputTextParserRuleCall_2_2_0; }
 		
 		//(',' '-' inputs+=TextInputText)*
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_2_3() { return cGroup_2_3; }
 		
 		//','
-		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
+		public Keyword getCommaKeyword_2_3_0() { return cCommaKeyword_2_3_0; }
 		
 		//'-'
-		public Keyword getHyphenMinusKeyword_5_1() { return cHyphenMinusKeyword_5_1; }
+		public Keyword getHyphenMinusKeyword_2_3_1() { return cHyphenMinusKeyword_2_3_1; }
 		
 		//inputs+=TextInputText
-		public Assignment getInputsAssignment_5_2() { return cInputsAssignment_5_2; }
+		public Assignment getInputsAssignment_2_3_2() { return cInputsAssignment_2_3_2; }
 		
 		//TextInputText
-		public RuleCall getInputsTextInputTextParserRuleCall_5_2_0() { return cInputsTextInputTextParserRuleCall_5_2_0; }
+		public RuleCall getInputsTextInputTextParserRuleCall_2_3_2_0() { return cInputsTextInputTextParserRuleCall_2_3_2_0; }
 		
 		//'buttons:'
-		public Keyword getButtonsKeyword_6() { return cButtonsKeyword_6; }
+		public Keyword getButtonsKeyword_3() { return cButtonsKeyword_3; }
 		
 		//(buttons+=Button)+
-		public Assignment getButtonsAssignment_7() { return cButtonsAssignment_7; }
+		public Assignment getButtonsAssignment_4() { return cButtonsAssignment_4; }
 		
 		//Button
-		public RuleCall getButtonsButtonParserRuleCall_7_0() { return cButtonsButtonParserRuleCall_7_0; }
+		public RuleCall getButtonsButtonParserRuleCall_4_0() { return cButtonsButtonParserRuleCall_4_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 	public class ButtonElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.Button");
@@ -3536,7 +3564,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//Empty returns Empty:
-	//    'Empty' 'response' name=EString
+	//    'Empty' 'response' name=EString ('{''description:' description=EString'}')?
 	//;
 	public EmptyElements getEmptyAccess() {
 		return pEmpty;
@@ -3560,7 +3588,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	
 	//LanguageButton returns LanguageButton:
 	//    ('inputs'('in' language=Language)?)?'{'
-	//        'text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*
+	//        ('text:' '-' inputs+=TextInputText (',' '-' inputs+=TextInputText)*)?
 	//        'buttons:'
 	//        (buttons+=Button)+
 	//    '}'

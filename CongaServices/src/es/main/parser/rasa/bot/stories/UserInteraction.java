@@ -90,4 +90,13 @@ public class UserInteraction {
 		}
 	}
 
+	@Override
+	public String toString() {
+		if (next!=null) {
+			return "user "+ intent +"=>"+next.toString(); 
+		}else {
+			return "user "+ intent +";";
+		}
+	}
+
 }

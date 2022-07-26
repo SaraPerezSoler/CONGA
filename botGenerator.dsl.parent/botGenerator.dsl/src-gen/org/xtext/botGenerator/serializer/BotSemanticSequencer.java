@@ -351,16 +351,10 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Empty returns Empty
 	 *
 	 * Constraint:
-	 *     name=EString
+	 *     (name=EString description=EString?)
 	 */
 	protected void sequence_Empty(ISerializationContext context, Empty semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.ELEMENT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.ELEMENT__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEmptyAccess().getNameEStringParserRuleCall_2_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -506,7 +500,7 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     LanguageButton returns LanguageButton
 	 *
 	 * Constraint:
-	 *     (language=Language? inputs+=TextInputText inputs+=TextInputText* buttons+=Button+)
+	 *     (language=Language? (inputs+=TextInputText inputs+=TextInputText*)? buttons+=Button+)
 	 */
 	protected void sequence_LanguageButton(ISerializationContext context, LanguageButton semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

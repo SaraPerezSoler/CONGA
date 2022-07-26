@@ -3318,6 +3318,39 @@ ruleEmpty returns [EObject current=null]
 				}
 			)
 		)
+		(
+			otherlv_3='{'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getEmptyAccess().getLeftCurlyBracketKeyword_3_0());
+			}
+			otherlv_4='description:'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getEmptyAccess().getDescriptionKeyword_3_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getEmptyAccess().getDescriptionEStringParserRuleCall_3_2_0());
+					}
+					lv_description_5_0=ruleEString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEmptyRule());
+						}
+						set(
+							$current,
+							"description",
+							lv_description_5_0,
+							"org.xtext.botGenerator.Bot.EString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_6='}'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getEmptyAccess().getRightCurlyBracketKeyword_3_3());
+			}
+		)?
 	)
 ;
 
@@ -3441,48 +3474,21 @@ ruleLanguageButton returns [EObject current=null]
 		{
 			newLeafNode(otherlv_3, grammarAccess.getLanguageButtonAccess().getLeftCurlyBracketKeyword_1());
 		}
-		otherlv_4='text:'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getLanguageButtonAccess().getTextKeyword_2());
-		}
-		otherlv_5='-'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getLanguageButtonAccess().getHyphenMinusKeyword_3());
-		}
 		(
-			(
-				{
-					newCompositeNode(grammarAccess.getLanguageButtonAccess().getInputsTextInputTextParserRuleCall_4_0());
-				}
-				lv_inputs_6_0=ruleTextInputText
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getLanguageButtonRule());
-					}
-					add(
-						$current,
-						"inputs",
-						lv_inputs_6_0,
-						"org.xtext.botGenerator.Bot.TextInputText");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_7=','
+			otherlv_4='text:'
 			{
-				newLeafNode(otherlv_7, grammarAccess.getLanguageButtonAccess().getCommaKeyword_5_0());
+				newLeafNode(otherlv_4, grammarAccess.getLanguageButtonAccess().getTextKeyword_2_0());
 			}
-			otherlv_8='-'
+			otherlv_5='-'
 			{
-				newLeafNode(otherlv_8, grammarAccess.getLanguageButtonAccess().getHyphenMinusKeyword_5_1());
+				newLeafNode(otherlv_5, grammarAccess.getLanguageButtonAccess().getHyphenMinusKeyword_2_1());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLanguageButtonAccess().getInputsTextInputTextParserRuleCall_5_2_0());
+						newCompositeNode(grammarAccess.getLanguageButtonAccess().getInputsTextInputTextParserRuleCall_2_2_0());
 					}
-					lv_inputs_9_0=ruleTextInputText
+					lv_inputs_6_0=ruleTextInputText
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLanguageButtonRule());
@@ -3490,21 +3496,50 @@ ruleLanguageButton returns [EObject current=null]
 						add(
 							$current,
 							"inputs",
-							lv_inputs_9_0,
+							lv_inputs_6_0,
 							"org.xtext.botGenerator.Bot.TextInputText");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-		)*
+			(
+				otherlv_7=','
+				{
+					newLeafNode(otherlv_7, grammarAccess.getLanguageButtonAccess().getCommaKeyword_2_3_0());
+				}
+				otherlv_8='-'
+				{
+					newLeafNode(otherlv_8, grammarAccess.getLanguageButtonAccess().getHyphenMinusKeyword_2_3_1());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getLanguageButtonAccess().getInputsTextInputTextParserRuleCall_2_3_2_0());
+						}
+						lv_inputs_9_0=ruleTextInputText
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getLanguageButtonRule());
+							}
+							add(
+								$current,
+								"inputs",
+								lv_inputs_9_0,
+								"org.xtext.botGenerator.Bot.TextInputText");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+		)?
 		otherlv_10='buttons:'
 		{
-			newLeafNode(otherlv_10, grammarAccess.getLanguageButtonAccess().getButtonsKeyword_6());
+			newLeafNode(otherlv_10, grammarAccess.getLanguageButtonAccess().getButtonsKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLanguageButtonAccess().getButtonsButtonParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getLanguageButtonAccess().getButtonsButtonParserRuleCall_4_0());
 				}
 				lv_buttons_11_0=ruleButton
 				{
@@ -3522,7 +3557,7 @@ ruleLanguageButton returns [EObject current=null]
 		)+
 		otherlv_12='}'
 		{
-			newLeafNode(otherlv_12, grammarAccess.getLanguageButtonAccess().getRightCurlyBracketKeyword_8());
+			newLeafNode(otherlv_12, grammarAccess.getLanguageButtonAccess().getRightCurlyBracketKeyword_5());
 		}
 	)
 ;

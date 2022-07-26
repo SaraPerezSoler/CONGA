@@ -74,7 +74,10 @@ public class BotInteraction {
 	public generator.BotInteraction getBotBotInteraction(Bot bot) {
 		List<Action> actions = new ArrayList<>();
 		for (String action : this.actions) {
-			actions.addAll(bot.getActionStartWith(action));
+			actions.addAll(bot.getActionStartWith(action+Domain.TEXT_SUFIX));
+			actions.addAll(bot.getActionStartWith(action+Domain.IMG_SUFIX));
+			actions.addAll(bot.getActionStartWith(action+Domain.BUTTON_SUFIX));
+			actions.addAll(bot.getActionStartWith(action+Domain.EMPTY_SUFIX));
 		}
 
 		generator.BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
@@ -167,6 +170,15 @@ public class BotInteraction {
 			return null;
 		}else {
 			return findParam(paramName, interaction.getIncoming().getSrc());
+		}
+	}
+
+	@Override
+	public String toString() {
+		if (next!=null) {
+			return "chatbot "+actions+"=>"+next.toString();
+		}else {
+			return "chatbot "+actions+";";
 		}
 	}
 

@@ -79,6 +79,7 @@ public class BotSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'inputs'?
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '{' 'buttons:' buttons+=Button
 	 *     (rule start) (ambiguity) '{' 'text:' '-' inputs+=TextInputText
 	 */
 	protected void emit_LanguageButton_InputsKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {

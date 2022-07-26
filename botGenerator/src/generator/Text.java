@@ -28,7 +28,7 @@ public interface Text extends Action {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
 	 * @see generator.GeneratorPackage#getText_Inputs()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<LanguageText> getInputs();

@@ -19,7 +19,7 @@ public class ConverRasa {
 		if (!folderBase.isDirectory()) {
 			return;
 		}
-		System.out.println("NAME;RUN;#LANGUAGES;LANGUAGES;#INTENTS;#ENTITES;#ACTIONS;#FLOWS;#BUTTONS;#TEXT;#IMAGES;#EMPTY;#HTTPREQUEST;#LOOPS");
+		System.out.println("NAME;RUN;#LANGUAGES;LANGUAGES;#INTENTS;#ENTITES;#ACTIONS;#FLOWS;#BUTTONS;#TEXT;#IMAGES;#EMPTY;#FORM;#ACTION;#HTTPREQUEST;#LOOPS");
 		for (File file : folderBase.listFiles()) {
 			boolean run = false;
 
@@ -38,6 +38,8 @@ public class ConverRasa {
 				int num_text = 0;
 				int num_image = 0;
 				int num_emptyAction = 0;
+				int num_formAction = 0;
+				int num_actionAction = 0;
 				int external_service = 0;
 				int num_loops = 0;
 				if (agent.getLanguage().equals("en")) {
@@ -59,6 +61,9 @@ public class ConverRasa {
 					num_emptyAction = bot.getEmpties().size();
 					external_service = bot.getHttpRequests().size();
 					num_loops = bot.getNumLoops();
+					
+					num_actionAction = agent.getDomain().getNum_actions();
+					num_formAction = agent.getDomain().getNum_forms();
 				}
 				
 				String runString = "-";
@@ -73,10 +78,10 @@ public class ConverRasa {
 				//agent.getName() + "\t" + agent.getLanguage() + "\t" + have_loops + "\t" + runString
 				//System.out.println(agent.getName()+"\t"+agent.getLanguage()+"\t"+have_loops+"\t"+ runString);
 				System.out.println(
-						agent.getName() +";"+runString+ ";"+num_language+";" + languages + ";" + num_intents + ";" + num_entities+";"+ num_action+";"+num_flows+";"+num_buttons+";"+num_text+";"+num_image+";"+num_emptyAction+";"+external_service+";"+num_loops
+						agent.getName() +";"+runString+ ";"+num_language+";" + languages + ";" + num_intents + ";" + num_entities+";"+ num_action+";"+num_flows+";"+num_buttons+";"+num_text+";"+num_image+";"+num_emptyAction+";"+num_formAction+";"+num_actionAction+";"+external_service+";"+num_loops
 						);
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				System.out.println(file.getName().replace(".zip", "") + ";N3");
 			}
 			
