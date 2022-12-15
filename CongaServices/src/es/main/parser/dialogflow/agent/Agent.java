@@ -41,7 +41,7 @@ public class Agent extends Chatbot {
 	private Map<generator.Intent, List<generator.Intent>> similarIntents = new HashMap<>();
 
 	private Map<String, Map<Intent, UserInteraction>> flow_intent = new HashMap<String, Map<Intent, UserInteraction>>();
-
+	
 	public Agent() {
 	}
 
@@ -169,9 +169,20 @@ public class Agent extends Chatbot {
 				}
 			}
 		}
-
+		boolean needWebhook = false;
+		for (UserInteraction flow: bot.getFlows()) {
+			if (flow.flowHasAction(request)) {
+				needWebhook = true;
+				break;
+			}
+		}
+		if (!needWebhook) {
+			bot.getActions().remove(request);
+			bot.getActions().remove(response);
+		}
 		return bot;
 	}
+	
 
 	private void saveIntent(generator.Intent botIntent, Bot bot) {
 		boolean hasSimiliar = false;

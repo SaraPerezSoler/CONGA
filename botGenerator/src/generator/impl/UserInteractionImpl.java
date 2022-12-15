@@ -2,6 +2,7 @@
  */
 package generator.impl;
 
+import generator.Action;
 import generator.BackToBot;
 import generator.BotInteraction;
 import generator.GeneratorPackage;
@@ -497,6 +498,14 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 		} else if (!target.equals(other.target))
 			return false;
 		return true;
+	}
+
+	@Override
+	public boolean flowHasAction(Action action) {
+		if (this.getTarget() == null) {
+			return false;
+		}
+		return this.target.flowHasAction(action);
 	}
 	
 } //UserInteractionImpl

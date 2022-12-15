@@ -23,11 +23,11 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class FromXMIToBot {
-//	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
-//	private static final String OUTPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+	private static final String OUTPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
 
-	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia";
-	private static final String OUTPUT_URI = "D:\\Desktop\\Rasa - copia";
+//	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia";
+//	private static final String OUTPUT_URI = "D:\\Desktop\\Rasa - copia";
 	
 	private static final String [] IGNORE_FILES = {"D:/Git/asymob/chatbots/botsInDSL"};
 	

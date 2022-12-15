@@ -403,7 +403,7 @@ class DialogflowGenerator extends BotGenerator {
 													"lang": "«bot.languages.get(0).languageAbbreviation»",
 												«ENDIF»
 												"condition": "",
-												"subtitle": «texLanguage.speechText(transition)»,
+												"title": «texLanguage.speechText(transition)»,
 												"buttons": [ 
 												«FOR button: texLanguage.buttons»
 													{

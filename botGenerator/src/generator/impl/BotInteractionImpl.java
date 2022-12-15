@@ -416,6 +416,19 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 			return false;
 		return true;
 	}
+
+	@Override
+	public boolean flowHasAction(Action action) {
+		if (this.getActions().contains(action)) {
+			return true;
+		}
+		for (UserInteraction ui: this.getOutcoming()) {
+			if (ui.flowHasAction(action)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 

@@ -137,5 +137,7 @@ public interface UserInteraction extends Interaction {
 	 * @generated
 	 */
 	void setBackTo(BackToBot value);
+	
+	boolean flowHasAction (Action action);
 
 } // UserInteraction

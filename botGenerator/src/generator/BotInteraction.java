@@ -109,4 +109,6 @@ public interface BotInteraction extends Interaction {
 	 */
 	void setName(String value);
 
+	boolean flowHasAction(Action action);
+
 } // BotInteraction
