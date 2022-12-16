@@ -47,6 +47,7 @@ import congabase.plantUML.CreateFlowsDiagram;
 import congabase.plantUML.UML;
 import generator.Bot;
 import generator.Language;
+import parser.DialogflowReverse;
 import recommenderQuestionnaire.Evaluation;
 import recommenderQuestionnaire.Option;
 import recommenderQuestionnaire.Question;
@@ -54,8 +55,6 @@ import recommenderQuestionnaire.Questionnaire;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
-import reverse.dialogflow.ReadDialogflowAgent;
-import reverse.dialogflow.agent.Agent;
 
 public class CongaData {
 
@@ -251,8 +250,8 @@ public class CongaData {
 	
 	public void loadBotFile(Project project, File file) throws IOException {
 		Resource resource = getProjectResource(project);
-		Agent agent = new ReadDialogflowAgent().getAgent(file);
-		Bot bot = agent.getBot();
+		DialogflowReverse parser = new DialogflowReverse();
+		Bot bot = parser.getChatbot(file).getBot(); 
 		bot.setName(project.getName());
 		resource.getContents().clear();
 		resource.getContents().add(bot);

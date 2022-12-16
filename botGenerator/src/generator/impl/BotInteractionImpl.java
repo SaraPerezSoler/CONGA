@@ -5,6 +5,7 @@ package generator.impl;
 import generator.Action;
 import generator.BotInteraction;
 import generator.GeneratorPackage;
+import generator.HTTPRequest;
 import generator.UserInteraction;
 
 import java.util.Collection;
@@ -308,6 +309,22 @@ public class BotInteractionImpl extends InteractionImpl implements BotInteractio
 		} else if (!getOutcoming().equals(other.getOutcoming()))
 			return false;
 		return true;
+	}
+
+	@Override
+	public boolean flowHasAction(HTTPRequest request) {
+		if (getActions().contains(request)) {
+			return true;
+		}
+		if (getOutcoming().isEmpty()) {
+			return false;
+		}
+		for (UserInteraction next: getOutcoming()) {
+			if (next.flowHasAction(request)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	

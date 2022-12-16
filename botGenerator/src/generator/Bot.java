@@ -102,4 +102,6 @@ public interface Bot extends Element {
 
 	List<Action> getActionsContains(String action);
 
+	List<Intent> getIntentStartsWith(String start);
+
 } // Bot

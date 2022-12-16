@@ -92,4 +92,6 @@ public interface UserInteraction extends Interaction {
 	 */
 	void setTarget(BotInteraction value);
 
+	boolean flowHasAction(HTTPRequest request);
+
 } // UserInteraction

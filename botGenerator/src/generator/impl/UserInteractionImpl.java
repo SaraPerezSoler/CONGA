@@ -4,6 +4,7 @@ package generator.impl;
 
 import generator.BotInteraction;
 import generator.GeneratorPackage;
+import generator.HTTPRequest;
 import generator.Intent;
 import generator.UserInteraction;
 
@@ -358,6 +359,17 @@ public class UserInteractionImpl extends InteractionImpl implements UserInteract
 		} else if (!target.equals(other.target))
 			return false;
 		return true;
+	}
+
+	@Override
+	public boolean flowHasAction(HTTPRequest request) {
+		if (getTarget() == null) {
+			return false;
+		}
+		if (getTarget().flowHasAction(request)) {
+			return true;
+		}
+		return false;
 	}
 	
 } //UserInteractionImpl

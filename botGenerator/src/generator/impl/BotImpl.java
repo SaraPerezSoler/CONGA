@@ -390,5 +390,15 @@ public class BotImpl extends ElementImpl implements Bot {
 		}
 		return actions;
 	}
+	@Override
+	public List<Intent> getIntentStartsWith(String start) {
+		List<Intent> ret = new ArrayList<Intent>();
+		for (Intent intent: getIntents()){
+			if (intent.getName().startsWith(start)) {
+				ret.add(intent);
+			}
+		}
+		return ret;
+	}
 
 } //BotImpl

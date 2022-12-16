@@ -73,4 +73,6 @@ public interface BotInteraction extends Interaction {
 	 */
 	EList<UserInteraction> getOutcoming();
 
+	boolean flowHasAction(HTTPRequest request);
+
 } // BotInteraction

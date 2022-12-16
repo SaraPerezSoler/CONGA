@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project CongaReverse with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR file Export Wizard-->
+    <!--ANT 1.7 is required-->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="D:/eclipse-workspace"/>
+    <property name="dir.jarfile" value="D:/Desktop"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/CongaReverse.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="main.ReverseMain"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ jakarta.xml.bind-api-2.3.2.jar jakarta.activation-api-1.2.1.jar jaxb-runtime-2.3.2.jar txw2-2.3.2.jar istack-commons-runtime-3.0.8.jar stax-ex-1.8.1.jar FastInfoset-1.2.16.jar org.eclipse.emf.ecore-2.12.0.jar org.eclipse.emf.common-2.12.0.jar org.eclipse.emf.ecore.xmi-2.12.0.jar jackson-databind-2.12.3.jar jackson-core-2.12.3.jar jackson-dataformat-yaml-2.12.3.jar snakeyaml-1.27.jar jackson-dataformat-xml-2.12.3.jar jackson-module-jaxb-annotations-2.12.3.jar stax2-api-4.2.1.jar woodstox-core-6.2.4.jar jackson-annotations-2.12.3.jar commonmark-0.17.1.jar commons-io-2.7.jar jsoup-1.13.1.jar json-20190722.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="D:/git/CONGA/CongaReverse/target/classes"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2" includes="jakarta.xml.bind-api-2.3.2.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1" includes="jakarta.activation-api-1.2.1.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.2" includes="jaxb-runtime-2.3.2.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/glassfish/jaxb/txw2/2.3.2" includes="txw2-2.3.2.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/sun/istack/istack-commons-runtime/3.0.8" includes="istack-commons-runtime-3.0.8.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/jvnet/staxex/stax-ex/1.8.1" includes="stax-ex-1.8.1.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/sun/xml/fastinfoset/FastInfoset/1.2.16" includes="FastInfoset-1.2.16.jar"/>
+            <fileset dir="D:/git/CONGA/botGenerator/target/classes"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore/2.12.0" includes="org.eclipse.emf.ecore-2.12.0.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/eclipse/emf/org.eclipse.emf.common/2.12.0" includes="org.eclipse.emf.common-2.12.0.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.12.0" includes="org.eclipse.emf.ecore.xmi-2.12.0.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.3" includes="jackson-databind-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.3" includes="jackson-core-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.12.3" includes="jackson-dataformat-yaml-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/yaml/snakeyaml/1.27" includes="snakeyaml-1.27.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.12.3" includes="jackson-dataformat-xml-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.12.3" includes="jackson-module-jaxb-annotations-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/codehaus/woodstox/stax2-api/4.2.1" includes="stax2-api-4.2.1.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/woodstox/woodstox-core/6.2.4" includes="woodstox-core-6.2.4.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.3" includes="jackson-annotations-2.12.3.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/commonmark/commonmark/0.17.1" includes="commonmark-0.17.1.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/commons-io/commons-io/2.7" includes="commons-io-2.7.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/jsoup/jsoup/1.13.1" includes="jsoup-1.13.1.jar"/>
+            <zipfileset dir="C:/Users/Kvothe/.m2/repository/org/json/json/20190722" includes="json-20190722.jar"/>
+        </jar>
+    </target>
+</project>
