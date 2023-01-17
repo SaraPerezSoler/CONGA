@@ -32,5 +32,6 @@ public interface TrainingPhrase extends IntentInput, Comparable {
 	 * @generated
 	 */
 	EList<Token> getTokens();
+	//String toString();
 
 } // TrainingPhrase

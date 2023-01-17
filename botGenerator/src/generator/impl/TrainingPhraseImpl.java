@@ -4,6 +4,8 @@ package generator.impl;
 
 import generator.Comparable;
 import generator.GeneratorPackage;
+import generator.Literal;
+import generator.ParameterReferenceToken;
 import generator.Token;
 import generator.TrainingPhrase;
 
@@ -165,5 +167,17 @@ public class TrainingPhraseImpl extends IntentInputImpl implements TrainingPhras
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		String ret = "";
+		for (Token tok: getTokens()) {
+			if (tok instanceof Literal) {
+				ret += ((Literal) tok).getText()+" ";
+			}else {
+				ret += ((ParameterReferenceToken)tok).getTextReference()+" ";
+			}
+		}
+		return ret.substring(0, ret.length()-1);
+	}
 
 } //TrainingPhraseImpl
