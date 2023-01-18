@@ -10,19 +10,21 @@ import com.google.inject.Provider;
 import generator.Bot;
 import generator.GeneratorPackage;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.generator.GeneratorContext;
-import org.eclipse.xtext.generator.GeneratorDelegate;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -32,9 +34,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.xtext.botGenerator.BotStandaloneSetup;
 
 public class ValidationMain {
-	
+
 	private static ValidationMain botPlatform;
-	
+
 	@Inject
 	private Provider<ResourceSet> resourceSetProvider;
 
@@ -43,7 +45,7 @@ public class ValidationMain {
 
 	@Inject
 	private XtextResourceSet resourceSetXtext;
-	
+
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.err.println("Aborting: no path to EMF resource provided!");
@@ -52,27 +54,30 @@ public class ValidationMain {
 		Injector injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		ValidationMain main = injector.getInstance(ValidationMain.class);
 		Resource resource;
+		File file = new File(args[0]);
+		if (!file.exists()) {
+			System.err.println("The file does not exists");
+			return;
+		}
 		if (args[0].endsWith(".xmi")) {
 			Resource aux = main.getResource(args[0]);
 			Bot bot = main.getBot(aux);
-			resource = main.createBotResource (bot, args[0].replace(".xmi", ".bot"));
-		}else {
+			resource = main.createBotResource(bot, args[0].replace(".xmi", ".bot"));
+		} else {
 			resource = main.getResource(args[0]);
 		}
-		
-		
+
 		main.validate(resource);
 	}
-	
-	
+
 	private Resource createBotResource(Bot bot, String outputUri) {
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		
+
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		}
 		Resource resourceDsl = resourceSetXtext.createResource(URI.createFileURI(outputUri));
-		
+
 		resourceDsl.getContents().add(bot);
 		try {
 			Map<Object, Object> options = new HashMap<Object, Object>();
@@ -84,7 +89,6 @@ public class ValidationMain {
 		return resourceDsl;
 	}
 
-
 	public static ValidationMain getBotPlatformStandAlone() {
 		if (botPlatform == null) {
 			Injector injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -92,29 +96,59 @@ public class ValidationMain {
 		}
 		return botPlatform;
 	}
-	
-	public Resource getResource (String string) {
+
+	public Resource getResource(String string) {
 		// Load the resource
 		ResourceSet set = resourceSetProvider.get();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
-		//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(".bot", Xtext)
+		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(".bot",
+		// Xtext)
 		set.getPackageRegistry().put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 		return set.getResource(URI.createFileURI(string), true);
 	}
-	public Bot getBot (Resource resource) {
+
+	public Bot getBot(Resource resource) {
 		return (Bot) resource.getContents().get(0);
 	}
+
 	public void validate(Resource resource) {
-		
+
 		// Validate the resource
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+		List<Issue> errors = new ArrayList<Issue>();
+		List<Issue> warnings = new ArrayList<Issue>();
+		String regex = "G[0-9].*";
+		Pattern pattern = Pattern.compile(regex);
+
 		if (!list.isEmpty()) {
+
 			for (Issue issue : list) {
-				System.err.println(issue);
+				Matcher matcher = pattern.matcher(issue.getMessage());
+				if (matcher.matches()) {
+					if (issue.getSeverity() == Severity.WARNING) {
+						warnings.add(issue);
+					} else if (issue.getSeverity() == Severity.ERROR) {
+						errors.add(issue);
+					}
+				}
 			}
+			System.err.println("Total " + (errors.size()+warnings.size()) + " problems, " + errors.size() + " errors and " + warnings.size()
+					+ " warnings");
+			for (Issue error : errors) {
+				System.err.println(error.getSeverity() + ": " + error.getMessage());
+				// System.err.println(issue.getSeverity()+":
+				// "+issue.getMessage().substring(issue.getMessage().indexOf("\t")+1));
+			}
+			for (Issue warning : warnings) {
+				System.err.println(warning.getSeverity() + ": " + warning.getMessage());
+				// System.err.println(issue.getSeverity()+":
+				// "+issue.getMessage().substring(issue.getMessage().indexOf("\t")+1));
+			}
+
 			return;
-		}else {
-			System.out.println("Validation successfull");
+		} else {
+			System.out.println("Validation successful");
 		}
 	}
+
 }
