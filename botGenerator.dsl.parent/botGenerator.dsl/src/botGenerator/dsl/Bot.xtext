@@ -85,7 +85,7 @@ EntityToken returns EntityToken:
 	'@'entity=[Entity|EString];
 
 ParameterToken returns ParameterToken:
-	'['parameter=[Parameter|EString]']';
+	'['parameter=[Parameter|EString]']' ('('info=EString')')?;
 
 ParameterRefenceToken returns ParameterReferenceToken:
 	'('textReference=EString')''[' parameter=[Parameter|EString]']';

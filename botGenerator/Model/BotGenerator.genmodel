@@ -114,6 +114,7 @@
     </genClasses>
     <genClasses ecoreClass="BotGenerator.ecore#//ParameterToken">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//ParameterToken/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BotGenerator.ecore#//ParameterToken/info"/>
     </genClasses>
     <genClasses ecoreClass="BotGenerator.ecore#//ParameterReferenceToken">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BotGenerator.ecore#//ParameterReferenceToken/parameter"/>

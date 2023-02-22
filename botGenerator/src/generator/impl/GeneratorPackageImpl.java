@@ -871,6 +871,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
+	public EAttribute getParameterToken_Info() {
+		return (EAttribute)parameterTokenEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getParameterReferenceToken() {
 		return parameterReferenceTokenEClass;
 	}
@@ -1546,6 +1556,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		parameterTokenEClass = createEClass(PARAMETER_TOKEN);
 		createEReference(parameterTokenEClass, PARAMETER_TOKEN__PARAMETER);
+		createEAttribute(parameterTokenEClass, PARAMETER_TOKEN__INFO);
 
 		parameterReferenceTokenEClass = createEClass(PARAMETER_REFERENCE_TOKEN);
 		createEReference(parameterReferenceTokenEClass, PARAMETER_REFERENCE_TOKEN__PARAMETER);
@@ -1748,6 +1759,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(parameterTokenEClass, ParameterToken.class, "ParameterToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterToken_Parameter(), this.getParameter(), null, "parameter", null, 1, 1, ParameterToken.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameterToken_Info(), ecorePackage.getEString(), "info", null, 0, 1, ParameterToken.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterReferenceTokenEClass, ParameterReferenceToken.class, "ParameterReferenceToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterReferenceToken_Parameter(), this.getParameter(), null, "parameter", null, 1, 1, ParameterReferenceToken.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -13,6 +13,7 @@ package generator;
  * </p>
  * <ul>
  *   <li>{@link generator.ParameterToken#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link generator.ParameterToken#getInfo <em>Info</em>}</li>
  * </ul>
  *
  * @see generator.GeneratorPackage#getParameterToken()
@@ -41,5 +42,27 @@ public interface ParameterToken extends Token {
 	 * @generated
 	 */
 	void setParameter(Parameter value);
+
+	/**
+	 * Returns the value of the '<em><b>Info</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Info</em>' attribute.
+	 * @see #setInfo(String)
+	 * @see generator.GeneratorPackage#getParameterToken_Info()
+	 * @model
+	 * @generated
+	 */
+	String getInfo();
+
+	/**
+	 * Sets the value of the '{@link generator.ParameterToken#getInfo <em>Info</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Info</em>' attribute.
+	 * @see #getInfo()
+	 * @generated
+	 */
+	void setInfo(String value);
 
 } // ParameterToken

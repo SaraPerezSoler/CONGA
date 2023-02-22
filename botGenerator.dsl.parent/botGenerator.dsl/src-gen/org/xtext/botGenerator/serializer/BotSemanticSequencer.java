@@ -620,16 +620,10 @@ public class BotSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ParameterToken returns ParameterToken
 	 *
 	 * Constraint:
-	 *     parameter=[Parameter|EString]
+	 *     (parameter=[Parameter|EString] info=EString?)
 	 */
 	protected void sequence_ParameterToken(ISerializationContext context, ParameterToken semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETER_TOKEN__PARAMETER) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETER_TOKEN__PARAMETER));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParameterTokenAccess().getParameterParameterEStringParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PARAMETER_TOKEN__PARAMETER, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

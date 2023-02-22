@@ -854,13 +854,22 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_TOKEN__PARAMETER = TOKEN_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Info</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_TOKEN__INFO = TOKEN_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Parameter Token</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_TOKEN_FEATURE_COUNT = TOKEN_FEATURE_COUNT + 1;
+	int PARAMETER_TOKEN_FEATURE_COUNT = TOKEN_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Parameter Token</em>' class.
@@ -2343,6 +2352,17 @@ public interface GeneratorPackage extends EPackage {
 	EReference getParameterToken_Parameter();
 
 	/**
+	 * Returns the meta object for the attribute '{@link generator.ParameterToken#getInfo <em>Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Info</em>'.
+	 * @see generator.ParameterToken#getInfo()
+	 * @see #getParameterToken()
+	 * @generated
+	 */
+	EAttribute getParameterToken_Info();
+
+	/**
 	 * Returns the meta object for class '{@link generator.ParameterReferenceToken <em>Parameter Reference Token</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3385,6 +3405,14 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAMETER_TOKEN__PARAMETER = eINSTANCE.getParameterToken_Parameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Info</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER_TOKEN__INFO = eINSTANCE.getParameterToken_Info();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.ParameterReferenceTokenImpl <em>Parameter Reference Token</em>}' class.

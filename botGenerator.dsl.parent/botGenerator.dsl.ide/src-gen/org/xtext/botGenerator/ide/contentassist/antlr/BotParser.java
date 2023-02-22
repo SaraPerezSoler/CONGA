@@ -94,6 +94,7 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getLanguagePromptAccess().getGroup_4(), "rule__LanguagePrompt__Group_4__0");
 			builder.put(grammarAccess.getEntityTokenAccess().getGroup(), "rule__EntityToken__Group__0");
 			builder.put(grammarAccess.getParameterTokenAccess().getGroup(), "rule__ParameterToken__Group__0");
+			builder.put(grammarAccess.getParameterTokenAccess().getGroup_3(), "rule__ParameterToken__Group_3__0");
 			builder.put(grammarAccess.getParameterRefenceTokenAccess().getGroup(), "rule__ParameterRefenceToken__Group__0");
 			builder.put(grammarAccess.getHTTPRequestTokenAccess().getGroup(), "rule__HTTPRequestToken__Group__0");
 			builder.put(grammarAccess.getHTTPRequestTokenAccess().getGroup_2(), "rule__HTTPRequestToken__Group_2__0");
@@ -193,6 +194,7 @@ public class BotParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getLiteralAccess().getTextAssignment(), "rule__Literal__TextAssignment");
 			builder.put(grammarAccess.getEntityTokenAccess().getEntityAssignment_1(), "rule__EntityToken__EntityAssignment_1");
 			builder.put(grammarAccess.getParameterTokenAccess().getParameterAssignment_1(), "rule__ParameterToken__ParameterAssignment_1");
+			builder.put(grammarAccess.getParameterTokenAccess().getInfoAssignment_3_1(), "rule__ParameterToken__InfoAssignment_3_1");
 			builder.put(grammarAccess.getParameterRefenceTokenAccess().getTextReferenceAssignment_1(), "rule__ParameterRefenceToken__TextReferenceAssignment_1");
 			builder.put(grammarAccess.getParameterRefenceTokenAccess().getParameterAssignment_4(), "rule__ParameterRefenceToken__ParameterAssignment_4");
 			builder.put(grammarAccess.getHTTPRequestTokenAccess().getTypeAssignment_1(), "rule__HTTPRequestToken__TypeAssignment_1");

@@ -1123,12 +1123,17 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		private final CrossReference cParameterParameterCrossReference_1_0 = (CrossReference)cParameterAssignment_1.eContents().get(0);
 		private final RuleCall cParameterParameterEStringParserRuleCall_1_0_1 = (RuleCall)cParameterParameterCrossReference_1_0.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cInfoAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cInfoEStringParserRuleCall_3_1_0 = (RuleCall)cInfoAssignment_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//ParameterToken returns ParameterToken:
-		//    '['parameter=[Parameter|EString]']';
+		//    '['parameter=[Parameter|EString]']' ('('info=EString')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'['parameter=[Parameter|EString]']'
+		//'['parameter=[Parameter|EString]']' ('('info=EString')')?
 		public Group getGroup() { return cGroup; }
 		
 		//'['
@@ -1145,6 +1150,21 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+		
+		//('('info=EString')')?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		
+		//info=EString
+		public Assignment getInfoAssignment_3_1() { return cInfoAssignment_3_1; }
+		
+		//EString
+		public RuleCall getInfoEStringParserRuleCall_3_1_0() { return cInfoEStringParserRuleCall_3_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 	}
 	public class ParameterRefenceTokenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.botGenerator.Bot.ParameterRefenceToken");
@@ -3329,7 +3349,7 @@ public class BotGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	}
 	
 	//ParameterToken returns ParameterToken:
-	//    '['parameter=[Parameter|EString]']';
+	//    '['parameter=[Parameter|EString]']' ('('info=EString')')?;
 	public ParameterTokenElements getParameterTokenAccess() {
 		return pParameterToken;
 	}

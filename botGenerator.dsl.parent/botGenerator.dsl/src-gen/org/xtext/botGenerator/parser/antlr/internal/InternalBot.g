@@ -1716,6 +1716,35 @@ ruleParameterToken returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getParameterTokenAccess().getRightSquareBracketKeyword_2());
 		}
+		(
+			otherlv_3='('
+			{
+				newLeafNode(otherlv_3, grammarAccess.getParameterTokenAccess().getLeftParenthesisKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getParameterTokenAccess().getInfoEStringParserRuleCall_3_1_0());
+					}
+					lv_info_4_0=ruleEString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getParameterTokenRule());
+						}
+						set(
+							$current,
+							"info",
+							lv_info_4_0,
+							"org.xtext.botGenerator.Bot.EString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_5=')'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getParameterTokenAccess().getRightParenthesisKeyword_3_2());
+			}
+		)?
 	)
 ;
 

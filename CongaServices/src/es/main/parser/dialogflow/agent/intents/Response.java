@@ -17,11 +17,10 @@ public class Response {
 	private int textCounter = 1;
 	private int imgCounter = 1;
 	private int buttonCounter = 1;
-	
+
 	public List<Context> getAffectedContexts() {
 		return affectedContexts;
 	}
-
 
 	public void setAffectedContexts(List<Context> affectedContext) {
 		this.affectedContexts = affectedContext;
@@ -45,23 +44,24 @@ public class Response {
 
 	public List<Action> getBotActions(generator.Intent intent, Bot bot, Agent agent) {
 		List<Action> ret = new ArrayList<>();
-		for (Message message: getMessages()) {
+		for (Message message : getMessages()) {
 			Action act = message.getBotAction(intent, textCounter, imgCounter, buttonCounter, bot, agent);
-			if (act instanceof Text) {
-				textCounter++;
-			}else if (act instanceof Image){
-				imgCounter++;
-			} else if (act instanceof ButtonAction) {
-				buttonCounter++;
+			if (act != null) {
+				if (act instanceof Text) {
+					textCounter++;
+				} else if (act instanceof Image) {
+					imgCounter++;
+				} else if (act instanceof ButtonAction) {
+					buttonCounter++;
+				}
+				ret.add(act);
 			}
-			ret.add(act);
 		}
 		return ret;
 	}
 
-
 	public boolean containsAffextedContext(String contextName) {
-		for (Context context: getAffectedContexts()) {
+		for (Context context : getAffectedContexts()) {
 			if (context.getName().equals(contextName)) {
 				return true;
 			}
