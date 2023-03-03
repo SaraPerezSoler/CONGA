@@ -71,30 +71,30 @@ class RasaGenerator extends BotGenerator{
 
 		for (Language lan : bot.languages) {
 
-			var subPath = lan.languageAbbreviation + File.separator
-			var dataPath = subPath + 'data'+ File.separator
+			var subPath = lan.languageAbbreviation
+			var dataPath = subPath + File.separator + 'data'
 //			generateFolder(subPath);
 //			generateFolder(dataPath)
 			
-			f = generateFile(subPath +'actions.py', actions(actions, lan, bot))
+			f = generateFile(subPath + File.separator +'actions.py', actions(actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'actions.py')
 
-			f = generateFile(subPath + 'config.yml', config(lan, fallbackAction, fallbackIntent!==null))
+			f = generateFile(subPath + File.separator + 'config.yml', config(lan, fallbackAction, fallbackIntent!==null))
 			saveFileIntoZip(f, subPath, 'config.yml')
 
-			f = generateFile(subPath + 'credentials.yml', credentials)
+			f = generateFile(subPath + File.separator + 'credentials.yml', credentials)
 			saveFileIntoZip(f, subPath, 'credentials.yml')
 			
-			f = generateFile(subPath + 'domain.yml', domain(intents, parameters, actions, lan, bot))
+			f = generateFile(subPath + File.separator + 'domain.yml', domain(intents, parameters, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'domain.yml')
 
-			f = generateFile(subPath + 'endpoints.yml', endpoint)
+			f = generateFile(subPath + File.separator + 'endpoints.yml', endpoint)
 			saveFileIntoZip(f, subPath, 'endpoints.yml')
 
-			f = generateFile(dataPath+'nlu.md', nlu(intents, entities, lan, bot))
+			f = generateFile(dataPath + File.separator + 'nlu.md', nlu(intents, entities, lan, bot))
 			saveFileIntoZip(f, dataPath, 'nlu.md')
 
-			f = generateFile(dataPath +'stories.md', stories(leafs))
+			f = generateFile(dataPath + File.separator + 'stories.md', stories(leafs))
 			saveFileIntoZip(f, dataPath, 'stories.md')
 		}
 		close()
