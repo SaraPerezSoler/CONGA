@@ -8,8 +8,7 @@ import org.jsoup.nodes.Element;
 
 import generator.Bot;
 import generator.GeneratorFactory;
-import generator.IntentLanguageInputs;
-import generator.LanguageInput;
+import generator.LanguageIntent;
 
 public class Intent {
 
@@ -90,12 +89,20 @@ public class Intent {
 	public generator.Intent createBotIntent(Bot bot){
 		generator.Intent botIntent = GeneratorFactory.eINSTANCE.createIntent();
 		botIntent.setName(name);
-		IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+		LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 		languageInput.setLanguage(bot.getLanguages().get(0));
 		botIntent.getInputs().add(languageInput);
 		for (Sentence sentence : getSentences()) {
 			languageInput.getInputs().add(sentence.createBotSentence(bot, botIntent));
 		}
 		return botIntent;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

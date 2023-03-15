@@ -3,6 +3,7 @@
 package congabase.impl;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -32,42 +32,35 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import congabase.CongabasePackage;
 import congabase.KeyValue;
 import congabase.Service;
 import congabase.ServiceStatus;
 import congabase.ServiceType;
-import congabase.User;
-import recommenderQuestionnaire.Tool;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Service</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Service</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link congabase.impl.ServiceImpl#getUrl <em>Url</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getTool <em>Tool</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getType <em>Type</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getStatus <em>Status</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getUser <em>User</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getBasicAuth <em>Basic Auth</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getHeaders <em>Headers</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getLastAccess <em>Last Access</em>}</li>
- *   <li>{@link congabase.impl.ServiceImpl#getServiceId <em>Service Id</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getUrl <em>Url</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getType <em>Type</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getStatus <em>Status</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getBasicAuth <em>Basic Auth</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getHeaders <em>Headers</em>}</li>
+ * <li>{@link congabase.impl.ServiceImpl#getLastAccess <em>Last
+ * Access</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ServiceImpl extends MinimalEObjectImpl.Container implements Service {
+public class ServiceImpl extends UtilityImpl implements Service {
 	/**
-	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
@@ -75,9 +68,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected static final String URL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getUrl() <em>Url</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getUrl()
 	 * @generated
 	 * @ordered
@@ -85,19 +78,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected String url = URL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTool() <em>Tool</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTool()
-	 * @generated
-	 * @ordered
-	 */
-	protected Tool tool;
-
-	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -105,9 +88,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected static final ServiceType TYPE_EDEFAULT = ServiceType.GENERATOR;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -116,8 +99,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -126,8 +109,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getStatus()
 	 * @generated
 	 * @ordered
@@ -136,38 +119,18 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getVersion()
 	 * @generated NOT
-	 * @ordered 
+	 * @ordered
 	 */
 	protected static final String VERSION_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVersion()
-	 * @generated
-	 * @ordered
-	 */
-	protected String version = VERSION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getUser() <em>User</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUser()
-	 * @generated
-	 * @ordered
-	 */
-	protected User user;
-
-	/**
-	 * The cached value of the '{@link #getBasicAuth() <em>Basic Auth</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getBasicAuth() <em>Basic Auth</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getBasicAuth()
 	 * @generated
 	 * @ordered
@@ -175,9 +138,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected KeyValue basicAuth;
 
 	/**
-	 * The cached value of the '{@link #getHeaders() <em>Headers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getHeaders() <em>Headers</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getHeaders()
 	 * @generated
 	 * @ordered
@@ -185,9 +148,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected EList<KeyValue> headers;
 
 	/**
-	 * The default value of the '{@link #getLastAccess() <em>Last Access</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getLastAccess() <em>Last Access</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLastAccess()
 	 * @generated
 	 * @ordered
@@ -195,38 +158,21 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	protected static final Date LAST_ACCESS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLastAccess() <em>Last Access</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getLastAccess() <em>Last Access</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLastAccess()
 	 * @generated
 	 * @ordered
 	 */
 	protected Date lastAccess = LAST_ACCESS_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #getServiceId() <em>Service Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getServiceId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long SERVICE_ID_EDEFAULT = 0L;
+	private static String pattern = "dd/MM/yyyy hh:mm:ss";
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 	/**
-	 * The cached value of the '{@link #getServiceId() <em>Service Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getServiceId()
-	 * @generated
-	 * @ordered
-	 */
-	protected long serviceId = SERVICE_ID_EDEFAULT;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ServiceImpl() {
@@ -234,8 +180,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -244,8 +190,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getUrl() {
@@ -253,8 +199,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setUrl(String newUrl) {
@@ -265,55 +211,21 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Tool getTool() {
-		if (tool != null && tool.eIsProxy()) {
-			InternalEObject oldTool = (InternalEObject)tool;
-			tool = (Tool)eResolveProxy(oldTool);
-			if (tool != oldTool) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.SERVICE__TOOL, oldTool, tool));
-			}
-		}
-		return tool;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Tool basicGetTool() {
-		return tool;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTool(Tool newTool) {
-		Tool oldTool = tool;
-		tool = newTool;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__TOOL, oldTool, tool));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ServiceType getType() {
 		return type;
 	}
 
+	public String getTypeString() {
+		return getType().getLiteral().toLowerCase();
+	}
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setType(ServiceType newType) {
@@ -324,17 +236,21 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ServiceStatus getStatus() {
 		return status;
 	}
 
+	public String getStatusString() {
+		return getStatus().getLiteral();
+	}
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setStatus(ServiceStatus newStatus) {
@@ -345,89 +261,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getVersion() {
-		return version;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVersion(String newVersion) {
-		String oldVersion = version;
-		version = newVersion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__VERSION, oldVersion, version));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public User getUser() {
-		if (user != null && user.eIsProxy()) {
-			InternalEObject oldUser = (InternalEObject)user;
-			user = (User)eResolveProxy(oldUser);
-			if (user != oldUser) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.SERVICE__USER, oldUser, user));
-			}
-		}
-		return user;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public User basicGetUser() {
-		return user;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetUser(User newUser, NotificationChain msgs) {
-		User oldUser = user;
-		user = newUser;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__USER, oldUser, newUser);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUser(User newUser) {
-		if (newUser != user) {
-			NotificationChain msgs = null;
-			if (user != null)
-				msgs = ((InternalEObject)user).eInverseRemove(this, CongabasePackage.USER__SERVICES, User.class, msgs);
-			if (newUser != null)
-				msgs = ((InternalEObject)newUser).eInverseAdd(this, CongabasePackage.USER__SERVICES, User.class, msgs);
-			msgs = basicSetUser(newUser, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__USER, newUser, newUser));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public KeyValue getBasicAuth() {
@@ -435,42 +270,49 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetBasicAuth(KeyValue newBasicAuth, NotificationChain msgs) {
 		KeyValue oldBasicAuth = basicAuth;
 		basicAuth = newBasicAuth;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__BASIC_AUTH, oldBasicAuth, newBasicAuth);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					CongabasePackage.SERVICE__BASIC_AUTH, oldBasicAuth, newBasicAuth);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setBasicAuth(KeyValue newBasicAuth) {
 		if (newBasicAuth != basicAuth) {
 			NotificationChain msgs = null;
 			if (basicAuth != null)
-				msgs = ((InternalEObject)basicAuth).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CongabasePackage.SERVICE__BASIC_AUTH, null, msgs);
+				msgs = ((InternalEObject) basicAuth).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - CongabasePackage.SERVICE__BASIC_AUTH, null, msgs);
 			if (newBasicAuth != null)
-				msgs = ((InternalEObject)newBasicAuth).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CongabasePackage.SERVICE__BASIC_AUTH, null, msgs);
+				msgs = ((InternalEObject) newBasicAuth).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - CongabasePackage.SERVICE__BASIC_AUTH, null, msgs);
 			msgs = basicSetBasicAuth(newBasicAuth, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__BASIC_AUTH, newBasicAuth, newBasicAuth));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__BASIC_AUTH, newBasicAuth,
+					newBasicAuth));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<KeyValue> getHeaders() {
@@ -481,241 +323,170 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Date getLastAccess() {
 		return lastAccess;
 	}
 
+	public String getLastAccessString() {
+		if (getLastAccess() != null) {
+			return simpleDateFormat.format(getLastAccess());
+		} else {
+			return "-";
+		}
+	}
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public void setLastAccess(Date newLastAccess) {
+	private void setLastAccess(Date newLastAccess) {
 		Date oldLastAccess = lastAccess;
 		lastAccess = newLastAccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__LAST_ACCESS, oldLastAccess, lastAccess));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__LAST_ACCESS, oldLastAccess,
+					lastAccess));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public long getServiceId() {
-		return serviceId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setServiceId(long newServiceId) {
-		long oldServiceId = serviceId;
-		serviceId = newServiceId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.SERVICE__SERVICE_ID, oldServiceId, serviceId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CongabasePackage.SERVICE__USER:
-				if (user != null)
-					msgs = ((InternalEObject)user).eInverseRemove(this, CongabasePackage.USER__SERVICES, User.class, msgs);
-				return basicSetUser((User)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CongabasePackage.SERVICE__USER:
-				return basicSetUser(null, msgs);
-			case CongabasePackage.SERVICE__BASIC_AUTH:
-				return basicSetBasicAuth(null, msgs);
-			case CongabasePackage.SERVICE__HEADERS:
-				return ((InternalEList<?>)getHeaders()).basicRemove(otherEnd, msgs);
+		case CongabasePackage.SERVICE__BASIC_AUTH:
+			return basicSetBasicAuth(null, msgs);
+		case CongabasePackage.SERVICE__HEADERS:
+			return ((InternalEList<?>) getHeaders()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CongabasePackage.SERVICE__URL:
-				return getUrl();
-			case CongabasePackage.SERVICE__TOOL:
-				if (resolve) return getTool();
-				return basicGetTool();
-			case CongabasePackage.SERVICE__TYPE:
-				return getType();
-			case CongabasePackage.SERVICE__STATUS:
-				return getStatus();
-			case CongabasePackage.SERVICE__VERSION:
-				return getVersion();
-			case CongabasePackage.SERVICE__USER:
-				if (resolve) return getUser();
-				return basicGetUser();
-			case CongabasePackage.SERVICE__BASIC_AUTH:
-				return getBasicAuth();
-			case CongabasePackage.SERVICE__HEADERS:
-				return getHeaders();
-			case CongabasePackage.SERVICE__LAST_ACCESS:
-				return getLastAccess();
-			case CongabasePackage.SERVICE__SERVICE_ID:
-				return getServiceId();
+		case CongabasePackage.SERVICE__URL:
+			return getUrl();
+		case CongabasePackage.SERVICE__TYPE:
+			return getType();
+		case CongabasePackage.SERVICE__STATUS:
+			return getStatus();
+		case CongabasePackage.SERVICE__BASIC_AUTH:
+			return getBasicAuth();
+		case CongabasePackage.SERVICE__HEADERS:
+			return getHeaders();
+		case CongabasePackage.SERVICE__LAST_ACCESS:
+			return getLastAccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CongabasePackage.SERVICE__URL:
-				setUrl((String)newValue);
-				return;
-			case CongabasePackage.SERVICE__TOOL:
-				setTool((Tool)newValue);
-				return;
-			case CongabasePackage.SERVICE__TYPE:
-				setType((ServiceType)newValue);
-				return;
-			case CongabasePackage.SERVICE__STATUS:
-				setStatus((ServiceStatus)newValue);
-				return;
-			case CongabasePackage.SERVICE__VERSION:
-				setVersion((String)newValue);
-				return;
-			case CongabasePackage.SERVICE__USER:
-				setUser((User)newValue);
-				return;
-			case CongabasePackage.SERVICE__BASIC_AUTH:
-				setBasicAuth((KeyValue)newValue);
-				return;
-			case CongabasePackage.SERVICE__HEADERS:
-				getHeaders().clear();
-				getHeaders().addAll((Collection<? extends KeyValue>)newValue);
-				return;
-			case CongabasePackage.SERVICE__LAST_ACCESS:
-				setLastAccess((Date)newValue);
-				return;
-			case CongabasePackage.SERVICE__SERVICE_ID:
-				setServiceId((Long)newValue);
-				return;
+		case CongabasePackage.SERVICE__URL:
+			setUrl((String) newValue);
+			return;
+		case CongabasePackage.SERVICE__TYPE:
+			setType((ServiceType) newValue);
+			return;
+		case CongabasePackage.SERVICE__STATUS:
+			setStatus((ServiceStatus) newValue);
+			return;
+		case CongabasePackage.SERVICE__BASIC_AUTH:
+			setBasicAuth((KeyValue) newValue);
+			return;
+		case CongabasePackage.SERVICE__HEADERS:
+			getHeaders().clear();
+			getHeaders().addAll((Collection<? extends KeyValue>) newValue);
+			return;
+		case CongabasePackage.SERVICE__LAST_ACCESS:
+			setLastAccess((Date) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.SERVICE__URL:
-				setUrl(URL_EDEFAULT);
-				return;
-			case CongabasePackage.SERVICE__TOOL:
-				setTool((Tool)null);
-				return;
-			case CongabasePackage.SERVICE__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case CongabasePackage.SERVICE__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
-			case CongabasePackage.SERVICE__VERSION:
-				setVersion(VERSION_EDEFAULT);
-				return;
-			case CongabasePackage.SERVICE__USER:
-				setUser((User)null);
-				return;
-			case CongabasePackage.SERVICE__BASIC_AUTH:
-				setBasicAuth((KeyValue)null);
-				return;
-			case CongabasePackage.SERVICE__HEADERS:
-				getHeaders().clear();
-				return;
-			case CongabasePackage.SERVICE__LAST_ACCESS:
-				setLastAccess(LAST_ACCESS_EDEFAULT);
-				return;
-			case CongabasePackage.SERVICE__SERVICE_ID:
-				setServiceId(SERVICE_ID_EDEFAULT);
-				return;
+		case CongabasePackage.SERVICE__URL:
+			setUrl(URL_EDEFAULT);
+			return;
+		case CongabasePackage.SERVICE__TYPE:
+			setType(TYPE_EDEFAULT);
+			return;
+		case CongabasePackage.SERVICE__STATUS:
+			setStatus(STATUS_EDEFAULT);
+			return;
+		case CongabasePackage.SERVICE__BASIC_AUTH:
+			setBasicAuth((KeyValue) null);
+			return;
+		case CongabasePackage.SERVICE__HEADERS:
+			getHeaders().clear();
+			return;
+		case CongabasePackage.SERVICE__LAST_ACCESS:
+			setLastAccess(LAST_ACCESS_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.SERVICE__URL:
-				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
-			case CongabasePackage.SERVICE__TOOL:
-				return tool != null;
-			case CongabasePackage.SERVICE__TYPE:
-				return type != TYPE_EDEFAULT;
-			case CongabasePackage.SERVICE__STATUS:
-				return status != STATUS_EDEFAULT;
-			case CongabasePackage.SERVICE__VERSION:
-				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case CongabasePackage.SERVICE__USER:
-				return user != null;
-			case CongabasePackage.SERVICE__BASIC_AUTH:
-				return basicAuth != null;
-			case CongabasePackage.SERVICE__HEADERS:
-				return headers != null && !headers.isEmpty();
-			case CongabasePackage.SERVICE__LAST_ACCESS:
-				return LAST_ACCESS_EDEFAULT == null ? lastAccess != null : !LAST_ACCESS_EDEFAULT.equals(lastAccess);
-			case CongabasePackage.SERVICE__SERVICE_ID:
-				return serviceId != SERVICE_ID_EDEFAULT;
+		case CongabasePackage.SERVICE__URL:
+			return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+		case CongabasePackage.SERVICE__TYPE:
+			return type != TYPE_EDEFAULT;
+		case CongabasePackage.SERVICE__STATUS:
+			return status != STATUS_EDEFAULT;
+		case CongabasePackage.SERVICE__BASIC_AUTH:
+			return basicAuth != null;
+		case CongabasePackage.SERVICE__HEADERS:
+			return headers != null && !headers.isEmpty();
+		case CongabasePackage.SERVICE__LAST_ACCESS:
+			return LAST_ACCESS_EDEFAULT == null ? lastAccess != null : !LAST_ACCESS_EDEFAULT.equals(lastAccess);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (url: ");
@@ -724,25 +495,21 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 		result.append(type);
 		result.append(", status: ");
 		result.append(status);
-		result.append(", version: ");
-		result.append(version);
 		result.append(", lastAccess: ");
 		result.append(lastAccess);
-		result.append(", serviceId: ");
-		result.append(serviceId);
 		result.append(')');
 		return result.toString();
 	}
 
 	@Override
 	public String getSortURL() {
-		if (getUrl().length()>50) {
-			String ret = getUrl().substring(0, 47)+"...";
+		if (getUrl().length() > 50) {
+			String ret = getUrl().substring(0, 47) + "...";
 			return ret;
 		}
 		return getUrl();
 	}
-	
+
 	public File sendAndGetFile(File file, String name) {
 		Response response = senService(file, name, MediaType.APPLICATION_OCTET_STREAM);
 
@@ -776,9 +543,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 		}
 		return null;
 	}
-	
+
 	public JSONObject sendAndGetJSON(File file, String name) {
-	
+
 		Response response = senService(file, name, MediaType.APPLICATION_JSON);
 
 		MultivaluedMap<String, String> header = response.getStringHeaders();
@@ -788,7 +555,7 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 				String output = response.readEntity(String.class);
 				try {
 					return new JSONObject(output);
-				}catch (JSONException e) {
+				} catch (JSONException e) {
 					JSONObject ret = new JSONObject();
 					ret.put("problems", new JSONArray(output));
 					return ret;
@@ -796,8 +563,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 			}
 		}
 		return null;
-	}	
-	
+	}
+
 	private Response senService(File file, String name, String consumes) {
 		@SuppressWarnings("resource")
 		final MultiPart multiPart = new FormDataMultiPart().field("file", file, MediaType.APPLICATION_OCTET_STREAM_TYPE)
@@ -817,9 +584,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
 			builder = builder.header(keyValue.getKey(), keyValue.getValue().toString());
 		}
 		Response response = builder.post(Entity.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE));
+		setLastAccess(new Date());
 		return response;
 	}
-	
-	
 
-} //ServiceImpl
+} // ServiceImpl

@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,9 +24,15 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class FromXMIToBot {
-	private static final String INPUT_URI = "D:/Git/asymob/chatbots";
+
+	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+	private static final String OUTPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+
+//	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia";
+//	private static final String OUTPUT_URI = "D:\\Desktop\\Rasa - copia";
+	
 	private static final String [] IGNORE_FILES = {"D:/Git/asymob/chatbots/botsInDSL"};
-	private static final String OUTPUT_URI = "D:/Git/asymob/chatbots/botsInDSL";
+	
 	private static String baseInputFile;
 	private ResourceSet resourceSet;
 	private Injector injector;
@@ -59,9 +68,15 @@ public class FromXMIToBot {
 					files.add(f1);
 				}
 			} else if (f.getName().endsWith(".xmi") || f.getName().endsWith(".XMI")) {
+
+				try {
 				String filepath = extract(f.getAbsolutePath(), "");
 				String fileName = extract(filepath, baseInputFile);
 				parser.XmiToDsl(f.getAbsolutePath(), OUTPUT_URI+"/"+fileName.replace(".xmi", ".bot"));
+				}catch (Exception e) {
+					System.out.println("Error in "+ f.getName());
+				}
+
 			}
 
 			files.remove(f);
@@ -74,6 +89,7 @@ public class FromXMIToBot {
 		injector = new BotStandaloneSetup().createInjectorAndDoEMFRegistration();
 		resourceSetXtext = injector.getInstance(XtextResourceSet.class);
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		//resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
@@ -92,7 +108,10 @@ public class FromXMIToBot {
 		resourceDsl.getContents().addAll(resourceXmi.getContents());
 
 		try {
-			resourceDsl.save(Collections.emptyMap());
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XtextResource.OPTION_ENCODING, "UTF-8");
+			resourceDsl.save(options);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

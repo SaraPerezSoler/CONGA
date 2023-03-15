@@ -15,9 +15,9 @@ import generator.ParameterReferenceToken
 import generator.ParameterToken
 import generator.TextInput
 import generator.Language
-import generator.IntentLanguageInputs
-import generator.TextLanguageInput
-import generator.LanguageInput
+import generator.LanguageIntent
+import generator.LanguageText
+import generator.LanguageEntity
 import generator.EntityInput
 import generator.RegexInput
 import generator.SimpleInput
@@ -64,20 +64,20 @@ class DialogflowGenerator extends BotGenerator {
 
 		var entities = resource.allContents.filter(Entity).toList;
 		for (Entity entity : entities) {
-
-			f = generateFile('entities' + File.separator + entity.name + '.json', entityFile(entity))
-			saveFileIntoZip(f, 'entities', entity.name + '.json')
+			var name = entity.name.replaceAll("[^a-zA-Z0-9'_-]", "");
+			f = generateFile('entities' + File.separator + name + '.json', entityFile(entity, name))
+			saveFileIntoZip(f, 'entities', name + '.json')
 
 			var lan = Language.ENGLISH;
 
-			for (LanguageInput input : entity.inputs) {
+			for (LanguageEntity input : entity.inputs) {
 				lan = bot.languages.get(0);
 				if (input.language != Language.EMPTY) {
 					lan = input.language
 				}
-				f = generateFile('entities' + File.separator + entity.name + '_entries_' + lan.languageAbbreviation +
+				f = generateFile('entities' + File.separator + name + '_entries_' + lan.languageAbbreviation +
 					'.json', entriesFile(input))
-				saveFileIntoZip(f, 'entities', entity.name + '_entries_' + lan.languageAbbreviation + '.json')
+				saveFileIntoZip(f, 'entities', name + '_entries_' + lan.languageAbbreviation + '.json')
 			}
 		}
 
@@ -120,8 +120,8 @@ class DialogflowGenerator extends BotGenerator {
 		}
 	}
 
-	public static int limit = 86;
-	public static int maxSize = 10;
+	public static int limit = 90;
+	public static int maxSize = 9;
 
 	def createIntentPrefix(List<String> prev) {
 		if (prev.isEmpty) {
@@ -130,16 +130,16 @@ class DialogflowGenerator extends BotGenerator {
 		var ret = ""
 		var i = 0;
 		var size = prev.size();
-		if (prev.size() >= (maxSize - 1)) {
-			i = prev.size() - (maxSize - 1)
-			size = (maxSize - 1);
+		if (prev.size() >= (maxSize)) {
+			i = prev.size() - maxSize
+			size = maxSize;
 		}
 
 		for (; i < prev.size(); i++) {
 			var value = prev.get(i);
-			var maxLength = ((limit / (size + 1)) - 3)
-			if (value.length > maxLength) {
-				value = value.substring(0, maxLength);
+			var maxLength = ((limit-(size+1)) / (size+1))
+			if (value.length > (maxLength-3)) {
+				value = value.substring(0, (maxLength-3));
 			}
 			ret += value + " - "
 		}
@@ -148,8 +148,8 @@ class DialogflowGenerator extends BotGenerator {
 
 	def createIntentName(List<String> prev, String name) {
 		var prefix = createIntentPrefix(prev)
-		var newName = name;
-		if (name.length > (limit - prefix.length - 3)) {
+		var newName = name.replaceAll("[^a-zA-Z0-9'_-]", "");
+		if (newName.length > (limit - prefix.length - 3)) {
 			newName = newName.substring(0, limit - prefix.length - 3)
 		}
 		var auxName = prefix + newName
@@ -166,10 +166,10 @@ class DialogflowGenerator extends BotGenerator {
 	def void createTransitionFiles(UserInteraction transition, List<String> prev, Bot bot) {
 		var name = createIntentName(prev, transition.intent.name)
 
-		var f = generateFile('/intents/' + name + '.json', transition.intentFile(createIntentPrefix(prev), bot))
+		var f = generateFile('/intents/' + name + '.json', transition.intentFile(createIntentPrefix(prev), name, bot))
 		saveFileIntoZip(f, 'intents', name + '.json')
 
-		for (IntentLanguageInputs input : transition.intent.inputs) {
+		for (LanguageIntent input : transition.intent.inputs) {
 			var lan = bot.languages.get(0)
 			if (input.language != Language.EMPTY) {
 				lan = input.language
@@ -201,7 +201,7 @@ class DialogflowGenerator extends BotGenerator {
 	 * 	name = name.replaceAll(" ", "");
 	 * 	return name
 	 }*/
-	def speechText(TextLanguageInput textAction, UserInteraction transition) {
+	def speechText(LanguageText textAction, UserInteraction transition) {
 		var ret = ""
 		for (TextInput input : textAction.inputs) {
 			ret += input.speechText(transition)
@@ -218,7 +218,7 @@ class DialogflowGenerator extends BotGenerator {
 		ret += "\""
 		for (Token token : input.tokens) {
 			if (token instanceof Literal) {
-				ret += token.text.replaceAll("\n", "\\n") + " "
+				ret += token.text.replaceAll("\n", "\\\\n")
 			} else if (token instanceof ParameterToken) {
 
 				ret += answerParam(token, transition)
@@ -230,13 +230,17 @@ class DialogflowGenerator extends BotGenerator {
 
 	def answerParam(ParameterToken token, UserInteraction transition) {
 		if (transition.intent.parameters.contains(token.parameter)) {
-			return "$" + token.parameter.name + " "
+			var original ="";
+			if (token.info !== null && token.info.equals("D: original")){
+				original = ".original"
+			}
+			return "$" + token.parameter.name + original
 		} else {
 			var aux = transition;
 			while (aux.src !== null) {
 				aux = aux.src.incoming
 				if (aux.intent.parameters.contains(token.parameter)) {
-					return "#" + affectedContext.get(aux) + "." + token.parameter.name + " "
+					return "#" + affectedContext.get(aux) + "." + token.parameter.name
 				}
 			}
 		}
@@ -262,7 +266,7 @@ class DialogflowGenerator extends BotGenerator {
 		}
 	}
 
-	def intentFile(UserInteraction transition, String prefix, Bot bot) {
+	def intentFile(UserInteraction transition, String prefix, String name, Bot bot) {
 		var actions = new ArrayList();
 
 		if (transition.target !== null) {
@@ -277,7 +281,7 @@ class DialogflowGenerator extends BotGenerator {
 			«var contextComa = ""»
 			{
 				"id": "«UUID.randomUUID().toString»",
-				"name": "«prefix + transition.intent.name»",
+				"name": "«name»",
 				"auto": true,
 				«IF transition.src!==null»
 					"contexts": ["«affectedContext.get(transition.src.incoming)»"],
@@ -371,6 +375,18 @@ class DialogflowGenerator extends BotGenerator {
 											«{coma=","; ""}»
 										«ENDFOR»
 									«ELSEIF action instanceof Image»
+										«IF action.caption!== null && !action.caption.isEmpty»
+										«coma»
+										{
+											"type": 0,
+											"lang": "«bot.languages.get(0).languageAbbreviation»",
+											"condition": "",
+											"speech": [
+												"«action.caption»"
+											]
+										}
+										«{coma=","; ""}»
+										«ENDIF»
 										«coma»
 										{
 											"type": 3,
@@ -391,7 +407,7 @@ class DialogflowGenerator extends BotGenerator {
 													"lang": "«bot.languages.get(0).languageAbbreviation»",
 												«ENDIF»
 												"condition": "",
-												"subtitle": «texLanguage.text.speechText(transition)»,
+												"title": «texLanguage.speechText(transition)»,
 												"buttons": [ 
 												«FOR button: texLanguage.buttons»
 													{
@@ -467,7 +483,7 @@ class DialogflowGenerator extends BotGenerator {
 		
 	'''
 
-	def usersayFile(IntentLanguageInputs intent) '''
+	def usersayFile(LanguageIntent intent) '''
 		[
 		«FOR phrase : intent.inputs»
 			«IF phrase instanceof TrainingPhrase»
@@ -557,11 +573,11 @@ class DialogflowGenerator extends BotGenerator {
 		}
 	}
 
-	def entityFile(Entity entity) '''
+	def entityFile(Entity entity, String name) '''
 		
 		{
 			"id": "«UUID.randomUUID().toString»",
-			"name": "«entity.name»",
+			"name": "«name»",
 			"isOverridable": true,	  
 			«IF entityType(entity) === BotGenerator.REGEX»
 				"isEnum": false,
@@ -585,7 +601,7 @@ class DialogflowGenerator extends BotGenerator {
 	def entityIsSimple(Entity entity) {
 	}
 
-	def entriesFile(LanguageInput entity) '''
+	def entriesFile(LanguageEntity entity) '''
 		[
 			«FOR entry : entity.inputs»
 				{

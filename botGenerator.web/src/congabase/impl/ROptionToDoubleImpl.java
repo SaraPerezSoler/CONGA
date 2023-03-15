@@ -3,7 +3,7 @@
 package congabase.impl;
 
 import congabase.CongabasePackage;
-
+import congabase.RecommenderOption;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.BasicEMap;
@@ -16,23 +16,21 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import recommenderQuestionnaire.Tool;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tool To Double</b></em>'.
+ * An implementation of the model object '<em><b>ROption To Double</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link congabase.impl.ToolToDoubleImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link congabase.impl.ToolToDoubleImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link congabase.impl.ROptionToDoubleImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link congabase.impl.ROptionToDoubleImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<Tool,Double> {
+public class ROptionToDoubleImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<RecommenderOption,Double> {
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -41,7 +39,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * @generated
 	 * @ordered
 	 */
-	protected Tool key;
+	protected RecommenderOption key;
 
 	/**
 	 * The default value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
@@ -68,7 +66,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ToolToDoubleImpl() {
+	protected ROptionToDoubleImpl() {
 		super();
 	}
 
@@ -79,7 +77,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CongabasePackage.Literals.TOOL_TO_DOUBLE;
+		return CongabasePackage.Literals.ROPTION_TO_DOUBLE;
 	}
 
 	/**
@@ -87,13 +85,13 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Tool getTypedKey() {
+	public RecommenderOption getTypedKey() {
 		if (key != null && key.eIsProxy()) {
 			InternalEObject oldKey = (InternalEObject)key;
-			key = (Tool)eResolveProxy(oldKey);
+			key = (RecommenderOption)eResolveProxy(oldKey);
 			if (key != oldKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.TOOL_TO_DOUBLE__KEY, oldKey, key));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongabasePackage.ROPTION_TO_DOUBLE__KEY, oldKey, key));
 			}
 		}
 		return key;
@@ -104,7 +102,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Tool basicGetTypedKey() {
+	public RecommenderOption basicGetTypedKey() {
 		return key;
 	}
 
@@ -113,11 +111,11 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypedKey(Tool newKey) {
-		Tool oldKey = key;
+	public void setTypedKey(RecommenderOption newKey) {
+		RecommenderOption oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.TOOL_TO_DOUBLE__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.ROPTION_TO_DOUBLE__KEY, oldKey, key));
 	}
 
 	/**
@@ -138,7 +136,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 		Double oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.TOOL_TO_DOUBLE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongabasePackage.ROPTION_TO_DOUBLE__VALUE, oldValue, value));
 	}
 
 	/**
@@ -149,10 +147,10 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CongabasePackage.TOOL_TO_DOUBLE__KEY:
+			case CongabasePackage.ROPTION_TO_DOUBLE__KEY:
 				if (resolve) return getTypedKey();
 				return basicGetTypedKey();
-			case CongabasePackage.TOOL_TO_DOUBLE__VALUE:
+			case CongabasePackage.ROPTION_TO_DOUBLE__VALUE:
 				return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -166,10 +164,10 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CongabasePackage.TOOL_TO_DOUBLE__KEY:
-				setTypedKey((Tool)newValue);
+			case CongabasePackage.ROPTION_TO_DOUBLE__KEY:
+				setTypedKey((RecommenderOption)newValue);
 				return;
-			case CongabasePackage.TOOL_TO_DOUBLE__VALUE:
+			case CongabasePackage.ROPTION_TO_DOUBLE__VALUE:
 				setTypedValue((Double)newValue);
 				return;
 		}
@@ -184,10 +182,10 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.TOOL_TO_DOUBLE__KEY:
-				setTypedKey((Tool)null);
+			case CongabasePackage.ROPTION_TO_DOUBLE__KEY:
+				setTypedKey((RecommenderOption)null);
 				return;
-			case CongabasePackage.TOOL_TO_DOUBLE__VALUE:
+			case CongabasePackage.ROPTION_TO_DOUBLE__VALUE:
 				setTypedValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -202,9 +200,9 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CongabasePackage.TOOL_TO_DOUBLE__KEY:
+			case CongabasePackage.ROPTION_TO_DOUBLE__KEY:
 				return key != null;
-			case CongabasePackage.TOOL_TO_DOUBLE__VALUE:
+			case CongabasePackage.ROPTION_TO_DOUBLE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
@@ -260,7 +258,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Tool getKey() {
+	public RecommenderOption getKey() {
 		return getTypedKey();
 	}
 
@@ -269,7 +267,7 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKey(Tool key) {
+	public void setKey(RecommenderOption key) {
 		setTypedKey(key);
 	}
 
@@ -299,9 +297,9 @@ public class ToolToDoubleImpl extends MinimalEObjectImpl.Container implements Ba
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EMap<Tool, Double> getEMap() {
+	public EMap<RecommenderOption, Double> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<Tool, Double>)container.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<RecommenderOption, Double>)container.eGet(eContainmentFeature());
 	}
 
-} //ToolToDoubleImpl
+} //ROptionToDoubleImpl

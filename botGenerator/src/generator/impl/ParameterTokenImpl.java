@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link generator.impl.ParameterTokenImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link generator.impl.ParameterTokenImpl#getInfo <em>Info</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,6 +38,25 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 	 * @ordered
 	 */
 	protected Parameter parameter;
+
+	/**
+	 * The default value of the '{@link #getInfo() <em>Info</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INFO_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getInfo() <em>Info</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected String info = INFO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,11 +123,36 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 	 * @generated
 	 */
 	@Override
+	public String getInfo() {
+		return info;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setInfo(String newInfo) {
+		String oldInfo = info;
+		info = newInfo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.PARAMETER_TOKEN__INFO, oldInfo, info));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.PARAMETER_TOKEN__PARAMETER:
 				if (resolve) return getParameter();
 				return basicGetParameter();
+			case GeneratorPackage.PARAMETER_TOKEN__INFO:
+				return getInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,6 +167,9 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 		switch (featureID) {
 			case GeneratorPackage.PARAMETER_TOKEN__PARAMETER:
 				setParameter((Parameter)newValue);
+				return;
+			case GeneratorPackage.PARAMETER_TOKEN__INFO:
+				setInfo((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,6 +186,9 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 			case GeneratorPackage.PARAMETER_TOKEN__PARAMETER:
 				setParameter((Parameter)null);
 				return;
+			case GeneratorPackage.PARAMETER_TOKEN__INFO:
+				setInfo(INFO_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -152,8 +203,26 @@ public class ParameterTokenImpl extends TokenImpl implements ParameterToken {
 		switch (featureID) {
 			case GeneratorPackage.PARAMETER_TOKEN__PARAMETER:
 				return parameter != null;
+			case GeneratorPackage.PARAMETER_TOKEN__INFO:
+				return INFO_EDEFAULT == null ? info != null : !INFO_EDEFAULT.equals(info);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (info: ");
+		result.append(info);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override

@@ -67,6 +67,8 @@ public class RasaBot extends Chatbot{
 		domain.saveBotActions(bot);
 		stories.saveBotFlows(bot);
 		stories.setParameters(bot);
+		config.setFallback(bot);
+		
 		return bot;
 	}
 
@@ -76,6 +78,22 @@ public class RasaBot extends Chatbot{
 		} else {
 			this.nlu = new Nlu(html);
 		}
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguage() {
+		return getConfig().getLanguage();
+	}
+
+	public boolean isHaveLoops() {
+		return false;
 	}
 
 }

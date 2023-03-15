@@ -14,7 +14,7 @@ import com.google.inject.Injector;
 import generator.Bot;
 import generator.GeneratorFactory;
 import generator.Intent;
-import generator.IntentLanguageInputs;
+import generator.LanguageIntent;
 import generator.Language;
 import generator.Literal;
 import generator.TrainingPhrase;
@@ -52,7 +52,7 @@ public class OpenResource {
 		
 		Intent intent = GeneratorFactory.eINSTANCE.createIntent();
 		intent.setName("Greetings");
-		IntentLanguageInputs inputs = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+		LanguageIntent inputs = GeneratorFactory.eINSTANCE.createLanguageIntent();
 		inputs.setLanguage(Language.ENGLISH);
 		
 		TrainingPhrase phrase1 = GeneratorFactory.eINSTANCE.createTrainingPhrase();

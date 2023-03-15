@@ -7,8 +7,8 @@ import generator.DefaultEntity;
 import generator.Entity;
 import generator.GeneratorPackage;
 import generator.Language;
+import generator.LanguagePrompt;
 import generator.Parameter;
-import generator.PromptLanguage;
 
 import java.util.Collection;
 
@@ -120,7 +120,7 @@ public class ParameterImpl extends ElementImpl implements Parameter {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PromptLanguage> prompts;
+	protected EList<LanguagePrompt> prompts;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -256,9 +256,9 @@ public class ParameterImpl extends ElementImpl implements Parameter {
 	 * @generated
 	 */
 	@Override
-	public EList<PromptLanguage> getPrompts() {
+	public EList<LanguagePrompt> getPrompts() {
 		if (prompts == null) {
-			prompts = new EObjectContainmentEList<PromptLanguage>(PromptLanguage.class, this, GeneratorPackage.PARAMETER__PROMPTS);
+			prompts = new EObjectContainmentEList<LanguagePrompt>(LanguagePrompt.class, this, GeneratorPackage.PARAMETER__PROMPTS);
 		}
 		return prompts;
 	}
@@ -323,7 +323,7 @@ public class ParameterImpl extends ElementImpl implements Parameter {
 				return;
 			case GeneratorPackage.PARAMETER__PROMPTS:
 				getPrompts().clear();
-				getPrompts().addAll((Collection<? extends PromptLanguage>)newValue);
+				getPrompts().addAll((Collection<? extends LanguagePrompt>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -399,8 +399,8 @@ public class ParameterImpl extends ElementImpl implements Parameter {
 	}
 
 	@Override
-	public PromptLanguage getPrompt(Language language) {
-		for (PromptLanguage prompt : getPrompts()) {
+	public LanguagePrompt getPrompt(Language language) {
+		for (LanguagePrompt prompt : getPrompts()) {
 			if (prompt.getLanguage().equals(language)) {
 				return prompt;
 			}

@@ -7,7 +7,7 @@ import es.main.parser.dialogflow.agent.Agent;
 import generator.Action;
 import generator.Bot;
 import generator.GeneratorFactory;
-import generator.IntentLanguageInputs;
+import generator.LanguageIntent;
 
 public class Intent {
 	
@@ -28,7 +28,7 @@ public class Intent {
 
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.replace(".", " ");
 	}
 
 
@@ -108,7 +108,7 @@ public class Intent {
 		}
 
 		for (UserSaysLanguage usersays : getUsersays()) {
-			IntentLanguageInputs languageInput = usersays.getBotLanguageInput(intent);
+			LanguageIntent languageInput = usersays.getBotLanguageInput(intent, bot);
 			intent.getInputs().add(languageInput);
 		}
 		

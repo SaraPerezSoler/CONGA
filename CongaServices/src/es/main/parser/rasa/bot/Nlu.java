@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.jsoup.nodes.Document;
@@ -16,9 +15,10 @@ import es.main.parser.rasa.bot.intents.Sentence;
 import generator.Bot;
 import generator.Entity;
 import generator.GeneratorFactory;
-import generator.LanguageInput;
+import generator.LanguageEntity;
 import generator.RegexInput;
 import generator.SimpleInput;
+import generator.TrainingPhrase;
 
 public class Nlu {
 
@@ -37,12 +37,19 @@ public class Nlu {
 			Element ul = element.nextElementSibling();
 			if (element.text().startsWith("intent:")) {
 				String name = element.text().replace("intent:", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				intents.add(new Intent(name, ul));
 			} else if (element.text().startsWith("regex:")) {
 				String name = element.text().replace("regex:", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				saveRegex(name, ul);
 			} else if (element.text().startsWith("synonym:")) {
 				String name = element.text().replace("synonym:", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
+				saveSynonyms(name, ul);
+			} else if (element.text().startsWith("lookup:")) {
+				String name = element.text().replace("lookup:", "");
+				name =name.replaceAll("[^A-Za-z0-9_\\-/]", "");
 				saveSynonyms(name, ul);
 			}
 		}
@@ -55,9 +62,10 @@ public class Nlu {
 		while (regexs.hasNext()) {
 			Element nextRegex = regexs.next();
 			try {
-				Pattern.compile(nextRegex.text());
+				//Pattern.compile(nextRegex.text());
 				regexsList.add(nextRegex.text());
 			} catch (PatternSyntaxException e) {
+				//System.out.println("Error:"+);
 			}
 		}
 		this.regex.put(name, regexsList);
@@ -87,7 +95,7 @@ public class Nlu {
 			Entity entity = GeneratorFactory.eINSTANCE.createEntity();
 			entity.setName(key);
 
-			LanguageInput langInputs = GeneratorFactory.eINSTANCE.createLanguageInput();
+			LanguageEntity langInputs = GeneratorFactory.eINSTANCE.createLanguageEntity();
 			langInputs.setLanguage(bot.getLanguages().get(0));
 
 			for (String s : this.regex.get(key)) {
@@ -128,7 +136,29 @@ public class Nlu {
 
 	public void saveBotIntents(Bot bot) {
 		for (Intent intent : this.intents) {
-			bot.getIntents().add(intent.createBotIntent(bot));
+			generator.Intent in;
+			if ((in=bot.getIntent(intent.getName()))!= null) {
+				for (Sentence sentence : intent.getSentences()) {
+					TrainingPhrase tp = sentence.createBotSentence(bot, in);
+					//if (in.getInputs().get(0).contains(tp)) {
+						in.getInputs().get(0).getInputs().add(tp);
+					//}
+				}
+			}else {
+				if (bot.containsElement(intent.getName())) {
+					intent.setName(intent.getName()+"Intent");
+				}
+				if ((in=bot.getIntent(intent.getName()))!= null) {
+					for (Sentence sentence : intent.getSentences()) {
+						TrainingPhrase tp = sentence.createBotSentence(bot, in);
+						//if (in.getInputs().get(0).contains(tp)) {
+							in.getInputs().get(0).getInputs().add(tp);
+						//}
+					}
+				}else {
+					bot.getIntents().add(intent.createBotIntent(bot));
+				}
+			}
 		}
 	}
 
@@ -138,13 +168,13 @@ public class Nlu {
 		if (entity == null) {
 			entity = GeneratorFactory.eINSTANCE.createEntity();
 			entity.setName(entityName);
-			LanguageInput langInputs = GeneratorFactory.eINSTANCE.createLanguageInput();
+			LanguageEntity langInputs = GeneratorFactory.eINSTANCE.createLanguageEntity();
 			langInputs.setLanguage(bot.getLanguages().get(0));
 			entity.getInputs().add(langInputs);
 			bot.getEntities().add(entity);
 		}
 		if (!entity.isRegex()) {
-			LanguageInput langInputs = entity.getInputs().get(0);
+			LanguageEntity langInputs = entity.getInputs().get(0);
 			SimpleInput entry = (SimpleInput) langInputs.getInput(entryName);
 			if (entry == null) {
 				entry = GeneratorFactory.eINSTANCE.createSimpleInput();

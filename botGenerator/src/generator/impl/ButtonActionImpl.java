@@ -3,11 +3,11 @@
 package generator.impl;
 
 import generator.ButtonAction;
-import generator.ButtonsLanguageInputs;
 import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Language;
 
+import generator.LanguageButton;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -42,7 +42,7 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ButtonsLanguageInputs> inputs;
+	protected EList<LanguageButton> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +69,9 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 	 * @generated
 	 */
 	@Override
-	public EList<ButtonsLanguageInputs> getInputs() {
+	public EList<LanguageButton> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<ButtonsLanguageInputs>(ButtonsLanguageInputs.class, this, GeneratorPackage.BUTTON_ACTION__INPUTS);
+			inputs = new EObjectContainmentEList<LanguageButton>(LanguageButton.class, this, GeneratorPackage.BUTTON_ACTION__INPUTS);
 		}
 		return inputs;
 	}
@@ -115,7 +115,7 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 		switch (featureID) {
 			case GeneratorPackage.BUTTON_ACTION__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends ButtonsLanguageInputs>)newValue);
+				getInputs().addAll((Collection<? extends LanguageButton>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class ButtonActionImpl extends ActionImpl implements ButtonAction {
 	
 	
 	@Override
-	public ButtonsLanguageInputs getInput(Language lan) {
-		for (ButtonsLanguageInputs  buttonLang: getInputs()) {
+	public LanguageButton getInput(Language lan) {
+		for (LanguageButton  buttonLang: getInputs()) {
 			if (buttonLang.getLanguage()==lan) {
 				return buttonLang;
 			}

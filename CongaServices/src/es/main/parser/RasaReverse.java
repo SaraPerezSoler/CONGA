@@ -1,11 +1,11 @@
 package es.main.parser;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,13 +21,21 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.jsoup.Jsoup;
 
-public class RasaReverse extends Reverse{
-	List<String> fileIgnore = new ArrayList<>();
+public class RasaReverse extends Reverse {
+	private List<String> fileIgnore = new ArrayList<>();
+	private static final String[] ignore = { "README.md", "readme.md", "Readme.md", "test_stories.yml", "test_stories.md", "test",
+			"tests" };
 
 	public RasaReverse() {
+		for (String s : ignore) {
+			fileIgnore.add(s);
+		}
 	}
 
 	public RasaReverse(List<String> fileIgnore) {
+		for (String s : ignore) {
+			fileIgnore.add(s);
+		}
 		this.fileIgnore.addAll(fileIgnore);
 	}
 
@@ -57,28 +65,41 @@ public class RasaReverse extends Reverse{
 		Parser parser = Parser.builder().build();
 		while (agentCreated == false && !files.isEmpty()) {
 			File currentFile = files.get(0);
-			if (currentFile.isDirectory()) {
-				for (File f : currentFile.listFiles()) {
-					if (!fileIgnore.contains(f.getName())) {
+			if (!fileIgnore.contains(currentFile.getName())) {
+				if (currentFile.isDirectory()) {
+					for (File f : currentFile.listFiles()) {
+						files.add(f);
+					}
+				} else {
+					File f = currentFile;
+					if (!f.getName().contains("test")) {
 						if (f.getName().endsWith(".md")) {
 							String info = readFile(f);
+							info = info.replaceAll("##intent:", "## intent:").replaceAll("##synonym:", "## synonym:")
+									.replaceAll("##regex:", "## regex:").replaceAll("##lookup:", "## lookup:");
+
 							if (info.contains("## intent:") || info.contains("## synonym:")
 									|| info.contains("## regex:") || info.contains("## lookup:")) {
-								Node document = parser.parse(readFile(f));
+								String fileString = info;
+								fileString = fileString.replaceAll("<!--.*-->", "");
+								fileString = fileString.replaceAll("\r", "").replaceAll("\n-", "\n- ").replaceAll("  ",
+										" ");
+
+								Node document = parser.parse(fileString);
 								HtmlRenderer renderer = HtmlRenderer.builder().build();
 								org.jsoup.nodes.Document html = Jsoup.parse(renderer.render(document));
 								rasaBot.setNlu(html);
 								// rasaBot.setNlu(readFile(f));
-								hasNLU = true;
+								// hasNLU = true;
 							} else {
 								rasaBot.setStories(info);
-								hasStories = true;
+								// hasStories = true;
 							}
 
 						} else if (f.getName().equals("domain.yml")) {
 							rasaBot.setDomain(om.readValue(f, Domain.class));
 							hasDomain = true;
-						} else if (f.getName().equals("config.yml")) {
+						} else if (f.getName().equals("config.yml") || f.getName().equals("nlu_config.yml")) {
 							rasaBot.setConfig(om.readValue(f, Config.class));
 							hasConfig = true;
 						} else if (f.isDirectory()) {
@@ -92,21 +113,36 @@ public class RasaReverse extends Reverse{
 			}
 			files.remove(currentFile);
 		}
+		removeFile(agentFiles);
 		return rasaBot;
 	}
 
 	private String readFile(File f) {
 		String text = "";
 		if (f.isFile()) {
+			BufferedReader br = null;
 			try {
-				Scanner myReader = new Scanner(f);
-				while (myReader.hasNextLine()) {
-					text += myReader.nextLine() + "\n";
+				br = new BufferedReader(new FileReader(f));
+				StringBuilder sb = new StringBuilder();
+				String line = br.readLine();
+
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = br.readLine();
 				}
-				myReader.close();
-			} catch (FileNotFoundException e) {
+				text = sb.toString();
+			} catch (Exception e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
+			} finally {
+				if (br != null) {
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		return text;

@@ -8,13 +8,14 @@ import congabase.CongabaseFactory;
 import congabase.CongabasePackage;
 import congabase.KeyValue;
 import congabase.Project;
+import congabase.RecommenderOption;
 import congabase.RelevanceLevel;
 import congabase.Service;
 import congabase.ServiceStatus;
 import congabase.ServiceType;
 import congabase.User;
 import congabase.UserAnswer;
-
+import congabase.Utility;
 import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -73,7 +74,14 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass toolToDoubleEClass = null;
+	private EClass rOptionToDoubleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass utilityEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,6 +89,13 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * @generated
 	 */
 	private EClass serviceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass recommenderOptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,6 +260,15 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCongaSystem_QOptions() {
+		return (EReference)congaSystemEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUser() {
 		return userEClass;
 	}
@@ -281,7 +305,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUser_Services() {
+	public EReference getUser_Utilities() {
 		return (EReference)userEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -416,8 +440,8 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getToolToDouble() {
-		return toolToDoubleEClass;
+	public EClass getROptionToDouble() {
+		return rOptionToDoubleEClass;
 	}
 
 	/**
@@ -425,8 +449,8 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getToolToDouble_Key() {
-		return (EReference)toolToDoubleEClass.getEStructuralFeatures().get(0);
+	public EReference getROptionToDouble_Key() {
+		return (EReference)rOptionToDoubleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -434,8 +458,53 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getToolToDouble_Value() {
-		return (EAttribute)toolToDoubleEClass.getEStructuralFeatures().get(1);
+	public EAttribute getROptionToDouble_Value() {
+		return (EAttribute)rOptionToDoubleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUtility() {
+		return utilityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUtility_ServiceId() {
+		return (EAttribute)utilityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUtility_Tool() {
+		return (EReference)utilityEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUtility_Version() {
+		return (EAttribute)utilityEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUtility_User() {
+		return (EReference)utilityEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -461,17 +530,8 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getService_Tool() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getService_Type() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -480,25 +540,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * @generated
 	 */
 	public EAttribute getService_Status() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getService_Version() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getService_User() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -507,7 +549,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * @generated
 	 */
 	public EReference getService_BasicAuth() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(6);
+		return (EReference)serviceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -516,7 +558,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * @generated
 	 */
 	public EReference getService_Headers() {
-		return (EReference)serviceEClass.getEStructuralFeatures().get(7);
+		return (EReference)serviceEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -525,7 +567,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * @generated
 	 */
 	public EAttribute getService_LastAccess() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -533,8 +575,44 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getService_ServiceId() {
-		return (EAttribute)serviceEClass.getEStructuralFeatures().get(9);
+	public EClass getRecommenderOption() {
+		return recommenderOptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRecommenderOption_Available() {
+		return (EReference)recommenderOptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRecommenderOption_Unavailable() {
+		return (EReference)recommenderOptionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRecommenderOption_Unknown() {
+		return (EReference)recommenderOptionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRecommenderOption_Possible() {
+		return (EReference)recommenderOptionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -626,12 +704,13 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		createEReference(congaSystemEClass, CONGA_SYSTEM__GENERATORS);
 		createEReference(congaSystemEClass, CONGA_SYSTEM__CONVERTERS);
 		createEReference(congaSystemEClass, CONGA_SYSTEM__VALIDATORS);
+		createEReference(congaSystemEClass, CONGA_SYSTEM__QOPTIONS);
 
 		userEClass = createEClass(USER);
 		createEAttribute(userEClass, USER__NICK);
 		createEAttribute(userEClass, USER__PASSWORD);
 		createEReference(userEClass, USER__PROJECTS);
-		createEReference(userEClass, USER__SERVICES);
+		createEReference(userEClass, USER__UTILITIES);
 
 		projectEClass = createEClass(PROJECT);
 		createEAttribute(projectEClass, PROJECT__NAME);
@@ -650,21 +729,29 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		createEReference(aQuestionEClass, AQUESTION__SELECTEDS);
 		createEAttribute(aQuestionEClass, AQUESTION__RELEVANCE);
 
-		toolToDoubleEClass = createEClass(TOOL_TO_DOUBLE);
-		createEReference(toolToDoubleEClass, TOOL_TO_DOUBLE__KEY);
-		createEAttribute(toolToDoubleEClass, TOOL_TO_DOUBLE__VALUE);
+		rOptionToDoubleEClass = createEClass(ROPTION_TO_DOUBLE);
+		createEReference(rOptionToDoubleEClass, ROPTION_TO_DOUBLE__KEY);
+		createEAttribute(rOptionToDoubleEClass, ROPTION_TO_DOUBLE__VALUE);
+
+		utilityEClass = createEClass(UTILITY);
+		createEAttribute(utilityEClass, UTILITY__SERVICE_ID);
+		createEReference(utilityEClass, UTILITY__TOOL);
+		createEAttribute(utilityEClass, UTILITY__VERSION);
+		createEReference(utilityEClass, UTILITY__USER);
 
 		serviceEClass = createEClass(SERVICE);
 		createEAttribute(serviceEClass, SERVICE__URL);
-		createEReference(serviceEClass, SERVICE__TOOL);
 		createEAttribute(serviceEClass, SERVICE__TYPE);
 		createEAttribute(serviceEClass, SERVICE__STATUS);
-		createEAttribute(serviceEClass, SERVICE__VERSION);
-		createEReference(serviceEClass, SERVICE__USER);
 		createEReference(serviceEClass, SERVICE__BASIC_AUTH);
 		createEReference(serviceEClass, SERVICE__HEADERS);
 		createEAttribute(serviceEClass, SERVICE__LAST_ACCESS);
-		createEAttribute(serviceEClass, SERVICE__SERVICE_ID);
+
+		recommenderOptionEClass = createEClass(RECOMMENDER_OPTION);
+		createEReference(recommenderOptionEClass, RECOMMENDER_OPTION__AVAILABLE);
+		createEReference(recommenderOptionEClass, RECOMMENDER_OPTION__UNAVAILABLE);
+		createEReference(recommenderOptionEClass, RECOMMENDER_OPTION__UNKNOWN);
+		createEReference(recommenderOptionEClass, RECOMMENDER_OPTION__POSSIBLE);
 
 		keyValueEClass = createEClass(KEY_VALUE);
 		createEAttribute(keyValueEClass, KEY_VALUE__KEY);
@@ -707,6 +794,8 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		serviceEClass.getESuperTypes().add(this.getUtility());
+		recommenderOptionEClass.getESuperTypes().add(this.getUtility());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(congaSystemEClass, CongaSystem.class, "CongaSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -716,12 +805,13 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEReference(getCongaSystem_Generators(), this.getService(), null, "generators", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCongaSystem_Converters(), this.getService(), null, "converters", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCongaSystem_Validators(), this.getService(), null, "validators", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCongaSystem_QOptions(), this.getRecommenderOption(), null, "qOptions", null, 0, -1, CongaSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUser_Nick(), ecorePackage.getEString(), "nick", null, 1, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_Password(), ecorePackage.getEString(), "password", null, 1, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUser_Projects(), this.getProject(), this.getProject_Owner(), "projects", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUser_Services(), this.getService(), this.getService_User(), "services", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUser_Utilities(), this.getUtility(), this.getUtility_User(), "utilities", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProject_Name(), ecorePackage.getEString(), "name", null, 1, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -732,7 +822,7 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 
 		initEClass(userAnswerEClass, UserAnswer.class, "UserAnswer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUserAnswer_Answers(), this.getAQuestion(), null, "answers", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUserAnswer_Ranking(), this.getToolToDouble(), null, "ranking", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUserAnswer_Ranking(), this.getROptionToDouble(), null, "ranking", null, 0, -1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUserAnswer_Date(), ecorePackage.getEDate(), "date", null, 0, 1, UserAnswer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aQuestionEClass, AQuestion.class, "AQuestion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -740,21 +830,29 @@ public class CongabasePackageImpl extends EPackageImpl implements CongabasePacka
 		initEReference(getAQuestion_Selecteds(), theRecommenderQuestionnairePackage.getOption(), null, "selecteds", null, 0, -1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAQuestion_Relevance(), this.getRelevanceLevel(), "relevance", "Relevant", 1, 1, AQuestion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(toolToDoubleEClass, Map.Entry.class, "ToolToDouble", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getToolToDouble_Key(), theRecommenderQuestionnairePackage.getTool(), null, "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getToolToDouble_Value(), ecorePackage.getEDoubleObject(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(rOptionToDoubleEClass, Map.Entry.class, "ROptionToDouble", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getROptionToDouble_Key(), this.getRecommenderOption(), null, "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getROptionToDouble_Value(), ecorePackage.getEDoubleObject(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(utilityEClass, Utility.class, "Utility", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUtility_ServiceId(), ecorePackage.getELong(), "serviceId", null, 1, 1, Utility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUtility_Tool(), theRecommenderQuestionnairePackage.getTool(), null, "tool", null, 1, 1, Utility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUtility_Version(), ecorePackage.getEString(), "version", null, 0, 1, Utility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUtility_User(), this.getUser(), this.getUser_Utilities(), "user", null, 1, 1, Utility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getService_Url(), ecorePackage.getEString(), "url", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getService_Tool(), theRecommenderQuestionnairePackage.getTool(), null, "tool", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_Type(), this.getServiceType(), "type", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_Status(), this.getServiceStatus(), "status", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getService_Version(), ecorePackage.getEString(), "version", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getService_User(), this.getUser(), this.getUser_Services(), "user", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getService_BasicAuth(), this.getKeyValue(), null, "basicAuth", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getService_Headers(), this.getKeyValue(), null, "headers", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getService_LastAccess(), ecorePackage.getEDate(), "lastAccess", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getService_ServiceId(), ecorePackage.getELong(), "serviceId", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(recommenderOptionEClass, RecommenderOption.class, "RecommenderOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRecommenderOption_Available(), theRecommenderQuestionnairePackage.getOption(), null, "available", null, 0, -1, RecommenderOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRecommenderOption_Unavailable(), theRecommenderQuestionnairePackage.getOption(), null, "unavailable", null, 0, -1, RecommenderOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRecommenderOption_Unknown(), theRecommenderQuestionnairePackage.getOption(), null, "unknown", null, 0, -1, RecommenderOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRecommenderOption_Possible(), theRecommenderQuestionnairePackage.getOption(), null, "possible", null, 0, -1, RecommenderOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(keyValueEClass, KeyValue.class, "KeyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKeyValue_Key(), ecorePackage.getEString(), "key", null, 1, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

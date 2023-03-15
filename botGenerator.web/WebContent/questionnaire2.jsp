@@ -40,6 +40,18 @@
 							String name = question.getQuestion().getName();
 					%>
 					<div class="row">
+						<div class="col">
+							<%
+							if (getServletContext().getAttribute("msg") != null) {
+							%>
+							<div class="alert alert-danger"><%=getServletContext().getAttribute("msg")%></div>
+							<%
+							getServletContext().setAttribute("msg", null);
+							}
+							%>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col box">
 							<div class="row ">
 								<div class="col-md-9 question-size">

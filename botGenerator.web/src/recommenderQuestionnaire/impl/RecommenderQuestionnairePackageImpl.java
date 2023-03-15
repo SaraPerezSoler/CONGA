@@ -2,12 +2,12 @@
  */
 package recommenderQuestionnaire.impl;
 
+import congabase.CongabasePackage;
+import congabase.impl.CongabasePackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import recommenderQuestionnaire.Evaluation;
@@ -18,8 +18,6 @@ import recommenderQuestionnaire.RecommenderQuestionnaireFactory;
 import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.WithName;
-
-import recommenderQuestionnaire.util.RecommenderQuestionnaireValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -117,20 +115,17 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(CongabasePackage.eNS_URI);
+		CongabasePackageImpl theCongabasePackage = (CongabasePackageImpl)(registeredPackage instanceof CongabasePackageImpl ? registeredPackage : CongabasePackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theRecommenderQuestionnairePackage.createPackageContents();
+		theCongabasePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theRecommenderQuestionnairePackage.initializePackageContents();
-
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theRecommenderQuestionnairePackage,
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return RecommenderQuestionnaireValidator.INSTANCE;
-				 }
-			 });
+		theCongabasePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theRecommenderQuestionnairePackage.freeze();
@@ -174,42 +169,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 	 */
 	public EClass getTool() {
 		return toolEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTool_AvailableOptions() {
-		return (EReference)toolEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTool_UnknownOptions() {
-		return (EReference)toolEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTool_UnavailableOptions() {
-		return (EReference)toolEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTool_PossibleOptions() {
-		return (EReference)toolEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -280,42 +239,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOption_Available() {
-		return (EReference)optionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOption_Unavailable() {
-		return (EReference)optionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOption_Unknown() {
-		return (EReference)optionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOption_Possible() {
-		return (EReference)optionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getWithName() {
 		return withNameEClass;
 	}
@@ -362,10 +285,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 		createEReference(questionnaireEClass, QUESTIONNAIRE__QUESTIONS);
 
 		toolEClass = createEClass(TOOL);
-		createEReference(toolEClass, TOOL__AVAILABLE_OPTIONS);
-		createEReference(toolEClass, TOOL__UNKNOWN_OPTIONS);
-		createEReference(toolEClass, TOOL__UNAVAILABLE_OPTIONS);
-		createEReference(toolEClass, TOOL__POSSIBLE_OPTIONS);
 
 		questionEClass = createEClass(QUESTION);
 		createEAttribute(questionEClass, QUESTION__TEXT);
@@ -376,10 +295,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 
 		optionEClass = createEClass(OPTION);
 		createEAttribute(optionEClass, OPTION__TEXT);
-		createEReference(optionEClass, OPTION__AVAILABLE);
-		createEReference(optionEClass, OPTION__UNAVAILABLE);
-		createEReference(optionEClass, OPTION__UNKNOWN);
-		createEReference(optionEClass, OPTION__POSSIBLE);
 
 		withNameEClass = createEClass(WITH_NAME);
 		createEAttribute(withNameEClass, WITH_NAME__NAME);
@@ -423,10 +338,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 		initEReference(getQuestionnaire_Questions(), this.getQuestion(), null, "questions", null, 1, -1, Questionnaire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(toolEClass, Tool.class, "Tool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTool_AvailableOptions(), this.getOption(), this.getOption_Available(), "availableOptions", null, 1, -1, Tool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTool_UnknownOptions(), this.getOption(), this.getOption_Unknown(), "unknownOptions", null, 0, -1, Tool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTool_UnavailableOptions(), this.getOption(), this.getOption_Unavailable(), "unavailableOptions", null, 0, -1, Tool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTool_PossibleOptions(), this.getOption(), this.getOption_Possible(), "possibleOptions", null, 0, -1, Tool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(questionEClass, Question.class, "Question", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuestion_Text(), ecorePackage.getEString(), "text", null, 1, 1, Question.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -437,10 +348,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 
 		initEClass(optionEClass, Option.class, "Option", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOption_Text(), ecorePackage.getEString(), "text", null, 1, 1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOption_Available(), this.getTool(), this.getTool_AvailableOptions(), "available", null, 1, -1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOption_Unavailable(), this.getTool(), this.getTool_UnavailableOptions(), "unavailable", null, 0, -1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOption_Unknown(), this.getTool(), this.getTool_UnknownOptions(), "unknown", null, 0, -1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOption_Possible(), this.getTool(), this.getTool_PossibleOptions(), "possible", null, 0, -1, Option.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(withNameEClass, WithName.class, "WithName", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWithName_Name(), ecorePackage.getEString(), "name", null, 1, 1, WithName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -451,8 +358,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
-		createPivotAnnotations();
 	}
 
 	/**
@@ -470,34 +375,6 @@ public class RecommenderQuestionnairePackageImpl extends EPackageImpl implements
 			   "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
 			   "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
 			   "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
-		   });
-		addAnnotation
-		  (optionEClass,
-		   source,
-		   new String[] {
-			   "constraints", "allToolsRegister toolInAvailableAndUnavailable toolInAvailableAndPossible toolInAvailableAndUnkown toolInUnavailableAndUnknown toolInUnavailableAndPossible toolInPossibleAndUnknown"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createPivotAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
-		addAnnotation
-		  (optionEClass,
-		   source,
-		   new String[] {
-			   "allToolsRegister", "Tool.allInstances()->forAll(t |\n\t\t\t\tself.available->includes(t) or self.unavailable->includes(t) or self.unknown->includes(t) or self.possible->includes(t))",
-			   "toolInAvailableAndUnavailable", "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n\t\t\t\tself.unavailable->includes(t))",
-			   "toolInAvailableAndPossible", "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n\t\t\t\tself.possible->includes(t))",
-			   "toolInAvailableAndUnkown", "Tool.allInstances()->forAll(t | self.available->includes(t) implies not\n\t\t\t\tself.unknown->includes(t))",
-			   "toolInUnavailableAndUnknown", "Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not\n\t\t\t\tself.unknown->includes(t))",
-			   "toolInUnavailableAndPossible", "Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not\n\t\t\t\tself.possible->includes(t))",
-			   "toolInPossibleAndUnknown", "Tool.allInstances()->forAll(t | self.possible->includes(t) implies not\n\t\t\t\tself.unknown->includes(t))"
 		   });
 	}
 

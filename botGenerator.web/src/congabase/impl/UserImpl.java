@@ -4,11 +4,16 @@ package congabase.impl;
 
 import congabase.CongabasePackage;
 import congabase.Project;
+import congabase.RecommenderOption;
 import congabase.Service;
 import congabase.ServiceType;
 import congabase.User;
 
+
+import congabase.Utility;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -35,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link congabase.impl.UserImpl#getNick <em>Nick</em>}</li>
  *   <li>{@link congabase.impl.UserImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link congabase.impl.UserImpl#getProjects <em>Projects</em>}</li>
- *   <li>{@link congabase.impl.UserImpl#getServices <em>Services</em>}</li>
+ *   <li>{@link congabase.impl.UserImpl#getUtilities <em>Utilities</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,14 +97,14 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	protected EList<Project> projects;
 
 	/**
-	 * The cached value of the '{@link #getServices() <em>Services</em>}' reference list.
+	 * The cached value of the '{@link #getUtilities() <em>Utilities</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getServices()
+	 * @see #getUtilities()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Service> services;
+	protected EList<Utility> utilities;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,13 +184,33 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Service> getServices() {
-		if (services == null) {
-			services = new EObjectWithInverseResolvingEList<Service>(Service.class, this, CongabasePackage.USER__SERVICES, CongabasePackage.SERVICE__USER);
+	public EList<Utility> getUtilities() {
+		if (utilities == null) {
+			utilities = new EObjectWithInverseResolvingEList<Utility>(Utility.class, this, CongabasePackage.USER__UTILITIES, CongabasePackage.UTILITY__USER);
 		}
-		return services;
+		return utilities;
 	}
 
+	public List<RecommenderOption> getRecommenderOptions() {
+		List<RecommenderOption> ret = new ArrayList<RecommenderOption>();
+		for (Utility u: getUtilities()) {
+			if (u instanceof RecommenderOption) {
+				ret.add((RecommenderOption)u);
+			}
+		}
+		return ret;
+	}
+	
+	public List<Service> getServices() {
+		List<Service> ret = new ArrayList<Service>();
+		for (Utility u: getUtilities()) {
+			if (u instanceof Service) {
+				ret.add((Service)u);
+			}
+		}
+		return ret;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -197,8 +222,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 		switch (featureID) {
 			case CongabasePackage.USER__PROJECTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProjects()).basicAdd(otherEnd, msgs);
-			case CongabasePackage.USER__SERVICES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getServices()).basicAdd(otherEnd, msgs);
+			case CongabasePackage.USER__UTILITIES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUtilities()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -213,8 +238,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 		switch (featureID) {
 			case CongabasePackage.USER__PROJECTS:
 				return ((InternalEList<?>)getProjects()).basicRemove(otherEnd, msgs);
-			case CongabasePackage.USER__SERVICES:
-				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
+			case CongabasePackage.USER__UTILITIES:
+				return ((InternalEList<?>)getUtilities()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -233,8 +258,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				return getPassword();
 			case CongabasePackage.USER__PROJECTS:
 				return getProjects();
-			case CongabasePackage.USER__SERVICES:
-				return getServices();
+			case CongabasePackage.USER__UTILITIES:
+				return getUtilities();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -258,9 +283,9 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				getProjects().clear();
 				getProjects().addAll((Collection<? extends Project>)newValue);
 				return;
-			case CongabasePackage.USER__SERVICES:
-				getServices().clear();
-				getServices().addAll((Collection<? extends Service>)newValue);
+			case CongabasePackage.USER__UTILITIES:
+				getUtilities().clear();
+				getUtilities().addAll((Collection<? extends Utility>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -283,8 +308,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case CongabasePackage.USER__PROJECTS:
 				getProjects().clear();
 				return;
-			case CongabasePackage.USER__SERVICES:
-				getServices().clear();
+			case CongabasePackage.USER__UTILITIES:
+				getUtilities().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -304,8 +329,8 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 			case CongabasePackage.USER__PROJECTS:
 				return projects != null && !projects.isEmpty();
-			case CongabasePackage.USER__SERVICES:
-				return services != null && !services.isEmpty();
+			case CongabasePackage.USER__UTILITIES:
+				return utilities != null && !utilities.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

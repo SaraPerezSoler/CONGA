@@ -95,10 +95,22 @@ public interface Bot extends Element {
 
 	Intent getIntent(String name);
 
+	List<Intent> getIntentStartsWith(String start);
+	
 	List<Action> getActionStartWith(String name);
 
 	boolean containsElement(String name);
 
 	List<Action> getActionsContains(String action);
+
+	List<ButtonAction> getButtons();
+	
+	List<Text> getTexts();
+	List<Image> getImages();
+	List<HTTPRequest> getHttpRequests();
+	List<Empty> getEmpties();
+
+	int getNumLoops();
+	
 
 } // Bot

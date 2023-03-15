@@ -34,4 +34,9 @@ public class ToolFiles extends FileManager{
 		remove.add(getFile());
 		super.destroy();
 	}
+	
+	public void clean() {
+		removeFile(getFile());
+		super.destroy();
+	}
 }

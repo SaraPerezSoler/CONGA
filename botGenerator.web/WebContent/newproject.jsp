@@ -60,7 +60,7 @@
 								<label>Language</label> <select name="language"
 									class="form-control form-control-sm">
 									<%
-									for (Language lan : Language.VALUES) {
+									for (Language lan : Language.values()) {
 									%>
 									<option><%=lan.getLiteral().toLowerCase()%></option>
 									<%

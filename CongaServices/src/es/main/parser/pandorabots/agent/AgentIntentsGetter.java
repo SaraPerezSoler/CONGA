@@ -14,19 +14,17 @@ import generator.Entity;
 import generator.GeneratorFactory;
 import generator.HTTPRequest;
 import generator.Intent;
-import generator.IntentLanguageInputs;
+import generator.LanguageIntent;
 import generator.KeyValue;
 import generator.Language;
-import generator.LanguageInput;
 import generator.Literal;
 import generator.Method;
 import generator.Parameter;
 import generator.ParameterReferenceToken;
-import generator.PromptLanguage;
-import generator.SimpleInput;
+import generator.LanguagePrompt;
 import generator.Text;
 import generator.TextInput;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 import generator.TrainingPhrase;
 import generator.UserInteraction;
 
@@ -35,13 +33,13 @@ public class AgentIntentsGetter {
 	// Función para gestionar los intents que únicamente contengan argumentos de tipo <set>sample</set>
 	public static void addCategoryWithOnlyPatternSets(Category category, Intent intent) {
 		if (category.pattern.sets != null && !category.pattern.sets.isEmpty()) {
-			IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+			LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 			TrainingPhrase phrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 
 			for (SetAttr set : category.pattern.sets) {
 				ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 				Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-				PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+				LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 				
 				parameter.setName(set.name);
 				parameter.setRequired(true);
@@ -65,7 +63,7 @@ public class AgentIntentsGetter {
 
 	// Función para gestionar los intents cuya entrada contenga fechas en el formato DD/MM/AA
 	public static void addCategoryWithDate(Category category, Intent intent, List<Entity> entities) {
-		IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+		LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 		TrainingPhrase phrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 
 		String[] tokens1 = category.pattern.text.split("\\* slash \\* slash \\*");
@@ -86,7 +84,7 @@ public class AgentIntentsGetter {
 		if (tokens.size() == 0) {
 			ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 			Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-			PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+			LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 			
 			prompt.setLanguage(Language.ENGLISH);
 			prompt.getPrompts().add("Tell me the date.");
@@ -127,7 +125,7 @@ public class AgentIntentsGetter {
 					if (innerTokens.size() == 0) {
 						ParameterReferenceToken innerParameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 						Parameter innerParameter = GeneratorFactory.eINSTANCE.createParameter();
-						PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+						LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 						
 						prompt.setLanguage(Language.ENGLISH);
 						prompt.getPrompts().add("Tell me the time.");
@@ -149,7 +147,7 @@ public class AgentIntentsGetter {
 						for (String innerToken : innerTokens) {
 							ParameterReferenceToken hourParameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 							Parameter hourParameter = GeneratorFactory.eINSTANCE.createParameter();
-							PromptLanguage hourPrompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+							LanguagePrompt hourPrompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 							
 							// Caso en que haya otros parámetros en el fragmento
 							if (innerToken.contains("*")) {
@@ -158,7 +156,7 @@ public class AgentIntentsGetter {
 									Literal innerLiteral = GeneratorFactory.eINSTANCE.createLiteral();
 									ParameterReferenceToken innerParameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 									Parameter innerParameter = GeneratorFactory.eINSTANCE.createParameter();
-									PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+									LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 									
 									// Guardado de texto previo al parametro
 									innerLiteral.setText(innerToken2);
@@ -210,7 +208,7 @@ public class AgentIntentsGetter {
 						Literal innerLiteral = GeneratorFactory.eINSTANCE.createLiteral();
 						ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 						Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-						PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+						LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 						
 						// Guardado de texto previo al parametro
 						innerLiteral.setText(innerToken);
@@ -240,7 +238,7 @@ public class AgentIntentsGetter {
 				
 				// Control de adición de parámetros de tipo fecha
 				if (dateCount > 0) {
-					PromptLanguage datePrompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+					LanguagePrompt datePrompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 
 					// Guardado del parámetro
 					datePrompt.setLanguage(Language.ENGLISH);
@@ -268,7 +266,7 @@ public class AgentIntentsGetter {
 
 	// Función para gestionar los intents cuya entrada contenga horas en el formato HH:MM
 	public static void addCategoryWithHour(Category category, Intent intent) {
-		IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+		LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 		TrainingPhrase phrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 		String[] tokens1 = category.pattern.text.split("\\* colon \\*");
 		String[] tokens2 = category.pattern.text.split("\\*colon\\*");
@@ -287,7 +285,7 @@ public class AgentIntentsGetter {
 		if (tokens.size() == 0) {
 			ParameterReferenceToken innerParameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 			Parameter innerParameter = GeneratorFactory.eINSTANCE.createParameter();
-			PromptLanguage hourPrompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+			LanguagePrompt hourPrompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 
 			// Guardado del parámetro
 			hourPrompt.setLanguage(Language.ENGLISH);
@@ -318,7 +316,7 @@ public class AgentIntentsGetter {
 						Literal innerLiteral = GeneratorFactory.eINSTANCE.createLiteral();
 						ParameterReferenceToken innerParameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 						Parameter innerParameter = GeneratorFactory.eINSTANCE.createParameter();
-						PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+						LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 
 						// Guardado de texto previo al parametro
 						innerLiteral.setText(innerToken2);
@@ -348,7 +346,7 @@ public class AgentIntentsGetter {
 				
 				// Control de adición de parámetros de tipo hora
 				if (timeCount > 0) {
-					PromptLanguage hourPrompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+					LanguagePrompt hourPrompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 
 					// Guardado del parámetro
 					hourPrompt.setLanguage(Language.ENGLISH);
@@ -374,7 +372,7 @@ public class AgentIntentsGetter {
 	public static void addCategoryBasic(Category category, Intent intent, List<Entity> entities) {
 		// Caso en que el intent contenga sólo texto
 		if (!category.pattern.text.contains("*")) {
-			IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+			LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 			TrainingPhrase phrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 			Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 			
@@ -397,7 +395,7 @@ public class AgentIntentsGetter {
 		
 		// Caso en que contenga *s
 		else {
-			IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+			LanguageIntent languageInput = GeneratorFactory.eINSTANCE.createLanguageIntent();
 			TrainingPhrase phrase = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 
 			// Sets contenidos en todo el template
@@ -417,7 +415,7 @@ public class AgentIntentsGetter {
 				Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 				ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 				Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-				PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+				LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 				int setsFlag = 0;
 				
 				// Guardado de texto previo al parametro
@@ -475,7 +473,7 @@ public class AgentIntentsGetter {
 	// Función para gestionar los flujos de conversación directos, a nivel 1
 	public static List<UserInteraction> getMainFlows(Category category, Intent intent, List<Intent> intents, List<Entity> entities) {
 		List<UserInteraction> ret = new ArrayList<UserInteraction>();
-		List<TextLanguageInput> responses = getAllIntentDirectResponses(category, intents);
+		List<LanguageText> responses = getAllIntentDirectResponses(category, intents);
 		UserInteraction flow = GeneratorFactory.eINSTANCE.createUserInteraction();
 		BotInteraction target = GeneratorFactory.eINSTANCE.createBotInteraction();
 		
@@ -490,7 +488,7 @@ public class AgentIntentsGetter {
 		}
 		
 		else {
-			for (TextLanguageInput response: responses) {
+			for (LanguageText response: responses) {
 				Text targetText = GeneratorFactory.eINSTANCE.createText();
 				
 				targetText.getInputs().add(response);
@@ -572,7 +570,7 @@ public class AgentIntentsGetter {
 			
 			// Variables del Intent
 			Intent intentCopy = GeneratorFactory.eINSTANCE.createIntent();
-			IntentLanguageInputs languageInputCopy = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
+			LanguageIntent languageInputCopy = GeneratorFactory.eINSTANCE.createLanguageIntent();
 			TrainingPhrase phraseCopy = GeneratorFactory.eINSTANCE.createTrainingPhrase();
 			
 			// Variables del Target
@@ -588,7 +586,7 @@ public class AgentIntentsGetter {
 			for (var action: flow.getTarget().getActions()) {
 				if (action instanceof Text) {
 					Text textCopy = GeneratorFactory.eINSTANCE.createText();
-					TextLanguageInput textLanguageInputCopy = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+					LanguageText textLanguageInputCopy = GeneratorFactory.eINSTANCE.createLanguageText();
 					TextInput textInputCopy = GeneratorFactory.eINSTANCE.createTextInput();
 					
 					for (var token: ((Text) action).getInputs().get(0).getInputs().get(0).getTokens()) {
@@ -649,7 +647,7 @@ public class AgentIntentsGetter {
 								KeyValue keyValueCopy = GeneratorFactory.eINSTANCE.createKeyValue();
 								ParameterReferenceToken parameterRefCopy = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 								Parameter parameterCopy = GeneratorFactory.eINSTANCE.createParameter();
-								PromptLanguage promptCopy = GeneratorFactory.eINSTANCE.createPromptLanguage();
+								LanguagePrompt promptCopy = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 								
 								promptCopy.setLanguage(Language.ENGLISH);
 								promptCopy.getPrompts().add("Tell me the " + keyValue.getKey());
@@ -763,10 +761,10 @@ public class AgentIntentsGetter {
 	}
 	
 	//// Funciones auxiliares para realizar tareas concretas
-	// Función que comprueba si un TextLanguageInput es igual a otro
+	// Función que comprueba si un LanguageText es igual a otro
 	public static boolean equalTextInputs(Text input1, Text input2) {
-		List<TextLanguageInput> internalInputs1 = input1.getInputs();
-		List<TextLanguageInput> internalInputs2 = input2.getInputs();
+		List<LanguageText> internalInputs1 = input1.getInputs();
+		List<LanguageText> internalInputs2 = input2.getInputs();
 		
 		if (internalInputs1.size() == internalInputs2.size()) {
 			for (int i = 0; i < internalInputs1.size(); i++) {
@@ -841,13 +839,13 @@ public class AgentIntentsGetter {
 	}
 	
 	// Devuelve todas las posibles respuestas de una categoría
-	public static List<TextLanguageInput> getAllIntentDirectResponses(Category category, List<Intent> intents) {
-		List<TextLanguageInput> ret = new ArrayList<TextLanguageInput>();
+	public static List<LanguageText> getAllIntentDirectResponses(Category category, List<Intent> intents) {
+		List<LanguageText> ret = new ArrayList<LanguageText>();
 	
 		if (category.template != null) {
 			// Caso en que el template tenga texto
 			if (category.template.text != null && !category.template.text.isBlank()) {
-				TextLanguageInput languageInput = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+				LanguageText languageInput = GeneratorFactory.eINSTANCE.createLanguageText();
 				TextInput textInput = GeneratorFactory.eINSTANCE.createTextInput();
 				Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 				
@@ -870,7 +868,7 @@ public class AgentIntentsGetter {
 			
 			// Caso en que el template tenga conditions
 			if (category.template.condition != null) {
-				ret.addAll(getConditionResponsesREC(category.template.condition, intents, new ArrayList<TextLanguageInput>()));
+				ret.addAll(getConditionResponsesREC(category.template.condition, intents, new ArrayList<LanguageText>()));
 			}
 			
 			// Caso en el que el template tenga un think con srais
@@ -883,11 +881,11 @@ public class AgentIntentsGetter {
 	}
 	
 	// Añade las respuestas de un intent formadas por srais en forma de lista
-	public static List<TextLanguageInput> addResponseSrais(List<Srai> srais, List<Intent> intents) {
-		List<TextLanguageInput> ret = new ArrayList<TextLanguageInput>();
+	public static List<LanguageText> addResponseSrais(List<Srai> srais, List<Intent> intents) {
+		List<LanguageText> ret = new ArrayList<LanguageText>();
 		
 		for (Srai srai: srais) {
-			TextLanguageInput languageInput = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+			LanguageText languageInput = GeneratorFactory.eINSTANCE.createLanguageText();
 			TextInput textInput = GeneratorFactory.eINSTANCE.createTextInput();
 			Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 			
@@ -956,7 +954,7 @@ public class AgentIntentsGetter {
 //					for (int i = 0; i < starsFound; i++) {
 //						ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 //						Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-//						PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+//						LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 //						
 //						prompt.setLanguage(Language.ENGLISH);
 //						prompt.getPrompts().add("I need a parameter.");
@@ -980,11 +978,11 @@ public class AgentIntentsGetter {
 	
 	// Recoge todas las posibles respuestas de un condicional y sus posibles árboles de condicionales
 	// y las devuelve en forma de lista
-	public static List<TextLanguageInput> getConditionResponsesREC(Condition condition, List<Intent> intents, List<TextLanguageInput> list) {
+	public static List<LanguageText> getConditionResponsesREC(Condition condition, List<Intent> intents, List<LanguageText> list) {
 		for (Option option: condition.options) {
 			// Caso en que la opción tenga texto
 			if (option.text != null) {
-				TextLanguageInput languageInput = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+				LanguageText languageInput = GeneratorFactory.eINSTANCE.createLanguageText();
 				TextInput textInput = GeneratorFactory.eINSTANCE.createTextInput();
 				Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 				
@@ -1003,7 +1001,7 @@ public class AgentIntentsGetter {
 			// Caso en que la opción tenga srais
 			if (option.srais != null) {
 				for (Srai srai: option.srais) {
-					TextLanguageInput languageInput = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+					LanguageText languageInput = GeneratorFactory.eINSTANCE.createLanguageText();
 					TextInput textInput = GeneratorFactory.eINSTANCE.createTextInput();
 					Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
 					
@@ -1052,7 +1050,7 @@ public class AgentIntentsGetter {
 												parameterRef.setParameter(parameters.get(star.index - 1));
 											} catch(Exception e) {
 //												Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-//												PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+//												LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 //												
 //												prompt.setLanguage(Language.ENGLISH);
 //												prompt.getPrompts().add("I need a parameter.");
@@ -1100,7 +1098,7 @@ public class AgentIntentsGetter {
 		for (SetAttr set : sets) {
 			ParameterReferenceToken parameterRef = GeneratorFactory.eINSTANCE.createParameterReferenceToken();
 			Parameter parameter = GeneratorFactory.eINSTANCE.createParameter();
-			PromptLanguage prompt = GeneratorFactory.eINSTANCE.createPromptLanguage();
+			LanguagePrompt prompt = GeneratorFactory.eINSTANCE.createLanguagePrompt();
 
 			if (entities != null) {
 				for (Entity entity : entities) {

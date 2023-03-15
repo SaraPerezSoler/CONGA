@@ -4,6 +4,7 @@ package congabase.impl;
 
 import congabase.AQuestion;
 import congabase.CongabasePackage;
+import congabase.RecommenderOption;
 import congabase.RelevanceLevel;
 import congabase.UserAnswer;
 
@@ -26,7 +27,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import recommenderQuestionnaire.Question;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,7 +62,7 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<Tool, Double> ranking;
+	protected EMap<RecommenderOption, Double> ranking;
 
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
@@ -122,9 +122,9 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EMap<Tool, Double> getRanking() {
+	public EMap<RecommenderOption, Double> getRanking() {
 		if (ranking == null) {
-			ranking = new EcoreEMap<Tool,Double>(CongabasePackage.Literals.TOOL_TO_DOUBLE, ToolToDoubleImpl.class, this, CongabasePackage.USER_ANSWER__RANKING);
+			ranking = new EcoreEMap<RecommenderOption,Double>(CongabasePackage.Literals.ROPTION_TO_DOUBLE, ROptionToDoubleImpl.class, this, CongabasePackage.USER_ANSWER__RANKING);
 		}
 		return ranking;
 	}
@@ -274,9 +274,9 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 	}
 
 	@Override
-	public void calculateRanking(List<Tool> allTools) {
+	public void calculateRanking(List<RecommenderOption> allTools) {
 	
-		for (Tool t : allTools) {
+		for (RecommenderOption t : allTools) {
 			double raiting = 0;
 			int totalQuestions = getAnswers().size();
 			for (AQuestion ans : getAnswers()) {
@@ -308,5 +308,6 @@ public class UserAnswerImpl extends MinimalEObjectImpl.Container implements User
 			}
 		}
 	}
+
 
 } //UserAnswerImpl

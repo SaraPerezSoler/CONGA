@@ -20,7 +20,7 @@ import generator.HTTPResponse;
 import generator.HTTPReturnType;
 import generator.Language;
 import generator.TextInput;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 import generator.UserInteraction;
 
 public class Agent extends Chatbot {
@@ -31,6 +31,8 @@ public class Agent extends Chatbot {
 	private List<String> supportedLanguages = new ArrayList<>();
 	private List<Intent> intents = new ArrayList<>();
 	private List<Entity> entities = new ArrayList<>();
+	private boolean haveLoops = false;
+	private boolean haveeContainerLoops = false;
 
 	private HTTPRequest request;
 	private HTTPResponse response;
@@ -39,7 +41,7 @@ public class Agent extends Chatbot {
 	private Map<generator.Intent, List<generator.Intent>> similarIntents = new HashMap<>();
 
 	private Map<String, Map<Intent, UserInteraction>> flow_intent = new HashMap<String, Map<Intent, UserInteraction>>();
-
+	
 	public Agent() {
 	}
 
@@ -138,6 +140,7 @@ public class Agent extends Chatbot {
 			}
 			bot.getEntities().add(botEntity);
 		}
+		Entity.endBotCompositeEntity(bot);
 
 		if (getWebhook() != null) {
 			request = getWebhook().getRequestAction();
@@ -159,13 +162,27 @@ public class Agent extends Chatbot {
 		int i = 0;
 		for (Intent intent : getIntents()) {
 			if (intent.getContexts().isEmpty()) {
-				bot.getFlows().add(startFlow(intent, bot, i));
-				i++;
+				UserInteraction interaction = startFlow(intent, bot, i);
+				if (!bot.getFlows().contains(interaction)) {
+					bot.getFlows().add(interaction);
+					i++;
+				}
 			}
 		}
-
+		boolean needWebhook = false;
+		for (UserInteraction flow: bot.getFlows()) {
+			if (flow.flowHasAction(request)) {
+				needWebhook = true;
+				break;
+			}
+		}
+		if (!needWebhook) {
+			bot.getActions().remove(request);
+			bot.getActions().remove(response);
+		}
 		return bot;
 	}
+	
 
 	private void saveIntent(generator.Intent botIntent, Bot bot) {
 		boolean hasSimiliar = false;
@@ -249,26 +266,28 @@ public class Agent extends Chatbot {
 				break;
 			}
 		}
-		
-		return completeInteraction(interaction, intent, bot, numPath+"");
+
+		return completeInteraction(interaction, intent, bot, numPath + "");
 
 	}
+
 	private int num_userInteraction = 1;
 	private int num_botInteraction = 1;
+
 	private UserInteraction completeInteraction(UserInteraction interaction, Intent intent, Bot bot, String numPath) {
 		if (interaction == null) {
 			interaction = GeneratorFactory.eINSTANCE.createUserInteraction();
 			interaction.setIntent(getIntent(intent.getBotIntent(bot)));
-			interaction.setName("user"+num_userInteraction);
+			interaction.setName("user" + num_userInteraction);
 			num_userInteraction++;
-			
-			if (flow_intent.get(numPath)==null) {
+
+			if (flow_intent.get(numPath) == null) {
 				flow_intent.put(numPath, new HashMap<Intent, UserInteraction>());
 			}
 			flow_intent.get(numPath).put(intent, interaction);
 		}
 		BotInteraction botInteraction = GeneratorFactory.eINSTANCE.createBotInteraction();
-		botInteraction.setName("bot"+num_botInteraction);
+		botInteraction.setName("bot" + num_botInteraction);
 		num_botInteraction++;
 		for (Action act : intent.getBotIntentActions(bot, this)) {
 			botInteraction.getActions().add(getAction(act));
@@ -283,14 +302,19 @@ public class Agent extends Chatbot {
 
 		List<Context> affectedContext = new ArrayList<>();
 		intent.getResponses().forEach((r) -> affectedContext.addAll(r.getAffectedContexts()));
+		int i = 0;
 		for (Context context : affectedContext) {
-			int i = 0;
 			for (Intent followUp : getIntents(context)) {
 				UserInteraction aux = getInPath(numPath, followUp);
 				if (aux != null) {
-					botInteraction.getBackTo().add(aux);
+//					if (botInteraction.eContainer().equals(aux)) {
+//						haveeContainerLoops=true;
+//					}else {
+						haveLoops = true;
+						botInteraction.getBackTo().add(aux);
+//					}
 				} else {
-					aux = continueFlow(followUp, bot, botInteraction, numPath+"_"+i);
+					aux = continueFlow(followUp, bot, botInteraction, numPath + "_" + i);
 					botInteraction.getOutcoming().add(aux);
 					i++;
 				}
@@ -298,15 +322,15 @@ public class Agent extends Chatbot {
 		}
 		return interaction;
 	}
-	
+
 	private UserInteraction getInPath(String numPath, Intent followUp) {
 		String[] nums = numPath.split("_");
-		String path="";
+		String path = "";
 		String sep = "";
-		for (String n: nums) {
-			path += sep+n;
+		for (String n : nums) {
+			path += sep + n;
 			sep = "_";
-			if (flow_intent.get(path)!= null) {
+			if (flow_intent.get(path) != null) {
 				if (flow_intent.get(path).containsKey(followUp)) {
 					return flow_intent.get(path).get(followUp);
 				}
@@ -330,48 +354,47 @@ public class Agent extends Chatbot {
 		if (language == null) {
 			return Language.ENGLISH;
 		}
-		switch (language) {
-		case "en":
+		if (language.startsWith("en")) {
 			return Language.ENGLISH;
-		case "es":
+		}else if (language.startsWith("es")) {
 			return Language.SPANISH;
-		case "da":
+		}else if (language.startsWith("da")) {
 			return Language.DANISH;
-		case "de":
+		}else if (language.startsWith("de")) {
 			return Language.GERMAN;
-		case "fr":
+		}else if (language.startsWith("fr")) {
 			return Language.FRENCH;
-		case "hi":
+		}else if (language.startsWith("hi")) {
 			return Language.HINDI;
-		case "id":
+		}else if (language.startsWith("id")) {
 			return Language.INDONESIAN;
-		case "it":
+		}else if (language.startsWith("it")) {
 			return Language.ITALIAN;
-		case "ja":
+		}else if (language.startsWith("ja")) {
 			return Language.JAPANESE;
-		case "ko":
+		}else if (language.startsWith("ko")) {
 			return Language.KOREAN;
-		case "nl":
+		}else if (language.startsWith("nl")) {
 			return Language.DUTCH;
-		case "no":
+		}else if (language.startsWith("no")) {
 			return Language.NORWEGIAN;
-		case "pl":
+		}else if (language.startsWith("pl")) {
 			return Language.POLISH;
-		case "pt":
+		}else if (language.startsWith("pt")) {
 			return Language.PORTUGUESE;
-		case "ru":
+		}else if (language.startsWith("ru")) {
 			return Language.RUSIAN;
-		case "sv":
+		}else if (language.startsWith("sv")) {
 			return Language.SWEDISH;
-		case "th":
+		}else if (language.startsWith("th")) {
 			return Language.THAI;
-		case "tr":
+		}else if (language.startsWith("tr")) {
 			return Language.TURKISH;
-		case "uk":
+		}else if (language.startsWith("uk")) {
 			return Language.UKRANIAN;
-		case "zh":
+		}else if (language.startsWith("zh")) {
 			return Language.CHINESE;
-		default:
+		}else {
 			return Language.ENGLISH;
 		}
 	}
@@ -380,15 +403,25 @@ public class Agent extends Chatbot {
 		HTTPResponse ret = GeneratorFactory.eINSTANCE.createHTTPResponse();
 		ret.setName("HttpResponse");
 		ret.setHTTPRequest(request);
+
 		for (String lan : getLanguages()) {
-			TextLanguageInput lanInput = GeneratorFactory.eINSTANCE.createTextLanguageInput();
-			lanInput.setLanguage(castLanguage(lan));
-			TextInput input = GeneratorFactory.eINSTANCE.createTextInput();
-			HTTPRequestToke token = GeneratorFactory.eINSTANCE.createHTTPRequestToke();
-			token.setType(HTTPReturnType.TEXT);
-			input.getTokens().add(token);
-			lanInput.getInputs().add(input);
-			ret.getInputs().add(lanInput);
+			boolean exists = false;
+			Language language = castLanguage(lan);
+			for (LanguageText lanInput : ret.getInputs()) {
+				if (lanInput.getLanguage().equals(language)) {
+					exists = true;
+				}
+			}
+			if (!exists) {
+				LanguageText lanInput = GeneratorFactory.eINSTANCE.createLanguageText();
+				lanInput.setLanguage(language);
+				TextInput input = GeneratorFactory.eINSTANCE.createTextInput();
+				HTTPRequestToke token = GeneratorFactory.eINSTANCE.createHTTPRequestToke();
+				token.setType(HTTPReturnType.TEXT);
+				input.getTokens().add(token);
+				lanInput.getInputs().add(input);
+				ret.getInputs().add(lanInput);
+			}
 		}
 		return ret;
 	}
@@ -398,6 +431,22 @@ public class Agent extends Chatbot {
 		languages.add(getLanguage());
 		languages.addAll(getSupportedLanguages());
 		return languages;
+	}
+
+	public boolean isHaveLoops() {
+		return haveLoops;
+	}
+
+	public void setHaveLoops(boolean haveLoops) {
+		this.haveLoops = haveLoops;
+	}
+
+	public boolean isHaveeContainerLoops() {
+		return haveeContainerLoops;
+	}
+
+	public void setHaveeContainerLoops(boolean haveeContainerLoops) {
+		this.haveeContainerLoops = haveeContainerLoops;
 	}
 
 }

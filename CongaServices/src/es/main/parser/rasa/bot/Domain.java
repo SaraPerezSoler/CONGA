@@ -6,16 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import es.main.parser.rasa.bot.domain.Button;
 import es.main.parser.rasa.bot.domain.Response;
 import es.main.parser.rasa.bot.domain.Slot;
 import generator.Action;
 import generator.Bot;
+import generator.ButtonAction;
 import generator.Empty;
 import generator.GeneratorFactory;
 import generator.Image;
-import generator.Intent;
+import generator.LanguageButton;
 import generator.Text;
-import generator.TextLanguageInput;
+import generator.LanguageText;
 
 public class Domain {
 
@@ -26,6 +28,15 @@ public class Domain {
 	private Map<String, Slot> slots;
 	private Map<String, List<Response>> responses;
 	public static Action defaultEmptyAction;
+
+	private int num_actions = 0;
+	private int num_forms = 0;
+	
+	public static final String TEXT_SUFIX= "_text";
+	public static final String IMG_SUFIX= "_img";
+	public static final String BUTTON_SUFIX= "_btn";
+	public static final String EMPTY_SUFIX= "_empty";
+	
 
 	public List<Object> getIntents() {
 		return intents;
@@ -55,8 +66,19 @@ public class Domain {
 		return forms;
 	}
 
-	public void setForms(List<String> forms) {
-		this.forms = forms;
+	/*
+	 * public void setForms(List<String> forms) {
+	 * 
+	 * this.forms = forms; }
+	 */
+
+	public void setForms(Object forms) {
+		if (forms instanceof List<?>) {
+			this.forms = (List<String>) forms;
+		} else if (forms instanceof Map<?, ?>) {
+			this.forms = new ArrayList<>();
+			this.forms.addAll(((Map<String, Object>) forms).keySet());
+		}
 	}
 
 	public Map<String, Slot> getSlots() {
@@ -89,14 +111,16 @@ public class Domain {
 		for (String actionName : actions) {
 			if (responses.containsKey(actionName)) {
 				int imageCount = 1;
+				int buttonCount = 1;
 				int emptyCount = 1;
 				Text text = null;
 				Image image = null;
+				ButtonAction button = null;
 				List<Response> responses = this.responses.get(actionName);
 				for (Response response : responses) {
 					if (response.getImage() != null && !response.getImage().isEmpty()
 							&& !response.getImage().isBlank()) {
-						String name = actionName + "_img";
+						String name = actionName + IMG_SUFIX;
 						if (imageCount != 1) {
 							name += imageCount;
 						}
@@ -106,20 +130,37 @@ public class Domain {
 						image.setCaption(response.getText());
 						imageCount++;
 						bot.getActions().add(image);
+					} else if (!response.getButtons().isEmpty()) {
+						String name = actionName + BUTTON_SUFIX;
+						if (buttonCount != 1) {
+							name += buttonCount;
+						}
+						button = GeneratorFactory.eINSTANCE.createButtonAction();
+						button.setName(name);
+						LanguageButton input = GeneratorFactory.eINSTANCE.createLanguageButton();
+						input.setLanguage(bot.getLanguages().get(0));
+						for (Button b : response.getButtons()) {
+							input.getButtons().add(b.getButton());
+						}
+						button.getInputs().add(input);
+						bot.getActions().add(button);
+						if(response.getText()!=null && !response.getText().isEmpty()) {
+							input.getInputs().add(response.getTextInput(bot));
+						}
 					} else if (response.getText() != null && !response.getText().isEmpty()
 							&& !response.getText().isBlank()) {
 						if (text == null) {
-							String name = actionName + "_text";
+							String name = actionName + TEXT_SUFIX;
 							text = GeneratorFactory.eINSTANCE.createText();
 							text.setName(name);
-							TextLanguageInput input = GeneratorFactory.eINSTANCE.createTextLanguageInput();
+							LanguageText input = GeneratorFactory.eINSTANCE.createLanguageText();
 							input.setLanguage(bot.getLanguages().get(0));
 							text.getInputs().add(input);
 							bot.getActions().add(text);
 						}
 						text.getInputs().get(0).getInputs().add(response.getTextInput(bot));
 					} else {
-						String name = actionName + "_empty";
+						String name = actionName + EMPTY_SUFIX;
 						if (emptyCount != 1) {
 							name += emptyCount;
 						}
@@ -127,16 +168,45 @@ public class Domain {
 						empty.setName(name);
 						emptyCount++;
 						bot.getActions().add(empty);
+						empty.setDescription("UNKNOWN_RASA");
 					}
 				}
 
 			} else {
-				String name = actionName + "_empty";
+				String name = actionName + EMPTY_SUFIX;
 				Empty empty = GeneratorFactory.eINSTANCE.createEmpty();
 				empty.setName(name);
+				empty.setDescription("RASA_ACTION");
 				bot.getActions().add(empty);
+				num_actions++;
+				
 			}
 		}
+
+		for (String formName : forms) {
+			String name = formName + EMPTY_SUFIX;
+			Empty empty = GeneratorFactory.eINSTANCE.createEmpty();
+			empty.setName(name);
+			empty.setDescription("RASA_FORM");
+			bot.getActions().add(empty);
+			num_forms++;
+		}
+	}
+
+	public int getNum_actions() {
+		return num_actions;
+	}
+
+	public void setNum_actions(int num_actions) {
+		this.num_actions = num_actions;
+	}
+
+	public int getNum_forms() {
+		return num_forms;
+	}
+
+	public void setNum_forms(int num_forms) {
+		this.num_forms = num_forms;
 	}
 
 }

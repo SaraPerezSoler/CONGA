@@ -27,10 +27,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xtext.botGenerator.generator.BotGenerator;
 
 import com.google.inject.Injector;
 
@@ -41,12 +41,14 @@ import congabase.CongabaseFactory;
 import congabase.CongabasePackage;
 import congabase.KeyValue;
 import congabase.Project;
+import congabase.RecommenderOption;
 import congabase.RelevanceLevel;
 import congabase.Service;
 import congabase.ServiceStatus;
 import congabase.ServiceType;
 import congabase.User;
 import congabase.UserAnswer;
+import congabase.Utility;
 import congabase.exception.FatalException;
 import congabase.plantUML.CreateFlowsDiagram;
 import congabase.plantUML.UML;
@@ -60,17 +62,17 @@ import recommenderQuestionnaire.RecommenderQuestionnairePackage;
 import recommenderQuestionnaire.Tool;
 import recommenderQuestionnaire.evaluations.Evaluator;
 
-
 /**
  * @author Sara Pérez Soler
  * 
- * Manager class of CONGA Web Tool
+ *         Manager class of CONGA Web Tool
  * 
- * **/
+ **/
 public class CongaData {
 
 	private static final String FILENAME = "CONGA.xmi";
-	private static final String RECOMMENDER_FILE = "RecomenderModel.xmi";
+	//private static final String RECOMMENDER_FILE = "RecomenderModel.xmi";
+	private static final String CONGA_BASE = "CONGA_base.xmi";
 	private static ResourceSet resourceSet = null;
 	private static CongaData congaData;
 	private static String PATH;
@@ -87,6 +89,9 @@ public class CongaData {
 					new XMIResourceFactoryImpl());
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",
 					new XMIResourceFactoryImpl());
+
+			resourceSet.getLoadOptions().put(XMIResource.OPTION_ENCODING, "UTF-8");
+			
 			if (!EPackage.Registry.INSTANCE.containsKey(RecommenderQuestionnairePackage.eNS_URI)) {
 				EPackage.Registry.INSTANCE.put(RecommenderQuestionnairePackage.eNS_URI,
 						RecommenderQuestionnairePackage.eINSTANCE);
@@ -117,7 +122,7 @@ public class CongaData {
 		}
 		return ret;
 	}
-	
+
 	public Map<String, List<Service>> supportedValidatorTools() {
 		Map<String, List<Service>> ret = new HashMap<>();
 		for (Service service : conga.getValidators()) {
@@ -130,9 +135,10 @@ public class CongaData {
 				services.add(service);
 			}
 		}
+		
 		return ret;
 	}
-	
+
 	public Map<String, List<Service>> supportedParserTools() {
 		Map<String, List<Service>> ret = new HashMap<>();
 		for (Service service : conga.getConverters()) {
@@ -165,8 +171,6 @@ public class CongaData {
 			if (path != null) {
 				PATH = path;
 				congaData = new CongaData(PATH);
-				BotGenerator.setIsPlugin(false);
-
 			}
 		}
 		return congaData;
@@ -182,17 +186,21 @@ public class CongaData {
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new FatalException("In class " + this.getClass().getName() + ": the file " + path + "/" + FILENAME
-						+ " can be opened: ");
+						+ " can not be opened: ");
 			}
 		} else {
 			this.resource = getResourceSet().createResource(URI.createURI(path + "/" + FILENAME));
-			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
+			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + CONGA_BASE), true);
+			conga = (CongaSystem) qresource.getContents().get(0);
 			resource.getContents().add(conga);
-			newUser("admin", "adminadmin");
-			newUser("Sara", "friends");
-			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
-			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
-			conga.setQuestionnaire(questionnaire);
+			
+//			conga = CongabaseFactory.eINSTANCE.createCongaSystem();
+//			resource.getContents().add(conga);
+//			newUser("admin", "adminadmin");
+//			newUser("Sara", "friends");
+//			Resource qresource = getResourceSet().getResource(URI.createFileURI(path + "/" + RECOMMENDER_FILE), true);
+//			Questionnaire questionnaire = (Questionnaire) qresource.getContents().get(0);
+//			conga.setQuestionnaire(questionnaire);
 		}
 		Questionnaire questionnaire = conga.getQuestionnaire();
 		try {
@@ -205,14 +213,16 @@ public class CongaData {
 	}
 
 	public void setLastServiceId() {
-		List<Service> services = new ArrayList<>();
+		List<Utility> services = new ArrayList<>();
 		services.addAll(conga.getConverters());
 		services.addAll(conga.getGenerators());
 		services.addAll(conga.getValidators());
-		Collections.sort(services, new Comparator<Service>() {
+		services.addAll(conga.getQOptions());
+		
+		Collections.sort(services, new Comparator<Utility>() {
 
 			@Override
-			public int compare(Service o1, Service o2) {
+			public int compare(Utility o1, Utility o2) {
 				return Long.compare(o1.getServiceId(), o2.getServiceId());
 			}
 
@@ -226,7 +236,9 @@ public class CongaData {
 
 	public void save() {
 		try {
-			resource.save(null);
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMIResource.OPTION_ENCODING, "UTF-8");
+			resource.save(options);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -257,22 +269,27 @@ public class CongaData {
 		save();
 	}
 
-	public void delService(String userString, String serviceId) {
+	public void delUtility(String userString, String serviceId) {
 		User user = getUser(userString);
 		if (user == null) {
 			return;
 		}
-		Service service = getService(userString, serviceId);
-		if (service == null) {
+		Utility utility = getUtility(userString, serviceId);
+		if (utility == null) {
 			return;
 		}
-		user.getServices().remove(service);
-		if (service.getType() == ServiceType.CONVERTER) {
-			conga.getConverters().remove(service);
-		} else if (service.getType() == ServiceType.GENERATOR) {
-			conga.getGenerators().remove(service);
-		} else {
-			conga.getValidators().remove(service);
+		user.getUtilities().remove(utility);
+		if (utility instanceof Service) {
+			Service service = (Service) utility;
+			if (service.getType() == ServiceType.CONVERTER) {
+				conga.getConverters().remove(service);
+			} else if (service.getType() == ServiceType.GENERATOR) {
+				conga.getGenerators().remove(service);
+			} else {
+				conga.getValidators().remove(service);
+			}
+		}else {
+			conga.getQOptions().remove(utility);
 		}
 		save();
 	}
@@ -436,15 +453,15 @@ public class CongaData {
 		}
 		save();
 	}
-	
-	public void addLastDateService(String userString, String serviceId, Date date) {
-		Service selected = getService(userString, serviceId);
-		if (selected != null) {
-			selected.setLastAccess(date);
-		}
-		save();
-		
-	}
+
+//	public void addLastDateService(String userString, String serviceId, Date date) {
+//		Service selected = getService(userString, serviceId);
+//		if (selected != null) {
+//			selected.setLastAccess(date);
+//		}
+//		save();
+//
+//	}
 
 	public Service getService(String userString, String serviceId) {
 		User user = getUser(userString);
@@ -459,6 +476,46 @@ public class CongaData {
 		}
 		Service selected = null;
 		for (Service s : user.getServices()) {
+			if (s.getServiceId() == serviceLong) {
+				selected = (Service) s;
+			}
+		}
+		return selected;
+	}
+
+	public Utility getUtility(String userString, String serviceId) {
+		User user = getUser(userString);
+		if (user == null) {
+			return null;
+		}
+		long serviceLong;
+		try {
+			serviceLong = Long.parseLong(serviceId);
+		} catch (Exception e) {
+			return null;
+		}
+		Utility selected = null;
+		for (Utility s : user.getUtilities()) {
+			if (s.getServiceId() == serviceLong) {
+				selected = s;
+			}
+		}
+		return selected;
+	}
+	
+	public RecommenderOption getRecommenderOption(String userString, String serviceId) {
+		User user = getUser(userString);
+		if (user == null) {
+			return null;
+		}
+		long serviceLong;
+		try {
+			serviceLong = Long.parseLong(serviceId);
+		} catch (Exception e) {
+			return null;
+		}
+		RecommenderOption selected = null;
+		for (RecommenderOption s : user.getRecommenderOptions()) {
 			if (s.getServiceId() == serviceLong) {
 				selected = s;
 			}
@@ -481,7 +538,7 @@ public class CongaData {
 		}
 		return selected;
 	}
-	
+
 	public Service getValidatorService(String generatorId) {
 		long serviceLong;
 		try {
@@ -497,7 +554,7 @@ public class CongaData {
 		}
 		return selected;
 	}
-	
+
 	public Service getParserService(String generatorId) {
 		long serviceLong;
 		try {
@@ -513,9 +570,9 @@ public class CongaData {
 		}
 		return selected;
 	}
-	
+
 	public Service getService(User user, Tool tool, String version, ServiceType type) {
-		for (Service s:user.getServices()) {
+		for (Service s : user.getServices()) {
 			if (s.getType() == type) {
 				if (s.getTool().equals(tool) && s.getVersion().equalsIgnoreCase(version)) {
 					return s;
@@ -524,15 +581,15 @@ public class CongaData {
 		}
 		return null;
 	}
-	
+
 	public Service getGeneratorService(User user, Tool tool, String version) {
 		return getService(user, tool, version, ServiceType.GENERATOR);
 	}
-	
+
 	public Service getValidatorService(User user, Tool tool, String version) {
 		return getService(user, tool, version, ServiceType.VALIDATOR);
 	}
-	
+
 	public Service getParserService(User user, Tool tool, String version) {
 		return getService(user, tool, version, ServiceType.CONVERTER);
 	}
@@ -554,11 +611,11 @@ public class CongaData {
 		resource.getContents().add(bot);
 		resource.save(null);
 	}
-	
+
 	public Bot extractBot(File f) throws IOException {
 		URI uri = URI.createFileURI(f.getAbsolutePath());
 		Resource resource = getResourceSet().getResource(uri, true);
-		Bot b = (Bot)resource.getContents().get(0);
+		Bot b = (Bot) resource.getContents().get(0);
 		resource.delete(null);
 		return b;
 	}
@@ -573,6 +630,7 @@ public class CongaData {
 		Injector injector = BotServlet.getInjector();
 		XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
 		resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 		Resource resource = resourceSetXtext.getResource(URI.createURI(getProjectFilePath(project)), true);
 		return resource;
 	}
@@ -609,17 +667,17 @@ public class CongaData {
 		}
 		return null;
 	}
-	
+
 	public Project getProject(Resource resource) {
-		for (Project p: conga.getProjects()) {
+		for (Project p : conga.getProjects()) {
 			Resource resource2 = getProjectResource(p);
-			String uri1 = resource.getURI().toString().replace("\\", "/");
+			String uri1 = resource.getURI().toString().replace("\\", "/").replace("%20", " ");
 			String uri2 = resource2.getURI().toString().replace("\\", "/");
 			if (uri1.equals(uri2)) {
 				return p;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -671,6 +729,14 @@ public class CongaData {
 		return user.getServices();
 	}
 
+	public List<Utility> getUtilities(String username) {
+		User user = getUser(username);
+		if (user == null) {
+			return new ArrayList<>();
+		}
+		return user.getUtilities();
+	}
+
 	public void updateModified(Project project) {
 		project.setModificationDate(new Date());
 		save();
@@ -704,6 +770,14 @@ public class CongaData {
 		return ret;
 	}
 
+	public List<Question> getRecommenderQuestions() {
+		List<Question> ret = new ArrayList<>();
+		for (Question ev : conga.getQuestionnaire().getQuestions()) {
+			ret.add(ev);
+		}
+		return ret;
+	}
+
 	public Map<String, List<AQuestion>> getAllQuestions(String user, String projectName) {
 		Map<String, List<AQuestion>> ret = new HashMap<>();
 		ret.put("Evaluations", getEvaluations(user, projectName));
@@ -733,6 +807,102 @@ public class CongaData {
 			answerQuestion(evaluation, answers, ans, RelevanceLevel.get(evaluationLevel.get(ev)));
 		}
 		save();
+	}
+
+	public void addToolOptions(Tool t, User user, String version, Map<String, List<String>> availables,
+			Map<String, List<String>> unavailables, Map<String, List<String>> possible) {
+		if (getToolOptions(t, user, version) != null) {
+			return;
+		}
+		RecommenderOption ro = CongabaseFactory.eINSTANCE.createRecommenderOption();
+		ro.setServiceId(lastServiceId);
+		lastServiceId++;
+		ro.setTool(t);
+		ro.setUser(user);
+		ro.setVersion(version);
+		for (Question q : conga.getQuestionnaire().getQuestions()) {
+			List<String> avOptions = availables.get(q.getName());
+			List<String> unavOptions = unavailables.get(q.getName());
+			List<String> possOptions = possible.get(q.getName());
+			for (Option op : q.getOptions()) {
+				if (avOptions.contains(op.getText())) {
+					ro.getAvailable().add(op);
+				} else if (unavOptions.contains(op.getText())) {
+					ro.getUnavailable().add(op);
+				} else if (possOptions.contains(op.getText())) {
+					ro.getPossible().add(op);
+				} else {
+					ro.getUnknown().add(op);
+				}
+			}
+		}
+		conga.getQOptions().add(ro);
+		save();
+	}
+	
+	public void editToolOptions(String serviceId, Tool t, String user, String version, Map<String, List<String>> availables,
+			Map<String, List<String>> unavailables, Map<String, List<String>> possible) {
+		
+		RecommenderOption ro = getRecommenderOption(user, serviceId);
+		ro.setTool(t);
+		ro.setVersion(version);
+		for (Question q : conga.getQuestionnaire().getQuestions()) {
+			List<String> avOptions = availables.get(q.getName());
+			List<String> unavOptions = unavailables.get(q.getName());
+			List<String> possOptions = possible.get(q.getName());
+			for (Option op : q.getOptions()) {
+				if (avOptions.contains(op.getText())) {
+					ro.getAvailable().add(op);
+				} else if (unavOptions.contains(op.getText())) {
+					ro.getUnavailable().add(op);
+				} else if (possOptions.contains(op.getText())) {
+					ro.getPossible().add(op);
+				} else {
+					ro.getUnknown().add(op);
+				}
+			}
+		}
+		conga.getQOptions().add(ro);
+		save();
+	}
+
+	public RecommenderOption getToolOptions(String t, String user, String version) {
+		for (RecommenderOption rOption : conga.getQOptions()) {
+			if (rOption.getTool().getName().equals(t) && rOption.getUser().getNick().equals(user)
+					&& rOption.getVersion().equals(version)) {
+				return rOption;
+			}
+		}
+		return null;
+	}
+
+	public RecommenderOption getToolOptions(String info) {
+		// t.getUser().getNick()+"/"+t.getTool().getName()+":"+t.getVersion(),
+		// ranking.get(t)
+		String t = "";
+		String user = "";
+		String version = "";
+
+		String[] split1 = info.split("/");
+		user = split1[0];
+
+		if (split1.length > 1) {
+			String[] split2 = split1[1].split(":");
+			t = split2[0];
+			if (split2.length > 1) {
+				version = split2[1];
+			}
+		}
+		return getToolOptions(t, user, version);
+	}
+
+	public RecommenderOption getToolOptions(Tool t, User user, String version) {
+		for (RecommenderOption rOption : conga.getQOptions()) {
+			if (rOption.getTool().equals(t) && rOption.getUser().equals(user) && rOption.getVersion().equals(version)) {
+				return rOption;
+			}
+		}
+		return null;
 	}
 
 	private void answerQuestion(Question question, UserAnswer answers, List<Option> options, RelevanceLevel level) {
@@ -773,7 +943,7 @@ public class CongaData {
 
 	public void calculateRanking(Project project) {
 		if (project.getQuestionnaire() != null) {
-			project.getQuestionnaire().calculateRanking(conga.getQuestionnaire().getTools());
+			project.getQuestionnaire().calculateRanking(conga.getQOptions());
 			project.getQuestionnaire().setDate(new Date());
 		}
 		save();
@@ -786,9 +956,9 @@ public class CongaData {
 			return new HashMap<>();
 		}
 		Map<String, Double> ret = new HashMap<>();
-		EMap<Tool, Double> ranking = p.getQuestionnaire().getRanking();
-		for (Tool t : ranking.keySet()) {
-			ret.put(t.getName(), ranking.get(t));
+		EMap<RecommenderOption, Double> ranking = p.getQuestionnaire().getRanking();
+		for (RecommenderOption t : ranking.keySet()) {
+			ret.put(t.getUser().getNick() + "/" + t.getTool().getName() + ":" + t.getVersion(), ranking.get(t));
 		}
 		ret = ret.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
@@ -797,6 +967,9 @@ public class CongaData {
 
 	public String getWinner(Project project) {
 		Map<String, Double> ranking = getRanking(project.getOwner().getNick(), project.getName());
+		if (ranking.isEmpty()) {
+			return "-";
+		}
 		String tool = ranking.keySet().iterator().next();
 		return tool + " (" + String.format("%.2f", ranking.get(tool) * 100) + "%)";
 	}
@@ -817,13 +990,15 @@ public class CongaData {
 		Resource xmiResource = getResourceSet().createResource(URI.createURI(getProjectXMIPath(p)));
 		xmiResource.getContents().add(bot);
 		try {
-			xmiResource.save(null);
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMIResource.OPTION_ENCODING, "UTF-8");
+			xmiResource.save(options);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void validate (Project p) throws Exception {
+
+	public void validate(Project p) throws Exception {
 		saveAsXmi(p);
 		File f = new File(getProjectXMIPath(p));
 		p.validate(f);

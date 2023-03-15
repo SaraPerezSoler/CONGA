@@ -105,9 +105,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.WITH_LANGUAGE: {
-				WithLanguage withLanguage = (WithLanguage)theEObject;
-				T result = caseWithLanguage(withLanguage);
+			case GeneratorPackage.LANGUAGE_INPUT: {
+				LanguageInput languageInput = (LanguageInput)theEObject;
+				T result = caseLanguageInput(languageInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -118,10 +118,10 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.LANGUAGE_INPUT: {
-				LanguageInput languageInput = (LanguageInput)theEObject;
-				T result = caseLanguageInput(languageInput);
-				if (result == null) result = caseWithLanguage(languageInput);
+			case GeneratorPackage.LANGUAGE_ENTITY: {
+				LanguageEntity languageEntity = (LanguageEntity)theEObject;
+				T result = caseLanguageEntity(languageEntity);
+				if (result == null) result = caseLanguageInput(languageEntity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,7 +153,6 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				RegexInput regexInput = (RegexInput)theEObject;
 				T result = caseRegexInput(regexInput);
 				if (result == null) result = caseEntityInput(regexInput);
-				if (result == null) result = caseIntentInput(regexInput);
 				if (result == null) result = caseInput(regexInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -212,25 +211,16 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.INTENT_LANGUAGE_INPUTS: {
-				IntentLanguageInputs intentLanguageInputs = (IntentLanguageInputs)theEObject;
-				T result = caseIntentLanguageInputs(intentLanguageInputs);
-				if (result == null) result = caseWithLanguage(intentLanguageInputs);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.INTENT_INPUT: {
-				IntentInput intentInput = (IntentInput)theEObject;
-				T result = caseIntentInput(intentInput);
-				if (result == null) result = caseInput(intentInput);
+			case GeneratorPackage.LANGUAGE_INTENT: {
+				LanguageIntent languageIntent = (LanguageIntent)theEObject;
+				T result = caseLanguageIntent(languageIntent);
+				if (result == null) result = caseLanguageInput(languageIntent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GeneratorPackage.TRAINING_PHRASE: {
 				TrainingPhrase trainingPhrase = (TrainingPhrase)theEObject;
 				T result = caseTrainingPhrase(trainingPhrase);
-				if (result == null) result = caseIntentInput(trainingPhrase);
-				if (result == null) result = caseInput(trainingPhrase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -241,10 +231,10 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.PROMPT_LANGUAGE: {
-				PromptLanguage promptLanguage = (PromptLanguage)theEObject;
-				T result = casePromptLanguage(promptLanguage);
-				if (result == null) result = caseWithLanguage(promptLanguage);
+			case GeneratorPackage.LANGUAGE_PROMPT: {
+				LanguagePrompt languagePrompt = (LanguagePrompt)theEObject;
+				T result = caseLanguagePrompt(languagePrompt);
+				if (result == null) result = caseLanguageInput(languagePrompt);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -287,10 +277,11 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.BUTTONS_LANGUAGE_INPUTS: {
-				ButtonsLanguageInputs buttonsLanguageInputs = (ButtonsLanguageInputs)theEObject;
-				T result = caseButtonsLanguageInputs(buttonsLanguageInputs);
-				if (result == null) result = caseWithLanguage(buttonsLanguageInputs);
+			case GeneratorPackage.LANGUAGE_BUTTON: {
+				LanguageButton languageButton = (LanguageButton)theEObject;
+				T result = caseLanguageButton(languageButton);
+				if (result == null) result = caseLanguageText(languageButton);
+				if (result == null) result = caseLanguageInput(languageButton);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -300,10 +291,10 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.TEXT_LANGUAGE_INPUT: {
-				TextLanguageInput textLanguageInput = (TextLanguageInput)theEObject;
-				T result = caseTextLanguageInput(textLanguageInput);
-				if (result == null) result = caseWithLanguage(textLanguageInput);
+			case GeneratorPackage.LANGUAGE_TEXT: {
+				LanguageText languageText = (LanguageText)theEObject;
+				T result = caseLanguageText(languageText);
+				if (result == null) result = caseLanguageInput(languageText);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -430,21 +421,6 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>With Language</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>With Language</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWithLanguage(WithLanguage object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -456,6 +432,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEntity(Entity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Language Entity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Language Entity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLanguageEntity(LanguageEntity object) {
 		return null;
 	}
 
@@ -655,32 +646,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Intent Language Inputs</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Language Intent</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Intent Language Inputs</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Language Intent</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntentLanguageInputs(IntentLanguageInputs object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Intent Input</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Intent Input</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntentInput(IntentInput object) {
+	public T caseLanguageIntent(LanguageIntent object) {
 		return null;
 	}
 
@@ -715,17 +691,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Prompt Language</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Language Prompt</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Prompt Language</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Language Prompt</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePromptLanguage(PromptLanguage object) {
+	public T caseLanguagePrompt(LanguagePrompt object) {
 		return null;
 	}
 
@@ -805,17 +781,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Buttons Language Inputs</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Language Button</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Buttons Language Inputs</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Language Button</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseButtonsLanguageInputs(ButtonsLanguageInputs object) {
+	public T caseLanguageButton(LanguageButton object) {
 		return null;
 	}
 
@@ -835,17 +811,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Text Language Input</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Language Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Text Language Input</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Language Text</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTextLanguageInput(TextLanguageInput object) {
+	public T caseLanguageText(LanguageText object) {
 		return null;
 	}
 

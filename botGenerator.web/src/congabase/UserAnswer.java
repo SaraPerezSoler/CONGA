@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 import recommenderQuestionnaire.Question;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,16 +45,16 @@ public interface UserAnswer extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ranking</b></em>' map.
-	 * The key is of type {@link recommenderQuestionnaire.Tool},
+	 * The key is of type {@link congabase.RecommenderOption},
 	 * and the value is of type {@link java.lang.Double},
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ranking</em>' map.
 	 * @see congabase.CongabasePackage#getUserAnswer_Ranking()
-	 * @model mapType="congabase.ToolToDouble&lt;recommenderQuestionnaire.Tool, org.eclipse.emf.ecore.EDoubleObject&gt;"
+	 * @model mapType="congabase.ROptionToDouble&lt;congabase.RecommenderOption, org.eclipse.emf.ecore.EDoubleObject&gt;"
 	 * @generated
 	 */
-	EMap<Tool, Double> getRanking();
+	EMap<RecommenderOption, Double> getRanking();
 
 
 	/**
@@ -69,7 +68,6 @@ public interface UserAnswer extends EObject {
 	 * @generated
 	 */
 	Date getDate();
-
 
 	/**
 	 * Sets the value of the '{@link congabase.UserAnswer#getDate <em>Date</em>}' attribute.
@@ -85,6 +83,6 @@ public interface UserAnswer extends EObject {
 	AQuestion getAnswer(Question question);
 
 
-	void calculateRanking(List<Tool> allTools);
+	void calculateRanking(List<RecommenderOption> allTools);
 
 } // UserAnswer

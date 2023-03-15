@@ -3,6 +3,8 @@
  */
 package botGenerator.web.xtextServlets;
 
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.service.DispatchingProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -24,8 +26,11 @@ public class BotWebModule extends AbstractBotWebModule {
 				new MyResourceBaseProvider(CongaData.getPath()));
 		binder.bind(XtextServiceDispatcher.class).to(MyXtextServiceDispatcher.class);
 		binder.bind(IResourceValidator.class).to(MyResourceValidator.class);
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class)
+		.to(MyEncodingPrivider.class);
 		super.configure(binder);
 	}
+	
 	
 	
 }

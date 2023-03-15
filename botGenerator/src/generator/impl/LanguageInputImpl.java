@@ -2,19 +2,13 @@
  */
 package generator.impl;
 
-import generator.EntityInput;
 import generator.GeneratorPackage;
+import generator.Language;
 import generator.LanguageInput;
-import generator.RegexInput;
-import generator.SimpleInput;
-
-import java.util.Collection;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,22 +18,30 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link generator.impl.LanguageInputImpl#getInputs <em>Inputs</em>}</li>
+ *   <li>{@link generator.impl.LanguageInputImpl#getLanguage <em>Language</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput {
+public abstract class LanguageInputImpl extends MinimalEObjectImpl.Container implements LanguageInput {
 	/**
-	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInputs()
+	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EntityInput> inputs;
-
+	protected static final Language LANGUAGE_EDEFAULT = Language.EMPTY;
+	/**
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected Language language = LANGUAGE_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,11 +67,8 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	 * @generated
 	 */
 	@Override
-	public EList<EntityInput> getInputs() {
-		if (inputs == null) {
-			inputs = new EObjectContainmentEList<EntityInput>(EntityInput.class, this, GeneratorPackage.LANGUAGE_INPUT__INPUTS);
-		}
-		return inputs;
+	public Language getLanguage() {
+		return language;
 	}
 
 	/**
@@ -78,12 +77,11 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GeneratorPackage.LANGUAGE_INPUT__INPUTS:
-				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setLanguage(Language newLanguage) {
+		Language oldLanguage = language;
+		language = newLanguage == null ? LANGUAGE_EDEFAULT : newLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.LANGUAGE_INPUT__LANGUAGE, oldLanguage, language));
 	}
 
 	/**
@@ -94,8 +92,8 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.LANGUAGE_INPUT__INPUTS:
-				return getInputs();
+			case GeneratorPackage.LANGUAGE_INPUT__LANGUAGE:
+				return getLanguage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,13 +103,11 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.LANGUAGE_INPUT__INPUTS:
-				getInputs().clear();
-				getInputs().addAll((Collection<? extends EntityInput>)newValue);
+			case GeneratorPackage.LANGUAGE_INPUT__LANGUAGE:
+				setLanguage((Language)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +121,8 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.LANGUAGE_INPUT__INPUTS:
-				getInputs().clear();
+			case GeneratorPackage.LANGUAGE_INPUT__LANGUAGE:
+				setLanguage(LANGUAGE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,26 +136,27 @@ public class LanguageInputImpl extends WithLanguageImpl implements LanguageInput
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.LANGUAGE_INPUT__INPUTS:
-				return inputs != null && !inputs.isEmpty();
+			case GeneratorPackage.LANGUAGE_INPUT__LANGUAGE:
+				return language != LANGUAGE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public EntityInput getInput(String name) {
-		for (EntityInput input: getInputs()) {
-			if (input instanceof SimpleInput) {
-				if (((SimpleInput)input).getName().equalsIgnoreCase(name)) {
-					return input;
-				}
-			}else if (input instanceof RegexInput) {
-				if (((RegexInput)input).getExpresion().equals(name)) {
-					return input;
-				}
-			}
-		}
-		return null;
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (language: ");
+		result.append(language);
+		result.append(')');
+		return result.toString();
 	}
+
 
 } //LanguageInputImpl

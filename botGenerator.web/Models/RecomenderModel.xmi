@@ -4,305 +4,145 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:recommenderQuestionnaire="recommenderQuestionnaire">
-  <tools name="Dialogflow"
-      availableOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.14 //@questions.12/@options.16 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.13/@options.1 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.1 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.9/@options.0 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.11/@options.1 //@questions.12/@options.5 //@questions.12/@options.13 //@questions.12/@options.15 //@questions.12/@options.17 //@questions.12/@options.23 //@questions.12/@options.25 //@questions.1/@options.0 //@questions.5/@options.0 //@questions.6/@options.2 //@questions.6/@options.3"/>
-  <tools name="Watson"
-      availableOptions="//@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.16 //@questions.12/@options.18 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.1 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.9/@options.0 //@questions.12/@options.19 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0"
-      unknownOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.19 //@questions.13/@options.1 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.17 //@questions.0/@options.18 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.17 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.25 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.4/@options.0 //@questions.5/@options.0 //@questions.6/@options.2 //@questions.6/@options.3"/>
-  <tools name="Lex"
-      availableOptions="//@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.6 //@questions.0/@options.9 //@questions.0/@options.12 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.2 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.1 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.12/@options.19 //@questions.16/@options.1 //@questions.17/@options.0"
-      unknownOptions="//@questions.11/@options.1 //@questions.13/@options.1 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.3/@options.0 //@questions.5/@options.0 //@questions.6/@options.2 //@questions.6/@options.3 //@questions.9/@options.0 //@questions.16/@options.0"/>
-  <tools name="Microsoft Bot Framework"
-      availableOptions="//@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.13 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.16 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.22 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.1 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.9/@options.0 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0 //@questions.17/@options.1"
-      unknownOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.19 //@questions.13/@options.1"
-      unavailableOptions="//@questions.0/@options.17 //@questions.0/@options.18 //@questions.12/@options.2 //@questions.12/@options.7 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.17 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.23 //@questions.12/@options.25 //@questions.0/@options.20 //@questions.5/@options.0 //@questions.6/@options.2 //@questions.7/@options.1"/>
-  <tools name="Rasa"
-      availableOptions="//@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.6 //@questions.0/@options.8 //@questions.0/@options.15 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.1/@options.0 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.5/@options.0 //@questions.6/@options.0 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.7 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.16 //@questions.0/@options.19 //@questions.0/@options.21 //@questions.1/@options.1 //@questions.3/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.7/@options.1 //@questions.8/@options.0 //@questions.9/@options.0"
-      possibleOptions="//@questions.13/@options.1 //@questions.17/@options.1"/>
-  <tools name="SmartLoop"
-      availableOptions="//@questions.0/@options.1 //@questions.0/@options.3 //@questions.0/@options.8 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.4 //@questions.12/@options.6 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.17 //@questions.12/@options.19 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0 //@questions.17/@options.1"
-      unknownOptions="//@questions.13/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.2 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.12/@options.3 //@questions.12/@options.5 //@questions.12/@options.7 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.16 //@questions.12/@options.18 //@questions.12/@options.23 //@questions.12/@options.25 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.2/@options.0 //@questions.4/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.8/@options.0 //@questions.9/@options.0"/>
-  <tools name="Xenioo"
-      availableOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.8 //@questions.0/@options.12 //@questions.0/@options.14 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.4 //@questions.12/@options.8 //@questions.12/@options.19 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.0/@options.21 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.2 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0 //@questions.17/@options.1"
-      unknownOptions="//@questions.13/@options.1"
-      unavailableOptions="//@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.13 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.11/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.25 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.1/@options.0 //@questions.2/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.9/@options.0"/>
-  <tools name="LUIS"
-      availableOptions="//@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.16 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.22 //@questions.12/@options.24 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.2 //@questions.7/@options.0 //@questions.8/@options.1 //@questions.8/@options.0 //@questions.9/@options.1 //@questions.9/@options.0 //@questions.16/@options.0 //@questions.16/@options.1 //@questions.17/@options.0"
-      unknownOptions="//@questions.13/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.11/@options.0 //@questions.12/@options.2 //@questions.12/@options.7 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.17 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.23 //@questions.12/@options.25 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.2/@options.0 //@questions.3/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.6/@options.3 //@questions.7/@options.1"
-      possibleOptions="//@questions.17/@options.1"/>
-  <tools name="FlowXO"
-      availableOptions="//@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.6 //@questions.0/@options.8 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.8 //@questions.12/@options.10 //@questions.12/@options.13 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.20 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.2 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.16/@options.0 //@questions.17/@options.0 //@questions.17/@options.1"
-      unknownOptions="//@questions.13/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.7 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.10/@options.2 //@questions.12/@options.2 //@questions.12/@options.7 //@questions.12/@options.9 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.21 //@questions.14/@options.1 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.2/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.6/@options.3 //@questions.8/@options.0 //@questions.9/@options.0 //@questions.16/@options.1"/>
-  <tools name="Landb.io"
-      availableOptions="//@questions.0/@options.14 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.11/@options.0 //@questions.11/@options.2 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.0/@options.20 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.3/@options.0 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.12/@options.19 //@questions.16/@options.0 //@questions.17/@options.0"
-      unknownOptions="//@questions.11/@options.1 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.1 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.10/@options.2 //@questions.14/@options.1 //@questions.15/@options.2 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.2/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.8/@options.0 //@questions.9/@options.0 //@questions.16/@options.1"/>
-  <tools name="ChatterBot"
-      availableOptions="//@questions.10/@options.1 //@questions.11/@options.0 //@questions.11/@options.2 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.15/@options.1 //@questions.1/@options.0 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.5/@options.1 //@questions.5/@options.0 //@questions.6/@options.0 //@questions.7/@options.0 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.12/@options.19 //@questions.17/@options.0"
-      unknownOptions="//@questions.10/@options.0 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.1 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.10/@options.2 //@questions.11/@options.1 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.1 //@questions.3/@options.0 //@questions.4/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.6/@options.3 //@questions.7/@options.1 //@questions.8/@options.0 //@questions.9/@options.0 //@questions.16/@options.0 //@questions.16/@options.1"/>
-  <tools name="Chatfuel"
-      availableOptions="//@questions.0/@options.1 //@questions.10/@options.1 //@questions.11/@options.0 //@questions.11/@options.2 //@questions.13/@options.0 //@questions.13/@options.1 //@questions.14/@options.0 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.1/@options.1 //@questions.2/@options.1 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.12/@options.19 //@questions.16/@options.1 //@questions.17/@options.0"
-      unknownOptions="//@questions.10/@options.0 //@questions.11/@options.1 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.10/@options.2 //@questions.14/@options.1 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.2/@options.0 //@questions.1/@options.0 //@questions.3/@options.0 //@questions.5/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.8/@options.0 //@questions.9/@options.0 //@questions.16/@options.0"/>
-  <tools name="Botkit"
-      availableOptions="//@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.19 //@questions.10/@options.1 //@questions.11/@options.2 //@questions.13/@options.0 //@questions.14/@options.0 //@questions.15/@options.1 //@questions.1/@options.0 //@questions.2/@options.1 //@questions.2/@options.0 //@questions.3/@options.1 //@questions.4/@options.1 //@questions.4/@options.0 //@questions.5/@options.1 //@questions.5/@options.0 //@questions.6/@options.0 //@questions.7/@options.0 //@questions.8/@options.1 //@questions.9/@options.1 //@questions.12/@options.19 //@questions.16/@options.0 //@questions.17/@options.0"
-      unknownOptions="//@questions.10/@options.0 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.1 //@questions.17/@options.1"
-      unavailableOptions="//@questions.0/@options.0 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.2 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.1 //@questions.3/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.6/@options.3 //@questions.7/@options.1 //@questions.8/@options.0 //@questions.9/@options.0 //@questions.16/@options.1"/>
-  <tools name="Pandorabot"
-      availableOptions="//@questions.16/@options.0 //@questions.17/@options.0"
-      unknownOptions="//@questions.0/@options.0 //@questions.0/@options.1 //@questions.0/@options.2 //@questions.0/@options.3 //@questions.0/@options.4 //@questions.0/@options.5 //@questions.0/@options.6 //@questions.0/@options.7 //@questions.0/@options.8 //@questions.0/@options.9 //@questions.0/@options.10 //@questions.0/@options.11 //@questions.0/@options.12 //@questions.0/@options.13 //@questions.0/@options.14 //@questions.0/@options.15 //@questions.0/@options.16 //@questions.0/@options.17 //@questions.0/@options.18 //@questions.0/@options.19 //@questions.0/@options.20 //@questions.0/@options.21 //@questions.1/@options.0 //@questions.1/@options.1 //@questions.2/@options.0 //@questions.2/@options.1 //@questions.3/@options.0 //@questions.3/@options.1 //@questions.4/@options.0 //@questions.4/@options.1 //@questions.5/@options.0 //@questions.5/@options.1 //@questions.6/@options.0 //@questions.6/@options.1 //@questions.6/@options.2 //@questions.6/@options.3 //@questions.7/@options.0 //@questions.7/@options.1 //@questions.8/@options.0 //@questions.8/@options.1 //@questions.9/@options.0 //@questions.9/@options.1 //@questions.10/@options.0 //@questions.10/@options.1 //@questions.10/@options.2 //@questions.11/@options.0 //@questions.11/@options.1 //@questions.11/@options.2 //@questions.12/@options.0 //@questions.12/@options.1 //@questions.12/@options.2 //@questions.12/@options.3 //@questions.12/@options.4 //@questions.12/@options.5 //@questions.12/@options.6 //@questions.12/@options.7 //@questions.12/@options.8 //@questions.12/@options.9 //@questions.12/@options.10 //@questions.12/@options.11 //@questions.12/@options.12 //@questions.12/@options.13 //@questions.12/@options.14 //@questions.12/@options.15 //@questions.12/@options.16 //@questions.12/@options.17 //@questions.12/@options.18 //@questions.12/@options.19 //@questions.12/@options.20 //@questions.12/@options.21 //@questions.12/@options.22 //@questions.12/@options.23 //@questions.12/@options.24 //@questions.12/@options.25 //@questions.13/@options.0 //@questions.13/@options.1 //@questions.14/@options.0 //@questions.14/@options.1 //@questions.15/@options.0 //@questions.15/@options.1 //@questions.15/@options.2"
-      unavailableOptions="//@questions.16/@options.1 //@questions.17/@options.1"/>
+  <tools name="Dialogflow"/>
+  <tools name="Watson"/>
+  <tools name="Lex"/>
+  <tools name="Microsoft Bot Framework"/>
+  <tools name="Rasa"/>
+  <tools name="SmartLoop"/>
+  <tools name="Xenioo"/>
+  <tools name="LUIS"/>
+  <tools name="FlowXO"/>
+  <tools name="Landb.io"/>
+  <tools name="ChatterBot"/>
+  <tools name="Chatfuel"/>
+  <tools name="Botkit"/>
+  <tools name="Pandorabot"/>
   <questions
       name="Social Networks"
       text="In which social network do you want to deploy the chatbot?"
       multiresponse="true">
     <options
-        text="Google Assistant"
-        available="//@tools.0 //@tools.6"
-        unavailable="//@tools.2 //@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.5 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Google Assistant"/>
     <options
-        text="Facebook Messenger"
-        available="//@tools.0 //@tools.2 //@tools.8 //@tools.11 //@tools.4 //@tools.5 //@tools.6 //@tools.12"
-        unavailable="//@tools.9 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Facebook Messenger"/>
     <options
-        text="Slack"
-        available="//@tools.0 //@tools.2 //@tools.8 //@tools.4 //@tools.6 //@tools.12"
-        unavailable="//@tools.9 //@tools.11 //@tools.5 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Slack"/>
     <options
-        text="Viber"
-        available="//@tools.0 //@tools.5"
-        unavailable="//@tools.2 //@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.6 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Viber"/>
     <options
-        text="Twitter"
-        available="//@tools.0"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Twitter"/>
     <options
-        text="Twilio (IP)"
-        available="//@tools.0 //@tools.12"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Twilio (IP)"/>
     <options
-        text="Twilio (SMS)"
-        available="//@tools.0 //@tools.2 //@tools.8 //@tools.4 //@tools.12"
-        unavailable="//@tools.9 //@tools.11 //@tools.5 //@tools.6 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Twilio (SMS)"/>
     <options
-        text="Skype"
-        available="//@tools.0 //@tools.3"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.7"
-        unknown="//@tools.1 //@tools.13"/>
+        text="Skype"/>
     <options
-        text="Telegram"
-        available="//@tools.0 //@tools.8 //@tools.4 //@tools.5 //@tools.6 //@tools.3"
-        unavailable="//@tools.2 //@tools.9 //@tools.11 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.13"/>
+        text="Telegram"/>
     <options
-        text="Kik"
-        available="//@tools.0 //@tools.2"
-        unavailable="//@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.5 //@tools.6 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Kik"/>
     <options
-        text="Line"
-        available="//@tools.0"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Line"/>
     <options
-        text="Cisco Spark"
-        available="//@tools.0"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Cisco Spark"/>
     <options
-        text="Amazon Alexa"
-        available="//@tools.0 //@tools.2 //@tools.6"
-        unavailable="//@tools.4 //@tools.5 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Amazon Alexa"/>
     <options
-        text="Microsoft Cortana"
-        available="//@tools.0 //@tools.3"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.1 //@tools.13"/>
+        text="Microsoft Cortana"/>
     <options
-        text="Whatsapp"
-        available="//@tools.9 //@tools.6"
-        unavailable="//@tools.0 //@tools.2 //@tools.8 //@tools.11 //@tools.4 //@tools.5 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Whatsapp"/>
     <options
-        text="Cisco Webex"
-        available="//@tools.4 //@tools.12"
-        unavailable="//@tools.0 //@tools.2 //@tools.8 //@tools.9 //@tools.11 //@tools.5 //@tools.6 //@tools.7 //@tools.10"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Cisco Webex"/>
     <options
-        text="Cisco Jabber"
-        available="//@tools.12"
-        unavailable="//@tools.0 //@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Cisco Jabber"/>
     <options
-        text="RocketChat"
-        available="//@tools.4"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="RocketChat"/>
     <options
-        text="Mattermost"
-        available="//@tools.4"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Mattermost"/>
     <options
-        text="Google Hangouts"
-        available="//@tools.12"
-        unavailable="//@tools.0 //@tools.2 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11"
-        unknown="//@tools.1 //@tools.3 //@tools.13"/>
+        text="Google Hangouts"/>
     <options
-        text="Integration with web pages"
-        available="//@tools.0 //@tools.9 //@tools.4"
-        unavailable="//@tools.1 //@tools.2 //@tools.8 //@tools.11 //@tools.5 //@tools.6 //@tools.12 //@tools.7 //@tools.10 //@tools.3"
-        unknown="//@tools.13"/>
+        text="Integration with web pages"/>
     <options
-        text="Own social network"
-        available="//@tools.0 //@tools.3 //@tools.6"
-        unavailable="//@tools.1 //@tools.2 //@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.5 //@tools.12 //@tools.7 //@tools.10"
-        unknown="//@tools.13"/>
+        text="Own social network"/>
   </questions>
   <questions
       name="Hosted Deployment"
       text="Do you want to deploy the chatbot on your own host or on the tool host?">
     <options
-        text="Own host"
-        available="//@tools.3 //@tools.4 //@tools.12 //@tools.10"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.8 //@tools.9 //@tools.5 //@tools.6 //@tools.7 //@tools.11"
-        unknown="//@tools.13"/>
+        text="Own host"/>
     <options
-        text="Tool host"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.8 //@tools.9 //@tools.11 //@tools.5 //@tools.6 //@tools.7"
-        unavailable="//@tools.4 //@tools.12 //@tools.10"
-        unknown="//@tools.13"/>
+        text="Tool host"/>
   </questions>
   <questions
       name="Version Control"
       text="Do you require version control in the tool?">
     <options
-        text="Yes"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.12 //@tools.10"
-        unavailable="//@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.11"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       name="Support for Analytics"
       text="Do you require support for analytics in the tool?">
     <options
-        text="Yes"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.8 //@tools.9 //@tools.5 //@tools.6"
-        unavailable="//@tools.2 //@tools.4 //@tools.7 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       name="User message persistence"
       text="Do you require user message persistence in the tool?">
     <options
-        text="Yes"
-        available="//@tools.0 //@tools.2 //@tools.3 //@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.6 //@tools.12 //@tools.7"
-        unavailable="//@tools.1 //@tools.5 //@tools.10"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       name="Open Source"
       text="Do you need the tool to be open source?">
     <options
-        text="Yes"
-        available="//@tools.4 //@tools.12 //@tools.10"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.11"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       name="Pricing model"
       text="Pricing model"
       multiresponse="true">
     <options
-        text="Free"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.8 //@tools.9 //@tools.11 //@tools.4 //@tools.6 //@tools.12 //@tools.10 //@tools.7 //@tools.5"
-        unknown="//@tools.13"/>
+        text="Free"/>
     <options
-        text="Pay as you go"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3"
-        unavailable="//@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Pay as you go"/>
     <options
-        text="Quota"
-        available="//@tools.8 //@tools.6 //@tools.7"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Quota"/>
     <options
-        text="Pay for avanced features"
-        available="//@tools.3 //@tools.9 //@tools.11 //@tools.4 //@tools.5 //@tools.6"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.7 //@tools.8 //@tools.10 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Pay for avanced features"/>
   </questions>
   <questions
       name="Developer expertise"
       text="What is the level of developer expertise of the chatbot developers?">
     <options
-        text="High"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="High"/>
     <options
-        text="Low"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.8 //@tools.9 //@tools.11 //@tools.5 //@tools.6"
-        unavailable="//@tools.3 //@tools.4 //@tools.10 //@tools.7 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Low"/>
   </questions>
   <questions
       name="Speech recognition"
       text="Do you want your chatbot to have speech recognition?">
     <options
-        text="Yes"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.2 //@tools.6 //@tools.7"
-        unavailable="//@tools.4 //@tools.5 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       name="Sentiment analysis"
       text="Do you want your chatbot to have sentiment analysis?">
     <options
-        text="Yes"
-        available="//@tools.0 //@tools.3 //@tools.7 //@tools.1"
-        unavailable="//@tools.2 //@tools.4 //@tools.5 //@tools.8 //@tools.9 //@tools.6 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="Yes"/>
     <options
-        text="No"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="No"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
@@ -310,37 +150,22 @@
       text="Does the bot use new entities, predefined or none?"
       multiresponse="true">
     <options
-        text="pre-defined"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9"
-        unknown="//@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="pre-defined"/>
     <options
-        text="none"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="none"/>
     <options
-        text="defined"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7"
-        unavailable="//@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="defined"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
       name="recommenderQuestionnaire.evaluations.ExternalServiceCalls"
       text="Does the chatbot have an external service call, multiple or none?">
     <options
-        text="one"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.8 //@tools.9 //@tools.10 //@tools.11"
-        unavailable="//@tools.5 //@tools.6 //@tools.7 //@tools.12"
-        unknown="//@tools.13"/>
+        text="one"/>
     <options
-        text="multiple"
-        available="//@tools.1 //@tools.3 //@tools.4 //@tools.6 //@tools.7 //@tools.8"
-        unavailable="//@tools.0 //@tools.5 //@tools.10 //@tools.12"
-        unknown="//@tools.2 //@tools.9 //@tools.11 //@tools.13"/>
+        text="multiple"/>
     <options
-        text="none"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="none"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
@@ -348,181 +173,86 @@
       text="Chatbot languages"
       multiresponse="true">
     <options
-        text="Italian"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unavailable="//@tools.2"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Italian"/>
     <options
-        text="German"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.7 //@tools.8"
-        unavailable="//@tools.2 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="German"/>
     <options
-        text="Swedish"
-        available="//@tools.0 //@tools.4 //@tools.5"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Swedish"/>
     <options
-        text="Turkish"
-        available="//@tools.0 //@tools.3 //@tools.4 //@tools.7 //@tools.8"
-        unavailable="//@tools.1 //@tools.2 //@tools.5 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Turkish"/>
     <options
-        text="French"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unavailable="//@tools.2"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="French"/>
     <options
-        text="Arabic"
-        available="//@tools.1 //@tools.3 //@tools.4 //@tools.7 //@tools.8"
-        unavailable="//@tools.0 //@tools.2 //@tools.5 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Arabic"/>
     <options
-        text="Portuguese"
-        available="//@tools.0 //@tools.3 //@tools.4 //@tools.5 //@tools.7 //@tools.8"
-        unavailable="//@tools.1 //@tools.2 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Portuguese"/>
     <options
-        text="Indonesian"
-        available="//@tools.0 //@tools.4"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Indonesian"/>
     <options
-        text="Spanish"
-        available="//@tools.0 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unavailable="//@tools.1 //@tools.2"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Spanish"/>
     <options
-        text="Hindi"
-        available="//@tools.0 //@tools.3 //@tools.4 //@tools.5 //@tools.7"
-        unavailable="//@tools.1 //@tools.2 //@tools.6 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Hindi"/>
     <options
-        text="Thai"
-        available="//@tools.0 //@tools.4 //@tools.8"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Thai"/>
     <options
-        text="Ukranian"
-        available="//@tools.0 //@tools.4"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Ukranian"/>
     <options
-        text="Norwegian"
-        available="//@tools.0 //@tools.4"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Norwegian"/>
     <options
-        text="Finish"
-        available="//@tools.4 //@tools.8"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Finish"/>
     <options
-        text="Polish"
-        available="//@tools.0 //@tools.4 //@tools.5"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Polish"/>
     <options
-        text="Bangla"
-        available="//@tools.4 //@tools.5"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Bangla"/>
     <options
-        text="Korean"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.7 //@tools.8"
-        unavailable="//@tools.2 //@tools.5 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Korean"/>
     <options
-        text="Bulgarian"
-        available="//@tools.4 //@tools.5 //@tools.8"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Bulgarian"/>
     <options
-        text="Japanese"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.7 //@tools.8"
-        unavailable="//@tools.2 //@tools.5 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Japanese"/>
     <options
-        text="English"
-        available="//@tools.0 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.1 //@tools.2 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="English"/>
     <options
-        text="Rusian"
-        available="//@tools.0 //@tools.4 //@tools.5 //@tools.8"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Rusian"/>
     <options
-        text="Danish"
-        available="//@tools.0 //@tools.4 //@tools.5"
-        unavailable="//@tools.1 //@tools.2 //@tools.3 //@tools.6 //@tools.7 //@tools.8"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Danish"/>
     <options
-        text="Chinese"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.7 //@tools.8"
-        unavailable="//@tools.2 //@tools.6"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Chinese"/>
     <options
-        text="Czech"
-        available="//@tools.1 //@tools.4 //@tools.8"
-        unavailable="//@tools.0 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Czech"/>
     <options
-        text="Dutch"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8"
-        unavailable="//@tools.2"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Dutch"/>
     <options
-        text="Greek"
-        available="//@tools.4 //@tools.8"
-        unavailable="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7"
-        unknown="//@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="Greek"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
       name="recommenderQuestionnaire.evaluations.Multilanguage"
       text="Is the bot multilanguage?">
     <options
-        text="no"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="no"/>
     <options
-        text="yes"
-        available="//@tools.0 //@tools.11"
-        unknown="//@tools.1 //@tools.2 //@tools.3 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.12 //@tools.13"
-        possible="//@tools.4"/>
+        text="yes"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
       name="recommenderQuestionnaire.evaluations.ParameterExtaction"
       text="Does the bot need text processing to obtain phrase parameters?">
     <options
-        text="no"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="no"/>
     <options
-        text="yes"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7"
-        unavailable="//@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="yes"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
       name="recommenderQuestionnaire.evaluations.ParameterStorage"
       text="Does the bot need persistent parameter storage, is volatile enough or none?">
     <options
-        text="volatile"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.11"
-        unavailable="//@tools.10 //@tools.12"
-        unknown="//@tools.13"/>
+        text="volatile"/>
     <options
-        text="none"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="none"/>
     <options
-        text="persistent"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.8"
-        unavailable="//@tools.6 //@tools.7 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        unknown="//@tools.13"/>
+        text="persistent"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
@@ -530,26 +260,17 @@
       text="Does the chatbot need pattern matching, natural language processing or both?"
       multiresponse="true">
     <options
-        text="Pattern Matching"
-        available="//@tools.0 //@tools.1 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.12 //@tools.13"
-        unavailable="//@tools.2 //@tools.10 //@tools.11"/>
+        text="Pattern Matching"/>
     <options
-        text="Natural Language Processing (NLP)"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.11"
-        unavailable="//@tools.8 //@tools.9 //@tools.10 //@tools.12 //@tools.13"/>
+        text="Natural Language Processing (NLP)"/>
   </questions>
   <questions
       xsi:type="recommenderQuestionnaire:Evaluation"
       name="recommenderQuestionnaire.evaluations.Loops"
       text="Has the bot conversation loops?">
     <options
-        text="no"
-        available="//@tools.0 //@tools.1 //@tools.2 //@tools.3 //@tools.4 //@tools.5 //@tools.6 //@tools.7 //@tools.8 //@tools.9 //@tools.10 //@tools.11 //@tools.12 //@tools.13"/>
+        text="no"/>
     <options
-        text="yes"
-        available="//@tools.0 //@tools.5 //@tools.8 //@tools.6 //@tools.3"
-        unavailable="//@tools.13"
-        unknown="//@tools.1 //@tools.2 //@tools.9 //@tools.10 //@tools.11 //@tools.12"
-        possible="//@tools.4 //@tools.7"/>
+        text="yes"/>
   </questions>
 </recommenderQuestionnaire:Questionnaire>

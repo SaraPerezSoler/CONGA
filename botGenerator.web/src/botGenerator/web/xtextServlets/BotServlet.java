@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
@@ -51,6 +53,9 @@ public class BotServlet extends XtextServlet {
 	public static Injector getInjector () {
 		if (injector == null) {
 			injector = new BotWebSetup().createInjectorAndDoEMFRegistration();
+			XtextResourceSet resourceSetXtext = injector.getInstance(XtextResourceSet.class);
+			resourceSetXtext.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+			resourceSetXtext.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 		}
 		
 		if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {

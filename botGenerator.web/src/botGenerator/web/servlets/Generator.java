@@ -75,7 +75,6 @@ public class Generator extends HttpServlet {
 				return;
 			}
 			
-			conga.addLastDateService(userProject, generatorId, new Date());
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			response.setIntHeader("Refresh", 5);
 			response.setHeader("Content-Disposition", "filename=\""+service.getTool().getName()+"_"+botName+".zip\"");

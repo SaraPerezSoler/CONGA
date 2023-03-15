@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.resource.Resource
 import java.io.FileInputStream
 import zipUtils.Zipper
 import es.main.CongaResource
+import java.io.OutputStreamWriter
+import java.io.FileOutputStream
+import java.nio.charset.StandardCharsets
 
 abstract class BotGenerator {
 	public static final int REGEX = 0;
@@ -96,7 +99,8 @@ abstract class BotGenerator {
 		if (folder !== null && !folder.exists) {
 			folder.mkdirs
 		}
-		var bw = new BufferedWriter(new FileWriter(file));
+		
+		var bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8));
 		bw.write(content);
 		bw.close
 		return file

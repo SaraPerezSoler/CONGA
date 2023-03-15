@@ -5,6 +5,7 @@ package congabase.impl;
 import congabase.CongaSystem;
 import congabase.CongabasePackage;
 import congabase.Project;
+import congabase.RecommenderOption;
 import congabase.Service;
 import congabase.User;
 
@@ -39,6 +40,7 @@ import recommenderQuestionnaire.Questionnaire;
  *   <li>{@link congabase.impl.CongaSystemImpl#getGenerators <em>Generators</em>}</li>
  *   <li>{@link congabase.impl.CongaSystemImpl#getConverters <em>Converters</em>}</li>
  *   <li>{@link congabase.impl.CongaSystemImpl#getValidators <em>Validators</em>}</li>
+ *   <li>{@link congabase.impl.CongaSystemImpl#getQOptions <em>QOptions</em>}</li>
  * </ul>
  *
  * @generated
@@ -103,6 +105,16 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 	 * @ordered
 	 */
 	protected EList<Service> validators;
+
+	/**
+	 * The cached value of the '{@link #getQOptions() <em>QOptions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQOptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RecommenderOption> qOptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,6 +243,18 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RecommenderOption> getQOptions() {
+		if (qOptions == null) {
+			qOptions = new EObjectContainmentEList<RecommenderOption>(RecommenderOption.class, this, CongabasePackage.CONGA_SYSTEM__QOPTIONS);
+		}
+		return qOptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -246,6 +270,8 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 				return ((InternalEList<?>)getConverters()).basicRemove(otherEnd, msgs);
 			case CongabasePackage.CONGA_SYSTEM__VALIDATORS:
 				return ((InternalEList<?>)getValidators()).basicRemove(otherEnd, msgs);
+			case CongabasePackage.CONGA_SYSTEM__QOPTIONS:
+				return ((InternalEList<?>)getQOptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -270,6 +296,8 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 				return getConverters();
 			case CongabasePackage.CONGA_SYSTEM__VALIDATORS:
 				return getValidators();
+			case CongabasePackage.CONGA_SYSTEM__QOPTIONS:
+				return getQOptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,6 +334,10 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 				getValidators().clear();
 				getValidators().addAll((Collection<? extends Service>)newValue);
 				return;
+			case CongabasePackage.CONGA_SYSTEM__QOPTIONS:
+				getQOptions().clear();
+				getQOptions().addAll((Collection<? extends RecommenderOption>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -336,6 +368,9 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 			case CongabasePackage.CONGA_SYSTEM__VALIDATORS:
 				getValidators().clear();
 				return;
+			case CongabasePackage.CONGA_SYSTEM__QOPTIONS:
+				getQOptions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -360,6 +395,8 @@ public class CongaSystemImpl extends MinimalEObjectImpl.Container implements Con
 				return converters != null && !converters.isEmpty();
 			case CongabasePackage.CONGA_SYSTEM__VALIDATORS:
 				return validators != null && !validators.isEmpty();
+			case CongabasePackage.CONGA_SYSTEM__QOPTIONS:
+				return qOptions != null && !qOptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

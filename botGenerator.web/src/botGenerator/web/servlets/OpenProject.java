@@ -41,8 +41,8 @@ public class OpenProject extends HttpServlet {
 			if (p!= null) {
 				getServletContext().setAttribute("project", p);
 				//////////////////////////////////////////////////////////////////////////////////
-				//System.out.println(p.getName()+":"+conga.countObject(p));
-				//conga.saveAsXmi(p);
+				System.out.println(p.getName()+":"+conga.countObject(p));
+				conga.saveAsXmi(p);
 				/////////////////////////////////////////////////////////////////////////////////
 				request.getRequestDispatcher("/editor.jsp").forward(request, response);
 			}

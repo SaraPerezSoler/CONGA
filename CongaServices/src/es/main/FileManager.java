@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import generator.GeneratorPackage;
@@ -27,6 +28,7 @@ public abstract class FileManager {
 					new XMIResourceFactoryImpl());
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",
 					new XMIResourceFactoryImpl());
+//			resourceSet.getLoadOptions().put(XMIResource.OPTION_ENCODING, "UTF-8");
 			if (!EPackage.Registry.INSTANCE.containsKey(GeneratorPackage.eNS_URI)) {
 				EPackage.Registry.INSTANCE.put(GeneratorPackage.eNS_URI, GeneratorPackage.eINSTANCE);
 			}
@@ -78,7 +80,7 @@ public abstract class FileManager {
 
 	}
 
-	private void removeFile(File file) {
+	protected void removeFile(File file) {
 		File[] contents = file.listFiles();
 		if (contents != null) {
 			for (File f : contents) {

@@ -1,3 +1,6 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="congabase.Project"%>
 <%@page import="java.util.List"%>
@@ -26,15 +29,59 @@
 	<div class="container">
 		<jsp:include page="header.jsp" />
 		<%
+		String prev = (String) getServletContext().getAttribute("Prev");
+		String ordPrev = (String) getServletContext().getAttribute("ord");
+		String orderBy = request.getParameter("orderBy");
+		String ordAux = "asc";
+		if (prev != null && orderBy != null) {
+			if (prev.equals(orderBy) && ordAux.equals(ordPrev)) {
+				ordAux = "desc";
+			}
+		}
+		String ord = ordAux;
+		getServletContext().setAttribute("Prev", orderBy);
+		getServletContext().setAttribute("ord", ord);
+		
 		String username = (String) session.getAttribute("user");
 		if (username == null){
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-			CongaData conga = CongaData.getCongaData(getServletContext());
-		List<Project> projects = conga.getProjects(username);
-		String pattern = "dd/MM/yyyy hh:mm:ss";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		CongaData conga = CongaData.getCongaData(getServletContext());
+		List<Project> projects = new ArrayList<Project>(); 
+		projects.addAll(conga.getProjects(username));
+		
 		if (!projects.isEmpty()) {
+			if (orderBy != null) {
+				Collections.sort(projects, new Comparator<Project>() {
+					@Override
+					public int compare(Project o1, Project o2) {
+						String s1 = "";
+						String s2 = "";
+						if (orderBy.equals("Name")){
+							s1 = o1.getName();
+							s2 = o2.getName();
+						}else if (orderBy.equals("Creation")){
+							s1 = o1.getCreationDateString();
+							s2 = o2.getCreationDateString();
+						}else if (orderBy.equals("Modification")){
+							s1 = o1.getModificationDateString();
+							s2 = o2.getModificationDateString();
+						}else if (orderBy.equals("RTool")){
+							s1 = conga.getWinner(o1);
+							s2 = conga.getWinner(o2);
+						}else if (orderBy.equals("RDate")){
+							s1 = o1.getQuestionnaireDateString();
+							s2 = o2.getQuestionnaireDateString();
+						}
+						
+						if (ord.equals("asc")) {
+							return s1.compareTo(s2);
+						} else {
+							return s2.compareTo(s1);
+						}
+					}
+						});
+			}
 		%>
 		<div class="row">
 			<div class="col">
@@ -42,11 +89,16 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">Project Name</th>
-								<th scope="col">Creation</th>
-								<th scope="col">Last modification</th>
-								<th scope="col">Recommended tool</th>
-								<th scope="col">Recommended date</th>
+								<th scope="col"><a href="User.jsp?orderBy=Name"
+									style="color: black;">Project Name</a></th>
+								<th scope="col"><a href="User.jsp?orderBy=Creation"
+									style="color: black;">Creation</a></th>
+								<th scope="col"><a href="User.jsp?orderBy=Modification"
+									style="color: black;">Last modification</a></th>
+								<th scope="col"><a href="User.jsp?orderBy=RTool"
+									style="color: black;">Recommended tool</a></th>
+								<th scope="col"><a href="User.jsp?orderBy=RDate"
+									style="color: black;">Recommended date</a></th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -56,21 +108,11 @@
 							%>
 							<tr>
 								<th scope="row"><a href="openProject?projectName=<%=project.getName()%>"><%=project.getName()%></a></th>
-								<td><%=simpleDateFormat.format(project.getCreationDate())%></td>
-								<td><%=simpleDateFormat.format(project.getModificationDate())%></td>
-								<%
-									if (project.getQuestionnaire() == null || project.getQuestionnaire().getDate() == null) {
-								%>
-								<td>-</td>
-								<td>-</td>
-								<%
-									} else {
-								%>
+								<td><%=project.getCreationDateString()%></td>
+								<td><%=project.getModificationDateString()%></td>
 								<td><%=conga.getWinner(project)%></td>
-								<td><%=simpleDateFormat.format(project.getQuestionnaire().getDate())%></td>
-								<%
-									}
-								%>
+								<td><%=project.getQuestionnaireDateString()%></td>
+							
 								<td>
 									<a href="deleteProject?projectName=<%=project.getName()%>">
 										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

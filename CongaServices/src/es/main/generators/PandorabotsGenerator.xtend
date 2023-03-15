@@ -10,7 +10,7 @@ import generator.HTTPRequest
 import generator.HTTPResponse
 import generator.Image
 import generator.Intent
-import generator.IntentLanguageInputs
+import generator.LanguageIntent
 import generator.Language
 import generator.Literal
 import generator.ParameterReferenceToken
@@ -18,7 +18,7 @@ import generator.ParameterToken
 import generator.SimpleInput
 import generator.Text
 import generator.TextInput
-import generator.TextLanguageInput
+import generator.LanguageText
 import generator.Token
 import generator.TrainingPhrase
 import generator.UserInteraction
@@ -210,7 +210,7 @@ class PandorabotsGenerator extends BotGenerator {
 	}
 
 	// Devuelve todas las posibles respuestas a un intent para un lenguage concreto
-	def getAllIntentResponses(TextLanguageInput textAction) {
+	def getAllIntentResponses(LanguageText textAction) {
 		var responses = new ArrayList<String>()
 		for (TextInput input : textAction.inputs) {
 			var response = ""
@@ -563,7 +563,7 @@ class PandorabotsGenerator extends BotGenerator {
 		// <lenguaje, entity>
 		var ret = new HashMap<String, DefaultEntity>()
 
-		for (IntentLanguageInputs language : intent.inputs)
+		for (LanguageIntent language : intent.inputs)
 			for (input : language.inputs)
 				if (input instanceof TrainingPhrase)
 					for (token : (input as TrainingPhrase).tokens)
@@ -693,7 +693,7 @@ class PandorabotsGenerator extends BotGenerator {
 
 	// Devuelve las acciones de un lenguaje concreto
 	def getLanguageActions(List<Action> actions, String lang) {
-		var ret = new ArrayList<TextLanguageInput>()
+		var ret = new ArrayList<LanguageText>()
 
 		for (action : actions)
 			if (action instanceof Text)

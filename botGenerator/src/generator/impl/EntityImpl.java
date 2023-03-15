@@ -5,7 +5,7 @@ package generator.impl;
 import generator.CompositeInput;
 import generator.Entity;
 import generator.GeneratorPackage;
-import generator.LanguageInput;
+import generator.LanguageEntity;
 import generator.RegexInput;
 import generator.SimpleInput;
 
@@ -39,7 +39,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<LanguageInput> inputs;
+	protected EList<LanguageEntity> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,9 +66,9 @@ public class EntityImpl extends ElementImpl implements Entity {
 	 * @generated
 	 */
 	@Override
-	public EList<LanguageInput> getInputs() {
+	public EList<LanguageEntity> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<LanguageInput>(LanguageInput.class, this, GeneratorPackage.ENTITY__INPUTS);
+			inputs = new EObjectContainmentEList<LanguageEntity>(LanguageEntity.class, this, GeneratorPackage.ENTITY__INPUTS);
 		}
 		return inputs;
 	}
@@ -112,7 +112,7 @@ public class EntityImpl extends ElementImpl implements Entity {
 		switch (featureID) {
 			case GeneratorPackage.ENTITY__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends LanguageInput>)newValue);
+				getInputs().addAll((Collection<? extends LanguageEntity>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -12,16 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="questions" lowerBound="1"
         upperBound="-1" eType="#//Question" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Tool" eSuperTypes="#//WithName">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="availableOptions" lowerBound="1"
-        upperBound="-1" eType="#//Option" eOpposite="#//Option/available"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unknownOptions" upperBound="-1"
-        eType="#//Option" eOpposite="#//Option/unknown"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unavailableOptions" upperBound="-1"
-        eType="#//Option" eOpposite="#//Option/unavailable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="possibleOptions" upperBound="-1"
-        eType="#//Option" eOpposite="#//Option/possible"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tool" eSuperTypes="#//WithName"/>
   <eClassifiers xsi:type="ecore:EClass" name="Question" eSuperTypes="#//WithName">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiresponse" lowerBound="1"
@@ -31,27 +22,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Evaluation" eSuperTypes="#//Question"/>
   <eClassifiers xsi:type="ecore:EClass" name="Option">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="allToolsRegister toolInAvailableAndUnavailable toolInAvailableAndPossible toolInAvailableAndUnkown toolInUnavailableAndUnknown toolInUnavailableAndPossible toolInPossibleAndUnknown"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="allToolsRegister" value="Tool.allInstances()->forAll(t |&#xA;&#x9;&#x9;&#x9;&#x9;self.available->includes(t) or self.unavailable->includes(t) or self.unknown->includes(t) or self.possible->includes(t))"/>
-      <details key="toolInAvailableAndUnavailable" value="Tool.allInstances()->forAll(t | self.available->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.unavailable->includes(t))"/>
-      <details key="toolInAvailableAndPossible" value="Tool.allInstances()->forAll(t | self.available->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.possible->includes(t))"/>
-      <details key="toolInAvailableAndUnkown" value="Tool.allInstances()->forAll(t | self.available->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.unknown->includes(t))"/>
-      <details key="toolInUnavailableAndUnknown" value="Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.unknown->includes(t))"/>
-      <details key="toolInUnavailableAndPossible" value="Tool.allInstances()->forAll(t | self.unavailable->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.possible->includes(t))"/>
-      <details key="toolInPossibleAndUnknown" value="Tool.allInstances()->forAll(t | self.possible->includes(t) implies not&#xA;&#x9;&#x9;&#x9;&#x9;self.unknown->includes(t))"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="available" lowerBound="1"
-        upperBound="-1" eType="#//Tool" eOpposite="#//Tool/availableOptions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unavailable" upperBound="-1"
-        eType="#//Tool" eOpposite="#//Tool/unavailableOptions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unknown" upperBound="-1"
-        eType="#//Tool" eOpposite="#//Tool/unknownOptions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="possible" upperBound="-1"
-        eType="#//Tool" eOpposite="#//Tool/possibleOptions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WithName" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

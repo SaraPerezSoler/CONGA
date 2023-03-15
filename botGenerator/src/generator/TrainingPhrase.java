@@ -3,6 +3,7 @@
 package generator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated NOT
  */
-public interface TrainingPhrase extends IntentInput, Comparable {
+public interface TrainingPhrase extends EObject, Comparable {
 	/**
 	 * Returns the value of the '<em><b>Tokens</b></em>' containment reference list.
 	 * The list contents are of type {@link generator.Token}.

@@ -24,7 +24,7 @@ public interface Entity extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link generator.LanguageInput}.
+	 * The list contents are of type {@link generator.LanguageEntity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -32,7 +32,7 @@ public interface Entity extends Element {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<LanguageInput> getInputs();
+	EList<LanguageEntity> getInputs();
 	boolean isRegex();
 	boolean isComposite();
 	boolean isSimple();

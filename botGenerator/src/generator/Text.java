@@ -23,16 +23,16 @@ import org.eclipse.emf.common.util.EList;
 public interface Text extends Action {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link generator.TextLanguageInput}.
+	 * The list contents are of type {@link generator.LanguageText}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
 	 * @see generator.GeneratorPackage#getText_Inputs()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TextLanguageInput> getInputs();
+	EList<LanguageText> getInputs();
 
-	TextLanguageInput getInput(Language language);
+	LanguageText getInput(Language language);
 
 } // Text

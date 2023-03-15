@@ -76,6 +76,15 @@ public interface CongabaseFactory extends EFactory {
 	Service createService();
 
 	/**
+	 * Returns a new object of class '<em>Recommender Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Recommender Option</em>'.
+	 * @generated
+	 */
+	RecommenderOption createRecommenderOption();
+
+	/**
 	 * Returns a new object of class '<em>Key Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

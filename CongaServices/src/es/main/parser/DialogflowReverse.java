@@ -62,6 +62,7 @@ public class DialogflowReverse extends Reverse{
 			agent.setEntities(entities);
 			agent.setIntents(intents);
 		}
+		removeFile(agentFiles);
 		return agent;
 	}
 

@@ -25,21 +25,21 @@ import java.util.ArrayList
 import generator.BotInteraction
 import generator.Interaction
 import generator.Language
-import generator.TextLanguageInput
+import generator.LanguageText
 import generator.SimpleInput
 import generator.RegexInput
-import generator.LanguageInput
+import generator.LanguageEntity
 import generator.EntityInput
 import java.io.File
 import generator.ButtonAction
+import generator.Empty
 
-class RasaGenerator extends BotGenerator{
+class RasaGenerator extends BotGenerator {
 
-
-	new(String path,String fileName, String botName) {
-		super(path+File.separator+fileName, botName)
+	new(String path, String fileName, String botName) {
+		super(path + File.separator + fileName, botName)
 	}
-	
+
 	override doGenerate(Resource resource) {
 
 		var bot = resource.allContents.filter(Bot).toList.get(0);
@@ -51,46 +51,87 @@ class RasaGenerator extends BotGenerator{
 		for (UserInteraction flow : bot.flows) {
 			leafsU(flow, leafs)
 		}
+		var fallbackIntent = null as Intent
+		for (Intent i : intents) {
+			if (i.isFallbackIntent) {
+				fallbackIntent = i;
+			}
+		}
+		var fallbackAction = null as Action
+		var i = 0;
+		while (fallbackAction === null && i < bot.flows.length) {
+			fallbackAction = getFallbackAction(fallbackIntent, bot.flows.get(i))
+			i++
+		}
 
-		var f = generateFile('requirements.txt',
-			"tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
+		var f = generateFile('requirements.txt', "tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
 		saveFileIntoZip(f, "requirements.txt");
 
 		for (Language lan : bot.languages) {
 
-			var subPath = lan.languageAbbreviation + File.separator
-			var dataPath = subPath + 'data'+ File.separator
+			var subPath = lan.languageAbbreviation
+			var dataPath = subPath + File.separator + 'data'
 //			generateFolder(subPath);
 //			generateFolder(dataPath)
-			
-			f = generateFile(subPath +'actions.py', actions(intents, entities, actions, lan, bot))
+			f = generateFile(subPath + File.separator + 'actions.py', actions(intents, entities, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'actions.py')
 
-			f = generateFile(subPath + 'config.yml', config(lan))
+			f = generateFile(subPath + File.separator + 'config.yml',
+				config(lan, fallbackAction, fallbackIntent !== null))
 			saveFileIntoZip(f, subPath, 'config.yml')
 
-			f = generateFile(subPath + 'credentials.yml', credentials)
+			f = generateFile(subPath + File.separator + 'credentials.yml', credentials)
 			saveFileIntoZip(f, subPath, 'credentials.yml')
-			
-			f = generateFile(subPath + 'domain.yml', domain(intents, parameters, actions, lan, bot))
+
+			f = generateFile(subPath + File.separator + 'domain.yml', domain(intents, parameters, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'domain.yml')
 
-			f = generateFile(subPath + 'endpoints.yml', endpoint)
+			f = generateFile(subPath + File.separator + 'endpoints.yml', endpoint)
 			saveFileIntoZip(f, subPath, 'endpoints.yml')
 
-			f = generateFile(dataPath+'nlu.md', nlu(intents, entities, lan, bot))
+			f = generateFile(dataPath + File.separator + 'nlu.md', nlu(intents, entities, lan, bot))
 			saveFileIntoZip(f, dataPath, 'nlu.md')
 
-			f = generateFile(dataPath +'stories.md', stories(leafs))
+			f = generateFile(dataPath + File.separator + 'stories.md', stories(leafs))
 			saveFileIntoZip(f, dataPath, 'stories.md')
 		}
 		close()
 		zipFile
 	}
 
+	def Action getFallbackAction(Intent fallbackIntent, UserInteraction flow) {
+		if (flow.intent.equals(fallbackIntent)) {
+			if (flow.target !== null) {
+				return flow.target.actions.get(0);
+			} else if (flow.backTo !== null) {
+				return flow.backTo.backTo.actions.get(0);
+			}
+
+		}
+		var action = null as Action
+		if (flow.target !== null) {
+			if (!flow.target.outcoming.isEmpty) {
+				for (UserInteraction ui : flow.target.outcoming) {
+					action = getFallbackAction(fallbackIntent, ui)
+					if (action !== null) {
+						return action;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
 	def String actionName(Action action) {
-		if (action instanceof Text || action instanceof Image) {
+		if (action instanceof Text || action instanceof Image || action instanceof ButtonAction) {
+			if (action.name.getRasaValue.startsWith("utter")) {
+				return action.name.getRasaValue
+			}
 			return "utter_" + action.name.getRasaValue
+		}
+		if (action.name.getRasaValue.startsWith("action")) {
+			return action.name.getRasaValue
 		}
 		return "action_" + action.name.getRasaValue
 	}
@@ -131,9 +172,6 @@ class RasaGenerator extends BotGenerator{
 		«ELSEIF flow instanceof BotInteraction»
 			«flow(flow as BotInteraction, clean)»
 		«ENDIF»
-		«FOR intent : clean»
-			«"\t"»- «intent.name.getRasaValue»_clean
-		«ENDFOR»
 	'''
 
 	def String flow(UserInteraction user, List<Intent> clean) '''
@@ -141,11 +179,6 @@ class RasaGenerator extends BotGenerator{
 			«flow(user.src, clean)»
 		«ENDIF»
 		* «user.intent.name.rasaValue»	
-		«IF !user.intent.parameters.isEmpty»
-			«"\t"»- «{clean.add(user.intent);user.intent.name.getRasaValue}»_form
-			«"\t"»- form{"name": "«user.intent.name.getRasaValue»_form"}
-			«"\t"»- form{"name": null}
-		«ENDIF»
 	'''
 
 	def String flow(BotInteraction bot, List<Intent> clean) '''
@@ -207,159 +240,157 @@ class RasaGenerator extends BotGenerator{
 			return None
 			
 		def date_validate(value:Text):
-				parses = d.parse_time(value)
-				for parse in parses:
-					if parse ['dim'] == 'time':
-						if parse['value'].get('grain') == 'day' or parse['value'].get('grain') == 'month' or parse['value'].get('grain') == 'year': 
-							return parse ['value']['value']
-				return None
+			parses = d.parse_time(value)
+			for parse in parses:
+				if parse ['dim'] == 'time':
+					if parse['value'].get('grain') == 'day' or parse['value'].get('grain') == 'month' or parse['value'].get('grain') == 'year': 
+						return parse ['value']['value']
+			return None
 				
 		«FOR entity : entities»
-			«IF entityType(entity) === BotGenerator.SIMPLE»
-				«FOR simpleLanguage : entity.inputs»
-					«IF simpleLanguage.language.compare(lan, bot)»
-						«entity.name.rasaValue»_db={
-							«FOR input: simpleLanguage.inputs»
-								"«(input as SimpleInput).name.toLowerCase»":["«(input as SimpleInput).name.toLowerCase»"«FOR value: (input as SimpleInput).values»,"«value.toLowerCase»"«ENDFOR»]«IF !DialogflowGenerator.isTheLast(entity.inputs, input)»,«ENDIF»
-							«ENDFOR»
-						}
-						
-						def «entity.name.rasaValue»_validate(value:Text):
-							for input in «entity.name.rasaValue»_db:
-								if value.lower() in «entity.name.rasaValue»_db[input]:
-									return input
-							return None
-					«ENDIF»		
-				«ENDFOR»
-			«ELSEIF entityType(entity) === BotGenerator.COMPOSITE»
-				def «entity.name.rasaValue»_validate(value:Text):
-					
-					return None
-					
-			«ENDIF»
+		«IF entityType(entity) === BotGenerator.SIMPLE»
+		«FOR simpleLanguage : entity.inputs»
+		«IF simpleLanguage.language.compare(lan, bot)»
+		«entity.name.rasaValue»_db={
+		«FOR input: simpleLanguage.inputs»
+		"«(input as SimpleInput).name.toLowerCase»":["«(input as SimpleInput).name.toLowerCase»"«FOR value: (input as SimpleInput).values»,"«value.toLowerCase»"«ENDFOR»]«IF !DialogflowGenerator.isTheLast(entity.inputs, input)»,«ENDIF»
+		«ENDFOR»}
+		def «entity.name.rasaValue»_validate(value:Text):
+			for input in «entity.name.rasaValue»_db:
+				if value.lower() in «entity.name.rasaValue»_db[input]:
+					return input
+			return None
+		«ENDIF»		
+		«ENDFOR»
+		«ELSEIF entityType(entity) === BotGenerator.COMPOSITE»
+		def «entity.name.rasaValue»_validate(value:Text):
+			return None
+		«ENDIF»
 		«ENDFOR»
 		«FOR intent : intents»
-			«IF !intent.parameters.empty»
-				class «intent.name.getRasaValue»Form (FormAction):
-					def name(self):
-						# type: () -> Text
-						"""Unique identifier of the form"""
-					
-						return "«intent.name.getRasaValue»_form"
+		«IF !intent.parameters.empty»
+		class «intent.name.getRasaValue»Form (FormAction):
+			def name(self):
+				# type: () -> Text
+					"""Unique identifier of the form"""
+					return "«intent.name.getRasaValue»_form"
 						
-					@staticmethod
-					def required_slots(tracker: Tracker) -> List[Text]:
-						"""A list of required slots that the form has to fill"""
-						«var coma =""»
-			return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.name.rasaValue}»"«ENDIF»«ENDFOR»]
+			@staticmethod
+			def required_slots(tracker: Tracker) -> List[Text]:
+				"""A list of required slots that the form has to fill"""
+				«var coma =""»
+				«/*return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.paramName}»"«ENDIF»«ENDFOR»]*/»
+				return [«FOR param :intent.parameters»«coma»"«{coma=",";param.paramName}»"«ENDFOR»]
 			«FOR param :intent.parameters»
-				
-					def validate_«param.name.getRasaValue»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
-						«IF param.entity !== null»
-							parseValue = «param.entity.name.rasaValue»_validate(value)
-						«ELSEIF param.defaultEntity === DefaultEntity.DATE»
-							parseValue = date_validate(value)
-						«ELSEIF param.defaultEntity === DefaultEntity.TIME»
-							parseValue = time_validate(value)
-						«ELSEIF param.defaultEntity === DefaultEntity.TEXT»
-							parseValue = value
-						«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
-							try:
-								parseValue = float (value)
-							except ValueError:
-								parseValue = None
-						«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
-							try:
-								parseValue = int (value)
-							except ValueError:
-								parseValue = None
-						«ENDIF»
-						if parseValue is None:
-							dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
-							return {'«param.name.getRasaValue»': None}
-						return {'«param.name.getRasaValue»': parseValue}
+			def validate_«param.paramName»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
+				«IF param.entity !== null»
+				parseValue = «param.entity.name.rasaValue»_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.DATE»
+				parseValue = date_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.TIME»
+				parseValue = time_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.TEXT»
+				parseValue = value
+				«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
+				try:
+					parseValue = float (value)
+					except ValueError:
+					parseValue = None
+				«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
+				try:
+					parseValue = int (value)
+					except ValueError:
+					parseValue = None
+				«ENDIF»
+				if parseValue is None:
+					dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
+					return {'«param.paramName»': None}
+				return {'«param.paramName»': parseValue}
 			«ENDFOR»
 			
-				def slot_mappings(self):
+			def slot_mappings(self):
 			
-					return {
-					      	«FOR param :intent.parameters»
-					      		"«param.name.rasaValue»": [self.from_entity(entity="«param.name.rasaValue»"),self.from_«param.paramType»()],
-					      	«ENDFOR»
-					      	}
+				return {«FOR param :intent.parameters»
+				"«param.paramName»": [self.from_entity(entity="«param.paramName»"),self.from_«param.paramType»()],«ENDFOR»}
 			def submit(
-			    self,
-			    dispatcher: CollectingDispatcher,
-			    tracker: Tracker,
-			    domain: Dict[Text, Any],
-			) -> List[Dict]:
-			   """Define what the form has to do
-			       after all required slots are filled"""
-			   return []
+				self,
+				dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any],
+				) -> List[Dict]:
+				"""Define what the form has to do after all required slots are filled"""
+				return []
 			
-			class «intent.name.getRasaValue»Clean (Action):
-				def name(self) -> Text:
-					return "«intent.name.getRasaValue»_clean"
-				def run(self, dispatcher: CollectingDispatcher,
-						tracker: Tracker,
-						domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-				return [«FOR param :intent.parameters»SlotSet("«param.name.rasaValue»", None) «IF !DialogflowGenerator.isTheLast(intent.parameters, param)»,«ENDIF»«ENDFOR»]            
+		class «intent.name.getRasaValue»Clean (Action):
+			def name(self) -> Text:
+				return "«intent.name.getRasaValue»_clean"
+			def run(self, dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				return [«FOR param :intent.parameters»SlotSet("«param.paramName»", None) «IF !DialogflowGenerator.isTheLast(intent.parameters, param)»,«ENDIF»«ENDFOR»]            
 			«ENDIF»
 		«ENDFOR»
 		«FOR action : actions»
-			«IF action instanceof HTTPRequest»
-				class «action.name.getRasaValue» (Action):
-					response = None
-					def name(self) -> Text:
-						return "«action.actionName»"
+		«IF action instanceof HTTPRequest»
+		class «action.name.getRasaValue» (Action):
+			response = None
+			def name(self) -> Text:
+				return "«action.actionName»"
 				
-					def run(self, dispatcher: CollectingDispatcher,
-								tracker: Tracker,
-								domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-						url = '«action.URL»'
-						«var args =""»
+			def run(self, dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				url = '«action.URL»'
+				«var args =""»
 						
-						«IF action.basicAuth !== null»
-							auth={'«action.basicAuth.key»', '«action.basicAuth.value»'}
-							«{args+=", auth=auth"; ""}»
-						«ENDIF»
+				«IF action.basicAuth !== null»
+				auth={'«action.basicAuth.key»', '«action.basicAuth.value»'}
+				«{args+=", auth=auth"; ""}»
+				«ENDIF»
 						
-						«IF !action.headers.isEmpty»
-							headers={
-								«FOR header: action.headers»
-									'«header.key»':'«header.value»'«IF !DialogflowGenerator.isTheLast(action.headers, header)», «ENDIF»
-								«ENDFOR»
-							}
-							«{args+=", headers=headers"; ""}»
-						«ENDIF»
+				«IF !action.headers.isEmpty»
+				headers={
+					«FOR header: action.headers»
+					'«header.key»':'«header.value»'«IF !DialogflowGenerator.isTheLast(action.headers, header)», «ENDIF»
+					«ENDFOR»}
+					«{args+=", headers=headers"; ""}»
+				«ENDIF»
 						
-						«IF !action.data.isEmpty»
-							data = {
-								«FOR d : action.data»
-									«IF d.value instanceof ParameterToken»
-										'«d.key»': tracker.get_slot("«(d.value as ParameterToken).parameter.name.getRasaValue»")«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
-									«ELSE»
-										'«d.key»':'«d.value»'«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
-									«ENDIF»
-								«ENDFOR»
-							}
-							«IF action.dataType === DataType.FORM»«{args+=",data=data";""}»«ELSE»«{args+=",json=data";""}»«ENDIF»
-						«ENDIF»
-						«action.name.rasaValue».response = requests.«action.method.getName.toLowerCase»(url «args») 
-			«ELSEIF action instanceof HTTPResponse»
-				class «action.name.rasaValue» (Action):
-					def name(self) -> Text:
-						return "«action.actionName»"
-					
-					def run(self, dispatcher: CollectingDispatcher,
-							tracker: Tracker,
-							domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-						response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
-						text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
-						dispatcher.utter_message(text)
-						return []         
+				«IF !action.data.isEmpty»
+				data = {
+					«FOR d : action.data»
+					«IF d.value instanceof ParameterToken»
+					'«d.key»': tracker.get_slot("«(d.value as ParameterToken).parameter.name.getRasaValue»")«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
+					«ELSE»
+					'«d.key»':'«d.value»'«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
+					«ENDIF»
+					«ENDFOR»}
+					«IF action.dataType === DataType.FORM»«{args+=",data=data";""}»«ELSE»«{args+=",json=data";""}»«ENDIF»
+				«ENDIF»
+				«action.name.rasaValue».response = requests.«action.method.getName.toLowerCase»(url «args») 
+		«ELSEIF action instanceof HTTPResponse»
+		class «action.name.rasaValue» (Action):
+			def name(self) -> Text:
+				return "«action.actionName»"
+			
+			def run(self, dispatcher: CollectingDispatcher,
+					tracker: Tracker,
+					domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
+				text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
+				dispatcher.utter_message(text)
+				return []         
 				
-			«ENDIF»
+		«ELSEIF action instanceof Empty»
+		class «action.name.rasaValue» (Action):
+			def name(self) -> Text:
+				return "«action.actionName»"
+			
+			def run(self, dispatcher: CollectingDispatcher,
+					tracker: Tracker,
+					domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				return []  
+		«ENDIF»
 			
 		«ENDFOR»
 		
@@ -367,7 +398,7 @@ class RasaGenerator extends BotGenerator{
 
 	def getHttpResponseText(HTTPResponse action, Language lan, Bot bot) {
 		var ret = ""
-		for (TextLanguageInput textLanguage : action.inputs) {
+		for (LanguageText textLanguage : action.inputs) {
 			if (textLanguage.language.compare(lan, bot)) {
 				for (token : textLanguage.inputs.get(0).tokens) {
 					if (token instanceof Literal) {
@@ -399,92 +430,102 @@ class RasaGenerator extends BotGenerator{
 	}
 
 	def domain(List<Intent> intents, List<Parameter> parameters, List<Action> actions, Language lan, Bot bot) '''
-		intents:
-		  «FOR intent : intents»
-		  	- «intent.name.getRasaValue»
-		  «ENDFOR»
+		session_config:
+		  session_expiration_time: 60
+		«IF !intents.isEmpty»
+			intents:
+			  «FOR intent : intents»
+			  	- «intent.name.getRasaValue»
+			  «ENDFOR»
+		«ENDIF»
+		«IF !parameters.isEmpty»
+			entities:
+			  «FOR parameter : parameters»
+			  	- «getParamName(parameter)»
+			  «ENDFOR»
+			
+			slots:
+			  «FOR parameter : parameters»
+			  	«parameter.paramName»:
+			  	  «IF parameter.isIsList»
+			  	  	type: list
+			  	  «ELSEIF parameter.entity!== null && parameter.entity.isSimple »
+			  	  	type: categorical
+			  	  	values:
+			  	  	«FOR v: parameter.entity.inputs.get(0).inputs»
+			  	  		- «(v as SimpleInput).name»
+			  	  	«ENDFOR» 
+			  	  «ELSEIF parameter.defaultEntity.equals(DefaultEntity.TEXT)»
+			  	  	type: text
+			  	  «ELSEIF parameter.defaultEntity.equals(DefaultEntity.FLOAT) || parameter.defaultEntity.equals(DefaultEntity.NUMBER)»
+			  	  	type: float
+			  	  «ELSE»
+			  	  	type: unfeaturized
+			  	  «ENDIF»
+			  «ENDFOR»
+		«ENDIF»
 		
-		entities:
-		  «FOR parameter : parameters»
-		  	- «getParamName(parameter)»
-		  «ENDFOR»
+		«IF !parameters.isEmpty || !actions.isEmpty»
+			responses:
+			  «FOR parameter : parameters»
+			  	«IF parameter.isRequired && !parameter.prompts.isEmpty»
+			  		utter_ask_«parameter.paramName»:
+			  		  «FOR prompt:parameter.prompts»
+			  		  	«IF prompt.language.compare(lan, bot)»
+			  		  		«FOR text : prompt.prompts»	
+			  		  			- text: "«text»"
+			  		  		«ENDFOR»
+			  		  	«ENDIF»
+			  		  «ENDFOR»
+			  		utter_wrong_«parameter.paramName»:
+			  		  - text: "I can not understand the «parameter.name», please try again"
+			  	«ENDIF»
+			  «ENDFOR»
+			  «FOR action : actions»
+			  	«IF action instanceof Text»
+			  		«action.actionName»:
+			  		  «FOR textLanguageEntity: action.inputs»
+			  		  	«IF textLanguageEntity.language.compare(lan, bot)»
+			  		  		«FOR input : textLanguageEntity.inputs»	
+			  		  			- text: "«input.textActionInput»"
+			  		  		«ENDFOR»
+			  		  	«ENDIF»
+			  		  «ENDFOR»
+			  	«ELSEIF action instanceof Image»
+			  		«action.actionName»:
+			  		  - text: «IF (action as Image).caption !== null»"«(action as Image).caption»"«ELSE»""«ENDIF»
+			  		    image: "«(action as Image).URL»"
+			  	«ELSEIF action instanceof ButtonAction»
+			  		«FOR textLanguageEntity: action.inputs»
+			  			«action.actionName»:
+			  			  «IF textLanguageEntity.language.compare(lan, bot)»
+			  			  	«FOR input : textLanguageEntity.inputs»	
+			  			  		- text: "«input.textActionInput»"
+			  			  	«ENDFOR»
+			  			  	buttons:
+			  			  	  «FOR button: textLanguageEntity.buttons»
+			  			  	  	- title: "«button.value»"
+			  			  	  	  «IF button.action !== null»
+			  			  	  	  	payload: "«button.action»"
+			  			  	  	  «ENDIF»
+			  			  	  «ENDFOR»
+			  			  «ENDIF»
+			  			«ENDFOR»
+			  		«ENDIF»
+			  	«ENDFOR»
+			«ENDIF»
 		
-		slots:
-		  «FOR parameter : parameters»
-		  	«parameter.paramName»:
-		  	  type: unfeaturized
-		  	  auto_fill: false
-		  «ENDFOR»
-		
-		responses:
-		  «FOR parameter : parameters»
-		  	«IF parameter.isRequired && !parameter.prompts.isEmpty»
-		  		utter_ask_«parameter.paramName»:
-		  		«FOR prompt:parameter.prompts»
-		  			«IF prompt.language.compare(lan, bot)»
-		  				«FOR text : prompt.prompts»	
-		  					- text: "«text»"
-		  				«ENDFOR»
-		  			«ENDIF»
-		  		«ENDFOR»
-		  		utter_wrong_«parameter.paramName»:
-		  		- text: "I can not understand the «parameter.name», please try again"
-		  	«ENDIF»
-		  «ENDFOR»
-		  «FOR action : actions»
-		  	«IF action instanceof Text»
-		  		«action.actionName»:
-		  		«FOR textLanguageInput: action.inputs»
-		  			«IF textLanguageInput.language.compare(lan, bot)»
-		  				«FOR input : textLanguageInput.inputs»	
-		  					- text: "«input.textActionInput»"
-		  				«ENDFOR»
-		  			«ENDIF»
-		  		«ENDFOR»
-		  	«ELSEIF action instanceof Image»
-		  		«action.actionName»:
-		  		- text: «IF (action as Image).caption !== null»"«(action as Image).caption»"«ELSE»""«ENDIF»
-		  		  image: "«(action as Image).URL»"
-		  	«ELSEIF action instanceof ButtonAction»
-		  		«FOR textLanguageInput: action.inputs»
-		  			«action.actionName»:
-		  			«IF textLanguageInput.language.compare(lan, bot)»
-		  			- text: "«textLanguageInput.text.textActionInput»"
-		  			buttons:
-		  			«FOR button: textLanguageInput.buttons»
-		  			- title: "«button.value»"
-		  			«IF button.action !== null»
-		  			payload: "«button.action»"
-				  		    «ENDIF»
-				  		  «ENDFOR»
-			  		 «ENDIF»
-		  		 «ENDFOR»
-		  		 
-		  	«ENDIF»
-		  «ENDFOR»
-		
-		actions:
-		
-		  «FOR action : actions»
-		  	- «action.actionName»
-		  «ENDFOR»
-		  «FOR intent : intents»
-		  	«IF !intent.parameters.empty»
-		  		- «intent.name.getRasaValue»_clean
-		  	«ENDIF»
-		  «ENDFOR»
-		
-		forms:
-		  «FOR intent : intents»
-		  	«IF !intent.parameters.empty»
-		  		- «intent.name.getRasaValue»_form
-		  	«ENDIF»
-		  «ENDFOR»
-	'''
-	
+		«IF !parameters.isEmpty || !actions.isEmpty»
+			actions:
+			  «FOR action : actions»
+			  	- «action.actionName»
+			  «ENDFOR»
+		«ENDIF»
+		'''
+
 	def compare(Language language, Language language2, Bot bot) {
 		var aux = language
-		if (aux.equals(Language.EMPTY)){
+		if (aux.equals(Language.EMPTY)) {
 			aux = bot.languages.get(0);
 		}
 		return aux.equals(language2)
@@ -494,9 +535,9 @@ class RasaGenerator extends BotGenerator{
 		var ret = ""
 		for (token : input.tokens) {
 			if (token instanceof Literal) {
-				ret += token.text + " "
+				ret += token.text
 			} else if (token instanceof ParameterToken) {
-				ret += "{" + token.parameter.paramName + "}" + " "
+				ret += "{" + token.parameter.paramName + "}"
 			}
 		}
 		return ret;
@@ -526,11 +567,11 @@ class RasaGenerator extends BotGenerator{
 
 	def nlu(List<Intent> intents, List<Entity> entities, Language lan, Bot bot) '''
 		«FOR intent : intents»
-			«FOR intentLanguageInput: intent.inputs»
-				«IF intentLanguageInput.language.compare(lan, bot)»
+			«FOR intentLanguageEntity: intent.inputs»
+				«IF intentLanguageEntity.language.compare(lan, bot)»
 					«IF intentType(intent) === BotGenerator.TRAINING»
 						## intent:«intent.name.getRasaValue»
-						«FOR input : intentLanguageInput.inputs»
+						«FOR input : intentLanguageEntity.inputs»
 							- «(input as TrainingPhrase).generate(lan, bot)»
 						«ENDFOR»
 					«ENDIF»
@@ -568,20 +609,17 @@ class RasaGenerator extends BotGenerator{
 				ret += token.text + " "
 			} else if (token instanceof ParameterReferenceToken) {
 				if (entityType(token.parameter.entity) == BotGenerator.SIMPLE) {
-				if (token.parameter.entity !== null){
-					ret +=
-					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +'"'+
-						'"value":'+ '"'+getEntry(token.textReference, token.parameter.entity, lan, bot) +'" }' 
-				}
-				ret +=
-					'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +
-						'" }' 
-						
+					if (token.parameter.entity !== null) {
+						ret +=
+							'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName + '",' +
+								'"value":' + '"' + getEntry(token.textReference, token.parameter.entity, lan, bot) +
+								'" }'
+					} else {
+						ret += '[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName + '" }'
+					}
 
 				} else {
-					ret +=
-						'[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName +
-							'" }' + " "
+					ret += '[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName + '" }' + " "
 				}
 			}
 		}
@@ -589,7 +627,7 @@ class RasaGenerator extends BotGenerator{
 	}
 
 	def getEntry(String string, Entity entity, Language lan, Bot bot) {
-		for (LanguageInput languageInput : entity.inputs) {
+		for (LanguageEntity languageInput : entity.inputs) {
 			if (languageInput.language.compare(lan, bot)) {
 				for (EntityInput input : languageInput.inputs) {
 					if (input instanceof SimpleInput) {
@@ -613,7 +651,7 @@ class RasaGenerator extends BotGenerator{
 	}
 
 	def getParamName(Parameter param) {
-		return (param.eContainer as Intent).name.rasaValue + "." + param.name.getRasaValue
+		return (param.eContainer as Intent).name.rasaValue + "_" + param.name.getRasaValue
 	}
 
 	def endpoint() '''
@@ -663,60 +701,43 @@ class RasaGenerator extends BotGenerator{
 		    url: http://localhost:5055/webhook
 	'''
 
-	def config(Language lan) '''
+	def config(Language lan, Action fallbackAction, boolean hasFallback) '''
 		# Configuration for Rasa NLU.
 		# https://rasa.com/docs/rasa/nlu/components/
 		language: «lan.languageAbbreviation»
-		
-		«IF lan.equals(Language.ENGLISH)»		
-			pipeline:
-			  - name: ConveRTTokenizer
-			  - name: ConveRTFeaturizer
-		«ELSE»
-			pipeline:
-			  - name: SpacyNLP
-			  - name: SpacyTokenizer
-			  - name: SpacyFeaturizer
-		«ENDIF»
+		pipeline:
+		  - name: WhitespaceTokenizer
 		  - name: RegexFeaturizer
 		  - name: LexicalSyntacticFeaturizer
 		  - name: CountVectorsFeaturizer
 		  - name: CountVectorsFeaturizer
-		  analyzer: "char_wb"
-		  min_ngram: 1
-		  max_ngram: 4
+		    analyzer: "char_wb"
+		    min_ngram: 1
+		    max_ngram: 4
 		  - name: DIETClassifier
-		  epochs: 100
+		    epochs: 100
 		  - name: EntitySynonymMapper
 		  - name: ResponseSelector
 		    epochs: 100
-		  - name: "DucklingHTTPExtractor"
-		    # url of the running duckling server
-		    url: "http://localhost:8000"
-		    # dimensions to extract
-		    dimensions: ["time"]
-		    # allows you to configure the locale, by default the language is
-		    # used
-		    locale: "«lan.languageAbbreviation»"
-		    # if not set the default timezone of Duckling is going to be used
-		    # needed to calculate dates from relative expressions like "tomorrow"
-		    timezone: "Europe/Berlin"
-		    # Timeout for receiving response from http url of the running duckling server
-		    # if not set the default timeout of duckling http url is set to 3 seconds.
-		    timeout : 3
 		
 		# Configuration for Rasa Core.
 		# https://rasa.com/docs/rasa/core/policies/
 		policies:
-		  - name: KerasPolicy
-		  - name: MappingPolicy
-		  - name: FormPolicy
 		  - name: MemoizationPolicy
-		  - name: "FallbackPolicy"
-		  nlu_threshold: 0.3
-		  ambiguity_threshold: 0.1
-		  core_threshold: 0.3
-		  fallback_action_name: 'action_default_fallback'
+		  - name: TEDPolicy
+		    max_history: 5
+		    epochs: 100
+		  - name: MappingPolicy
+		  «IF hasFallback»
+		  	- name: "FallbackPolicy"
+		  	  nlu_threshold: 0.5
+		  	  core_threshold: 0.35
+		  	  «IF fallbackAction === null»
+		  	  	fallback_action_name: 'action_default_fallback'
+		  	  «ELSE»
+		  	  	fallback_action_name: '«fallbackAction.actionName»'
+		  	  «ENDIF»
+		  	«ENDIF»
 	'''
 
 	def languageAbbreviation(Language lan) {

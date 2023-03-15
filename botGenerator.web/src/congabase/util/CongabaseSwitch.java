@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
-import recommenderQuestionnaire.Tool;
 
 /**
  * <!-- begin-user-doc -->
@@ -98,15 +97,29 @@ public class CongabaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CongabasePackage.TOOL_TO_DOUBLE: {
-				@SuppressWarnings("unchecked") Map.Entry<Tool, Double> toolToDouble = (Map.Entry<Tool, Double>)theEObject;
-				T result = caseToolToDouble(toolToDouble);
+			case CongabasePackage.ROPTION_TO_DOUBLE: {
+				@SuppressWarnings("unchecked") Map.Entry<RecommenderOption, Double> rOptionToDouble = (Map.Entry<RecommenderOption, Double>)theEObject;
+				T result = caseROptionToDouble(rOptionToDouble);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CongabasePackage.UTILITY: {
+				Utility utility = (Utility)theEObject;
+				T result = caseUtility(utility);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CongabasePackage.SERVICE: {
 				Service service = (Service)theEObject;
 				T result = caseService(service);
+				if (result == null) result = caseUtility(service);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CongabasePackage.RECOMMENDER_OPTION: {
+				RecommenderOption recommenderOption = (RecommenderOption)theEObject;
+				T result = caseRecommenderOption(recommenderOption);
+				if (result == null) result = caseUtility(recommenderOption);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -196,17 +209,32 @@ public class CongabaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tool To Double</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>ROption To Double</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tool To Double</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>ROption To Double</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseToolToDouble(Map.Entry<Tool, Double> object) {
+	public T caseROptionToDouble(Map.Entry<RecommenderOption, Double> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Utility</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Utility</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUtility(Utility object) {
 		return null;
 	}
 
@@ -222,6 +250,21 @@ public class CongabaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseService(Service object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Recommender Option</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Recommender Option</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRecommenderOption(RecommenderOption object) {
 		return null;
 	}
 

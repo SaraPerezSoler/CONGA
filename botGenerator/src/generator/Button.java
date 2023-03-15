@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see generator.GeneratorPackage#getButton()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface Button extends EObject, Comparable {
 	/**

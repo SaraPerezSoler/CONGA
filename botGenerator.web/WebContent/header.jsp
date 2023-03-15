@@ -47,8 +47,9 @@ if (session == null) {
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 				role="button" aria-haspopup="true" aria-expanded="false">Services</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="NewService.jsp">New service</a> <a
-						class="dropdown-item" href="serviceManager.jsp">Service Manager</a>
+					<a class="dropdown-item" href="NewService.jsp">New service</a>
+					<a class="dropdown-item" href="NewRecommenderTool.jsp">New recommender Tool</a> 
+					<a class="dropdown-item" href="serviceManager.jsp">Service Manager</a>
 				</div></li>
 		</ul>
 	</div>

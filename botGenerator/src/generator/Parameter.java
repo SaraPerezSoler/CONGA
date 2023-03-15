@@ -126,8 +126,8 @@ public interface Parameter extends Element, Comparable {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<PromptLanguage> getPrompts();
+	EList<LanguagePrompt> getPrompts();
 
-	PromptLanguage getPrompt(Language language);
+	LanguagePrompt getPrompt(Language language);
 
 } // Parameter

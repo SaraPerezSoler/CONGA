@@ -92,16 +92,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createElementAdapter();
 			}
 			@Override
-			public Adapter caseWithLanguage(WithLanguage object) {
-				return createWithLanguageAdapter();
+			public Adapter caseLanguageInput(LanguageInput object) {
+				return createLanguageInputAdapter();
 			}
 			@Override
 			public Adapter caseEntity(Entity object) {
 				return createEntityAdapter();
 			}
 			@Override
-			public Adapter caseLanguageInput(LanguageInput object) {
-				return createLanguageInputAdapter();
+			public Adapter caseLanguageEntity(LanguageEntity object) {
+				return createLanguageEntityAdapter();
 			}
 			@Override
 			public Adapter caseEntityInput(EntityInput object) {
@@ -152,12 +152,8 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createIntentAdapter();
 			}
 			@Override
-			public Adapter caseIntentLanguageInputs(IntentLanguageInputs object) {
-				return createIntentLanguageInputsAdapter();
-			}
-			@Override
-			public Adapter caseIntentInput(IntentInput object) {
-				return createIntentInputAdapter();
+			public Adapter caseLanguageIntent(LanguageIntent object) {
+				return createLanguageIntentAdapter();
 			}
 			@Override
 			public Adapter caseTrainingPhrase(TrainingPhrase object) {
@@ -168,8 +164,8 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createParameterAdapter();
 			}
 			@Override
-			public Adapter casePromptLanguage(PromptLanguage object) {
-				return createPromptLanguageAdapter();
+			public Adapter caseLanguagePrompt(LanguagePrompt object) {
+				return createLanguagePromptAdapter();
 			}
 			@Override
 			public Adapter caseAction(Action object) {
@@ -192,16 +188,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createButtonActionAdapter();
 			}
 			@Override
-			public Adapter caseButtonsLanguageInputs(ButtonsLanguageInputs object) {
-				return createButtonsLanguageInputsAdapter();
+			public Adapter caseLanguageButton(LanguageButton object) {
+				return createLanguageButtonAdapter();
 			}
 			@Override
 			public Adapter caseButton(Button object) {
 				return createButtonAdapter();
 			}
 			@Override
-			public Adapter caseTextLanguageInput(TextLanguageInput object) {
-				return createTextLanguageInputAdapter();
+			public Adapter caseLanguageText(LanguageText object) {
+				return createLanguageTextAdapter();
 			}
 			@Override
 			public Adapter caseTextInput(TextInput object) {
@@ -324,20 +320,6 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link generator.WithLanguage <em>With Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see generator.WithLanguage
-	 * @generated
-	 */
-	public Adapter createWithLanguageAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link generator.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -348,6 +330,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link generator.LanguageEntity <em>Language Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see generator.LanguageEntity
+	 * @generated
+	 */
+	public Adapter createLanguageEntityAdapter() {
 		return null;
 	}
 
@@ -534,30 +530,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link generator.IntentLanguageInputs <em>Intent Language Inputs</em>}'.
+	 * Creates a new adapter for an object of class '{@link generator.LanguageIntent <em>Language Intent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see generator.IntentLanguageInputs
+	 * @see generator.LanguageIntent
 	 * @generated
 	 */
-	public Adapter createIntentLanguageInputsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link generator.IntentInput <em>Intent Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see generator.IntentInput
-	 * @generated
-	 */
-	public Adapter createIntentInputAdapter() {
+	public Adapter createLanguageIntentAdapter() {
 		return null;
 	}
 
@@ -590,16 +572,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link generator.PromptLanguage <em>Prompt Language</em>}'.
+	 * Creates a new adapter for an object of class '{@link generator.LanguagePrompt <em>Language Prompt</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see generator.PromptLanguage
+	 * @see generator.LanguagePrompt
 	 * @generated
 	 */
-	public Adapter createPromptLanguageAdapter() {
+	public Adapter createLanguagePromptAdapter() {
 		return null;
 	}
 
@@ -674,16 +656,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link generator.ButtonsLanguageInputs <em>Buttons Language Inputs</em>}'.
+	 * Creates a new adapter for an object of class '{@link generator.LanguageButton <em>Language Button</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see generator.ButtonsLanguageInputs
+	 * @see generator.LanguageButton
 	 * @generated
 	 */
-	public Adapter createButtonsLanguageInputsAdapter() {
+	public Adapter createLanguageButtonAdapter() {
 		return null;
 	}
 
@@ -702,16 +684,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link generator.TextLanguageInput <em>Text Language Input</em>}'.
+	 * Creates a new adapter for an object of class '{@link generator.LanguageText <em>Language Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see generator.TextLanguageInput
+	 * @see generator.LanguageText
 	 * @generated
 	 */
-	public Adapter createTextLanguageInputAdapter() {
+	public Adapter createLanguageTextAdapter() {
 		return null;
 	}
 

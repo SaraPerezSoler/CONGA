@@ -2,6 +2,8 @@
  */
 package congabase;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -18,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link congabase.User#getNick <em>Nick</em>}</li>
  *   <li>{@link congabase.User#getPassword <em>Password</em>}</li>
  *   <li>{@link congabase.User#getProjects <em>Projects</em>}</li>
- *   <li>{@link congabase.User#getServices <em>Services</em>}</li>
+ *   <li>{@link congabase.User#getUtilities <em>Utilities</em>}</li>
  * </ul>
  *
  * @see congabase.CongabasePackage#getUser()
@@ -84,19 +86,9 @@ public interface User extends EObject {
 	 */
 	EList<Project> getProjects();
 
-	/**
-	 * Returns the value of the '<em><b>Services</b></em>' reference list.
-	 * The list contents are of type {@link congabase.Service}.
-	 * It is bidirectional and its opposite is '{@link congabase.Service#getUser <em>User</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Services</em>' reference list.
-	 * @see congabase.CongabasePackage#getUser_Services()
-	 * @see congabase.Service#getUser
-	 * @model opposite="user"
-	 * @generated
-	 */
-	EList<Service> getServices();
+	List<RecommenderOption> getRecommenderOptions();
+	EList<Utility> getUtilities();
+	List<Service> getServices();
 
 	Project get(String project);
 

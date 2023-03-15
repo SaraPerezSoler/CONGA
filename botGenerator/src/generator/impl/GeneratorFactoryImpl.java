@@ -62,7 +62,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.USER_INTERACTION: return createUserInteraction();
 			case GeneratorPackage.BACK_TO_BOT: return createBackToBot();
 			case GeneratorPackage.ENTITY: return createEntity();
-			case GeneratorPackage.LANGUAGE_INPUT: return createLanguageInput();
+			case GeneratorPackage.LANGUAGE_ENTITY: return createLanguageEntity();
 			case GeneratorPackage.SIMPLE_INPUT: return createSimpleInput();
 			case GeneratorPackage.COMPOSITE_INPUT: return createCompositeInput();
 			case GeneratorPackage.REGEX_INPUT: return createRegexInput();
@@ -72,17 +72,17 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.PARAMETER_REFERENCE_TOKEN: return createParameterReferenceToken();
 			case GeneratorPackage.HTTP_REQUEST_TOKE: return createHTTPRequestToke();
 			case GeneratorPackage.INTENT: return createIntent();
-			case GeneratorPackage.INTENT_LANGUAGE_INPUTS: return createIntentLanguageInputs();
+			case GeneratorPackage.LANGUAGE_INTENT: return createLanguageIntent();
 			case GeneratorPackage.TRAINING_PHRASE: return createTrainingPhrase();
 			case GeneratorPackage.PARAMETER: return createParameter();
-			case GeneratorPackage.PROMPT_LANGUAGE: return createPromptLanguage();
+			case GeneratorPackage.LANGUAGE_PROMPT: return createLanguagePrompt();
 			case GeneratorPackage.IMAGE: return createImage();
 			case GeneratorPackage.EMPTY: return createEmpty();
 			case GeneratorPackage.TEXT: return createText();
 			case GeneratorPackage.BUTTON_ACTION: return createButtonAction();
-			case GeneratorPackage.BUTTONS_LANGUAGE_INPUTS: return createButtonsLanguageInputs();
+			case GeneratorPackage.LANGUAGE_BUTTON: return createLanguageButton();
 			case GeneratorPackage.BUTTON: return createButton();
-			case GeneratorPackage.TEXT_LANGUAGE_INPUT: return createTextLanguageInput();
+			case GeneratorPackage.LANGUAGE_TEXT: return createLanguageText();
 			case GeneratorPackage.TEXT_INPUT: return createTextInput();
 			case GeneratorPackage.HTTP_REQUEST: return createHTTPRequest();
 			case GeneratorPackage.HTTP_RESPONSE: return createHTTPResponse();
@@ -199,9 +199,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public LanguageInput createLanguageInput() {
-		LanguageInputImpl languageInput = new LanguageInputImpl();
-		return languageInput;
+	public LanguageEntity createLanguageEntity() {
+		LanguageEntityImpl languageEntity = new LanguageEntityImpl();
+		return languageEntity;
 	}
 
 	/**
@@ -309,9 +309,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public IntentLanguageInputs createIntentLanguageInputs() {
-		IntentLanguageInputsImpl intentLanguageInputs = new IntentLanguageInputsImpl();
-		return intentLanguageInputs;
+	public LanguageIntent createLanguageIntent() {
+		LanguageIntentImpl languageIntent = new LanguageIntentImpl();
+		return languageIntent;
 	}
 
 	/**
@@ -342,9 +342,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public PromptLanguage createPromptLanguage() {
-		PromptLanguageImpl promptLanguage = new PromptLanguageImpl();
-		return promptLanguage;
+	public LanguagePrompt createLanguagePrompt() {
+		LanguagePromptImpl languagePrompt = new LanguagePromptImpl();
+		return languagePrompt;
 	}
 
 	/**
@@ -397,9 +397,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public ButtonsLanguageInputs createButtonsLanguageInputs() {
-		ButtonsLanguageInputsImpl buttonsLanguageInputs = new ButtonsLanguageInputsImpl();
-		return buttonsLanguageInputs;
+	public LanguageButton createLanguageButton() {
+		LanguageButtonImpl languageButton = new LanguageButtonImpl();
+		return languageButton;
 	}
 
 	/**
@@ -419,9 +419,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public TextLanguageInput createTextLanguageInput() {
-		TextLanguageInputImpl textLanguageInput = new TextLanguageInputImpl();
-		return textLanguageInput;
+	public LanguageText createLanguageText() {
+		LanguageTextImpl languageText = new LanguageTextImpl();
+		return languageText;
 	}
 
 	/**

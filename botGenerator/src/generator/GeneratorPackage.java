@@ -398,43 +398,6 @@ public interface GeneratorPackage extends EPackage {
 	int BACK_TO_BOT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.WithLanguageImpl <em>With Language</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.WithLanguageImpl
-	 * @see generator.impl.GeneratorPackageImpl#getWithLanguage()
-	 * @generated
-	 */
-	int WITH_LANGUAGE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WITH_LANGUAGE__LANGUAGE = 0;
-
-	/**
-	 * The number of structural features of the '<em>With Language</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WITH_LANGUAGE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>With Language</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WITH_LANGUAGE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link generator.impl.EntityImpl <em>Entity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -443,6 +406,53 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	int ENTITY = 7;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.LanguageEntityImpl <em>Language Entity</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.LanguageEntityImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageEntity()
+	 * @generated
+	 */
+	int LANGUAGE_ENTITY = 8;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.LanguageInputImpl <em>Language Input</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.LanguageInputImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageInput()
+	 * @generated
+	 */
+	int LANGUAGE_INPUT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_INPUT__LANGUAGE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Language Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_INPUT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Language Input</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_INPUT_OPERATION_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -481,23 +491,13 @@ public interface GeneratorPackage extends EPackage {
 	int ENTITY_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.LanguageInputImpl <em>Language Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.LanguageInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getLanguageInput()
-	 * @generated
-	 */
-	int LANGUAGE_INPUT = 8;
-
-	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANGUAGE_INPUT__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+	int LANGUAGE_ENTITY__LANGUAGE = LANGUAGE_INPUT__LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -506,25 +506,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANGUAGE_INPUT__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
+	int LANGUAGE_ENTITY__INPUTS = LANGUAGE_INPUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Language Input</em>' class.
+	 * The number of structural features of the '<em>Language Entity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANGUAGE_INPUT_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
+	int LANGUAGE_ENTITY_FEATURE_COUNT = LANGUAGE_INPUT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Language Input</em>' class.
+	 * The number of operations of the '<em>Language Entity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANGUAGE_INPUT_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+	int LANGUAGE_ENTITY_OPERATION_COUNT = LANGUAGE_INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.InputImpl <em>Input</em>}' class.
@@ -746,26 +746,6 @@ public interface GeneratorPackage extends EPackage {
 	int INTENT = 20;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.IntentLanguageInputsImpl <em>Intent Language Inputs</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.IntentLanguageInputsImpl
-	 * @see generator.impl.GeneratorPackageImpl#getIntentLanguageInputs()
-	 * @generated
-	 */
-	int INTENT_LANGUAGE_INPUTS = 21;
-
-	/**
-	 * The meta object id for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.IntentInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
-	 * @generated
-	 */
-	int INTENT_INPUT = 22;
-
-	/**
 	 * The feature id for the '<em><b>Expresion</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -874,13 +854,22 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_TOKEN__PARAMETER = TOKEN_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Info</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_TOKEN__INFO = TOKEN_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Parameter Token</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_TOKEN_FEATURE_COUNT = TOKEN_FEATURE_COUNT + 1;
+	int PARAMETER_TOKEN_FEATURE_COUNT = TOKEN_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Parameter Token</em>' class.
@@ -1018,13 +1007,23 @@ public interface GeneratorPackage extends EPackage {
 	int INTENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link generator.impl.LanguageIntentImpl <em>Language Intent</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.LanguageIntentImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageIntent()
+	 * @generated
+	 */
+	int LANGUAGE_INTENT = 21;
+
+	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTENT_LANGUAGE_INPUTS__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+	int LANGUAGE_INTENT__LANGUAGE = LANGUAGE_INPUT__LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -1033,43 +1032,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTENT_LANGUAGE_INPUTS__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
+	int LANGUAGE_INTENT__INPUTS = LANGUAGE_INPUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Intent Language Inputs</em>' class.
+	 * The number of structural features of the '<em>Language Intent</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTENT_LANGUAGE_INPUTS_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
+	int LANGUAGE_INTENT_FEATURE_COUNT = LANGUAGE_INPUT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Intent Language Inputs</em>' class.
+	 * The number of operations of the '<em>Language Intent</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTENT_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Intent Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTENT_INPUT_FEATURE_COUNT = INPUT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Intent Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTENT_INPUT_OPERATION_COUNT = INPUT_OPERATION_COUNT + 0;
+	int LANGUAGE_INTENT_OPERATION_COUNT = LANGUAGE_INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.TrainingPhraseImpl <em>Training Phrase</em>}' class.
@@ -1079,7 +1060,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTrainingPhrase()
 	 * @generated
 	 */
-	int TRAINING_PHRASE = 23;
+	int TRAINING_PHRASE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1088,7 +1069,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE__TOKENS = INTENT_INPUT_FEATURE_COUNT + 0;
+	int TRAINING_PHRASE__TOKENS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Training Phrase</em>' class.
@@ -1097,7 +1078,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE_FEATURE_COUNT = INTENT_INPUT_FEATURE_COUNT + 1;
+	int TRAINING_PHRASE_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Training Phrase</em>' class.
@@ -1106,7 +1087,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRAINING_PHRASE_OPERATION_COUNT = INTENT_INPUT_OPERATION_COUNT + 0;
+	int TRAINING_PHRASE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -1116,7 +1097,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 24;
+	int PARAMETER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1191,14 +1172,14 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.PromptLanguageImpl <em>Prompt Language</em>}' class.
+	 * The meta object id for the '{@link generator.impl.LanguagePromptImpl <em>Language Prompt</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see generator.impl.PromptLanguageImpl
-	 * @see generator.impl.GeneratorPackageImpl#getPromptLanguage()
+	 * @see generator.impl.LanguagePromptImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguagePrompt()
 	 * @generated
 	 */
-	int PROMPT_LANGUAGE = 25;
+	int LANGUAGE_PROMPT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1207,7 +1188,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROMPT_LANGUAGE__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+	int LANGUAGE_PROMPT__LANGUAGE = LANGUAGE_INPUT__LANGUAGE;
 
 	/**
 	 * The feature id for the '<em><b>Prompts</b></em>' attribute list.
@@ -1216,25 +1197,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROMPT_LANGUAGE__PROMPTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
+	int LANGUAGE_PROMPT__PROMPTS = LANGUAGE_INPUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Prompt Language</em>' class.
+	 * The number of structural features of the '<em>Language Prompt</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROMPT_LANGUAGE_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
+	int LANGUAGE_PROMPT_FEATURE_COUNT = LANGUAGE_INPUT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Prompt Language</em>' class.
+	 * The number of operations of the '<em>Language Prompt</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROMPT_LANGUAGE_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+	int LANGUAGE_PROMPT_OPERATION_COUNT = LANGUAGE_INPUT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ActionImpl <em>Action</em>}' class.
@@ -1244,7 +1225,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getAction()
 	 * @generated
 	 */
-	int ACTION = 26;
+	int ACTION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1281,7 +1262,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getImage()
 	 * @generated
 	 */
-	int IMAGE = 27;
+	int IMAGE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1336,7 +1317,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getEmpty()
 	 * @generated
 	 */
-	int EMPTY = 28;
+	int EMPTY = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1348,13 +1329,22 @@ public interface GeneratorPackage extends EPackage {
 	int EMPTY__NAME = ACTION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY__DESCRIPTION = ACTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Empty</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPTY_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+	int EMPTY_FEATURE_COUNT = ACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Empty</em>' class.
@@ -1373,7 +1363,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getText()
 	 * @generated
 	 */
-	int TEXT = 29;
+	int TEXT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1419,7 +1409,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getButtonAction()
 	 * @generated
 	 */
-	int BUTTON_ACTION = 30;
+	int BUTTON_ACTION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1458,14 +1448,14 @@ public interface GeneratorPackage extends EPackage {
 	int BUTTON_ACTION_OPERATION_COUNT = ACTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+	 * The meta object id for the '{@link generator.impl.LanguageTextImpl <em>Language Text</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see generator.impl.ButtonsLanguageInputsImpl
-	 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+	 * @see generator.impl.LanguageTextImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageText()
 	 * @generated
 	 */
-	int BUTTONS_LANGUAGE_INPUTS = 31;
+	int LANGUAGE_TEXT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1474,16 +1464,62 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTONS_LANGUAGE_INPUTS__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
+	int LANGUAGE_TEXT__LANGUAGE = LANGUAGE_INPUT__LANGUAGE;
 
 	/**
-	 * The feature id for the '<em><b>Text</b></em>' containment reference.
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTONS_LANGUAGE_INPUTS__TEXT = WITH_LANGUAGE_FEATURE_COUNT + 0;
+	int LANGUAGE_TEXT__INPUTS = LANGUAGE_INPUT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Language Text</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_TEXT_FEATURE_COUNT = LANGUAGE_INPUT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Language Text</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_TEXT_OPERATION_COUNT = LANGUAGE_INPUT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link generator.impl.LanguageButtonImpl <em>Language Button</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.impl.LanguageButtonImpl
+	 * @see generator.impl.GeneratorPackageImpl#getLanguageButton()
+	 * @generated
+	 */
+	int LANGUAGE_BUTTON = 30;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_BUTTON__LANGUAGE = LANGUAGE_TEXT__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANGUAGE_BUTTON__INPUTS = LANGUAGE_TEXT__INPUTS;
 
 	/**
 	 * The feature id for the '<em><b>Buttons</b></em>' containment reference list.
@@ -1492,25 +1528,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTONS_LANGUAGE_INPUTS__BUTTONS = WITH_LANGUAGE_FEATURE_COUNT + 1;
+	int LANGUAGE_BUTTON__BUTTONS = LANGUAGE_TEXT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Buttons Language Inputs</em>' class.
+	 * The number of structural features of the '<em>Language Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTONS_LANGUAGE_INPUTS_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 2;
+	int LANGUAGE_BUTTON_FEATURE_COUNT = LANGUAGE_TEXT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Buttons Language Inputs</em>' class.
+	 * The number of operations of the '<em>Language Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTONS_LANGUAGE_INPUTS_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
+	int LANGUAGE_BUTTON_OPERATION_COUNT = LANGUAGE_TEXT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
@@ -1520,7 +1556,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getButton()
 	 * @generated
 	 */
-	int BUTTON = 32;
+	int BUTTON = 31;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1559,52 +1595,6 @@ public interface GeneratorPackage extends EPackage {
 	int BUTTON_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see generator.impl.TextLanguageInputImpl
-	 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
-	 * @generated
-	 */
-	int TEXT_LANGUAGE_INPUT = 33;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_LANGUAGE_INPUT__LANGUAGE = WITH_LANGUAGE__LANGUAGE;
-
-	/**
-	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_LANGUAGE_INPUT__INPUTS = WITH_LANGUAGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Text Language Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_LANGUAGE_INPUT_FEATURE_COUNT = WITH_LANGUAGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Text Language Input</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_LANGUAGE_INPUT_OPERATION_COUNT = WITH_LANGUAGE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link generator.impl.TextInputImpl <em>Text Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1612,7 +1602,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getTextInput()
 	 * @generated
 	 */
-	int TEXT_INPUT = 34;
+	int TEXT_INPUT = 33;
 
 	/**
 	 * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
@@ -1649,7 +1639,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPRequest()
 	 * @generated
 	 */
-	int HTTP_REQUEST = 35;
+	int HTTP_REQUEST = 34;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1740,7 +1730,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPResponse()
 	 * @generated
 	 */
-	int HTTP_RESPONSE = 36;
+	int HTTP_RESPONSE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1795,7 +1785,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getKeyValue()
 	 * @generated
 	 */
-	int KEY_VALUE = 37;
+	int KEY_VALUE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1841,7 +1831,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 38;
+	int DATA_TYPE = 37;
 
 	/**
 	 * The meta object id for the '{@link generator.Method <em>Method</em>}' enum.
@@ -1851,7 +1841,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getMethod()
 	 * @generated
 	 */
-	int METHOD = 39;
+	int METHOD = 38;
 
 	/**
 	 * The meta object id for the '{@link generator.Language <em>Language</em>}' enum.
@@ -1861,7 +1851,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getLanguage()
 	 * @generated
 	 */
-	int LANGUAGE = 40;
+	int LANGUAGE = 39;
 
 	/**
 	 * The meta object id for the '{@link generator.HTTPReturnType <em>HTTP Return Type</em>}' enum.
@@ -1871,7 +1861,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getHTTPReturnType()
 	 * @generated
 	 */
-	int HTTP_RETURN_TYPE = 41;
+	int HTTP_RETURN_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link generator.DefaultEntity <em>Default Entity</em>}' enum.
@@ -1881,7 +1871,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see generator.impl.GeneratorPackageImpl#getDefaultEntity()
 	 * @generated
 	 */
-	int DEFAULT_ENTITY = 42;
+	int DEFAULT_ENTITY = 41;
 
 
 	/**
@@ -2143,27 +2133,6 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getElement_Name();
 
 	/**
-	 * Returns the meta object for class '{@link generator.WithLanguage <em>With Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>With Language</em>'.
-	 * @see generator.WithLanguage
-	 * @generated
-	 */
-	EClass getWithLanguage();
-
-	/**
-	 * Returns the meta object for the attribute '{@link generator.WithLanguage#getLanguage <em>Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see generator.WithLanguage#getLanguage()
-	 * @see #getWithLanguage()
-	 * @generated
-	 */
-	EAttribute getWithLanguage_Language();
-
-	/**
 	 * Returns the meta object for class '{@link generator.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2185,6 +2154,27 @@ public interface GeneratorPackage extends EPackage {
 	EReference getEntity_Inputs();
 
 	/**
+	 * Returns the meta object for class '{@link generator.LanguageEntity <em>Language Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Language Entity</em>'.
+	 * @see generator.LanguageEntity
+	 * @generated
+	 */
+	EClass getLanguageEntity();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link generator.LanguageEntity#getInputs <em>Inputs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
+	 * @see generator.LanguageEntity#getInputs()
+	 * @see #getLanguageEntity()
+	 * @generated
+	 */
+	EReference getLanguageEntity_Inputs();
+
+	/**
 	 * Returns the meta object for class '{@link generator.LanguageInput <em>Language Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2195,15 +2185,15 @@ public interface GeneratorPackage extends EPackage {
 	EClass getLanguageInput();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link generator.LanguageInput#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the attribute '{@link generator.LanguageInput#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.LanguageInput#getInputs()
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see generator.LanguageInput#getLanguage()
 	 * @see #getLanguageInput()
 	 * @generated
 	 */
-	EReference getLanguageInput_Inputs();
+	EAttribute getLanguageInput_Language();
 
 	/**
 	 * Returns the meta object for class '{@link generator.EntityInput <em>Entity Input</em>}'.
@@ -2362,6 +2352,17 @@ public interface GeneratorPackage extends EPackage {
 	EReference getParameterToken_Parameter();
 
 	/**
+	 * Returns the meta object for the attribute '{@link generator.ParameterToken#getInfo <em>Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Info</em>'.
+	 * @see generator.ParameterToken#getInfo()
+	 * @see #getParameterToken()
+	 * @generated
+	 */
+	EAttribute getParameterToken_Info();
+
+	/**
 	 * Returns the meta object for class '{@link generator.ParameterReferenceToken <em>Parameter Reference Token</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2469,35 +2470,25 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getIntent_FallbackIntent();
 
 	/**
-	 * Returns the meta object for class '{@link generator.IntentLanguageInputs <em>Intent Language Inputs</em>}'.
+	 * Returns the meta object for class '{@link generator.LanguageIntent <em>Language Intent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Intent Language Inputs</em>'.
-	 * @see generator.IntentLanguageInputs
+	 * @return the meta object for class '<em>Language Intent</em>'.
+	 * @see generator.LanguageIntent
 	 * @generated
 	 */
-	EClass getIntentLanguageInputs();
+	EClass getLanguageIntent();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link generator.IntentLanguageInputs#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.LanguageIntent#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.IntentLanguageInputs#getInputs()
-	 * @see #getIntentLanguageInputs()
+	 * @see generator.LanguageIntent#getInputs()
+	 * @see #getLanguageIntent()
 	 * @generated
 	 */
-	EReference getIntentLanguageInputs_Inputs();
-
-	/**
-	 * Returns the meta object for class '{@link generator.IntentInput <em>Intent Input</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Intent Input</em>'.
-	 * @see generator.IntentInput
-	 * @generated
-	 */
-	EClass getIntentInput();
+	EReference getLanguageIntent_Inputs();
 
 	/**
 	 * Returns the meta object for class '{@link generator.TrainingPhrase <em>Training Phrase</em>}'.
@@ -2586,25 +2577,25 @@ public interface GeneratorPackage extends EPackage {
 	EReference getParameter_Prompts();
 
 	/**
-	 * Returns the meta object for class '{@link generator.PromptLanguage <em>Prompt Language</em>}'.
+	 * Returns the meta object for class '{@link generator.LanguagePrompt <em>Language Prompt</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Prompt Language</em>'.
-	 * @see generator.PromptLanguage
+	 * @return the meta object for class '<em>Language Prompt</em>'.
+	 * @see generator.LanguagePrompt
 	 * @generated
 	 */
-	EClass getPromptLanguage();
+	EClass getLanguagePrompt();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link generator.PromptLanguage#getPrompts <em>Prompts</em>}'.
+	 * Returns the meta object for the attribute list '{@link generator.LanguagePrompt#getPrompts <em>Prompts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Prompts</em>'.
-	 * @see generator.PromptLanguage#getPrompts()
-	 * @see #getPromptLanguage()
+	 * @see generator.LanguagePrompt#getPrompts()
+	 * @see #getLanguagePrompt()
 	 * @generated
 	 */
-	EAttribute getPromptLanguage_Prompts();
+	EAttribute getLanguagePrompt_Prompts();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Action <em>Action</em>}'.
@@ -2659,6 +2650,17 @@ public interface GeneratorPackage extends EPackage {
 	EClass getEmpty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link generator.Empty#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see generator.Empty#getDescription()
+	 * @see #getEmpty()
+	 * @generated
+	 */
+	EAttribute getEmpty_Description();
+
+	/**
 	 * Returns the meta object for class '{@link generator.Text <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2701,36 +2703,25 @@ public interface GeneratorPackage extends EPackage {
 	EReference getButtonAction_Inputs();
 
 	/**
-	 * Returns the meta object for class '{@link generator.ButtonsLanguageInputs <em>Buttons Language Inputs</em>}'.
+	 * Returns the meta object for class '{@link generator.LanguageButton <em>Language Button</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Buttons Language Inputs</em>'.
-	 * @see generator.ButtonsLanguageInputs
+	 * @return the meta object for class '<em>Language Button</em>'.
+	 * @see generator.LanguageButton
 	 * @generated
 	 */
-	EClass getButtonsLanguageInputs();
+	EClass getLanguageButton();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link generator.ButtonsLanguageInputs#getText <em>Text</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Text</em>'.
-	 * @see generator.ButtonsLanguageInputs#getText()
-	 * @see #getButtonsLanguageInputs()
-	 * @generated
-	 */
-	EReference getButtonsLanguageInputs_Text();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link generator.ButtonsLanguageInputs#getButtons <em>Buttons</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.LanguageButton#getButtons <em>Buttons</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Buttons</em>'.
-	 * @see generator.ButtonsLanguageInputs#getButtons()
-	 * @see #getButtonsLanguageInputs()
+	 * @see generator.LanguageButton#getButtons()
+	 * @see #getLanguageButton()
 	 * @generated
 	 */
-	EReference getButtonsLanguageInputs_Buttons();
+	EReference getLanguageButton_Buttons();
 
 	/**
 	 * Returns the meta object for class '{@link generator.Button <em>Button</em>}'.
@@ -2765,25 +2756,25 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getButton_Action();
 
 	/**
-	 * Returns the meta object for class '{@link generator.TextLanguageInput <em>Text Language Input</em>}'.
+	 * Returns the meta object for class '{@link generator.LanguageText <em>Language Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Text Language Input</em>'.
-	 * @see generator.TextLanguageInput
+	 * @return the meta object for class '<em>Language Text</em>'.
+	 * @see generator.LanguageText
 	 * @generated
 	 */
-	EClass getTextLanguageInput();
+	EClass getLanguageText();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link generator.TextLanguageInput#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link generator.LanguageText#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Inputs</em>'.
-	 * @see generator.TextLanguageInput#getInputs()
-	 * @see #getTextLanguageInput()
+	 * @see generator.LanguageText#getInputs()
+	 * @see #getLanguageText()
 	 * @generated
 	 */
-	EReference getTextLanguageInput_Inputs();
+	EReference getLanguageText_Inputs();
 
 	/**
 	 * Returns the meta object for class '{@link generator.TextInput <em>Text Input</em>}'.
@@ -3224,24 +3215,6 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute ELEMENT__NAME = eINSTANCE.getElement_Name();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.WithLanguageImpl <em>With Language</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see generator.impl.WithLanguageImpl
-		 * @see generator.impl.GeneratorPackageImpl#getWithLanguage()
-		 * @generated
-		 */
-		EClass WITH_LANGUAGE = eINSTANCE.getWithLanguage();
-
-		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute WITH_LANGUAGE__LANGUAGE = eINSTANCE.getWithLanguage_Language();
-
-		/**
 		 * The meta object literal for the '{@link generator.impl.EntityImpl <em>Entity</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3260,6 +3233,24 @@ public interface GeneratorPackage extends EPackage {
 		EReference ENTITY__INPUTS = eINSTANCE.getEntity_Inputs();
 
 		/**
+		 * The meta object literal for the '{@link generator.impl.LanguageEntityImpl <em>Language Entity</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.impl.LanguageEntityImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguageEntity()
+		 * @generated
+		 */
+		EClass LANGUAGE_ENTITY = eINSTANCE.getLanguageEntity();
+
+		/**
+		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LANGUAGE_ENTITY__INPUTS = eINSTANCE.getLanguageEntity_Inputs();
+
+		/**
 		 * The meta object literal for the '{@link generator.impl.LanguageInputImpl <em>Language Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3270,12 +3261,12 @@ public interface GeneratorPackage extends EPackage {
 		EClass LANGUAGE_INPUT = eINSTANCE.getLanguageInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LANGUAGE_INPUT__INPUTS = eINSTANCE.getLanguageInput_Inputs();
+		EAttribute LANGUAGE_INPUT__LANGUAGE = eINSTANCE.getLanguageInput_Language();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.EntityInputImpl <em>Entity Input</em>}' class.
@@ -3416,6 +3407,14 @@ public interface GeneratorPackage extends EPackage {
 		EReference PARAMETER_TOKEN__PARAMETER = eINSTANCE.getParameterToken_Parameter();
 
 		/**
+		 * The meta object literal for the '<em><b>Info</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER_TOKEN__INFO = eINSTANCE.getParameterToken_Info();
+
+		/**
 		 * The meta object literal for the '{@link generator.impl.ParameterReferenceTokenImpl <em>Parameter Reference Token</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3502,14 +3501,14 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute INTENT__FALLBACK_INTENT = eINSTANCE.getIntent_FallbackIntent();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.IntentLanguageInputsImpl <em>Intent Language Inputs</em>}' class.
+		 * The meta object literal for the '{@link generator.impl.LanguageIntentImpl <em>Language Intent</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.IntentLanguageInputsImpl
-		 * @see generator.impl.GeneratorPackageImpl#getIntentLanguageInputs()
+		 * @see generator.impl.LanguageIntentImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguageIntent()
 		 * @generated
 		 */
-		EClass INTENT_LANGUAGE_INPUTS = eINSTANCE.getIntentLanguageInputs();
+		EClass LANGUAGE_INTENT = eINSTANCE.getLanguageIntent();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
@@ -3517,17 +3516,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTENT_LANGUAGE_INPUTS__INPUTS = eINSTANCE.getIntentLanguageInputs_Inputs();
-
-		/**
-		 * The meta object literal for the '{@link generator.impl.IntentInputImpl <em>Intent Input</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see generator.impl.IntentInputImpl
-		 * @see generator.impl.GeneratorPackageImpl#getIntentInput()
-		 * @generated
-		 */
-		EClass INTENT_INPUT = eINSTANCE.getIntentInput();
+		EReference LANGUAGE_INTENT__INPUTS = eINSTANCE.getLanguageIntent_Inputs();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TrainingPhraseImpl <em>Training Phrase</em>}' class.
@@ -3598,14 +3587,14 @@ public interface GeneratorPackage extends EPackage {
 		EReference PARAMETER__PROMPTS = eINSTANCE.getParameter_Prompts();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.PromptLanguageImpl <em>Prompt Language</em>}' class.
+		 * The meta object literal for the '{@link generator.impl.LanguagePromptImpl <em>Language Prompt</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.PromptLanguageImpl
-		 * @see generator.impl.GeneratorPackageImpl#getPromptLanguage()
+		 * @see generator.impl.LanguagePromptImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguagePrompt()
 		 * @generated
 		 */
-		EClass PROMPT_LANGUAGE = eINSTANCE.getPromptLanguage();
+		EClass LANGUAGE_PROMPT = eINSTANCE.getLanguagePrompt();
 
 		/**
 		 * The meta object literal for the '<em><b>Prompts</b></em>' attribute list feature.
@@ -3613,7 +3602,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROMPT_LANGUAGE__PROMPTS = eINSTANCE.getPromptLanguage_Prompts();
+		EAttribute LANGUAGE_PROMPT__PROMPTS = eINSTANCE.getLanguagePrompt_Prompts();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.ActionImpl <em>Action</em>}' class.
@@ -3662,6 +3651,14 @@ public interface GeneratorPackage extends EPackage {
 		EClass EMPTY = eINSTANCE.getEmpty();
 
 		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPTY__DESCRIPTION = eINSTANCE.getEmpty_Description();
+
+		/**
 		 * The meta object literal for the '{@link generator.impl.TextImpl <em>Text</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3698,22 +3695,14 @@ public interface GeneratorPackage extends EPackage {
 		EReference BUTTON_ACTION__INPUTS = eINSTANCE.getButtonAction_Inputs();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.ButtonsLanguageInputsImpl <em>Buttons Language Inputs</em>}' class.
+		 * The meta object literal for the '{@link generator.impl.LanguageButtonImpl <em>Language Button</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.ButtonsLanguageInputsImpl
-		 * @see generator.impl.GeneratorPackageImpl#getButtonsLanguageInputs()
+		 * @see generator.impl.LanguageButtonImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguageButton()
 		 * @generated
 		 */
-		EClass BUTTONS_LANGUAGE_INPUTS = eINSTANCE.getButtonsLanguageInputs();
-
-		/**
-		 * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BUTTONS_LANGUAGE_INPUTS__TEXT = eINSTANCE.getButtonsLanguageInputs_Text();
+		EClass LANGUAGE_BUTTON = eINSTANCE.getLanguageButton();
 
 		/**
 		 * The meta object literal for the '<em><b>Buttons</b></em>' containment reference list feature.
@@ -3721,7 +3710,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BUTTONS_LANGUAGE_INPUTS__BUTTONS = eINSTANCE.getButtonsLanguageInputs_Buttons();
+		EReference LANGUAGE_BUTTON__BUTTONS = eINSTANCE.getLanguageButton_Buttons();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.ButtonImpl <em>Button</em>}' class.
@@ -3750,14 +3739,14 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute BUTTON__ACTION = eINSTANCE.getButton_Action();
 
 		/**
-		 * The meta object literal for the '{@link generator.impl.TextLanguageInputImpl <em>Text Language Input</em>}' class.
+		 * The meta object literal for the '{@link generator.impl.LanguageTextImpl <em>Language Text</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see generator.impl.TextLanguageInputImpl
-		 * @see generator.impl.GeneratorPackageImpl#getTextLanguageInput()
+		 * @see generator.impl.LanguageTextImpl
+		 * @see generator.impl.GeneratorPackageImpl#getLanguageText()
 		 * @generated
 		 */
-		EClass TEXT_LANGUAGE_INPUT = eINSTANCE.getTextLanguageInput();
+		EClass LANGUAGE_TEXT = eINSTANCE.getLanguageText();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
@@ -3765,7 +3754,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TEXT_LANGUAGE_INPUT__INPUTS = eINSTANCE.getTextLanguageInput_Inputs();
+		EReference LANGUAGE_TEXT__INPUTS = eINSTANCE.getLanguageText_Inputs();
 
 		/**
 		 * The meta object literal for the '{@link generator.impl.TextInputImpl <em>Text Input</em>}' class.

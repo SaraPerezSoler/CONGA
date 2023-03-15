@@ -224,17 +224,18 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		}
 		tool = RecommenderQuestionnaireFactory.eINSTANCE.createTool();
 		tool.setName(toolName);
-		for (Question q : getQuestions()) {
+		/*for (Question q : getQuestions()) {
 			for (Option a : q.getOptions()) {
 				tool.getUnknownOptions().add(a);
 			}
-		}
+		}*/
 		getTools().add(tool);
 		return tool;
 	}
 
 	public Evaluation createEvaluation(String evName, String evText, boolean multi, List<String> options,
-			Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Map<String, List<String>> opt_tools_possible, Evaluator ev) {
+			//Map<String, List<String>> opt_tools_accepted, Map<String, List<String>> opt_tools_refused, Map<String, List<String>> opt_tools_possible, 
+			Evaluator ev) {
 		
 		
 		Evaluation evaluation = getEvaluation(evName);
@@ -246,7 +247,7 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 		evaluation.setText(evText);
 		evaluation.setMultiresponse(multi);
 		evaluation.setEvaluator(ev);
-		for (String opt : options) {
+		/*for (String opt : options) {
 			Option a = RecommenderQuestionnaireFactory.eINSTANCE.createOption();
 			a.setText(opt);
 			List<String> acp = opt_tools_accepted.get(opt);
@@ -264,7 +265,7 @@ public class QuestionnaireImpl extends MinimalEObjectImpl.Container implements Q
 				}
 			}
 			evaluation.getOptions().add(a);
-		}
+		}*/
 		getQuestions().add(evaluation);
 		return evaluation;
 	}
