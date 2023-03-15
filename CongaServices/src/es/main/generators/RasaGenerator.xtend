@@ -73,7 +73,7 @@ class RasaGenerator extends BotGenerator {
 			var dataPath = subPath + File.separator + 'data'
 //			generateFolder(subPath);
 //			generateFolder(dataPath)
-			f = generateFile(subPath + File.separator + 'actions.py', actions(actions, lan, bot))
+			f = generateFile(subPath + File.separator + 'actions.py', actions(intents, entities, actions, lan, bot))
 			saveFileIntoZip(f, subPath, 'actions.py')
 
 			f = generateFile(subPath + File.separator + 'config.yml',
@@ -190,140 +190,211 @@ class RasaGenerator extends BotGenerator {
 		«ENDFOR»
 	'''
 
-	def actions(List<Action> actions, Language lan, Bot bot) {
-		var printed = false
-		'''
-			# This files contains your custom actions which can be used to run
-			# custom Python code.
-			#
-			# See this guide on how to implement these action:
-			# https://rasa.com/docs/rasa/core/actions/#custom-actions/
+	def actions(List<Intent> intents, List<Entity> entities, List<Action> actions, Language lan, Bot bot) '''
+		# This files contains your custom actions which can be used to run
+		# custom Python code.
+		#
+		# See this guide on how to implement these action:
+		# https://rasa.com/docs/rasa/core/actions/#custom-actions/
+		
+		
+		# This is a simple example for a custom action which utters "Hello World!"
+		
+		# from typing import Any, Text, Dict, List
+		#
+		# from rasa_sdk import Action, Tracker
+		# from rasa_sdk.executor import CollectingDispatcher
+		#
+		#
+		# class ActionHelloWorld(Action):
+		#
+		#     def name(self) -> Text:
+		#         return "action_hello_world"
+		#
+		#     def run(self, dispatcher: CollectingDispatcher,
+		#             tracker: Tracker,
+		#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+		#
+		#         dispatcher.utter_message("Hello World!")
+		#
+		#         return []
+		from typing import Dict, Text, Any, List, Union, Optional
+		
+		from rasa_sdk import ActionExecutionRejection
+		from rasa_sdk import Action
+		from rasa_sdk import Tracker
+		from rasa_sdk.events import SlotSet
+		from rasa_sdk.executor import CollectingDispatcher
+		from rasa_sdk.forms import FormAction, REQUESTED_SLOT
+		from duckling import DucklingWrapper, Dim, Language
+		import time
+		import requests
+		
+		d = DucklingWrapper()
+		def time_validate(value:Text):
+			parses = d.parse_time(value)
+			for parse in parses:
+				if parse ['dim'] == 'time':
+					if parse['value'].get('grain') == 'minute' or parse['value'].get('grain') == 'hour': 
+						return parse ['value']['value']
+			return None
 			
-			
-			# This is a simple example for a custom action which utters "Hello World!"
-			
-			# from typing import Any, Text, Dict, List
-			#
-			# from rasa_sdk import Action, Tracker
-			# from rasa_sdk.executor import CollectingDispatcher
-			#
-			#
-			# class ActionHelloWorld(Action):
-			#
-			#     def name(self) -> Text:
-			#         return "action_hello_world"
-			#
-			#     def run(self, dispatcher: CollectingDispatcher,
-			#             tracker: Tracker,
-			#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-			#
-			#         dispatcher.utter_message("Hello World!")
-			#
-			#         return []
-			«{printed=false;""}»
-			
-			«FOR action : actions»
-				«IF action instanceof HTTPRequest»
-					«IF printed === false»
-						from typing import Dict, Text, Any, List, Union, Optional
-						from rasa_sdk import ActionExecutionRejection
-						from rasa_sdk import Action
-						from rasa_sdk import Tracker
-						from rasa_sdk.events import SlotSet
-						from rasa_sdk.executor import CollectingDispatcher
-						from rasa_sdk.forms import FormAction, REQUESTED_SLOT
-						import requests	
-						«{printed=true;""}»
-					«ENDIF»
-					
-					class «action.name.getRasaValue» (Action):
-						response = None
-						def name(self) -> Text:
-							return "«action.actionName»"
-							
-						def run(self, dispatcher: CollectingDispatcher,
-							tracker: Tracker,
-							domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-							url = '«action.URL»'
-							«var args =""»
-									
-							«IF action.basicAuth !== null»
-								auth={'«action.basicAuth.key»', '«action.basicAuth.value»'}
-								«{args+=", auth=auth"; ""}»
-							«ENDIF»
-							
-							«IF !action.headers.isEmpty»
-								headers={
-									«FOR header: action.headers»
-										'«header.key»':'«header.value»'«IF !DialogflowGenerator.isTheLast(action.headers, header)», «ENDIF»
-									«ENDFOR»}
-									«{args+=", headers=headers"; ""}»
-							«ENDIF»
-							
-							«IF !action.data.isEmpty»
-								data = {
-									«FOR d : action.data»
-										«IF d.value instanceof ParameterToken»
-											'«d.key»': tracker.get_slot("«(d.value as ParameterToken).parameter.name.getRasaValue»")«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
-										«ELSE»
-											'«d.key»':'«d.value»'«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
-										«ENDIF»
-									«ENDFOR»}
-									«IF action.dataType === DataType.FORM»«{args+=",data=data";""}»«ELSE»«{args+=",json=data";""}»«ENDIF»
-							«ENDIF»
-							«action.name.rasaValue».response = requests.«action.method.getName.toLowerCase»(url «args») 
-				«ELSEIF action instanceof HTTPResponse»
-					«IF printed === false»
-						from typing import Dict, Text, Any, List, Union, Optional
-						from rasa_sdk import ActionExecutionRejection
-						from rasa_sdk import Action
-						from rasa_sdk import Tracker
-						from rasa_sdk.events import SlotSet
-						from rasa_sdk.executor import CollectingDispatcher
-						from rasa_sdk.forms import FormAction, REQUESTED_SLOT
-						import requests	
-						«{printed=true;""}»
-					«ENDIF»
-					
-					class «action.name.rasaValue» (Action):
-						def name(self) -> Text:
-							return "«action.actionName»"
-						
-						def run(self, dispatcher: CollectingDispatcher,
-								tracker: Tracker,
-								domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-							response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
-							text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
-							dispatcher.utter_message(text)
-							return []         
-							
-				«ELSEIF action instanceof Empty»
-					«IF printed === false»
-						from typing import Dict, Text, Any, List, Union, Optional
-						from rasa_sdk import ActionExecutionRejection
-						from rasa_sdk import Action
-						from rasa_sdk import Tracker
-						from rasa_sdk.events import SlotSet
-						from rasa_sdk.executor import CollectingDispatcher
-						from rasa_sdk.forms import FormAction, REQUESTED_SLOT
-						import requests	
-						«{printed=true;""}»
-					«ENDIF»
-					
-					class «action.name.rasaValue» (Action):
-						def name(self) -> Text:
-							return "«action.actionName»"
-						
-						def run(self, dispatcher: CollectingDispatcher,
-								tracker: Tracker,
-								domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-							return []  
-				«ENDIF»
+		def date_validate(value:Text):
+			parses = d.parse_time(value)
+			for parse in parses:
+				if parse ['dim'] == 'time':
+					if parse['value'].get('grain') == 'day' or parse['value'].get('grain') == 'month' or parse['value'].get('grain') == 'year': 
+						return parse ['value']['value']
+			return None
 				
+		«FOR entity : entities»
+		«IF entityType(entity) === BotGenerator.SIMPLE»
+		«FOR simpleLanguage : entity.inputs»
+		«IF simpleLanguage.language.compare(lan, bot)»
+		«entity.name.rasaValue»_db={
+		«FOR input: simpleLanguage.inputs»
+		"«(input as SimpleInput).name.toLowerCase»":["«(input as SimpleInput).name.toLowerCase»"«FOR value: (input as SimpleInput).values»,"«value.toLowerCase»"«ENDFOR»]«IF !DialogflowGenerator.isTheLast(entity.inputs, input)»,«ENDIF»
+		«ENDFOR»}
+		def «entity.name.rasaValue»_validate(value:Text):
+			for input in «entity.name.rasaValue»_db:
+				if value.lower() in «entity.name.rasaValue»_db[input]:
+					return input
+			return None
+		«ENDIF»		
+		«ENDFOR»
+		«ELSEIF entityType(entity) === BotGenerator.COMPOSITE»
+		def «entity.name.rasaValue»_validate(value:Text):
+			return None
+		«ENDIF»
+		«ENDFOR»
+		«FOR intent : intents»
+		«IF !intent.parameters.empty»
+		class «intent.name.getRasaValue»Form (FormAction):
+			def name(self):
+				# type: () -> Text
+					"""Unique identifier of the form"""
+					return "«intent.name.getRasaValue»_form"
+						
+			@staticmethod
+			def required_slots(tracker: Tracker) -> List[Text]:
+				"""A list of required slots that the form has to fill"""
+				«var coma =""»
+				«/*return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.paramName}»"«ENDIF»«ENDFOR»]*/»
+				return [«FOR param :intent.parameters»«coma»"«{coma=",";param.paramName}»"«ENDFOR»]
+			«FOR param :intent.parameters»
+			def validate_«param.paramName»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
+				«IF param.entity !== null»
+				parseValue = «param.entity.name.rasaValue»_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.DATE»
+				parseValue = date_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.TIME»
+				parseValue = time_validate(value)
+				«ELSEIF param.defaultEntity === DefaultEntity.TEXT»
+				parseValue = value
+				«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
+				try:
+					parseValue = float (value)
+					except ValueError:
+					parseValue = None
+				«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
+				try:
+					parseValue = int (value)
+					except ValueError:
+					parseValue = None
+				«ENDIF»
+				if parseValue is None:
+					dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
+					return {'«param.paramName»': None}
+				return {'«param.paramName»': parseValue}
 			«ENDFOR»
 			
-		'''
-	}
+			def slot_mappings(self):
+			
+				return {«FOR param :intent.parameters»
+				"«param.paramName»": [self.from_entity(entity="«param.paramName»"),self.from_«param.paramType»()],«ENDFOR»}
+			def submit(
+				self,
+				dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any],
+				) -> List[Dict]:
+				"""Define what the form has to do after all required slots are filled"""
+				return []
+			
+		class «intent.name.getRasaValue»Clean (Action):
+			def name(self) -> Text:
+				return "«intent.name.getRasaValue»_clean"
+			def run(self, dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				return [«FOR param :intent.parameters»SlotSet("«param.paramName»", None) «IF !DialogflowGenerator.isTheLast(intent.parameters, param)»,«ENDIF»«ENDFOR»]            
+			«ENDIF»
+		«ENDFOR»
+		«FOR action : actions»
+		«IF action instanceof HTTPRequest»
+		class «action.name.getRasaValue» (Action):
+			response = None
+			def name(self) -> Text:
+				return "«action.actionName»"
+				
+			def run(self, dispatcher: CollectingDispatcher,
+				tracker: Tracker,
+				domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				url = '«action.URL»'
+				«var args =""»
+						
+				«IF action.basicAuth !== null»
+				auth={'«action.basicAuth.key»', '«action.basicAuth.value»'}
+				«{args+=", auth=auth"; ""}»
+				«ENDIF»
+						
+				«IF !action.headers.isEmpty»
+				headers={
+					«FOR header: action.headers»
+					'«header.key»':'«header.value»'«IF !DialogflowGenerator.isTheLast(action.headers, header)», «ENDIF»
+					«ENDFOR»}
+					«{args+=", headers=headers"; ""}»
+				«ENDIF»
+						
+				«IF !action.data.isEmpty»
+				data = {
+					«FOR d : action.data»
+					«IF d.value instanceof ParameterToken»
+					'«d.key»': tracker.get_slot("«(d.value as ParameterToken).parameter.name.getRasaValue»")«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
+					«ELSE»
+					'«d.key»':'«d.value»'«IF !DialogflowGenerator.isTheLast(action.data, d)», «ENDIF»
+					«ENDIF»
+					«ENDFOR»}
+					«IF action.dataType === DataType.FORM»«{args+=",data=data";""}»«ELSE»«{args+=",json=data";""}»«ENDIF»
+				«ENDIF»
+				«action.name.rasaValue».response = requests.«action.method.getName.toLowerCase»(url «args») 
+		«ELSEIF action instanceof HTTPResponse»
+		class «action.name.rasaValue» (Action):
+			def name(self) -> Text:
+				return "«action.actionName»"
+			
+			def run(self, dispatcher: CollectingDispatcher,
+					tracker: Tracker,
+					domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
+				text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
+				dispatcher.utter_message(text)
+				return []         
+				
+		«ELSEIF action instanceof Empty»
+		class «action.name.rasaValue» (Action):
+			def name(self) -> Text:
+				return "«action.actionName»"
+			
+			def run(self, dispatcher: CollectingDispatcher,
+					tracker: Tracker,
+					domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+				return []  
+		«ENDIF»
+			
+		«ENDFOR»
+		
+	'''
 
 	def getHttpResponseText(HTTPResponse action, Language lan, Bot bot) {
 		var ret = ""
