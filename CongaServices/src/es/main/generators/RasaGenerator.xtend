@@ -165,7 +165,7 @@ class RasaGenerator extends BotGenerator {
 		return ret;
 	}
 
-	def path(Interaction flow, int i, List<Intent> clean) '''
+	/*def path(Interaction flow, int i, List<Intent> clean) '''
 		## path_«i»
 		«IF flow instanceof UserInteraction»
 			«flow(flow as UserInteraction, clean)»
@@ -173,12 +173,47 @@ class RasaGenerator extends BotGenerator {
 			«flow(flow as BotInteraction, clean)»
 		«ENDIF»
 	'''
+	
+	
 
 	def String flow(UserInteraction user, List<Intent> clean) '''
 		«IF user.src!==null»
 			«flow(user.src, clean)»
 		«ENDIF»
 		* «user.intent.name.rasaValue»	
+	'''
+
+	def String flow(BotInteraction bot, List<Intent> clean) '''
+		«IF bot.incoming !== null»
+			«flow(bot.incoming, clean)»
+		«ENDIF»
+		«FOR action : bot.actions»
+			«"\t"»- «action.actionName»
+		«ENDFOR»
+	'''*/
+	
+		def path(Interaction flow, int i, List<Intent> clean) '''
+		## path_«i»
+		«IF flow instanceof UserInteraction»
+			«flow(flow as UserInteraction, clean)»
+		«ELSEIF flow instanceof BotInteraction»
+			«flow(flow as BotInteraction, clean)»
+		«ENDIF»
+		«FOR intent : clean»
+			«"\t"»- «intent.name.getRasaValue»_clean
+		«ENDFOR»
+	'''
+
+	def String flow(UserInteraction user, List<Intent> clean) '''
+		«IF user.src!==null»
+			«flow(user.src, clean)»
+		«ENDIF»
+		* «user.intent.name.rasaValue»	
+		«IF !user.intent.parameters.isEmpty»
+			«"\t"»- «{clean.add(user.intent);user.intent.name.getRasaValue}»_form
+			«"\t"»- form{"name": "«user.intent.name.getRasaValue»_form"}
+			«"\t"»- form{"name": null}
+		«ENDIF»
 	'''
 
 	def String flow(BotInteraction bot, List<Intent> clean) '''
@@ -226,26 +261,14 @@ class RasaGenerator extends BotGenerator {
 		from rasa_sdk.events import SlotSet
 		from rasa_sdk.executor import CollectingDispatcher
 		from rasa_sdk.forms import FormAction, REQUESTED_SLOT
-		from duckling import DucklingWrapper, Dim, Language
 		import time
 		import requests
 		
-		d = DucklingWrapper()
 		def time_validate(value:Text):
-			parses = d.parse_time(value)
-			for parse in parses:
-				if parse ['dim'] == 'time':
-					if parse['value'].get('grain') == 'minute' or parse['value'].get('grain') == 'hour': 
-						return parse ['value']['value']
-			return None
+			return Text
 			
 		def date_validate(value:Text):
-			parses = d.parse_time(value)
-			for parse in parses:
-				if parse ['dim'] == 'time':
-					if parse['value'].get('grain') == 'day' or parse['value'].get('grain') == 'month' or parse['value'].get('grain') == 'year': 
-						return parse ['value']['value']
-			return None
+			return Text
 				
 		«FOR entity : entities»
 		«IF entityType(entity) === BotGenerator.SIMPLE»
@@ -294,12 +317,12 @@ class RasaGenerator extends BotGenerator {
 				«ELSEIF param.defaultEntity === DefaultEntity.FLOAT»
 				try:
 					parseValue = float (value)
-					except ValueError:
+				except ValueError:
 					parseValue = None
 				«ELSEIF param.defaultEntity === DefaultEntity.NUMBER»
 				try:
 					parseValue = int (value)
-					except ValueError:
+				except ValueError:
 					parseValue = None
 				«ENDIF»
 				if parseValue is None:
@@ -377,6 +400,8 @@ class RasaGenerator extends BotGenerator {
 					tracker: Tracker,
 					domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 				response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
+				if response is None:
+					return []	
 				text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
 				dispatcher.utter_message(text)
 				return []         
@@ -520,6 +545,19 @@ class RasaGenerator extends BotGenerator {
 			  «FOR action : actions»
 			  	- «action.actionName»
 			  «ENDFOR»
+			  «FOR intent : intents»
+			  	«IF !intent.parameters.empty»
+			  	- «intent.name.getRasaValue»_clean
+			  	«ENDIF»
+			  «ENDFOR»
+		«ENDIF»
+		«IF !parameters.isEmpty»
+			forms:
+			  «FOR intent : intents»
+			  	«IF !intent.parameters.empty»
+			  	- «intent.name.getRasaValue»_form
+			 	«ENDIF»
+			  «ENDFOR»
 		«ENDIF»
 		'''
 
@@ -558,9 +596,9 @@ class RasaGenerator extends BotGenerator {
 				case (DefaultEntity.TIME):
 					return "text"
 				case (DefaultEntity.NUMBER):
-					return "float"
+					return "text"
 				case (DefaultEntity.FLOAT):
-					return "float"
+					return "text"
 			}
 		}
 	}
@@ -647,7 +685,7 @@ class RasaGenerator extends BotGenerator {
 	}
 
 	def getRasaValue(String name) {
-		return name.replaceAll(" ", "_")
+		return name.replaceAll(" ", "_").replace("-","_")
 	}
 
 	def getParamName(Parameter param) {
@@ -724,6 +762,7 @@ class RasaGenerator extends BotGenerator {
 		# https://rasa.com/docs/rasa/core/policies/
 		policies:
 		  - name: MemoizationPolicy
+		  - name: FormPolicy
 		  - name: TEDPolicy
 		    max_history: 5
 		    epochs: 100
