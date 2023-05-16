@@ -199,9 +199,6 @@ class RasaGenerator extends BotGenerator {
 		«ELSEIF flow instanceof BotInteraction»
 			«flow(flow as BotInteraction, clean)»
 		«ENDIF»
-		«FOR intent : clean»
-			«"\t"»- «intent.name.getRasaValue»_clean
-		«ENDFOR»
 	'''
 
 	def String flow(UserInteraction user, List<Intent> clean) '''
@@ -303,7 +300,7 @@ class RasaGenerator extends BotGenerator {
 				"""A list of required slots that the form has to fill"""
 				«var coma =""»
 				«/*return [«FOR param :intent.parameters»«IF param.required»«coma»"«{coma=",";param.paramName}»"«ENDIF»«ENDFOR»]*/»
-				return [«FOR param :intent.parameters»«coma»"«{coma=",";param.paramName}»"«ENDFOR»]
+				return [«FOR param :intent.parameters»«IF param.isRequired»«coma»"«{coma=",";param.paramName}»"«ENDIF»«ENDFOR»]
 			«FOR param :intent.parameters»
 			def validate_«param.paramName»(self, value: Text,dispatcher: CollectingDispatcher,tracker: Tracker,domain: Dict[Text, Any]) -> Dict[Text, Any]:
 				«IF param.entity !== null»
@@ -326,9 +323,9 @@ class RasaGenerator extends BotGenerator {
 					parseValue = None
 				«ENDIF»
 				if parseValue is None:
-					dispatcher.utter_template('utter_wrong_«param.name.getRasaValue»', tracker)
+					dispatcher.utter_message('utter_wrong_«param.name.getRasaValue»', tracker)
 					return {'«param.paramName»': None}
-				return {'«param.paramName»': parseValue}
+				return {'«param.paramName»': value}
 			«ENDFOR»
 			
 			def slot_mappings(self):
@@ -343,14 +340,6 @@ class RasaGenerator extends BotGenerator {
 				) -> List[Dict]:
 				"""Define what the form has to do after all required slots are filled"""
 				return []
-			
-		class «intent.name.getRasaValue»Clean (Action):
-			def name(self) -> Text:
-				return "«intent.name.getRasaValue»_clean"
-			def run(self, dispatcher: CollectingDispatcher,
-				tracker: Tracker,
-				domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-				return [«FOR param :intent.parameters»SlotSet("«param.paramName»", None) «IF !DialogflowGenerator.isTheLast(intent.parameters, param)»,«ENDIF»«ENDFOR»]            
 			«ENDIF»
 		«ENDFOR»
 		«FOR action : actions»
@@ -402,6 +391,8 @@ class RasaGenerator extends BotGenerator {
 				response = «(action as HTTPResponse).HTTPRequest.name.rasaValue».response			
 				if response is None:
 					return []	
+				if response.status_code != 200:
+					return []
 				text = «getHttpResponseText(action as HTTPResponse, lan, bot)»
 				dispatcher.utter_message(text)
 				return []         
@@ -546,9 +537,6 @@ class RasaGenerator extends BotGenerator {
 			  	- «action.actionName»
 			  «ENDFOR»
 			  «FOR intent : intents»
-			  	«IF !intent.parameters.empty»
-			  	- «intent.name.getRasaValue»_clean
-			  	«ENDIF»
 			  «ENDFOR»
 		«ENDIF»
 		«IF !parameters.isEmpty»
@@ -769,7 +757,7 @@ class RasaGenerator extends BotGenerator {
 		  - name: MappingPolicy
 		  «IF hasFallback»
 		  	- name: "FallbackPolicy"
-		  	  nlu_threshold: 0.5
+		  	  nlu_threshold: 0.8
 		  	  core_threshold: 0.35
 		  	  «IF fallbackAction === null»
 		  	  	fallback_action_name: 'action_default_fallback'
