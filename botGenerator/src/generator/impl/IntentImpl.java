@@ -263,7 +263,7 @@ public class IntentImpl extends ElementImpl implements Intent {
 	@Override
 	public Parameter getParameter(String alias) {
 		for (Parameter param: getParameters()) {
-			if (param.getName().equals(alias)) {
+			if (param.getName().compareToIgnoreCase(alias)==0) {
 				return param;
 			}
 		}

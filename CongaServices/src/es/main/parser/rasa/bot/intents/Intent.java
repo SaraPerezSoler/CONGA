@@ -94,7 +94,7 @@ public class Intent {
 		botIntent.getInputs().add(languageInput);
 		for (Sentence sentence : getSentences()) {
 			languageInput.getInputs().add(sentence.createBotSentence(bot, botIntent));
-		}
+		}		
 		return botIntent;
 	}
 

@@ -38,18 +38,14 @@ public abstract class FileManager {
 	}
 
 	public FileManager(String folderPath, File file, String fname) {
-		removePrevius();
-		if (FOLDER_PATH == null) {
-			FOLDER_PATH = folderPath;
-			File file1 = new File(FOLDER_PATH);
-			if (file1.exists()) {
-				removeFile(file1);
-			}
-			file1.mkdirs();
-		}
-		String countString = "";
-		int count = 0;
-		File file2 = null;
+		fileManager(folderPath, file, fname, true);
+	}
+
+	public FileManager(String folderPath, File file, String fname, boolean move) {
+		fileManager(folderPath, file, fname, move);
+	}
+
+	public void fileManager(String folderPath, File file, String fname, boolean move) {
 		String[] split = fname.split("\\.");
 		String auxName;
 		if (split.length == 2) {
@@ -59,15 +55,39 @@ public abstract class FileManager {
 			auxName = fname;
 			ext = "";
 		}
-		do {
+		
+		if (move == true) {
+			removePrevius();
+			if (FOLDER_PATH == null) {
+				FOLDER_PATH = folderPath;
+				File file1 = new File(FOLDER_PATH);
+				if (file1.exists()) {
+					removeFile(file1);
+				}
+				file1.mkdirs();
+			}
+			String countString = "";
+			int count = 0;
+			File file2 = null;
+			
+			do {
 
-			name = auxName + countString;
-			path = FOLDER_PATH + File.separator + name + ext;
-			file2 = new File(path);
-			count++;
-			countString = Integer.toString(count);
-		} while (file2.exists());
-		file.renameTo(file2);
+				name = auxName + countString;
+				path = FOLDER_PATH + File.separator + name + ext;
+				file2 = new File(path);
+				count++;
+				countString = Integer.toString(count);
+			} while (file2.exists());
+			file.renameTo(file2);
+		}else {
+			if (FOLDER_PATH == null) {
+				FOLDER_PATH = folderPath;
+				File file1 = new File(FOLDER_PATH);
+				file1.mkdirs();
+			}
+			this.name = auxName;
+			this.path = file.getAbsolutePath();
+		}
 	}
 
 	private void removePrevius() {

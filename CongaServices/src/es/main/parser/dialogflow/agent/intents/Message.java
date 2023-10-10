@@ -229,7 +229,7 @@ public class Message {
 					input += "? "; 
 				}else if (split.endsWith("!")) {
 					split = split.replace("!", "");
-					input += "? "; 
+					input += "! "; 
 				}else {
 					input += " ";
 				}
@@ -242,6 +242,10 @@ public class Message {
 						token.setInfo("D: original");
 					}
 					ret.getTokens().add(token);
+				}else {
+					Literal literal = GeneratorFactory.eINSTANCE.createLiteral();
+					literal.setText(split);
+					ret.getTokens().add(literal);
 				}
 			} else if (split.length() > 2 && split.charAt(0) == '#' && Character.isLetter(split.charAt(1))) {
 				String[] paramValues = split.split("\\.");
