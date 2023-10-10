@@ -34,7 +34,7 @@ import java.io.File
 import generator.ButtonAction
 import generator.Empty
 
-class RasaGenerator extends BotGenerator {
+class Rasa3_0Generator extends BotGenerator {
 
 	new(String path, String fileName, String botName) {
 		super(path + File.separator + fileName, botName)
@@ -64,17 +64,18 @@ class RasaGenerator extends BotGenerator {
 			i++
 		}
 
-		var f = generateFile('requirements.txt', "tensorflow-addons\ntensorflow=>2.1.0\nrasa==1.10.0\nduckling==1.8.0")
+		var f = generateFile('requirements.txt', "python==3.7.0\nrasa==3.0.0")
 		saveFileIntoZip(f, "requirements.txt");
 
 		for (Language lan : bot.languages) {
 
 			var subPath = lan.languageAbbreviation
 			var dataPath = subPath + File.separator + 'data'
+			var actionPath = subPath + File.separator + 'actions' 
 //			generateFolder(subPath);
 //			generateFolder(dataPath)
-			f = generateFile(subPath + File.separator + 'actions.py', actions(intents, entities, actions, lan, bot))
-			saveFileIntoZip(f, subPath, 'actions.py')
+			f = generateFile(actionPath + File.separator + 'actions.py', actions(intents, entities, actions, lan, bot))
+			saveFileIntoZip(f, actionPath, 'actions.py')
 
 			f = generateFile(subPath + File.separator + 'config.yml',
 				config(lan, fallbackAction, fallbackIntent !== null, hasForm))
@@ -89,11 +90,14 @@ class RasaGenerator extends BotGenerator {
 			f = generateFile(subPath + File.separator + 'endpoints.yml', endpoint)
 			saveFileIntoZip(f, subPath, 'endpoints.yml')
 
-			f = generateFile(dataPath + File.separator + 'nlu.md', nlu(intents, entities, lan, bot))
-			saveFileIntoZip(f, dataPath, 'nlu.md')
+			f = generateFile(dataPath + File.separator + 'nlu.yml', nlu(intents, entities, lan, bot))
+			saveFileIntoZip(f, dataPath, 'nlu.yml')
 
-			f = generateFile(dataPath + File.separator + 'stories.md', stories(leafs))
-			saveFileIntoZip(f, dataPath, 'stories.md')
+			f = generateFile(dataPath + File.separator + 'stories.yml', stories(leafs))
+			saveFileIntoZip(f, dataPath, 'stories.yml')
+			
+			f = generateFile(dataPath + File.separator + 'rules.yml', rules())
+			saveFileIntoZip(f, dataPath, 'rules.yml')
 		}
 		close()
 		zipFile
@@ -156,7 +160,7 @@ class RasaGenerator extends BotGenerator {
 	}
 
 	def String stories(List<Interaction> leafs) {
-		var ret = ""
+		var ret = 'version: "3.0"\n\n'+'stories:\n\n'
 		for (var i = 0; i < leafs.size; i++) {
 			var clean = new ArrayList<Intent>()
 			var leaf = leafs.get(i)
@@ -166,7 +170,8 @@ class RasaGenerator extends BotGenerator {
 	}
 
 	def path(Interaction flow, int i, List<Intent> clean) '''
-		## path_«i»
+		- story: path_«i»
+		  steps:
 		«IF flow instanceof UserInteraction»
 			«flow(flow as UserInteraction, clean)»
 		«ELSEIF flow instanceof BotInteraction»
@@ -179,7 +184,7 @@ class RasaGenerator extends BotGenerator {
 			«flow(user.src, clean)»
 		«ENDIF»
 		«IF !user.intent.isFallbackIntent»
-		* «user.intent.name.rasaValue»	
+		  - intent: «user.intent.name.rasaValue»
 		«IF !user.intent.parameters.isEmpty»
 			«"\t"»- «{clean.add(user.intent);user.intent.name.getRasaValue}»_form
 			«"\t"»- form{"name": "«user.intent.name.getRasaValue»_form"}
@@ -194,9 +199,13 @@ class RasaGenerator extends BotGenerator {
 		«ENDIF»
 		«IF bot.incoming===null || (bot.incoming!== null && !bot.incoming.intent.isFallbackIntent) »
 		«FOR action : bot.actions»
-			«"\t"»- «action.actionName»
+			«"  "»- action: «action.actionName»
 		«ENDFOR»
 		«ENDIF»
+	'''
+	
+	def rules() '''
+		version: "3.0"
 	'''
 
 	def actions(List<Intent> intents, List<Entity> entities, List<Action> actions, Language lan, Bot bot) '''
@@ -414,8 +423,8 @@ class RasaGenerator extends BotGenerator {
 	}
 
 	def domain(List<Intent> intents, List<Parameter> parameters, List<Action> actions, Language lan, Bot bot) '''
-		session_config:
-		  session_expiration_time: 60
+		version: "3.0"
+		
 		«IF !intents.isEmpty»
 			intents:
 			  «FOR intent : intents»
@@ -513,6 +522,10 @@ class RasaGenerator extends BotGenerator {
 			  	«ENDIF»
 			  «ENDFOR»
 		«ENDIF»
+		
+		session_config:
+		  session_expiration_time: 60
+		  carry_over_slots_to_new_session: true
 	'''
 
 	def compare(Language language, Language language2, Bot bot) {
@@ -558,14 +571,19 @@ class RasaGenerator extends BotGenerator {
 	}
 
 	def nlu(List<Intent> intents, List<Entity> entities, Language lan, Bot bot) '''
+		version: "3.0"
+		
+		nlu:
 		«FOR intent : intents»
 			«FOR intentLanguageEntity: intent.inputs»
 				«IF intentLanguageEntity.language.compare(lan, bot)»
 					«IF intentType(intent) === BotGenerator.TRAINING»
-						## intent:«intent.name.getRasaValue»
+						- intent: «intent.name.getRasaValue»
+						  examples: |
 						«FOR input : intentLanguageEntity.inputs»
-							- «(input as TrainingPhrase).generate(lan, bot)»
+							«"    "»- «(input as TrainingPhrase).generate(lan, bot)»
 						«ENDFOR»
+						
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
@@ -607,11 +625,11 @@ class RasaGenerator extends BotGenerator {
 								'"value":' + '"' + getEntry(token.textReference, token.parameter.entity, lan, bot) +
 								'" }'
 					} else {
-						ret += '[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName + '" }'
+						ret += '[' + token.textReference + ']' + '(' + token.parameter.paramName + ')'
 					}
 
 				} else {
-					ret += '[' + token.textReference + ']' + '{"entity": "' + token.parameter.paramName + '" }' + " "
+					ret += '[' + token.textReference + ']' + '(' + token.parameter.paramName + ')' + " "
 				}
 			}
 		}
@@ -694,6 +712,10 @@ class RasaGenerator extends BotGenerator {
 	'''
 
 	def config(Language lan, Action fallbackAction, boolean hasFallback, boolean hasForm) '''
+		# The config recipe.
+		# https://rasa.com/docs/rasa/model-configuration/
+		recipe: default.v1
+		
 		# Configuration for Rasa NLU.
 		# https://rasa.com/docs/rasa/nlu/components/
 		language: «lan.languageAbbreviation»
@@ -719,18 +741,19 @@ class RasaGenerator extends BotGenerator {
 		  - name: TEDPolicy
 		    max_history: 5
 		    epochs: 100
-		  - name: MappingPolicy
 		  «IF hasForm»
 		  - name: FormPolicy
 		  «ENDIF»
 		  «IF hasFallback»
-		  	- name: "FallbackPolicy"
-		  	  nlu_threshold: 0.5
-		  	  core_threshold: 0.35
+		  	- name: "RulePolicy"
+		  	  core_fallback_threshold: 0.3
+		  	  enable_fallback_prediction: true
+		  	  restric_rules: true
+		  	  check_for_contradictions: true
 		  	  «IF fallbackAction === null»
-		  	  	fallback_action_name: 'action_default_fallback'
+		  	  	core_fallback_action_name: 'action_default_fallback'
 		  	  «ELSE»
-		  	  	fallback_action_name: '«fallbackAction.actionName»'
+		  	  	core_fallback_action_name: '«fallbackAction.actionName»'
 		  	  «ENDIF»
 		  «ENDIF»
 	'''

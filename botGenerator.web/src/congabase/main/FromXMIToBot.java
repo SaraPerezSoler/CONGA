@@ -23,13 +23,13 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class FromXMIToBot {
-	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
-	private static final String OUTPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+//	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
+//	private static final String OUTPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
 
 //	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia";
 //	private static final String OUTPUT_URI = "D:\\Desktop\\Rasa - copia";
 	
-	private static final String [] IGNORE_FILES = {"D:/Git/asymob/chatbots/botsInDSL"};
+//	private static final String [] IGNORE_FILES = {"D:/Git/asymob/chatbots/botsInDSL"};
 	
 	private static String baseInputFile;
 	private ResourceSet resourceSet;
@@ -37,7 +37,17 @@ public class FromXMIToBot {
 	private XtextResourceSet resourceSetXtext;
 
 	public static void main(String[] args) {
-
+		String [] IGNORE_FILES = {};
+		String INPUT_URI;
+		String OUTPUT_URI;
+		
+		if (args.length<2) {
+			System.err.println("The program needs at least 2 argument: <XMI path> <output path>");
+		}
+		INPUT_URI = args[0];
+		OUTPUT_URI = args[1];
+		
+		
 		FromXMIToBot parser = new FromXMIToBot();
 		File inputFile = new File(INPUT_URI);
 		if (!inputFile.isDirectory()) {

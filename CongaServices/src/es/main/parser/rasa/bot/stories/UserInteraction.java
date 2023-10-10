@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.main.parser.rasa.bot.Domain;
+import es.main.parser.rasa.bot.domain.Form;
+import generator.Action;
 import generator.Bot;
+import generator.DefaultEntity;
 import generator.GeneratorFactory;
 import generator.Intent;
+import generator.Parameter;
 
 public class UserInteraction {
 	private String intent;
@@ -48,10 +52,10 @@ public class UserInteraction {
 	public List<generator.UserInteraction> getBotUserInteraction(Bot bot) {
 		Intent intent = bot.getIntent(getIntent());
 		if (intent == null) {
-			intent = bot.getIntent(getIntent()+"Intent");
+			intent = bot.getIntent(getIntent() + "Intent");
 		}
 		List<Intent> intents = new ArrayList<Intent>();
-		
+
 		if (intent == null) {
 			intents.addAll(bot.getIntentStartsWith(getIntent() + "/"));
 		} else {
@@ -61,10 +65,13 @@ public class UserInteraction {
 		if (intents.isEmpty()) {
 			String name = getIntent();
 			if (bot.containsElement(name)) {
-				name = name+"Intent";
+				name = name + "Intent";
 			}
 			intent = GeneratorFactory.eINSTANCE.createIntent();
 			intent.setName(name);
+			if (intent.getName().equalsIgnoreCase("nlu_fallback")) {
+				intent.setFallbackIntent(true);
+			}
 			bot.getIntents().add(intent);
 			intents.add(intent);
 		}
@@ -92,10 +99,29 @@ public class UserInteraction {
 
 	@Override
 	public String toString() {
-		if (next!=null) {
-			return "user "+ intent +"=>"+next.toString(); 
-		}else {
-			return "user "+ intent +";";
+		if (next != null) {
+			return "user " + intent + "=>" + next.toString();
+		} else {
+			return "user " + intent + ";";
+		}
+	}
+
+	public void setRequiredParameters(Bot bot, Domain domain) {
+		if (next != null) {
+			List<Form> forms = next.getForms(domain);
+			for (Form f : forms) {
+			for (String required : f.getRequired_slots()) {
+					Parameter param = bot.getIntent(this.intent).getParameter(required);
+					if (param == null) {
+						param = GeneratorFactory.eINSTANCE.createParameter();
+						param.setName(required);
+						param.setDefaultEntity(DefaultEntity.TEXT);
+						bot.getIntent(intent).getParameters().add(param);
+					}
+						param.setRequired(true);
+				}
+			}
+			next.setRequiredParameters(bot, domain);
 		}
 	}
 

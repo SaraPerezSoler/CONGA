@@ -59,6 +59,7 @@ public class Sentence {
 		String senteceString = line.text();
 		Iterator<Element> params = line.getElementsByTag("a").iterator();
 		while (params.hasNext()) {
+			hasParam = true;
 			Element param = params.next();
 			String toke = senteceString.substring(0, senteceString.indexOf(param.text()));
 			saveToken(toke);

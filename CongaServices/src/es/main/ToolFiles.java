@@ -14,6 +14,9 @@ public class ToolFiles extends FileManager{
 	public ToolFiles(String folderPath, File file, String fname) {
 		super (folderPath, file, fname);
 	}
+	public ToolFiles(String folderPath, File file, String fname, boolean move) {
+		super (folderPath, file, fname, move);
+	}
 
 	public File createResource(Bot bot) {
 		resorcePath = FOLDER_PATH+File.separator+getName()+".xmi";
