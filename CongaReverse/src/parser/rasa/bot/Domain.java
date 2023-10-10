@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import parser.rasa.bot.domain.Form;
 import parser.rasa.bot.domain.Response;
 import parser.rasa.bot.domain.Slot;
 import generator.Action;
@@ -21,7 +22,7 @@ public class Domain {
 	private List<Object> intents = new ArrayList<>();
 	private List<String> entities = new ArrayList<>();
 	private List<String> actions = new ArrayList<>();
-	private List<String> forms = new ArrayList<>();
+	private Map<String, Form> forms;
 	private Map<String, Slot> slots;
 	private Map<String, List<Response>> responses;
 	public static Action defaultEmptyAction;
@@ -59,7 +60,7 @@ public class Domain {
 		this.actions = actions;
 	}
 
-	public List<String> getForms() {
+	public Map<String, Form> getForms() {
 		return forms;
 	}
 
@@ -69,13 +70,17 @@ public class Domain {
 	 * this.forms = forms; }
 	 */
 
-	public void setForms(Object forms) {
+	/*public void setForms(Object forms) {
 		if (forms instanceof List<?>) {
 			this.forms = (List<String>) forms;
 		} else if (forms instanceof Map<?, ?>) {
 			this.forms = new ArrayList<>();
 			this.forms.addAll(((Map<String, Object>) forms).keySet());
 		}
+	}*/
+	
+	public void setForm(Map<String, Form> form) {
+		this.forms = form;
 	}
 
 	public Map<String, Slot> getSlots() {
@@ -180,7 +185,7 @@ public class Domain {
 			}
 		}
 
-		for (String formName : forms) {
+		for (String formName : forms.keySet()) {
 			String name = formName + EMPTY_SUFIX;
 			Empty empty = GeneratorFactory.eINSTANCE.createEmpty();
 			empty.setName(name);

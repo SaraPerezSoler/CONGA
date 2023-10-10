@@ -13,6 +13,8 @@ import generator.GeneratorPackage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -115,14 +118,16 @@ public class ValidationMain {
 
 		// Validate the resource
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-		List<Issue> errors = new ArrayList<Issue>();
-		List<Issue> warnings = new ArrayList<Issue>();
+		List<MyIssue> errors = new ArrayList<MyIssue>();
+		List<MyIssue> warnings = new ArrayList<MyIssue>();
 		String regex = "G[0-9].*";
 		Pattern pattern = Pattern.compile(regex);
 
 		if (!list.isEmpty()) {
-
-			for (Issue issue : list) {
+			List<MyIssue> iList = groupG17(list);
+			iList = groupG18(iList);
+			iList = groupG16(iList);
+			for (MyIssue issue : iList) {
 				Matcher matcher = pattern.matcher(issue.getMessage());
 				if (matcher.matches()) {
 					if (issue.getSeverity() == Severity.WARNING) {
@@ -134,12 +139,45 @@ public class ValidationMain {
 			}
 			System.err.println("Total " + (errors.size()+warnings.size()) + " problems, " + errors.size() + " errors and " + warnings.size()
 					+ " warnings");
-			for (Issue error : errors) {
+			Collections.sort(warnings, new Comparator<MyIssue>() {
+				public int compare(MyIssue i1, MyIssue i2) {
+					String code1 = i1.getMessage().split("\t")[0];
+					String code2 = i2.getMessage().split("\t")[0];
+					
+					int num1 = Integer.parseInt(code1.substring(1));
+					int num2 = Integer.parseInt(code2.substring(1));
+					if ( num1 < num2) {
+						return -1;
+					}else if (num1 > num2) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
+			});
+			
+			Collections.sort(errors, new Comparator<MyIssue>() {
+				public int compare(MyIssue i1, MyIssue i2) {
+					String code1 = i1.getMessage().split("\t")[0];
+					String code2 = i2.getMessage().split("\t")[0];
+					
+					int num1 = Integer.parseInt(code1.substring(1));
+					int num2 = Integer.parseInt(code2.substring(1));
+					if ( num1 < num2) {
+						return -1;
+					}else if (num1 > num2) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
+			});
+			for (MyIssue error : errors) {
 				System.err.println(error.getSeverity() + ": " + error.getMessage());
 				// System.err.println(issue.getSeverity()+":
 				// "+issue.getMessage().substring(issue.getMessage().indexOf("\t")+1));
 			}
-			for (Issue warning : warnings) {
+			for (MyIssue warning : warnings) {
 				System.err.println(warning.getSeverity() + ": " + warning.getMessage());
 				// System.err.println(issue.getSeverity()+":
 				// "+issue.getMessage().substring(issue.getMessage().indexOf("\t")+1));
@@ -150,5 +188,108 @@ public class ValidationMain {
 			System.out.println("Validation successful");
 		}
 	}
+	
+	public static List<MyIssue> groupG17(List<Issue> list){
+		String msg;
+		
+		Map<String, RepIssue> name_issue = new HashMap<String, RepIssue>();
+		List<MyIssue> ret = new ArrayList<MyIssue>();
+		for (Issue i: list) {
+			msg= i.getMessage();
+			if (msg.startsWith("G17")) {
+				String name = msg.replaceAll("G17\\tThe intent ", "");
+				name = name.split(" ")[0];
+				if (name_issue.containsKey(name)) {
+					RepIssue repIssue = name_issue.get(name);
+					repIssue.addOne();
+					name_issue.put(name, repIssue);
+				}else {
+					RepIssue repIssue = new RepIssue(1, i);
+					name_issue.put(name, repIssue);
+				}
+			}else {
+				ret.add(new MyIssue(i));
+			}
+		}
+		
+		for (String key: name_issue.keySet()) {
+			RepIssue repIssue = name_issue.get(key);
+			int rep = repIssue.getRep();
+			repIssue.setMessege("G17\tThe intent " + key + " contains "+rep+" training phrases repeated. Two training phrases cannot be equal in the same intent");
+			ret.add(repIssue);
+		}
+		return ret;
+	}
+	
+	public static List<MyIssue> groupG18(List<MyIssue> list){
+		String msg;
+		
+		Map<String, RepIssue> name_issue = new HashMap<String, RepIssue>();
+		List<MyIssue> ret = new ArrayList<MyIssue>();
+		for (MyIssue i: list) {
+			msg= i.getMessage();
+			if (msg.startsWith("G18")) {
+				String name = msg.replaceAll("G18\tThe intent ", "");
+				name = name.split(" ")[0];
+				if (name_issue.containsKey(name)) {
+					RepIssue repIssue = name_issue.get(name);
+					repIssue.addOne();
+					name_issue.put(name, repIssue);
+				}else {
+					RepIssue repIssue = new RepIssue(1, i.getIssue());
+					name_issue.put(name, repIssue);
+				}
+			}else {
+				ret.add(i);
+			}
+		}
+		
+		for (String key: name_issue.keySet()) {
+			RepIssue repIssue = name_issue.get(key);
+			int rep = repIssue.getRep();
+			repIssue.setMessege("G18\tThe intent " + key + " contains "+rep+" training phrase with only a text parameter. Training phrases should contain something more than a text parameter");
+			ret.add(repIssue);
+		}
+		return ret;
+	}
+	
+	public static List<MyIssue> groupG16(List<MyIssue> list){
+		String msg;
+		
+		Map<String, RepIssue> name_issue = new HashMap<String, RepIssue>();
+		List<MyIssue> ret = new ArrayList<MyIssue>();
+		for (MyIssue i: list) {
+			msg= i.getMessage();
+			if (msg.startsWith("G16")) {
+				String sentences = msg.replaceAll("G16\tThe intents ", "");
+				String name1 = sentences.split(" ")[0];
+				String name2 = sentences.replaceAll(name1+" and ", "").split(" ")[0];
+				
+				if (name_issue.containsKey(name1+"@"+name2)) {
+					RepIssue repIssue = name_issue.get(name1+"@"+name2);
+					repIssue.addOne();
+					name_issue.put(name1+"@"+name2, repIssue);
+				}else if (name_issue.containsKey(name2+"@"+name1)) {
+					RepIssue repIssue = name_issue.get(name2+"@"+name1);
+					repIssue.addOne();
+					name_issue.put(name2+"@"+name1, repIssue);
+					
+				}else {
+					RepIssue repIssue = new RepIssue(1, i.getIssue());
+					name_issue.put(name1+"@"+name2, repIssue);
+				}
+			}else {
+				ret.add(i);
+			}
+		}
+		
+		for (String key: name_issue.keySet()) {
+			RepIssue repIssue = name_issue.get(key);
+			repIssue.setMessege(repIssue.getIssue().getMessage());
+			ret.add(repIssue);
+		}
+		return ret;
+	}
+
 
 }
