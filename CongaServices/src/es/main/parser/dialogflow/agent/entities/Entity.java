@@ -74,21 +74,6 @@ public class Entity {
 			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
 			ret.setName(getName());
 			for (EntryLanguage entryLan : getEntriesLanguage()) {
-				LanguageInput input = GeneratorFactory.eINSTANCE.createLanguageInput();
-				input.setLanguage(Agent.castLanguage(entryLan.getLanguage()));
-				for (Entry entry : entryLan.getEntries()) {
-					RegexInput regex = GeneratorFactory.eINSTANCE.createRegexInput();
-					regex.setExpresion(entry.getValue());
-					input.getInputs().add(regex);
-				}
-				ret.getInputs().add(input);
-			}
-			return ret;
-
-		} else if (getIsEnum() == false) {
-			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();
-			ret.setName(getName());
-			for (EntryLanguage entryLan : getEntriesLanguage()) {
 				LanguageEntity input = GeneratorFactory.eINSTANCE.createLanguageEntity();
 				input.setLanguage(Agent.castLanguage(entryLan.getLanguage()));
 				for (Entry entry : entryLan.getEntries()) {
@@ -98,8 +83,7 @@ public class Entity {
 				}
 				ret.getInputs().add(input);
 			}
-			entity = ret;
-			return entity;
+			return ret;
 
 		} else if (getIsEnum() == false) {
 			generator.Entity ret = GeneratorFactory.eINSTANCE.createEntity();

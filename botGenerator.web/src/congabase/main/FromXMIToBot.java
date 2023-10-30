@@ -106,10 +106,10 @@ public class FromXMIToBot {
 	public void XmiToDsl(String inputUri, String outputUri) {
 
 		// Source
-		Resource resourceXmi = resourceSet.getResource(createURI(inputUri, null), true);
+		Resource resourceXmi = resourceSet.getResource(URI.createFileURI(inputUri), true);
 
 		// Create new target file
-		Resource resourceDsl = resourceSetXtext.createResource(createURI(outputUri, null));
+		Resource resourceDsl = resourceSetXtext.createResource(URI.createFileURI(outputUri));
 
 		// Copy content
 		resourceDsl.getContents().addAll(resourceXmi.getContents());

@@ -27,8 +27,7 @@ public class RasaParserGenerator {
 		String dest;
 		String type = GENERATOR;
 		String version = RASA1;
-		if 
-		(args.length <2) {
+		if (args.length <2) {
 			System.err.println("The program needs at least 2 argument: <file_path> <dest_path> <proccess (generator/parser)[optional: default generator]> <rasa version (1, 2 or 3)[optional: default 1]>");
 			return;
 		}
@@ -54,34 +53,62 @@ public class RasaParserGenerator {
 			return;
 		}
 		if (type.equals(GENERATOR)) {
-			CongaResource cr = new CongaResource(dest, file, file.getName());
-			BotGenerator generator;
-			if (version.equals(RASA1)) {
-				generator = new RasaGenerator(dest, cr.getName(), cr.getName());
-			}else if (version.equals(RASA2)) {
-				generator = new Rasa2_0Generator(dest, cr.getName(), cr.getName());
-			}else {
-				generator = new Rasa3_0Generator(dest, cr.getName(), cr.getName());
-			}
-			File f = generator.doGenerate(cr.getResource()); 
-			cr.destroy();
+			doRasaGenerator(file, dest, version);
 		}else {
-			ToolFiles tf = new ToolFiles(dest, file, file.getName(), false);
-			RasaBot rasaBot;
-			if (version.equals(RASA1)) {
-				RasaReverse parser = new RasaReverse();
-				rasaBot = parser.getChatbot(tf.getFile());
-			}else if (version.equals(RASA2)) {
-				Rasa2_0Reverse parser = new Rasa2_0Reverse();
-				rasaBot = parser.getChatbot(tf.getFile());
-			}else {
-				Rasa3_0Reverse parser = new Rasa3_0Reverse();
-				rasaBot = parser.getChatbot(tf.getFile());
-			}
-			
-			Bot bot = rasaBot.getBot();
-			File f = tf.createResource(bot);
+			doRasaParser(file, dest, version);
 		}
+	}
+	
+	public static File doRasaParser(String src, String dest, String version) throws Exception {
+		File file = new File (src);
+		if (!file.exists()) {
+			System.err.println("The provided file does not exist");
+			return null;
+		}
+		return doRasaParser(file, dest, version);
+	}
+	
+	public static File doRasaParser(File src, String dest, String version) throws Exception {
+		ToolFiles tf = new ToolFiles(dest, src, src.getName(), false);
+		RasaBot rasaBot;
+		if (version.equals(RASA1)) {
+			RasaReverse parser = new RasaReverse();
+			rasaBot = parser.getChatbot(tf.getFile());
+		}else if (version.equals(RASA2)) {
+			Rasa2_0Reverse parser = new Rasa2_0Reverse();
+			rasaBot = parser.getChatbot(tf.getFile());
+		}else {
+			Rasa3_0Reverse parser = new Rasa3_0Reverse();
+			rasaBot = parser.getChatbot(tf.getFile());
+		}
+		
+		Bot bot = rasaBot.getBot();
+		File f = tf.createResource(bot);
+		return f;
+	}
+	
+	public static File doRasaGenerator (String src, String dest, String version) {
+		File file = new File (src);
+		if (!file.exists()) {
+			System.err.println("The provided file does not exist");
+			return null;
+		}
+		return doRasaGenerator(file, dest, version);
+	}
+	public static File doRasaGenerator (File src, String dest, String version) {
+		String name = src.getName().substring(0, src.getName().indexOf("."));
+		CongaResource cr = new CongaResource(dest, src, name, false);
+		BotGenerator generator;
+		
+		if (version.equals(RASA1)) {
+			generator = new RasaGenerator(dest, cr.getName(), name);
+		}else if (version.equals(RASA2)) {
+			generator = new Rasa2_0Generator(dest, cr.getName(), name);
+		}else {
+			generator = new Rasa3_0Generator(dest, cr.getName(), name);
+		}
+		File f = generator.doGenerate(cr.getResource()); 
+		return f;
 	}
 
 }

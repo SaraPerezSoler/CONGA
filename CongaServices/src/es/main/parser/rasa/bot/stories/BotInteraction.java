@@ -30,8 +30,8 @@ public class BotInteraction {
 			text = info.substring(0, index);
 		}
 
-		String[] actionsNames = text.replace(" \n", "").replace("\n", "").replace("  ", " ").replace("  ", " ")
-				.replace("- ", "-").replace(" -", "-").split("-");
+		String[] actionsNames = text.replaceAll(" \n", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("  ", " ")
+					.replaceAll("  ", " ").replaceAll("\t", "").replaceAll("- ", "-").replaceAll(" -", "-").split("-");
 		for (String act : actionsNames) {
 			if (!act.isBlank() && !act.isEmpty()) {
 				act = act.replaceAll(" ", "");

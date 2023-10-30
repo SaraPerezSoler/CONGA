@@ -9,8 +9,8 @@ import generator.Language;
 
 public class ConverDialogflow {
 
-	private static final String FOLDER = "D:\\Desktop\\Dialogflow - copia\\xmi";
-	private static final String FOLDER_BASE = "D:\\Desktop\\Dialogflow - copia";
+	private static final String FOLDER = "D:\\Desktop\\Dialogflow\\xmi";
+	private static final String FOLDER_BASE = "D:\\Desktop\\Dialogflow";
 
 	public static void main(String[] args) {
 		String folderPath = FOLDER;

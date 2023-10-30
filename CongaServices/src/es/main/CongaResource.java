@@ -12,9 +12,12 @@ public class CongaResource extends FileManager{
 
 	public CongaResource(String folderPath, File file, String botName) {
 		super (folderPath, file, botName+".xmi");
-		this.resource = getResourceSet().getResource(URI.createURI(super.getPath()), true);
+		this.resource = getResourceSet().getResource(URI.createFileURI(super.getPath()), true);
 	}
-
+	public CongaResource(String folderPath, File file, String botName, boolean move) {
+		super (folderPath, file, botName+".xmi", move);
+		this.resource = getResourceSet().getResource(URI.createFileURI(super.getPath()), true);
+	}
 
 	public Resource getResource() {
 		return resource;
