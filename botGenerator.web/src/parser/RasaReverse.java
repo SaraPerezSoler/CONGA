@@ -104,6 +104,8 @@ public class RasaReverse extends Reverse {
 							hasConfig = true;
 						} else if (f.isDirectory()) {
 							files.add(f);
+						} else if (f.getName().equals("actions.py")) {
+							
 						}
 						if (hasDomain && hasNLU && hasStories && hasConfig) {
 							agentCreated = true;

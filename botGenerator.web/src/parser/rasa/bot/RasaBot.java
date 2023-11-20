@@ -14,6 +14,7 @@ public class RasaBot extends Chatbot{
 	private Stories stories;
 	private Domain domain;
 	private Config config;
+	private Actions actions;
 
 	public RasaBot(String name) {
 		super();
@@ -35,6 +36,12 @@ public class RasaBot extends Chatbot{
 			this.stories.add(stories);
 		}
 	}
+	
+	public void setActions(String actions) {
+		this.actions = new Actions(actions);
+		
+	}
+
 
 	public Domain getDomain() {
 		return domain;
