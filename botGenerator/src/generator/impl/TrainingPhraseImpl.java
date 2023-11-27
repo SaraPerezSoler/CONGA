@@ -4,6 +4,8 @@ package generator.impl;
 
 import generator.Comparable;
 import generator.GeneratorPackage;
+import generator.Literal;
+import generator.ParameterReferenceToken;
 import generator.Token;
 import generator.TrainingPhrase;
 
@@ -164,6 +166,19 @@ public class TrainingPhraseImpl extends MinimalEObjectImpl.Container implements 
 		} else if (!isSimilar(getTokens(), other.getTokens()))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String getSentence() {
+		String str = "";
+		for (Token token: getTokens()) {
+			if (token instanceof Literal) {
+				str += ((Literal)token).getText()+" ";
+			}else {
+				str += ((ParameterReferenceToken) token).getTextReference()+" ";
+			}
+		}
+		return str.replaceAll("  ", " ");
 	}
 	
 

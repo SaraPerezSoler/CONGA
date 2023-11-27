@@ -26,3 +26,4 @@ botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerat
 
 botGenerator.dsl.parent/botGenerator.dsl/xtend-gen/org/*
 botGenerator.dsl.parent/botGenerator.dsl.tests/xtend-gen/org/xtext/botGenerator/tests/BotParsingTest.java
+ConfusingMatrixImporter_standalone/ConfusingMatrixImporter/lib/*

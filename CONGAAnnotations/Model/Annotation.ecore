@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="congaAnnotation" nsURI="congaAnnotation" nsPrefix="congaAnnotation">
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semanticSimilarities" upperBound="-1"
+        eType="#//SemanticSimilarity" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="avgSims" upperBound="-1"
+        eType="#//AvgSim" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intentAvgSims" upperBound="-1"
+        eType="#//IntentAvgSim" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticSimilarity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trainingPhrase1" lowerBound="1"
+        eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trainingPhrase2" lowerBound="1"
+        eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="similarity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AvgSim">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trainingPhrase" lowerBound="1"
+        eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="avg" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="min" lowerBound="1" eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="max" lowerBound="1" eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntentAvgSim">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trainingPhrase" lowerBound="1"
+        eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intent" lowerBound="1"
+        eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//Intent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="avg" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="min" lowerBound="1" eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="max" lowerBound="1" eType="ecore:EClass ../../botGenerator/Model/BotGenerator.ecore#//TrainingPhrase"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+</ecore:EPackage>

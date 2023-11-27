@@ -5,6 +5,7 @@ package generator.impl;
 import generator.Comparable;
 import generator.GeneratorPackage;
 import generator.Intent;
+import generator.Language;
 import generator.LanguageIntent;
 import generator.Parameter;
 
@@ -301,6 +302,16 @@ public class IntentImpl extends ElementImpl implements Intent {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public LanguageIntent getInput(Language language) {
+		for (LanguageIntent lan: getInputs()) {
+			if (lan.getLanguage().equals(language)) {
+				return lan;
+			}
+		}
+		return null;
 	}
 	
 

@@ -71,4 +71,6 @@ public interface Intent extends Element, Comparable {
 
 	Parameter getParameter(String alias);
 
+	LanguageIntent getInput(Language language);
+
 } // Intent

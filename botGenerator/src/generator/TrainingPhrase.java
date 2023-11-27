@@ -34,4 +34,6 @@ public interface TrainingPhrase extends EObject, Comparable {
 	 */
 	EList<Token> getTokens();
 
+	String getSentence();
+
 } // TrainingPhrase
