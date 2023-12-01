@@ -9,30 +9,55 @@
   <genPackages prefix="CongaAnnotation" disposableProviderFactory="true" ecorePackage="Annotation.ecore#/">
     <genClasses ecoreClass="Annotation.ecore#//Annotation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/semanticSimilarities"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/avgSims"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/intentAvgSims"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/tpAvgSims"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/tpIntentAvgSims"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/intentIntentValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Annotation.ecore#//Annotation/intentValues"/>
     </genClasses>
     <genClasses ecoreClass="Annotation.ecore#//SemanticSimilarity">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//SemanticSimilarity/trainingPhrase1"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//SemanticSimilarity/trainingPhrase2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//SemanticSimilarity/similarity"/>
     </genClasses>
-    <genClasses ecoreClass="Annotation.ecore#//AvgSim">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//AvgSim/trainingPhrase"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//AvgSim/avg"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//AvgSim/min"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//AvgSim/max"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//AvgSim/minValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//AvgSim/maxValue"/>
+    <genClasses ecoreClass="Annotation.ecore#//TPAvg">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPAvg/trainingPhrase"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPAvg/avg"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPAvg/min"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPAvg/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPAvg/minValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPAvg/maxValue"/>
     </genClasses>
-    <genClasses ecoreClass="Annotation.ecore#//IntentAvgSim">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentAvgSim/trainingPhrase"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentAvgSim/intent"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentAvgSim/avg"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentAvgSim/min"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentAvgSim/max"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentAvgSim/minValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentAvgSim/maxValue"/>
+    <genClasses ecoreClass="Annotation.ecore#//TPIntentAvgSim">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPIntentAvgSim/trainingPhrase"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPIntentAvgSim/intent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPIntentAvgSim/avg"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPIntentAvgSim/min"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//TPIntentAvgSim/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPIntentAvgSim/minValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//TPIntentAvgSim/maxValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Annotation.ecore#//IntentValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentValue/intent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentValue/min1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentValue/max1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentValue/min1Value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentValue/max1Value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentValue/min2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentValue/max2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentValue/min2Value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentValue/max2Value"/>
+    </genClasses>
+    <genClasses ecoreClass="Annotation.ecore#//IntentIntentValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/intent1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/intent2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/min1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/max1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentIntentValue/min1Value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentIntentValue/max1Value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/min2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Annotation.ecore#//IntentIntentValue/max2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentIntentValue/min2Value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Annotation.ecore#//IntentIntentValue/max2Value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

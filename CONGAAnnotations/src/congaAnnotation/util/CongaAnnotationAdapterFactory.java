@@ -76,12 +76,20 @@ public class CongaAnnotationAdapterFactory extends AdapterFactoryImpl {
 				return createSemanticSimilarityAdapter();
 			}
 			@Override
-			public Adapter caseAvgSim(AvgSim object) {
-				return createAvgSimAdapter();
+			public Adapter caseTPAvg(TPAvg object) {
+				return createTPAvgAdapter();
 			}
 			@Override
-			public Adapter caseIntentAvgSim(IntentAvgSim object) {
-				return createIntentAvgSimAdapter();
+			public Adapter caseTPIntentAvgSim(TPIntentAvgSim object) {
+				return createTPIntentAvgSimAdapter();
+			}
+			@Override
+			public Adapter caseIntentValue(IntentValue object) {
+				return createIntentValueAdapter();
+			}
+			@Override
+			public Adapter caseIntentIntentValue(IntentIntentValue object) {
+				return createIntentIntentValueAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -132,30 +140,58 @@ public class CongaAnnotationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link congaAnnotation.AvgSim <em>Avg Sim</em>}'.
+	 * Creates a new adapter for an object of class '{@link congaAnnotation.TPAvg <em>TP Avg</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see congaAnnotation.AvgSim
+	 * @see congaAnnotation.TPAvg
 	 * @generated
 	 */
-	public Adapter createAvgSimAdapter() {
+	public Adapter createTPAvgAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link congaAnnotation.IntentAvgSim <em>Intent Avg Sim</em>}'.
+	 * Creates a new adapter for an object of class '{@link congaAnnotation.TPIntentAvgSim <em>TP Intent Avg Sim</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see congaAnnotation.IntentAvgSim
+	 * @see congaAnnotation.TPIntentAvgSim
 	 * @generated
 	 */
-	public Adapter createIntentAvgSimAdapter() {
+	public Adapter createTPIntentAvgSimAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link congaAnnotation.IntentValue <em>Intent Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see congaAnnotation.IntentValue
+	 * @generated
+	 */
+	public Adapter createIntentValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link congaAnnotation.IntentIntentValue <em>Intent Intent Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see congaAnnotation.IntentIntentValue
+	 * @generated
+	 */
+	public Adapter createIntentIntentValueAdapter() {
 		return null;
 	}
 

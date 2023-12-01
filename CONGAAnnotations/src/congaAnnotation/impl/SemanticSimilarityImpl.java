@@ -59,7 +59,7 @@ public class SemanticSimilarityImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double SIMILARITY_EDEFAULT = 0.0;
+	protected static final float SIMILARITY_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getSimilarity() <em>Similarity</em>}' attribute.
@@ -69,7 +69,7 @@ public class SemanticSimilarityImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected double similarity = SIMILARITY_EDEFAULT;
+	protected float similarity = SIMILARITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,7 +171,7 @@ public class SemanticSimilarityImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getSimilarity() {
+	public float getSimilarity() {
 		return similarity;
 	}
 
@@ -180,8 +180,8 @@ public class SemanticSimilarityImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSimilarity(double newSimilarity) {
-		double oldSimilarity = similarity;
+	public void setSimilarity(float newSimilarity) {
+		float oldSimilarity = similarity;
 		similarity = newSimilarity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.SEMANTIC_SIMILARITY__SIMILARITY, oldSimilarity, similarity));
@@ -222,7 +222,7 @@ public class SemanticSimilarityImpl extends MinimalEObjectImpl.Container impleme
 				setTrainingPhrase2((TrainingPhrase)newValue);
 				return;
 			case CongaAnnotationPackage.SEMANTIC_SIMILARITY__SIMILARITY:
-				setSimilarity((Double)newValue);
+				setSimilarity((Float)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

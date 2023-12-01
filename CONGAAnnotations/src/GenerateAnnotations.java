@@ -1,9 +1,14 @@
 
+import java.util.HashMap;
+import java.util.Map;
+
 import congaAnnotation.Annotation;
-import congaAnnotation.AvgSim;
 import congaAnnotation.CongaAnnotationFactory;
-import congaAnnotation.IntentAvgSim;
+import congaAnnotation.IntentIntentValue;
+import congaAnnotation.IntentValue;
 import congaAnnotation.SemanticSimilarity;
+import congaAnnotation.TPAvg;
+import congaAnnotation.TPIntentAvgSim;
 import generator.Bot;
 import generator.Intent;
 import generator.LanguageIntent;
@@ -14,14 +19,18 @@ public class GenerateAnnotations {
 	public static Annotation calculateAnnotation(Bot bot) {
 		Annotation annotation = CongaAnnotationFactory.eINSTANCE.createAnnotation();
 		for (Intent i1 : bot.getIntents()) {
+			Map<Intent, IntentIntentValue> iivalues = new HashMap<>();
+			IntentValue ivalue = CongaAnnotationFactory.eINSTANCE.createIntentValue();
+			ivalue.setIntent(i1);
+			
 			for (LanguageIntent lan1 : i1.getInputs()) {
 				for (TrainingPhrase tp1 : lan1.getInputs()) {
-					AvgSim avg = CongaAnnotationFactory.eINSTANCE.createAvgSim();
+					TPAvg avg = CongaAnnotationFactory.eINSTANCE.createTPAvg();
 					avg.setTrainingPhrase(tp1);
 					avg.setAvg(0);
 					int numSentence = 0;
 					for (Intent i2 : bot.getIntents()) {
-						IntentAvgSim intentAvg = CongaAnnotationFactory.eINSTANCE.createIntentAvgSim();
+						TPIntentAvgSim intentAvg = CongaAnnotationFactory.eINSTANCE.createTPIntentAvgSim();
 						intentAvg.setTrainingPhrase(tp1);
 						intentAvg.setIntent(i2);
 						intentAvg.setAvg(0);
@@ -34,13 +43,14 @@ public class GenerateAnnotations {
 											.createSemanticSimilarity();
 									semSim.setTrainingPhrase1(tp1);
 									semSim.setTrainingPhrase2(tp2);
-									float confusing = matrixImport.calculateConfusing(tp1.getSentence(), tp2.getSentence());
+									float confusing = matrixImport.calculateConfusing(tp1.getSentence(),
+											tp2.getSentence());
 									semSim.setSimilarity(confusing);
 									annotation.getSemanticSimilarities().add(semSim);
 									numSentence++;
 									numIntentSentence++;
 									// avg
-									double aux = avg.getAvg();
+									float aux = avg.getAvg();
 									avg.setAvg(aux + confusing);
 									if (avg.getMin() == null || avg.getMinValue() > confusing) {
 										avg.setMin(tp2);
@@ -61,19 +71,77 @@ public class GenerateAnnotations {
 										intentAvg.setMax(tp2);
 										intentAvg.setMaxValue(confusing);
 									}
+
 								}
 							}
+
+							float aux = intentAvg.getAvg();
+							intentAvg.setAvg(aux / numIntentSentence);
+							annotation.getTpIntentAvgSims().add(intentAvg);
+							
+
 						}
-						double aux = intentAvg.getAvg();
-						intentAvg.setAvg(aux / numIntentSentence);
-						annotation.getIntentAvgSims().add(intentAvg);
+						if (i1.equals(i2)) {
+							if (ivalue.getMin1() == null || ivalue.getMin1Value() > intentAvg.getAvg()) {
+								ivalue.setMin2(ivalue.getMin1());
+								ivalue.setMin2Value(ivalue.getMin1Value());
+								ivalue.setMin1(intentAvg.getTrainingPhrase());
+								ivalue.setMin1Value(intentAvg.getAvg());
+							}else if (ivalue.getMin2() == null || ivalue.getMin2Value() > intentAvg.getAvg()) {
+								ivalue.setMin2(intentAvg.getTrainingPhrase());
+								ivalue.setMin2Value(intentAvg.getAvg());
+							}
+							
+							if (ivalue.getMax1() == null || ivalue.getMax1Value() < intentAvg.getAvg()) {
+								ivalue.setMax2(ivalue.getMax1());
+								ivalue.setMax2Value(ivalue.getMax1Value());
+								ivalue.setMax1(intentAvg.getTrainingPhrase());
+								ivalue.setMax1Value(intentAvg.getAvg());
+							}else if (ivalue.getMax2() == null || ivalue.getMax2Value() < intentAvg.getAvg()) {
+								ivalue.setMax2(intentAvg.getTrainingPhrase());
+								ivalue.setMax2Value(intentAvg.getAvg());
+							}
+						}else {
+							IntentIntentValue iivalue = iivalues.get(i2);
+							if (iivalue == null) {
+								iivalue = CongaAnnotationFactory.eINSTANCE.createIntentIntentValue();
+								iivalue.setIntent1(i1);
+								iivalue.setIntent2(i2);
+								iivalues.put(i2, iivalue);
+							}
+							if (iivalue.getMin1() == null || iivalue.getMin1Value() > intentAvg.getAvg()) {
+								iivalue.setMin2(iivalue.getMin1());
+								iivalue.setMin2Value(iivalue.getMin1Value());
+								iivalue.setMin1(intentAvg.getTrainingPhrase());
+								iivalue.setMin1Value(intentAvg.getAvg());
+							}else if (iivalue.getMin2() == null || iivalue.getMin2Value() > intentAvg.getAvg()) {
+								iivalue.setMin2(intentAvg.getTrainingPhrase());
+								iivalue.setMin2Value(intentAvg.getAvg());
+							}
+							
+							if (iivalue.getMax1() == null || iivalue.getMax1Value() < intentAvg.getAvg()) {
+								iivalue.setMax2(iivalue.getMax1());
+								iivalue.setMax2Value(iivalue.getMax1Value());
+								iivalue.setMax1(intentAvg.getTrainingPhrase());
+								iivalue.setMax1Value(intentAvg.getAvg());
+							}else if (iivalue.getMax2() == null || iivalue.getMax2Value() < intentAvg.getAvg()) {
+								iivalue.setMax2(intentAvg.getTrainingPhrase());
+								iivalue.setMax2Value(intentAvg.getAvg());
+							}
+							
+
+						}
 					}
-					double aux = avg.getAvg();
-					avg.setAvg(aux/numSentence);
-					annotation.getAvgSims().add(avg);
+					float aux = avg.getAvg();
+					avg.setAvg(aux / numSentence);
+					annotation.getTpAvgSims().add(avg);
 				}
 			}
+			
+			annotation.getIntentValues().add(ivalue);
+			annotation.getIntentIntentValues().addAll(iivalues.values());
 		}
+
 		return annotation;
 	}
 }

@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/git/CONGA/ConfusingMatrixImporter_standalone/ConfusingMatrixImporter/lib/djl/api/0.10.0-SNAPSHOT/api-0.10.0-SNAPSHOT.jar" sourcepath="/asymob/lib/djl/api/0.10.0-SNAPSHOT/api-0.10.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="lib" path="lib/djl/commons-compress-1.20.jar"/>
 	<classpathentry kind="lib" path="lib/djl/jna-5.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/djl/slf4j-api-1.7.21.jar"/>
 	<classpathentry kind="lib" path="lib/djl/slf4j-simple-1.7.21.jar"/>
 	<classpathentry kind="lib" path="lib/djl/tensorflow-core-platform-0.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/djl/api/0.10.0-SNAPSHOT/api-0.10.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/djl/basicdataset/0.10.0-SNAPSHOT/basicdataset-0.10.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/djl/bytedeco/javacpp/1.5.4/javacpp-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/djl/gson/gson/2.8.5/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="lib/djl/model-zoo/0.10.0-SNAPSHOT/model-zoo-0.10.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/djl/mxnet/mxnet-engine/0.10.0-SNAPSHOT/mxnet-engine-0.10.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/djl/mxnet/mxnet-model-zoo/0.10.0-SNAPSHOT/mxnet-model-zoo-0.10.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/djl/mxnet/mxnet-native-auto/1.7.0-backport/mxnet-native-auto-1.7.0-backport.jar"/>
 	<classpathentry kind="lib" path="lib/djl/protobuf/protobuf-java/3.8.0/protobuf-java-3.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/djl/tensorflow/tensorflow-api/0.10.0-SNAPSHOT/tensorflow-api-0.10.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/djl/bytedeco/javacpp/1.5.4/javacpp-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/djl/bytedeco/javacpp/1.5.4/javacpp-1.5.4-windows-x86_64.jar"/>
 	<classpathentry kind="lib" path="lib/djl/tensorflow/tensorflow-engine/0.10.0-SNAPSHOT/tensorflow-engine-0.10.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/djl/tensorflow/tensorflow-native-auto/2.3.1/tensorflow-native-auto-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>

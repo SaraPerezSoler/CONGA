@@ -3,11 +3,13 @@
 package congaAnnotation.impl;
 
 import congaAnnotation.Annotation;
-import congaAnnotation.AvgSim;
 import congaAnnotation.CongaAnnotationFactory;
 import congaAnnotation.CongaAnnotationPackage;
-import congaAnnotation.IntentAvgSim;
+import congaAnnotation.IntentIntentValue;
+import congaAnnotation.IntentValue;
 import congaAnnotation.SemanticSimilarity;
+import congaAnnotation.TPAvg;
+import congaAnnotation.TPIntentAvgSim;
 
 import generator.GeneratorPackage;
 
@@ -44,14 +46,28 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass avgSimEClass = null;
+	private EClass tpAvgEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass intentAvgSimEClass = null;
+	private EClass tpIntentAvgSimEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intentValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intentIntentValueEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -140,7 +156,7 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnnotation_AvgSims() {
+	public EReference getAnnotation_TpAvgSims() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -149,8 +165,26 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnnotation_IntentAvgSims() {
+	public EReference getAnnotation_TpIntentAvgSims() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotation_IntentIntentValues() {
+		return (EReference)annotationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotation_IntentValues() {
+		return (EReference)annotationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -194,8 +228,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAvgSim() {
-		return avgSimEClass;
+	public EClass getTPAvg() {
+		return tpAvgEClass;
 	}
 
 	/**
@@ -203,8 +237,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAvgSim_TrainingPhrase() {
-		return (EReference)avgSimEClass.getEStructuralFeatures().get(0);
+	public EReference getTPAvg_TrainingPhrase() {
+		return (EReference)tpAvgEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -212,8 +246,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAvgSim_Avg() {
-		return (EAttribute)avgSimEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTPAvg_Avg() {
+		return (EAttribute)tpAvgEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -221,8 +255,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAvgSim_Min() {
-		return (EReference)avgSimEClass.getEStructuralFeatures().get(2);
+	public EReference getTPAvg_Min() {
+		return (EReference)tpAvgEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -230,8 +264,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAvgSim_Max() {
-		return (EReference)avgSimEClass.getEStructuralFeatures().get(3);
+	public EReference getTPAvg_Max() {
+		return (EReference)tpAvgEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -239,8 +273,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAvgSim_MinValue() {
-		return (EAttribute)avgSimEClass.getEStructuralFeatures().get(4);
+	public EAttribute getTPAvg_MinValue() {
+		return (EAttribute)tpAvgEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -248,8 +282,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAvgSim_MaxValue() {
-		return (EAttribute)avgSimEClass.getEStructuralFeatures().get(5);
+	public EAttribute getTPAvg_MaxValue() {
+		return (EAttribute)tpAvgEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -257,8 +291,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIntentAvgSim() {
-		return intentAvgSimEClass;
+	public EClass getTPIntentAvgSim() {
+		return tpIntentAvgSimEClass;
 	}
 
 	/**
@@ -266,8 +300,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntentAvgSim_TrainingPhrase() {
-		return (EReference)intentAvgSimEClass.getEStructuralFeatures().get(0);
+	public EReference getTPIntentAvgSim_TrainingPhrase() {
+		return (EReference)tpIntentAvgSimEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -275,8 +309,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntentAvgSim_Intent() {
-		return (EReference)intentAvgSimEClass.getEStructuralFeatures().get(1);
+	public EReference getTPIntentAvgSim_Intent() {
+		return (EReference)tpIntentAvgSimEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -284,8 +318,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntentAvgSim_Avg() {
-		return (EAttribute)intentAvgSimEClass.getEStructuralFeatures().get(2);
+	public EAttribute getTPIntentAvgSim_Avg() {
+		return (EAttribute)tpIntentAvgSimEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -293,8 +327,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntentAvgSim_Min() {
-		return (EReference)intentAvgSimEClass.getEStructuralFeatures().get(3);
+	public EReference getTPIntentAvgSim_Min() {
+		return (EReference)tpIntentAvgSimEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -302,8 +336,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntentAvgSim_Max() {
-		return (EReference)intentAvgSimEClass.getEStructuralFeatures().get(4);
+	public EReference getTPIntentAvgSim_Max() {
+		return (EReference)tpIntentAvgSimEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -311,8 +345,8 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntentAvgSim_MinValue() {
-		return (EAttribute)intentAvgSimEClass.getEStructuralFeatures().get(5);
+	public EAttribute getTPIntentAvgSim_MinValue() {
+		return (EAttribute)tpIntentAvgSimEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -320,8 +354,197 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntentAvgSim_MaxValue() {
-		return (EAttribute)intentAvgSimEClass.getEStructuralFeatures().get(6);
+	public EAttribute getTPIntentAvgSim_MaxValue() {
+		return (EAttribute)tpIntentAvgSimEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntentValue() {
+		return intentValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentValue_Intent() {
+		return (EReference)intentValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentValue_Min1() {
+		return (EReference)intentValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentValue_Max1() {
+		return (EReference)intentValueEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentValue_Min1Value() {
+		return (EAttribute)intentValueEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentValue_Max1Value() {
+		return (EAttribute)intentValueEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentValue_Min2() {
+		return (EReference)intentValueEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentValue_Max2() {
+		return (EReference)intentValueEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentValue_Min2Value() {
+		return (EAttribute)intentValueEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentValue_Max2Value() {
+		return (EAttribute)intentValueEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntentIntentValue() {
+		return intentIntentValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Intent1() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Intent2() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Min1() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Max1() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentIntentValue_Min1Value() {
+		return (EAttribute)intentIntentValueEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentIntentValue_Max1Value() {
+		return (EAttribute)intentIntentValueEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Min2() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntentIntentValue_Max2() {
+		return (EReference)intentIntentValueEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentIntentValue_Min2Value() {
+		return (EAttribute)intentIntentValueEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntentIntentValue_Max2Value() {
+		return (EAttribute)intentIntentValueEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -354,30 +577,55 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 		// Create classes and their features
 		annotationEClass = createEClass(ANNOTATION);
 		createEReference(annotationEClass, ANNOTATION__SEMANTIC_SIMILARITIES);
-		createEReference(annotationEClass, ANNOTATION__AVG_SIMS);
-		createEReference(annotationEClass, ANNOTATION__INTENT_AVG_SIMS);
+		createEReference(annotationEClass, ANNOTATION__TP_AVG_SIMS);
+		createEReference(annotationEClass, ANNOTATION__TP_INTENT_AVG_SIMS);
+		createEReference(annotationEClass, ANNOTATION__INTENT_INTENT_VALUES);
+		createEReference(annotationEClass, ANNOTATION__INTENT_VALUES);
 
 		semanticSimilarityEClass = createEClass(SEMANTIC_SIMILARITY);
 		createEReference(semanticSimilarityEClass, SEMANTIC_SIMILARITY__TRAINING_PHRASE1);
 		createEReference(semanticSimilarityEClass, SEMANTIC_SIMILARITY__TRAINING_PHRASE2);
 		createEAttribute(semanticSimilarityEClass, SEMANTIC_SIMILARITY__SIMILARITY);
 
-		avgSimEClass = createEClass(AVG_SIM);
-		createEReference(avgSimEClass, AVG_SIM__TRAINING_PHRASE);
-		createEAttribute(avgSimEClass, AVG_SIM__AVG);
-		createEReference(avgSimEClass, AVG_SIM__MIN);
-		createEReference(avgSimEClass, AVG_SIM__MAX);
-		createEAttribute(avgSimEClass, AVG_SIM__MIN_VALUE);
-		createEAttribute(avgSimEClass, AVG_SIM__MAX_VALUE);
+		tpAvgEClass = createEClass(TP_AVG);
+		createEReference(tpAvgEClass, TP_AVG__TRAINING_PHRASE);
+		createEAttribute(tpAvgEClass, TP_AVG__AVG);
+		createEReference(tpAvgEClass, TP_AVG__MIN);
+		createEReference(tpAvgEClass, TP_AVG__MAX);
+		createEAttribute(tpAvgEClass, TP_AVG__MIN_VALUE);
+		createEAttribute(tpAvgEClass, TP_AVG__MAX_VALUE);
 
-		intentAvgSimEClass = createEClass(INTENT_AVG_SIM);
-		createEReference(intentAvgSimEClass, INTENT_AVG_SIM__TRAINING_PHRASE);
-		createEReference(intentAvgSimEClass, INTENT_AVG_SIM__INTENT);
-		createEAttribute(intentAvgSimEClass, INTENT_AVG_SIM__AVG);
-		createEReference(intentAvgSimEClass, INTENT_AVG_SIM__MIN);
-		createEReference(intentAvgSimEClass, INTENT_AVG_SIM__MAX);
-		createEAttribute(intentAvgSimEClass, INTENT_AVG_SIM__MIN_VALUE);
-		createEAttribute(intentAvgSimEClass, INTENT_AVG_SIM__MAX_VALUE);
+		tpIntentAvgSimEClass = createEClass(TP_INTENT_AVG_SIM);
+		createEReference(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__TRAINING_PHRASE);
+		createEReference(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__INTENT);
+		createEAttribute(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__AVG);
+		createEReference(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__MIN);
+		createEReference(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__MAX);
+		createEAttribute(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__MIN_VALUE);
+		createEAttribute(tpIntentAvgSimEClass, TP_INTENT_AVG_SIM__MAX_VALUE);
+
+		intentValueEClass = createEClass(INTENT_VALUE);
+		createEReference(intentValueEClass, INTENT_VALUE__INTENT);
+		createEReference(intentValueEClass, INTENT_VALUE__MIN1);
+		createEReference(intentValueEClass, INTENT_VALUE__MAX1);
+		createEAttribute(intentValueEClass, INTENT_VALUE__MIN1_VALUE);
+		createEAttribute(intentValueEClass, INTENT_VALUE__MAX1_VALUE);
+		createEReference(intentValueEClass, INTENT_VALUE__MIN2);
+		createEReference(intentValueEClass, INTENT_VALUE__MAX2);
+		createEAttribute(intentValueEClass, INTENT_VALUE__MIN2_VALUE);
+		createEAttribute(intentValueEClass, INTENT_VALUE__MAX2_VALUE);
+
+		intentIntentValueEClass = createEClass(INTENT_INTENT_VALUE);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__INTENT1);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__INTENT2);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__MIN1);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__MAX1);
+		createEAttribute(intentIntentValueEClass, INTENT_INTENT_VALUE__MIN1_VALUE);
+		createEAttribute(intentIntentValueEClass, INTENT_INTENT_VALUE__MAX1_VALUE);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__MIN2);
+		createEReference(intentIntentValueEClass, INTENT_INTENT_VALUE__MAX2);
+		createEAttribute(intentIntentValueEClass, INTENT_INTENT_VALUE__MIN2_VALUE);
+		createEAttribute(intentIntentValueEClass, INTENT_INTENT_VALUE__MAX2_VALUE);
 	}
 
 	/**
@@ -415,30 +663,55 @@ public class CongaAnnotationPackageImpl extends EPackageImpl implements CongaAnn
 		// Initialize classes, features, and operations; add parameters
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_SemanticSimilarities(), this.getSemanticSimilarity(), null, "semanticSimilarities", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_AvgSims(), this.getAvgSim(), null, "avgSims", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_IntentAvgSims(), this.getIntentAvgSim(), null, "intentAvgSims", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_TpAvgSims(), this.getTPAvg(), null, "tpAvgSims", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_TpIntentAvgSims(), this.getTPIntentAvgSim(), null, "tpIntentAvgSims", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_IntentIntentValues(), this.getIntentIntentValue(), null, "intentIntentValues", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_IntentValues(), this.getIntentValue(), null, "intentValues", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semanticSimilarityEClass, SemanticSimilarity.class, "SemanticSimilarity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemanticSimilarity_TrainingPhrase1(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase1", null, 1, 1, SemanticSimilarity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSemanticSimilarity_TrainingPhrase2(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase2", null, 1, 1, SemanticSimilarity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSemanticSimilarity_Similarity(), ecorePackage.getEDouble(), "similarity", null, 1, 1, SemanticSimilarity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSemanticSimilarity_Similarity(), ecorePackage.getEFloat(), "similarity", null, 1, 1, SemanticSimilarity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(avgSimEClass, AvgSim.class, "AvgSim", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAvgSim_TrainingPhrase(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAvgSim_Avg(), ecorePackage.getEDouble(), "avg", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAvgSim_Min(), theGeneratorPackage.getTrainingPhrase(), null, "min", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAvgSim_Max(), theGeneratorPackage.getTrainingPhrase(), null, "max", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAvgSim_MinValue(), ecorePackage.getEDouble(), "minValue", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAvgSim_MaxValue(), ecorePackage.getEDouble(), "maxValue", null, 1, 1, AvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tpAvgEClass, TPAvg.class, "TPAvg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTPAvg_TrainingPhrase(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPAvg_Avg(), ecorePackage.getEFloat(), "avg", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTPAvg_Min(), theGeneratorPackage.getTrainingPhrase(), null, "min", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTPAvg_Max(), theGeneratorPackage.getTrainingPhrase(), null, "max", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPAvg_MinValue(), ecorePackage.getEFloat(), "minValue", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPAvg_MaxValue(), ecorePackage.getEFloat(), "maxValue", null, 1, 1, TPAvg.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(intentAvgSimEClass, IntentAvgSim.class, "IntentAvgSim", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIntentAvgSim_TrainingPhrase(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntentAvgSim_Intent(), theGeneratorPackage.getIntent(), null, "intent", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntentAvgSim_Avg(), ecorePackage.getEDouble(), "avg", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntentAvgSim_Min(), theGeneratorPackage.getTrainingPhrase(), null, "min", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntentAvgSim_Max(), theGeneratorPackage.getTrainingPhrase(), null, "max", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntentAvgSim_MinValue(), ecorePackage.getEDouble(), "minValue", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntentAvgSim_MaxValue(), ecorePackage.getEDouble(), "maxValue", null, 1, 1, IntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tpIntentAvgSimEClass, TPIntentAvgSim.class, "TPIntentAvgSim", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTPIntentAvgSim_TrainingPhrase(), theGeneratorPackage.getTrainingPhrase(), null, "trainingPhrase", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTPIntentAvgSim_Intent(), theGeneratorPackage.getIntent(), null, "intent", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPIntentAvgSim_Avg(), ecorePackage.getEFloat(), "avg", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTPIntentAvgSim_Min(), theGeneratorPackage.getTrainingPhrase(), null, "min", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTPIntentAvgSim_Max(), theGeneratorPackage.getTrainingPhrase(), null, "max", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPIntentAvgSim_MinValue(), ecorePackage.getEFloat(), "minValue", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTPIntentAvgSim_MaxValue(), ecorePackage.getEFloat(), "maxValue", null, 1, 1, TPIntentAvgSim.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(intentValueEClass, IntentValue.class, "IntentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIntentValue_Intent(), theGeneratorPackage.getIntent(), null, "intent", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentValue_Min1(), theGeneratorPackage.getTrainingPhrase(), null, "min1", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentValue_Max1(), theGeneratorPackage.getTrainingPhrase(), null, "max1", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentValue_Min1Value(), ecorePackage.getEFloat(), "min1Value", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentValue_Max1Value(), ecorePackage.getEFloat(), "max1Value", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentValue_Min2(), theGeneratorPackage.getTrainingPhrase(), null, "min2", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentValue_Max2(), theGeneratorPackage.getTrainingPhrase(), null, "max2", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentValue_Min2Value(), ecorePackage.getEFloat(), "min2Value", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentValue_Max2Value(), ecorePackage.getEFloat(), "max2Value", null, 1, 1, IntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(intentIntentValueEClass, IntentIntentValue.class, "IntentIntentValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIntentIntentValue_Intent1(), theGeneratorPackage.getIntent(), null, "intent1", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentIntentValue_Intent2(), theGeneratorPackage.getIntent(), null, "intent2", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentIntentValue_Min1(), theGeneratorPackage.getTrainingPhrase(), null, "min1", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentIntentValue_Max1(), theGeneratorPackage.getTrainingPhrase(), null, "max1", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentIntentValue_Min1Value(), ecorePackage.getEFloat(), "min1Value", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentIntentValue_Max1Value(), ecorePackage.getEFloat(), "max1Value", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentIntentValue_Min2(), theGeneratorPackage.getTrainingPhrase(), null, "min2", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntentIntentValue_Max2(), theGeneratorPackage.getTrainingPhrase(), null, "max2", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentIntentValue_Min2Value(), ecorePackage.getEFloat(), "min2Value", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntentIntentValue_Max2Value(), ecorePackage.getEFloat(), "max2Value", null, 1, 1, IntentIntentValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -2,8 +2,8 @@
  */
 package congaAnnotation.impl;
 
-import congaAnnotation.AvgSim;
 import congaAnnotation.CongaAnnotationPackage;
+import congaAnnotation.TPAvg;
 
 import generator.TrainingPhrase;
 
@@ -17,23 +17,23 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Avg Sim</b></em>'.
+ * An implementation of the model object '<em><b>TP Avg</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getTrainingPhrase <em>Training Phrase</em>}</li>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getAvg <em>Avg</em>}</li>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getMin <em>Min</em>}</li>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getMax <em>Max</em>}</li>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getMinValue <em>Min Value</em>}</li>
- *   <li>{@link congaAnnotation.impl.AvgSimImpl#getMaxValue <em>Max Value</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getTrainingPhrase <em>Training Phrase</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getAvg <em>Avg</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getMin <em>Min</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getMax <em>Max</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getMinValue <em>Min Value</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPAvgImpl#getMaxValue <em>Max Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
+public class TPAvgImpl extends MinimalEObjectImpl.Container implements TPAvg {
 	/**
 	 * The cached value of the '{@link #getTrainingPhrase() <em>Training Phrase</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -52,7 +52,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double AVG_EDEFAULT = 0.0;
+	protected static final float AVG_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getAvg() <em>Avg</em>}' attribute.
@@ -62,7 +62,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected double avg = AVG_EDEFAULT;
+	protected float avg = AVG_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMin() <em>Min</em>}' reference.
@@ -92,7 +92,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double MIN_VALUE_EDEFAULT = 0.0;
+	protected static final float MIN_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMinValue() <em>Min Value</em>}' attribute.
@@ -102,7 +102,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected double minValue = MIN_VALUE_EDEFAULT;
+	protected float minValue = MIN_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMaxValue() <em>Max Value</em>}' attribute.
@@ -112,7 +112,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double MAX_VALUE_EDEFAULT = 0.0;
+	protected static final float MAX_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMaxValue() <em>Max Value</em>}' attribute.
@@ -122,14 +122,14 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * @generated
 	 * @ordered
 	 */
-	protected double maxValue = MAX_VALUE_EDEFAULT;
+	protected float maxValue = MAX_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AvgSimImpl() {
+	protected TPAvgImpl() {
 		super();
 	}
 
@@ -140,7 +140,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CongaAnnotationPackage.Literals.AVG_SIM;
+		return CongaAnnotationPackage.Literals.TP_AVG;
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 			trainingPhrase = (TrainingPhrase)eResolveProxy(oldTrainingPhrase);
 			if (trainingPhrase != oldTrainingPhrase) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
 			}
 		}
 		return trainingPhrase;
@@ -178,7 +178,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 		TrainingPhrase oldTrainingPhrase = trainingPhrase;
 		trainingPhrase = newTrainingPhrase;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getAvg() {
+	public float getAvg() {
 		return avg;
 	}
 
@@ -195,11 +195,11 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAvg(double newAvg) {
-		double oldAvg = avg;
+	public void setAvg(float newAvg) {
+		float oldAvg = avg;
 		avg = newAvg;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__AVG, oldAvg, avg));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__AVG, oldAvg, avg));
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 			min = (TrainingPhrase)eResolveProxy(oldMin);
 			if (min != oldMin) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.AVG_SIM__MIN, oldMin, min));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_AVG__MIN, oldMin, min));
 			}
 		}
 		return min;
@@ -237,7 +237,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 		TrainingPhrase oldMin = min;
 		min = newMin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__MIN, oldMin, min));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__MIN, oldMin, min));
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 			max = (TrainingPhrase)eResolveProxy(oldMax);
 			if (max != oldMax) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.AVG_SIM__MAX, oldMax, max));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_AVG__MAX, oldMax, max));
 			}
 		}
 		return max;
@@ -275,7 +275,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 		TrainingPhrase oldMax = max;
 		max = newMax;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__MAX, oldMax, max));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__MAX, oldMax, max));
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getMinValue() {
+	public float getMinValue() {
 		return minValue;
 	}
 
@@ -292,11 +292,11 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMinValue(double newMinValue) {
-		double oldMinValue = minValue;
+	public void setMinValue(float newMinValue) {
+		float oldMinValue = minValue;
 		minValue = newMinValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__MIN_VALUE, oldMinValue, minValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__MIN_VALUE, oldMinValue, minValue));
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getMaxValue() {
+	public float getMaxValue() {
 		return maxValue;
 	}
 
@@ -313,11 +313,11 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMaxValue(double newMaxValue) {
-		double oldMaxValue = maxValue;
+	public void setMaxValue(float newMaxValue) {
+		float oldMaxValue = maxValue;
 		maxValue = newMaxValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.AVG_SIM__MAX_VALUE, oldMaxValue, maxValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_AVG__MAX_VALUE, oldMaxValue, maxValue));
 	}
 
 	/**
@@ -328,20 +328,20 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE:
 				if (resolve) return getTrainingPhrase();
 				return basicGetTrainingPhrase();
-			case CongaAnnotationPackage.AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_AVG__AVG:
 				return getAvg();
-			case CongaAnnotationPackage.AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_AVG__MIN:
 				if (resolve) return getMin();
 				return basicGetMin();
-			case CongaAnnotationPackage.AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_AVG__MAX:
 				if (resolve) return getMax();
 				return basicGetMax();
-			case CongaAnnotationPackage.AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MIN_VALUE:
 				return getMinValue();
-			case CongaAnnotationPackage.AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MAX_VALUE:
 				return getMaxValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -355,23 +355,23 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE:
 				setTrainingPhrase((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__AVG:
-				setAvg((Double)newValue);
+			case CongaAnnotationPackage.TP_AVG__AVG:
+				setAvg((Float)newValue);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_AVG__MIN:
 				setMin((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_AVG__MAX:
 				setMax((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MIN_VALUE:
-				setMinValue((Double)newValue);
+			case CongaAnnotationPackage.TP_AVG__MIN_VALUE:
+				setMinValue((Float)newValue);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MAX_VALUE:
-				setMaxValue((Double)newValue);
+			case CongaAnnotationPackage.TP_AVG__MAX_VALUE:
+				setMaxValue((Float)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -385,22 +385,22 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE:
 				setTrainingPhrase((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_AVG__AVG:
 				setAvg(AVG_EDEFAULT);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_AVG__MIN:
 				setMin((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_AVG__MAX:
 				setMax((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MIN_VALUE:
 				setMinValue(MIN_VALUE_EDEFAULT);
 				return;
-			case CongaAnnotationPackage.AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MAX_VALUE:
 				setMaxValue(MAX_VALUE_EDEFAULT);
 				return;
 		}
@@ -415,17 +415,17 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CongaAnnotationPackage.AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_AVG__TRAINING_PHRASE:
 				return trainingPhrase != null;
-			case CongaAnnotationPackage.AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_AVG__AVG:
 				return avg != AVG_EDEFAULT;
-			case CongaAnnotationPackage.AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_AVG__MIN:
 				return min != null;
-			case CongaAnnotationPackage.AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_AVG__MAX:
 				return max != null;
-			case CongaAnnotationPackage.AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MIN_VALUE:
 				return minValue != MIN_VALUE_EDEFAULT;
-			case CongaAnnotationPackage.AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_AVG__MAX_VALUE:
 				return maxValue != MAX_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -451,4 +451,4 @@ public class AvgSimImpl extends MinimalEObjectImpl.Container implements AvgSim {
 		return result.toString();
 	}
 
-} //AvgSimImpl
+} //TPAvgImpl

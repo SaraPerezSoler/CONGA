@@ -46,7 +46,7 @@ public class TensorflowHandler {
 	
 	public void loadModel()
 	{
-		
+		System.out.println(Engine.getInstance().getEngineName());
 		if ("TensorFlow".equals(Engine.getInstance().getEngineName())) {
 	        String modelUrl =
 	                "https://storage.googleapis.com/tfhub-modules/google/universal-sentence-encoder/4.tar.gz";

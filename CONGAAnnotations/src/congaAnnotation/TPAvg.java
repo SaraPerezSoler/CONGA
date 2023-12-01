@@ -2,48 +2,46 @@
  */
 package congaAnnotation;
 
-import generator.Intent;
 import generator.TrainingPhrase;
 
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Intent Avg Sim</b></em>'.
+ * A representation of the model object '<em><b>TP Avg</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link congaAnnotation.IntentAvgSim#getTrainingPhrase <em>Training Phrase</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getIntent <em>Intent</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getAvg <em>Avg</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getMin <em>Min</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getMax <em>Max</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getMinValue <em>Min Value</em>}</li>
- *   <li>{@link congaAnnotation.IntentAvgSim#getMaxValue <em>Max Value</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getTrainingPhrase <em>Training Phrase</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getAvg <em>Avg</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getMin <em>Min</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getMax <em>Max</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getMinValue <em>Min Value</em>}</li>
+ *   <li>{@link congaAnnotation.TPAvg#getMaxValue <em>Max Value</em>}</li>
  * </ul>
  *
- * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim()
+ * @see congaAnnotation.CongaAnnotationPackage#getTPAvg()
  * @model
  * @generated
  */
-public interface IntentAvgSim extends EObject {
+public interface TPAvg extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Training Phrase</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Training Phrase</em>' reference.
 	 * @see #setTrainingPhrase(TrainingPhrase)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_TrainingPhrase()
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_TrainingPhrase()
 	 * @model required="true"
 	 * @generated
 	 */
 	TrainingPhrase getTrainingPhrase();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getTrainingPhrase <em>Training Phrase</em>}' reference.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getTrainingPhrase <em>Training Phrase</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Training Phrase</em>' reference.
@@ -53,48 +51,26 @@ public interface IntentAvgSim extends EObject {
 	void setTrainingPhrase(TrainingPhrase value);
 
 	/**
-	 * Returns the value of the '<em><b>Intent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Intent</em>' reference.
-	 * @see #setIntent(Intent)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_Intent()
-	 * @model required="true"
-	 * @generated
-	 */
-	Intent getIntent();
-
-	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getIntent <em>Intent</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Intent</em>' reference.
-	 * @see #getIntent()
-	 * @generated
-	 */
-	void setIntent(Intent value);
-
-	/**
 	 * Returns the value of the '<em><b>Avg</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Avg</em>' attribute.
-	 * @see #setAvg(double)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_Avg()
+	 * @see #setAvg(float)
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_Avg()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getAvg();
+	float getAvg();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getAvg <em>Avg</em>}' attribute.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getAvg <em>Avg</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Avg</em>' attribute.
 	 * @see #getAvg()
 	 * @generated
 	 */
-	void setAvg(double value);
+	void setAvg(float value);
 
 	/**
 	 * Returns the value of the '<em><b>Min</b></em>' reference.
@@ -102,14 +78,14 @@ public interface IntentAvgSim extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min</em>' reference.
 	 * @see #setMin(TrainingPhrase)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_Min()
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_Min()
 	 * @model required="true"
 	 * @generated
 	 */
 	TrainingPhrase getMin();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getMin <em>Min</em>}' reference.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getMin <em>Min</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Min</em>' reference.
@@ -124,14 +100,14 @@ public interface IntentAvgSim extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max</em>' reference.
 	 * @see #setMax(TrainingPhrase)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_Max()
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_Max()
 	 * @model required="true"
 	 * @generated
 	 */
 	TrainingPhrase getMax();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getMax <em>Max</em>}' reference.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getMax <em>Max</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Max</em>' reference.
@@ -145,43 +121,43 @@ public interface IntentAvgSim extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Min Value</em>' attribute.
-	 * @see #setMinValue(double)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_MinValue()
+	 * @see #setMinValue(float)
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_MinValue()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getMinValue();
+	float getMinValue();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getMinValue <em>Min Value</em>}' attribute.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getMinValue <em>Min Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Min Value</em>' attribute.
 	 * @see #getMinValue()
 	 * @generated
 	 */
-	void setMinValue(double value);
+	void setMinValue(float value);
 
 	/**
 	 * Returns the value of the '<em><b>Max Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Max Value</em>' attribute.
-	 * @see #setMaxValue(double)
-	 * @see congaAnnotation.CongaAnnotationPackage#getIntentAvgSim_MaxValue()
+	 * @see #setMaxValue(float)
+	 * @see congaAnnotation.CongaAnnotationPackage#getTPAvg_MaxValue()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getMaxValue();
+	float getMaxValue();
 
 	/**
-	 * Sets the value of the '{@link congaAnnotation.IntentAvgSim#getMaxValue <em>Max Value</em>}' attribute.
+	 * Sets the value of the '{@link congaAnnotation.TPAvg#getMaxValue <em>Max Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Max Value</em>' attribute.
 	 * @see #getMaxValue()
 	 * @generated
 	 */
-	void setMaxValue(double value);
+	void setMaxValue(float value);
 
-} // IntentAvgSim
+} // TPAvg

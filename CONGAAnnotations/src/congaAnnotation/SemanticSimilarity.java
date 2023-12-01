@@ -74,12 +74,12 @@ public interface SemanticSimilarity extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Similarity</em>' attribute.
-	 * @see #setSimilarity(double)
+	 * @see #setSimilarity(float)
 	 * @see congaAnnotation.CongaAnnotationPackage#getSemanticSimilarity_Similarity()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getSimilarity();
+	float getSimilarity();
 
 	/**
 	 * Sets the value of the '{@link congaAnnotation.SemanticSimilarity#getSimilarity <em>Similarity</em>}' attribute.
@@ -89,6 +89,6 @@ public interface SemanticSimilarity extends EObject {
 	 * @see #getSimilarity()
 	 * @generated
 	 */
-	void setSimilarity(double value);
+	void setSimilarity(float value);
 
 } // SemanticSimilarity

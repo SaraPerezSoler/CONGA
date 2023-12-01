@@ -7,7 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/botGenerator"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ConfusingMatrixImporter"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

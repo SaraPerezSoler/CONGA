@@ -58,8 +58,10 @@ public class CongaAnnotationFactoryImpl extends EFactoryImpl implements CongaAnn
 		switch (eClass.getClassifierID()) {
 			case CongaAnnotationPackage.ANNOTATION: return createAnnotation();
 			case CongaAnnotationPackage.SEMANTIC_SIMILARITY: return createSemanticSimilarity();
-			case CongaAnnotationPackage.AVG_SIM: return createAvgSim();
-			case CongaAnnotationPackage.INTENT_AVG_SIM: return createIntentAvgSim();
+			case CongaAnnotationPackage.TP_AVG: return createTPAvg();
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM: return createTPIntentAvgSim();
+			case CongaAnnotationPackage.INTENT_VALUE: return createIntentValue();
+			case CongaAnnotationPackage.INTENT_INTENT_VALUE: return createIntentIntentValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -90,9 +92,9 @@ public class CongaAnnotationFactoryImpl extends EFactoryImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AvgSim createAvgSim() {
-		AvgSimImpl avgSim = new AvgSimImpl();
-		return avgSim;
+	public TPAvg createTPAvg() {
+		TPAvgImpl tpAvg = new TPAvgImpl();
+		return tpAvg;
 	}
 
 	/**
@@ -100,9 +102,29 @@ public class CongaAnnotationFactoryImpl extends EFactoryImpl implements CongaAnn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntentAvgSim createIntentAvgSim() {
-		IntentAvgSimImpl intentAvgSim = new IntentAvgSimImpl();
-		return intentAvgSim;
+	public TPIntentAvgSim createTPIntentAvgSim() {
+		TPIntentAvgSimImpl tpIntentAvgSim = new TPIntentAvgSimImpl();
+		return tpIntentAvgSim;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntentValue createIntentValue() {
+		IntentValueImpl intentValue = new IntentValueImpl();
+		return intentValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntentIntentValue createIntentIntentValue() {
+		IntentIntentValueImpl intentIntentValue = new IntentIntentValueImpl();
+		return intentIntentValue;
 	}
 
 	/**

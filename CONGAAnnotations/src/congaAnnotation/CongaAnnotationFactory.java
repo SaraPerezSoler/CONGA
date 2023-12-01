@@ -40,22 +40,40 @@ public interface CongaAnnotationFactory extends EFactory {
 	SemanticSimilarity createSemanticSimilarity();
 
 	/**
-	 * Returns a new object of class '<em>Avg Sim</em>'.
+	 * Returns a new object of class '<em>TP Avg</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Avg Sim</em>'.
+	 * @return a new object of class '<em>TP Avg</em>'.
 	 * @generated
 	 */
-	AvgSim createAvgSim();
+	TPAvg createTPAvg();
 
 	/**
-	 * Returns a new object of class '<em>Intent Avg Sim</em>'.
+	 * Returns a new object of class '<em>TP Intent Avg Sim</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Intent Avg Sim</em>'.
+	 * @return a new object of class '<em>TP Intent Avg Sim</em>'.
 	 * @generated
 	 */
-	IntentAvgSim createIntentAvgSim();
+	TPIntentAvgSim createTPIntentAvgSim();
+
+	/**
+	 * Returns a new object of class '<em>Intent Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Intent Value</em>'.
+	 * @generated
+	 */
+	IntentValue createIntentValue();
+
+	/**
+	 * Returns a new object of class '<em>Intent Intent Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Intent Intent Value</em>'.
+	 * @generated
+	 */
+	IntentIntentValue createIntentIntentValue();
 
 	/**
 	 * Returns the package supported by this factory.

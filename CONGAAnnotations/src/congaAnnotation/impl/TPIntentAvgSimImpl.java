@@ -3,7 +3,7 @@
 package congaAnnotation.impl;
 
 import congaAnnotation.CongaAnnotationPackage;
-import congaAnnotation.IntentAvgSim;
+import congaAnnotation.TPIntentAvgSim;
 
 import generator.Intent;
 import generator.TrainingPhrase;
@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Intent Avg Sim</b></em>'.
+ * An implementation of the model object '<em><b>TP Intent Avg Sim</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getTrainingPhrase <em>Training Phrase</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getIntent <em>Intent</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getAvg <em>Avg</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getMin <em>Min</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getMax <em>Max</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getMinValue <em>Min Value</em>}</li>
- *   <li>{@link congaAnnotation.impl.IntentAvgSimImpl#getMaxValue <em>Max Value</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getTrainingPhrase <em>Training Phrase</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getIntent <em>Intent</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getAvg <em>Avg</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getMin <em>Min</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getMax <em>Max</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getMinValue <em>Min Value</em>}</li>
+ *   <li>{@link congaAnnotation.impl.TPIntentAvgSimImpl#getMaxValue <em>Max Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements IntentAvgSim {
+public class TPIntentAvgSimImpl extends MinimalEObjectImpl.Container implements TPIntentAvgSim {
 	/**
 	 * The cached value of the '{@link #getTrainingPhrase() <em>Training Phrase</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -64,7 +64,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double AVG_EDEFAULT = 0.0;
+	protected static final float AVG_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getAvg() <em>Avg</em>}' attribute.
@@ -74,7 +74,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected double avg = AVG_EDEFAULT;
+	protected float avg = AVG_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMin() <em>Min</em>}' reference.
@@ -104,7 +104,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double MIN_VALUE_EDEFAULT = 0.0;
+	protected static final float MIN_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMinValue() <em>Min Value</em>}' attribute.
@@ -114,7 +114,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected double minValue = MIN_VALUE_EDEFAULT;
+	protected float minValue = MIN_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMaxValue() <em>Max Value</em>}' attribute.
@@ -124,7 +124,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double MAX_VALUE_EDEFAULT = 0.0;
+	protected static final float MAX_VALUE_EDEFAULT = 0.0F;
 
 	/**
 	 * The cached value of the '{@link #getMaxValue() <em>Max Value</em>}' attribute.
@@ -134,14 +134,14 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected double maxValue = MAX_VALUE_EDEFAULT;
+	protected float maxValue = MAX_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IntentAvgSimImpl() {
+	protected TPIntentAvgSimImpl() {
 		super();
 	}
 
@@ -152,7 +152,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CongaAnnotationPackage.Literals.INTENT_AVG_SIM;
+		return CongaAnnotationPackage.Literals.TP_INTENT_AVG_SIM;
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 			trainingPhrase = (TrainingPhrase)eResolveProxy(oldTrainingPhrase);
 			if (trainingPhrase != oldTrainingPhrase) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
 			}
 		}
 		return trainingPhrase;
@@ -190,7 +190,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 		TrainingPhrase oldTrainingPhrase = trainingPhrase;
 		trainingPhrase = newTrainingPhrase;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE, oldTrainingPhrase, trainingPhrase));
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 			intent = (Intent)eResolveProxy(oldIntent);
 			if (intent != oldIntent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.INTENT_AVG_SIM__INTENT, oldIntent, intent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT, oldIntent, intent));
 			}
 		}
 		return intent;
@@ -228,7 +228,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 		Intent oldIntent = intent;
 		intent = newIntent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__INTENT, oldIntent, intent));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT, oldIntent, intent));
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getAvg() {
+	public float getAvg() {
 		return avg;
 	}
 
@@ -245,11 +245,11 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAvg(double newAvg) {
-		double oldAvg = avg;
+	public void setAvg(float newAvg) {
+		float oldAvg = avg;
 		avg = newAvg;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__AVG, oldAvg, avg));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__AVG, oldAvg, avg));
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 			min = (TrainingPhrase)eResolveProxy(oldMin);
 			if (min != oldMin) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.INTENT_AVG_SIM__MIN, oldMin, min));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN, oldMin, min));
 			}
 		}
 		return min;
@@ -287,7 +287,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 		TrainingPhrase oldMin = min;
 		min = newMin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__MIN, oldMin, min));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN, oldMin, min));
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 			max = (TrainingPhrase)eResolveProxy(oldMax);
 			if (max != oldMax) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.INTENT_AVG_SIM__MAX, oldMax, max));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX, oldMax, max));
 			}
 		}
 		return max;
@@ -325,7 +325,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 		TrainingPhrase oldMax = max;
 		max = newMax;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__MAX, oldMax, max));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX, oldMax, max));
 	}
 
 	/**
@@ -333,7 +333,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getMinValue() {
+	public float getMinValue() {
 		return minValue;
 	}
 
@@ -342,11 +342,11 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMinValue(double newMinValue) {
-		double oldMinValue = minValue;
+	public void setMinValue(float newMinValue) {
+		float oldMinValue = minValue;
 		minValue = newMinValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__MIN_VALUE, oldMinValue, minValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN_VALUE, oldMinValue, minValue));
 	}
 
 	/**
@@ -354,7 +354,7 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getMaxValue() {
+	public float getMaxValue() {
 		return maxValue;
 	}
 
@@ -363,11 +363,11 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMaxValue(double newMaxValue) {
-		double oldMaxValue = maxValue;
+	public void setMaxValue(float newMaxValue) {
+		float oldMaxValue = maxValue;
 		maxValue = newMaxValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.INTENT_AVG_SIM__MAX_VALUE, oldMaxValue, maxValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX_VALUE, oldMaxValue, maxValue));
 	}
 
 	/**
@@ -378,23 +378,23 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE:
 				if (resolve) return getTrainingPhrase();
 				return basicGetTrainingPhrase();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__INTENT:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT:
 				if (resolve) return getIntent();
 				return basicGetIntent();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__AVG:
 				return getAvg();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN:
 				if (resolve) return getMin();
 				return basicGetMin();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX:
 				if (resolve) return getMax();
 				return basicGetMax();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN_VALUE:
 				return getMinValue();
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX_VALUE:
 				return getMaxValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -408,26 +408,26 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE:
 				setTrainingPhrase((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__INTENT:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT:
 				setIntent((Intent)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__AVG:
-				setAvg((Double)newValue);
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__AVG:
+				setAvg((Float)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN:
 				setMin((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX:
 				setMax((TrainingPhrase)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN_VALUE:
-				setMinValue((Double)newValue);
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN_VALUE:
+				setMinValue((Float)newValue);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX_VALUE:
-				setMaxValue((Double)newValue);
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX_VALUE:
+				setMaxValue((Float)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -441,25 +441,25 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE:
 				setTrainingPhrase((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__INTENT:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT:
 				setIntent((Intent)null);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__AVG:
 				setAvg(AVG_EDEFAULT);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN:
 				setMin((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX:
 				setMax((TrainingPhrase)null);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN_VALUE:
 				setMinValue(MIN_VALUE_EDEFAULT);
 				return;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX_VALUE:
 				setMaxValue(MAX_VALUE_EDEFAULT);
 				return;
 		}
@@ -474,19 +474,19 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CongaAnnotationPackage.INTENT_AVG_SIM__TRAINING_PHRASE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__TRAINING_PHRASE:
 				return trainingPhrase != null;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__INTENT:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__INTENT:
 				return intent != null;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__AVG:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__AVG:
 				return avg != AVG_EDEFAULT;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN:
 				return min != null;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX:
 				return max != null;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MIN_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MIN_VALUE:
 				return minValue != MIN_VALUE_EDEFAULT;
-			case CongaAnnotationPackage.INTENT_AVG_SIM__MAX_VALUE:
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM__MAX_VALUE:
 				return maxValue != MAX_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -512,4 +512,4 @@ public class IntentAvgSimImpl extends MinimalEObjectImpl.Container implements In
 		return result.toString();
 	}
 
-} //IntentAvgSimImpl
+} //TPIntentAvgSimImpl

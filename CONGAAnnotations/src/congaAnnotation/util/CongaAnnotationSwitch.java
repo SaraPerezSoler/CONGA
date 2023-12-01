@@ -78,15 +78,27 @@ public class CongaAnnotationSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CongaAnnotationPackage.AVG_SIM: {
-				AvgSim avgSim = (AvgSim)theEObject;
-				T result = caseAvgSim(avgSim);
+			case CongaAnnotationPackage.TP_AVG: {
+				TPAvg tpAvg = (TPAvg)theEObject;
+				T result = caseTPAvg(tpAvg);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CongaAnnotationPackage.INTENT_AVG_SIM: {
-				IntentAvgSim intentAvgSim = (IntentAvgSim)theEObject;
-				T result = caseIntentAvgSim(intentAvgSim);
+			case CongaAnnotationPackage.TP_INTENT_AVG_SIM: {
+				TPIntentAvgSim tpIntentAvgSim = (TPIntentAvgSim)theEObject;
+				T result = caseTPIntentAvgSim(tpIntentAvgSim);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CongaAnnotationPackage.INTENT_VALUE: {
+				IntentValue intentValue = (IntentValue)theEObject;
+				T result = caseIntentValue(intentValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CongaAnnotationPackage.INTENT_INTENT_VALUE: {
+				IntentIntentValue intentIntentValue = (IntentIntentValue)theEObject;
+				T result = caseIntentIntentValue(intentIntentValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -125,32 +137,62 @@ public class CongaAnnotationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Avg Sim</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>TP Avg</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Avg Sim</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>TP Avg</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAvgSim(AvgSim object) {
+	public T caseTPAvg(TPAvg object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Intent Avg Sim</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>TP Intent Avg Sim</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Intent Avg Sim</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>TP Intent Avg Sim</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntentAvgSim(IntentAvgSim object) {
+	public T caseTPIntentAvgSim(TPIntentAvgSim object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Intent Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Intent Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntentValue(IntentValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Intent Intent Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Intent Intent Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntentIntentValue(IntentIntentValue object) {
 		return null;
 	}
 
