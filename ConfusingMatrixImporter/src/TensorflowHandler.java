@@ -44,7 +44,7 @@ public class TensorflowHandler {
 			loadModel();
 	}
 	
-	public void loadModel()
+	private void loadModel()
 	{
 		System.out.println(Engine.getInstance().getEngineName());
 		if ("TensorFlow".equals(Engine.getInstance().getEngineName())) {
