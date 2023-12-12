@@ -10,6 +10,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+
+import com.google.common.collect.Lists;
 
 import congaAnnotation.Annotation;
 import congaAnnotation.IntentIntentValue;
@@ -17,6 +20,9 @@ import congaAnnotation.IntentValue;
 import congaAnnotation.SemanticSimilarity;
 import generator.Bot;
 import generator.GeneratorPackage;
+import generator.Language;
+import generator.Parameter;
+import generator.TrainingPhrase;
 
 public class Main {
 	private static ResourceSet resourceSet = null;
@@ -50,26 +56,62 @@ public class Main {
 		File file = new File(strPathIn);
 		TensorflowHandler.getInstance();
 		if (file.isDirectory()) {
+			System.out.println(
+					"name;num_language;languages;num_intents;num_entities;num_param;num_action;num_flows;num_buttons;num_text;num_image;num_emptyAction;external_service;num_loops"
+					);
 			for (File f : file.listFiles()) {
 				String name = f.getName();
 				try {
 					Bot bot = loadChatbot(f);
 					if (bot != null) {
-						long startTime = System.currentTimeMillis();
-						Annotation annotation = GenerateAnnotations.calculateAnnotation(bot);
-						long endTime1 = System.currentTimeMillis() - startTime;
-						String name1 = name.replace(".xmi", "Annotated.xmi");
-						saveAnnotation(strPathOut, name1, annotation);
-						long endTime2 = System.currentTimeMillis() - startTime;
-						name1 = name.replace(".xmi", "");
-						generateStringFiles(strPathOut, name1, annotation);
-						annotation.getSemanticSimilarities().clear();
-						annotation.getTpAvgSims().clear();
-						annotation.getTpIntentAvgSims().clear();
-						name1 = name.replace(".xmi", "AnnotatedShort.xmi");
-						saveAnnotation(strPathOut, name1, annotation);
-						long endTime3 = System.currentTimeMillis() - startTime;
-						System.out.println(name+";"+endTime1+";"+endTime2+";"+endTime3);
+//						long startTime = System.currentTimeMillis();
+//						Annotation annotation = GenerateAnnotations.calculateAnnotation(bot);
+//						long endTime1 = System.currentTimeMillis() - startTime;
+//						String name1 = name.replace(".xmi", "Annotated.xmi");
+//						saveAnnotation(strPathOut, name1, annotation);
+//						long endTime2 = System.currentTimeMillis() - startTime;
+//						name1 = name.replace(".xmi", "");
+//						generateStringFiles(strPathOut, name1, annotation);
+//						annotation.getSemanticSimilarities().clear();
+//						annotation.getTpAvgSims().clear();
+//						annotation.getTpIntentAvgSims().clear();
+//						name1 = name.replace(".xmi", "AnnotatedShort.xmi");
+//						saveAnnotation(strPathOut, name1, annotation);
+//						long endTime3 = System.currentTimeMillis() - startTime;
+//						System.out.println(name + ";" + endTime1 + ";" + endTime2 + ";" + endTime3);
+
+						int num_language = 0;
+						String languages = "";
+						int num_intents = 0;
+						int num_entities = 0;
+						int num_action = 0;
+						int num_flows = 0;
+
+						int num_buttons = 0;
+						int num_text = 0;
+						int num_image = 0;
+						int num_emptyAction = 0;
+						int external_service = 0;
+						int num_loops = 0;
+						int num_param = Lists.newArrayList(IteratorExtensions.filter(bot.eAllContents(), Parameter.class)).size();
+						num_language = bot.getLanguages().size();
+						for (Language lan : bot.getLanguages()) {
+							languages += lan + " ";
+						}
+						num_intents = bot.getIntents().size();
+						num_entities = bot.getEntities().size();
+						num_action = bot.getActions().size();
+						num_flows = bot.getFlows().size();
+
+						num_buttons = bot.getButtons().size();
+						num_text = bot.getTexts().size();
+						num_image = bot.getImages().size();
+						num_emptyAction = bot.getEmpties().size();
+						external_service = bot.getHttpRequests().size();
+						num_loops = bot.getNumLoops();
+						System.out.println(
+								name +";"+num_language+";" + languages + ";" + num_intents + ";" + num_entities+";"+num_param+";"+ num_action+";"+num_flows+";"+num_buttons+";"+num_text+";"+num_image+";"+num_emptyAction+";"+external_service+";"+num_loops
+								);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
