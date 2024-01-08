@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -20,9 +22,11 @@ import congaAnnotation.IntentValue;
 import congaAnnotation.SemanticSimilarity;
 import generator.Bot;
 import generator.GeneratorPackage;
+import generator.Intent;
 import generator.Language;
 import generator.Parameter;
 import generator.TrainingPhrase;
+import generator.UserInteraction;
 
 public class Main {
 	private static ResourceSet resourceSet = null;
@@ -57,8 +61,7 @@ public class Main {
 		TensorflowHandler.getInstance();
 		if (file.isDirectory()) {
 			System.out.println(
-					"name;num_language;languages;num_intents;num_entities;num_param;num_action;num_flows;num_buttons;num_text;num_image;num_emptyAction;external_service;num_loops"
-					);
+					"name;num_language;languages;num_intents;num_fallbacks;num_trainingPhrases;avg_trainingPhrases;num_entities;num_param;num_action;num_flows;num_paths;min(pathSteps);max(pathSteps);avg(pathSteps);num_buttons;num_text;num_image;num_emptyAction;external_service;num_loops");
 			for (File f : file.listFiles()) {
 				String name = f.getName();
 				try {
@@ -83,9 +86,16 @@ public class Main {
 						int num_language = 0;
 						String languages = "";
 						int num_intents = 0;
+						int fallbackIntetns = 0;
+						float num_trainingPhrases = 0;
+						float avg_trainingPhrases = 0;
 						int num_entities = 0;
 						int num_action = 0;
 						int num_flows = 0;
+						int num_paths = 0;
+						float min_pathSteps = 0;
+						float max_pathSteps = 0;
+						float avg_pathSteps = 0;
 
 						int num_buttons = 0;
 						int num_text = 0;
@@ -93,25 +103,38 @@ public class Main {
 						int num_emptyAction = 0;
 						int external_service = 0;
 						int num_loops = 0;
-						int num_param = Lists.newArrayList(IteratorExtensions.filter(bot.eAllContents(), Parameter.class)).size();
+						int num_param = Lists
+								.newArrayList(IteratorExtensions.filter(bot.eAllContents(), Parameter.class)).size();
 						num_language = bot.getLanguages().size();
 						for (Language lan : bot.getLanguages()) {
 							languages += lan + " ";
 						}
 						num_intents = bot.getIntents().size();
+						fallbackIntetns = countNumFallback(bot.getIntents());
+						
+						float[] tpValues = getTrainingPhrasesValues(bot.getIntents());
+						num_trainingPhrases = tpValues[0];
+						avg_trainingPhrases = tpValues[1];
 						num_entities = bot.getEntities().size();
 						num_action = bot.getActions().size();
 						num_flows = bot.getFlows().size();
-
+						List<List<UserInteraction>> flattenFlows = flattenFlows(bot.getFlows());
+						num_paths = flattenFlows.size();
+						float[] steps = getPathStepsValues(flattenFlows);
+						min_pathSteps = steps[0];
+						max_pathSteps = steps[1];
+						avg_pathSteps = steps[2];
 						num_buttons = bot.getButtons().size();
 						num_text = bot.getTexts().size();
 						num_image = bot.getImages().size();
 						num_emptyAction = bot.getEmpties().size();
 						external_service = bot.getHttpRequests().size();
 						num_loops = bot.getNumLoops();
-						System.out.println(
-								name +";"+num_language+";" + languages + ";" + num_intents + ";" + num_entities+";"+num_param+";"+ num_action+";"+num_flows+";"+num_buttons+";"+num_text+";"+num_image+";"+num_emptyAction+";"+external_service+";"+num_loops
-								);
+						System.out.println(name + ";" + num_language + ";" + languages + ";" + num_intents + ";"
+								+ fallbackIntetns+";" +num_trainingPhrases+";"+avg_trainingPhrases+ ";" + num_entities + ";" + num_param + ";" + num_action + ";"
+								+ num_flows + ";" + num_paths + ";" + min_pathSteps + ";" + max_pathSteps + ";"
+								+ avg_pathSteps + ";" + num_buttons + ";" + num_text + ";" + num_image + ";"
+								+ num_emptyAction + ";" + external_service + ";" + num_loops);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -217,4 +240,78 @@ public class Main {
 		pw.close();
 	}
 
+	public static int countNumFallback(List<Intent> intents) {
+		int count = 0;
+		for (Intent intent : intents) {
+			if (intent.isFallbackIntent()) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public static List<List<UserInteraction>> flattenFlows(List<UserInteraction> flows) {
+		List<List<UserInteraction>> ret = new ArrayList<List<UserInteraction>>();
+		for (UserInteraction flow : flows) {
+			ret.addAll(flattenPath(new ArrayList<UserInteraction>(), flow));
+		}
+		return ret;
+	}
+
+	public static List<List<UserInteraction>> flattenPath(List<UserInteraction> prev, UserInteraction user) {
+		List<List<UserInteraction>> ret = new ArrayList<List<UserInteraction>>();
+		if (user.getTarget() == null) {
+			prev.add(user);
+			ret.add(prev);
+			return ret;
+		}
+		if (user.getTarget().getOutcoming().isEmpty()) {
+			prev.add(user);
+			ret.add(prev);
+			return ret;
+		}
+
+		for (UserInteraction child : user.getTarget().getOutcoming()) {
+			List<UserInteraction> prevCopy = new ArrayList<UserInteraction>();
+			prevCopy.addAll(prev);
+			prevCopy.add(user);
+			ret.addAll(flattenPath(prevCopy, child));
+		}
+		return ret;
+	}
+
+	public static float[] getPathStepsValues(List<List<UserInteraction>> paths) {
+		float[] values = new float[3];
+		float min = Integer.MAX_VALUE;
+		float max = 0;
+		float med = 0;
+		for (List<UserInteraction> path : paths) {
+			if (min > path.size()) {
+				min = path.size();
+			}
+			if (max < path.size()) {
+				max = path.size();
+			}
+			med += path.size();
+		}
+		med = med / paths.size();
+		values[0] = min;
+		values[1] = max;
+		values[2] = med;
+		return values;
+	}
+	public static float[] getTrainingPhrasesValues(List<Intent> intents) {
+		float[] values = new float[2];
+		float total = 0;
+		float med = 0;
+		for (Intent intent : intents) {
+			total += Lists
+					.newArrayList(IteratorExtensions.filter(intent.eAllContents(), TrainingPhrase.class)).size();
+		}
+		med = total / intents.size();
+		
+		values[0] = total;
+		values[1] = med;
+		return values;
+	}
 }

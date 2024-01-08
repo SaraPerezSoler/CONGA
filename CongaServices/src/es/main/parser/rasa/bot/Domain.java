@@ -30,10 +30,16 @@ public class Domain {
 	private int num_actions = 0;
 	private int num_forms = 0;
 
-	public static final String TEXT_SUFIX = "_text";
-	public static final String IMG_SUFIX = "_img";
-	public static final String BUTTON_SUFIX = "_btn";
-	public static final String EMPTY_SUFIX = "_empty";
+	public static final String TEXT_SUFIX = "";
+	public static final String IMG_SUFIX = "";
+	public static final String BUTTON_SUFIX = "";
+	public static final String EMPTY_SUFIX = "";
+	
+//	public static final String TEXT_SUFIX = "_text";
+//	public static final String IMG_SUFIX = "_img";
+//	public static final String BUTTON_SUFIX = "_btn";
+//	public static final String EMPTY_SUFIX = "_empty";
+
 
 	public List<Object> getIntents() {
 		return intents;
