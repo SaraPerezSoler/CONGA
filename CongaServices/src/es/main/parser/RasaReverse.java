@@ -102,7 +102,10 @@ public class RasaReverse extends Reverse {
 						} else if (f.getName().equals("config.yml") || f.getName().equals("nlu_config.yml")) {
 							rasaBot.setConfig(om.readValue(f, Config.class));
 							hasConfig = true;
-						} else if (f.isDirectory()) {
+						}else if (f.getName().equals("actions.py")) { 
+							String info = readFile(f);
+							rasaBot.setActions(info);
+						}else if (f.isDirectory()) {
 							files.add(f);
 						}
 						if (hasDomain && hasNLU && hasStories && hasConfig) {

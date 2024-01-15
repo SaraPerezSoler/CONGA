@@ -22,11 +22,11 @@ import com.google.inject.Injector;
 import generator.GeneratorPackage;
 
 public class Validator {
-//	private static final String INPUT_URI = "D:\\Desktop\\Rasa - copia\\xmi";
-//	private static final String LOG_FILE = "D:\\Desktop\\Rasa - copia\\errors.txt";
+	private static final String INPUT_URI = "D:\\Desktop\\ValidationSetup-main\\Rasa";
+	private static final String LOG_FILE = "D:\\Desktop\\ValidationSetup-main\\errorsR.txt";
 	
-	private static final String INPUT_URI = "D:\\Desktop\\Dialogflow - copia\\xmi";
-	private static final String LOG_FILE = "D:\\Desktop\\Dialogflow - copia\\errors.txt";
+//	private static final String INPUT_URI = "D:\\Desktop\\ValidationSetup-main\\Dialogflow";
+//	private static final String LOG_FILE = "D:\\Desktop\\ValidationSetup-main\\errorsD.txt";
 
 	
 	private static final String[] IGNORE_FILES = { "D:/Git/asymob/chatbots/botsInDSL" };
@@ -68,6 +68,9 @@ public class Validator {
 			} else if (f.getName().endsWith(".bot") || f.getName().endsWith(".BOT")) {
 				try {
 					String name = f.getName().replace(".bot", "").replace(".BOT", "");
+					if (name.equals("Date")) {
+						System.out.println("Date");
+					}
 					List<Issue>issues = validator.validate(f.getAbsolutePath());
 					validator.printIssues(name, issues);
 				} catch (Exception e) {

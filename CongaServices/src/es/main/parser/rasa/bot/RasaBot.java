@@ -3,6 +3,7 @@ package es.main.parser.rasa.bot;
 import org.jsoup.nodes.Document;
 
 import es.main.parser.Chatbot;
+import es.main.parser.rasa.actions.python.Actions;
 import generator.Bot;
 import generator.GeneratorFactory;
 import generator.Language;
@@ -14,6 +15,7 @@ public class RasaBot extends Chatbot{
 	private Stories stories;
 	private Domain domain;
 	private Config config;
+	private Actions actions;
 
 	public RasaBot(String name) {
 		super();
@@ -94,6 +96,11 @@ public class RasaBot extends Chatbot{
 
 	public boolean isHaveLoops() {
 		return false;
+	}
+
+	public void setActions(String info) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

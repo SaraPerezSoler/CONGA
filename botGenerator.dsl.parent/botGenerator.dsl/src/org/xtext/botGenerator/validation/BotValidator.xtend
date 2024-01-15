@@ -600,7 +600,7 @@ class BotValidator extends AbstractBotValidator {
 				}
 
 			}
-			
+
 		} else {
 			for (UserInteraction user1 : bot.flows) {
 				if (!interaction.equals(user1)) {
@@ -639,15 +639,29 @@ class BotValidator extends AbstractBotValidator {
 	/**
 	 * Rule G17: Two Training Phrases cannot be equals in the same intent
 	 */
+//	@Check
+//	def similarPhrasesSameIntent(TrainingPhrase phrase) {
+//		var intent = phrase.intent;
+//
+//		var trainingPhrases = intent.eAllContents.filter(TrainingPhrase).toList
+//		for (tp : trainingPhrases) {
+//			if (phrase.isSimilarTo(tp) && !phrase.equals(tp)) {
+//				warning("G17\tTwo training phrases should not be equals in the same intent",
+//					GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+//			}
+//		}
+//	}
 	@Check
-	def similarPhrasesSameIntent(TrainingPhrase phrase) {
-		var intent = phrase.intent;
+	def similarPhrasesSameIntent(Intent intent) {
 
 		var trainingPhrases = intent.eAllContents.filter(TrainingPhrase).toList
-		for (tp : trainingPhrases) {
-			if (phrase.isSimilarTo(tp) && !phrase.equals(tp)) {
-				warning("G17\tTwo training phrases should not be equals in the same intent",
-					GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+		for (tp1 : trainingPhrases) {
+			for (tp2 : trainingPhrases) {
+				if (tp1.isSimilarTo(tp2) && !tp1.equals(tp2)) {
+					warning("G17\tTwo training phrases should not be equals in the same intent",
+						GeneratorPackage.Literals.INTENT__INPUTS)
+					return
+				}
 			}
 		}
 	}
@@ -655,22 +669,45 @@ class BotValidator extends AbstractBotValidator {
 	/**
 	 * Rule G18: Training Phrases should contains something more than a text parameter
 	 */
+//	@Check
+//	def trainingPhraseWithOnlyTextEntity(TrainingPhrase phrase) {
+//		var onlyTextEntity = true
+//		for (token : phrase.tokens) {
+//			if (token instanceof Literal) {
+//				onlyTextEntity = false;
+//			} else if (token instanceof ParameterReferenceToken) {
+//				if ((token as ParameterReferenceToken).parameter.entity !== null ||
+//					(token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT) {
+//					onlyTextEntity = false;
+//				}
+//			}
+//		}
+//		if (onlyTextEntity) {
+//			warning("G18\tTraining phrases should contains something different to a text parameter",
+//				GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+//		}
+//	}
 	@Check
-	def trainingPhraseWithOnlyTextEntity(TrainingPhrase phrase) {
-		var onlyTextEntity = true
-		for (token : phrase.tokens) {
-			if (token instanceof Literal) {
-				onlyTextEntity = false;
-			} else if (token instanceof ParameterReferenceToken) {
-				if ((token as ParameterReferenceToken).parameter.entity !== null ||
-					(token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT) {
+	def trainingPhraseWithOnlyTextEntity(Intent intent) {
+		
+		var trainingPhrases = intent.eAllContents.filter(TrainingPhrase).toList
+		for (phrase : trainingPhrases) {
+			var onlyTextEntity = true
+			for (token : phrase.tokens) {
+				if (token instanceof Literal) {
 					onlyTextEntity = false;
+				} else if (token instanceof ParameterReferenceToken) {
+					if ((token as ParameterReferenceToken).parameter.entity !== null ||
+						(token as ParameterReferenceToken).parameter.defaultEntity != DefaultEntity.TEXT) {
+						onlyTextEntity = false;
+					}
 				}
 			}
-		}
-		if (onlyTextEntity) {
-			warning("G18\tTraining phrases should contains something different to a text parameter",
-				GeneratorPackage.Literals.TRAINING_PHRASE__TOKENS)
+			if (onlyTextEntity) {
+				warning("G18\tTraining phrases should contains something different to a text parameter",
+					GeneratorPackage.Literals.INTENT__INPUTS)
+				return
+			}
 		}
 	}
 
