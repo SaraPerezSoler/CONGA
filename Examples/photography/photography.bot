@@ -1,0 +1,203 @@
+Chatbot photography language: en
+
+intents:
+welcome:
+	inputs{
+		"hi",
+		"hello",
+		"hey",
+		"Good Morning",
+		"good evening",
+		"hey there",
+		"just going to say hi",
+		"greetings",
+		"long time no see"
+}
+
+call_appointment:
+	inputs{
+		"I would like to set up an appointment for "("tomorrow")[day]".",
+	    "I need to make an appointment for " (today)[day],
+	    "I want an appointment",
+	    "I'm interested in scheduling a photo session",
+	    "Can I schedule service next "("Monday")[day]" ?", 
+	    "It is possible schedule an appointment?"
+    }
+    parameters:
+        day: entity date, required, prompts["What day do you want the appointment?"];
+
+call_appointment_followUp:
+    inputs {
+        "I’m" ("John Smith")[name]", "("john@finestgallery.com")[phone]", my number is "("555-22344")[phone]".",
+        "My name is "("Jane Doe")[name],
+        "My number is "("+34 555 12 34 56")[phone],
+        "My name is "("Olivia Parker")[name] "and my email is "("oliviaPark@gmail.com")[email]
+        
+    }
+    parameters:
+        name: entity text, required, prompts["Could you please tell me your name?"];
+        phone: entity phone_number, required, prompts ["Could you share the phone number where we can contact you?"];
+        email: entity email;
+        
+        
+
+estimate_price:
+	inputs{
+		"Can you provide a price estimate for my project?",
+		"I'd like to get a sense of the pricing. Can you calculate a rough estimate for me?",
+		"To plan my budget, I need to know the estimated cost of the work. Can you help with that?",
+		"Before we proceed, I'd like to know the estimated cost. Can you provide that?",
+		"Can you provide a rough estimate for the work?",
+		"How much do you think it would cost for the work I need?"
+}
+
+session_details:
+	inputs{
+		"I want "("photography")[media] "for " ("six")[num] ("sculpture")[artwork],
+		"I need a "("3d video")[media] " of my gallery with " ("32")[num] ("pictures")[artwork],
+		"Can you do my gallery?",
+		"I want a "("video")[media] "of" ("ceramic")[artwork],
+		"We have "("a hundred")[num] "of" ("pictures")[artwork]
+}
+    parameters:
+        media: entity media_entity, required, prompts["What types of media do you requiere for the session (photography, video, 3D rendering)?"];
+        num: entity number, required, prompts["How many pieces of art are encompassed in the session?"];
+        artwork: entity type_artworks, required, prompts["What is the type of artwork (picture, sculpture or ceramic)?"];
+
+open_hours:
+	inputs{
+		"When are you open?",
+		"What are your operating hours?",
+		"Could you please provide your business hours?",
+		"Are you open tomorrow at 3pm?",
+		"When is the photography shop open during the week?",
+		"Can you give me an idea of your weekly opening schedule?",
+		"How late are you open on weekends?",
+		"Are you open today?",
+		"When do you close ?"
+}
+portfolio:
+	inputs{
+		"Tell me about your portfolio, what important projects have you worked on?",
+		"Could you show me examples of your previous work with art galleries or artists?",
+		"How would you describe your artistic style and approach to capturing artwork?",
+		"Can you walk me through a few specific projects you've worked on for art galleries?",
+		"Can you share some highlights from your portfolio?",
+		"What are some of the most meaningful projects you've been involved in within the context of art gallery photography?"
+}
+
+price:
+	inputs{
+		"Do you charge per hour or by number of photos?",
+		"What is your pricing?",
+		"How much cost your services? ",
+		"Do you charge per session or per image when photographing artwork for art galleries?",
+		"How much does it cost for your photography services in art galleries?",
+		"How much do you charge for your services?",
+		"What's the cost of your photography service?",
+		"Is there a standard price for your services?",
+		"Are there any extra charges beyond the base price?"
+}
+
+
+media:
+	inputs{
+		"What media do you work on?",
+		"What types of media do you specialize in",
+		"Do you do videos?",
+		"Do you do virtual renderings?",
+		"What kinds of media do you typically work on?",
+		"Do you specialize in 3D work?",
+		"Are your projects focused on photos?",
+		"Tell me about the kinds of media you handle",
+		"Which forms of media do you work with?"
+}
+
+fallback Fallback
+
+entities:
+    Regex entity email:
+    {
+      pattern: "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    }
+    
+    Regex entity phone_number:
+    {
+        pattern: "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"
+    }
+    Simple entity media_entity:
+    {
+        photography synonyms Photo, Picture, Capture, shot, Portraiture
+        video synonyms Film, Recording, Movie, Multimedia, Cinematography
+        "3D rendering" synonyms "Virtual rendering", "3D visualization", "3D graphics", "Digital rendering"
+        
+    }
+    
+    Simple entity type_artworks:
+    {
+        picture synonyms Painting, Drawing, "Image"
+        sculpture synonyms Statue, Statuette, "Sculpted piece"
+        ceramic synonyms Porcelain, Pottery, Clayware, China
+    }
+
+actions:
+	text response welcome_response:
+		inputs{
+		"Welcome to ArtClicks, we are specialized in photographs for art galleries. What can I do for you?"
+	}
+	text response call_appointment_response:
+	    inputs{
+	    "We will contact you by phone, but we need the following information: your name and phone and/or e-mail address"    
+	}
+	
+	text response call_appointment_followUp_response:
+	     inputs{
+	     "We will contact you by phone, but we need the following information: your name and phone and/or e-mail address"    
+	}
+    Text response estimate_price_response: 
+        inputs{
+	     "To estimate the price we need some details about the session, including the  type of media, and number and type of artworks"    
+	}
+	Request post session_details_request:
+	    URL: "https://localhost:8080/myservice";
+	    data: "media": ["session_details.media"],
+	          "number": ["session_details.num"],
+	          "type_artwork": ["session_details.artwork"];
+	   dataType: JSON;
+	Response session_details_response:
+	    Request: session_details_request;
+	    inputs{ request.text }
+	
+	text response open_hour_response:
+	    inputs{
+	    "We shoot art on location and on our studio at SoHo. We are open Monday to Friday from 9am to 17:00pm."
+	}
+	text response portfolio_response:
+	    inputs{
+	    "We have recently worked on large on-site digitization projects for the Taller del Prado, Madrid, Spain, and the Centro Cultural Eduardo Leon Jimenez Art Museum, Santiago, Dominican Republic"
+	}
+	
+	text response price_response:
+	    inputs{
+	    "We charge 200$ by hour"    
+	}
+	
+    text response media_response:
+        inputs{
+        "Mainly on photographs, but also on video, and virtual/3D rendering"
+    }
+    
+    text response fallback_action:
+		inputs{
+		"Great, we’ll contact you very soon!"
+	}
+
+flows:
+	- user welcome => chatbot welcome_response;
+	- user fallback => chatbot fallback_action;
+	- user call_appointment => chatbot call_appointment_response => user call_appointment_followUp => chatbot call_appointment_followUp_response;
+	- user estimate_price => chatbot estimate_price_response => user session_details => chatbot session_details_request, session_details_response;
+	- user open_hours => chatbot open_hour_response;
+	- user portfolio => chatbot portfolio_response;
+	- user price => chatbot price_response;
+	- user media => chatbot media_response;

@@ -1,0 +1,40 @@
+@startuml
+
+skinparam class {
+}
+skinparam nodeSep 30 
+skinparam rankSep 30 
+hide empty members   
+state c <<choice>>
+[*]-->c
+c-->welcome_response : welcome
+welcome_response : welcome_response
+welcome_response-->[*]
+c-->fallback_action : fallback
+fallback_action : fallback_action
+fallback_action-->[*]
+c-->call_appointment_response : call_appointment
+call_appointment_response : call_appointment_response
+call_appointment_response-->call_appointment_followUp_response : call_appointment_followUp
+call_appointment_followUp_response : call_appointment_followUp_response
+call_appointment_followUp_response-->[*]
+c-->estimate_price_response : estimate_price
+estimate_price_response : estimate_price_response
+estimate_price_response-->session_details_request : session_details
+session_details_request : session_details_request
+session_details_request : session_details_response
+session_details_request-->[*]
+c-->open_hour_response : open_hours
+open_hour_response : open_hour_response
+open_hour_response-->[*]
+c-->portfolio_response : portfolio
+portfolio_response : portfolio_response
+portfolio_response-->[*]
+c-->price_response : price
+price_response : price_response
+price_response-->[*]
+c-->media_response : media
+media_response : media_response
+media_response-->[*]
+
+@enduml

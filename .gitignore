@@ -27,3 +27,6 @@ botGenerator.dsl.parent/botGenerator.dsl.ide/target/classes/org/xtext/botGenerat
 botGenerator.dsl.parent/botGenerator.dsl/xtend-gen/org/*
 botGenerator.dsl.parent/botGenerator.dsl.tests/xtend-gen/org/xtext/botGenerator/tests/BotParsingTest.java
 ConfusingMatrixImporter/lib/*
+Examples/photography/photographyRest/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+Examples/photography/photographyRest/target/m2e-wtp/web-resources/META-INF/maven/photographyRest/photographyRest/pom.properties
+Examples/photography/photographyRest/target/m2e-wtp/web-resources/META-INF/maven/photographyRest/photographyRest/pom.xml
