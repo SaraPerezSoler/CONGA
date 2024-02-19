@@ -470,7 +470,7 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
 
 	@Override
 	public String getQuestionnaireDateString() {
-		if (getQuestionnaire()!=null) {
+		if (getQuestionnaire()!=null && getQuestionnaire().getDate()!=null) {
 			return simpleDateFormat.format(getQuestionnaire().getDate());
 		}else {
 			return "-";

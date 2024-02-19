@@ -65,12 +65,12 @@
 					<button type="submit"
 						class="row-lg btn btn-secondary btn-lg btn-block">Sign in</button>
 					<div class="etc-login-form">
-						<p>
+						<!-- <p>
 							New to CONGA? <a href=""> Create an account.</a>
 						</p>
 						<p>
 							You can also <a href="editor.jsp">try</a> CONGA without account.
-						</p>
+						</p>-->
 					</div>
 				</form>
 			</div>

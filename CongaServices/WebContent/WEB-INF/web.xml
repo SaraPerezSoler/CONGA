@@ -32,14 +32,21 @@
 		<servlet-name>CongaServices</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
-	<context-param>
+	
+	<!-- Windows Params -->
+	 <context-param>
 		<param-name>ServicePath</param-name>
 		<param-value>/CongaServices</param-value>
-	</context-param>
+	</context-param>  
 	
-		<context-param>
+	<!-- Linux Params -->
+	<!--<context-param>
+		<param-name>ServicePath</param-name>
+		<param-value>/home/Sara/CONGA/CongaServices</param-value>
+	</context-param>-->
+	
+	<context-param>
 		<param-name>PandorabotsFiles</param-name>
-		<param-value>/CONGA/</param-value>
+		<param-value>/home/Sara/CONGA/</param-value>
 	</context-param>
 </web-app>

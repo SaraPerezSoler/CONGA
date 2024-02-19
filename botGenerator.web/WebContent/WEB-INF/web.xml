@@ -13,8 +13,15 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+	<!-- Windows Params -->
 	<context-param>
 		<param-name>project.files</param-name>
 		<param-value>/CONGA</param-value>
-	</context-param>
+	</context-param> 
+
+	<!-- Linux Params -->
+	<!-- <context-param>
+		<param-name>project.files</param-name>
+		<param-value>/home/Sara/CONGA</param-value>
+	</context-param>-->
 </web-app>
