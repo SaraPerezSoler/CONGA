@@ -15,7 +15,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.json.JSONObject;
+
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -65,17 +68,21 @@ public class RestAccess {
 	@Path("dialgoflow")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON })
-	public javax.ws.rs.core.Response editProject(@Context ServletContext context, InputStream incomingData,
+	public javax.ws.rs.core.Response dialogflow(@Context ServletContext context, InputStream incomingData,
 			@PathParam("name") String name) throws JsonParseException, JsonMappingException, IOException {
 		String data = readIncomingData(incomingData);
 
 		//System.out.println(data);
-
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		Request request = mapper.readValue(data, Request.class);
 		 System.out.println(request);
 
 		try {
-			String responseText =  processRequest(context, request, name);
+			String artwork = (String) request.getParameter("artwork");
+			Object numObject = request.getParameter("num");
+			String media = (String) request.getParameter("media");
+			
+			String responseText =  processRequest(context, artwork, numObject, media, name);
 			Response response = new Response();
 			response.setFulfillmentText(responseText);
 			return javax.ws.rs.core.Response.ok(mapper.writeValueAsString(response), MediaType.APPLICATION_JSON)
@@ -84,6 +91,32 @@ public class RestAccess {
 			Response response = new Response();
 			response.setFulfillmentText(e.getMessage());
 			return javax.ws.rs.core.Response.ok(mapper.writeValueAsString(response), MediaType.APPLICATION_JSON)
+					.build();
+		}
+	}
+	
+	@POST
+	@Path("rasa")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON })
+	public javax.ws.rs.core.Response rasa(@Context ServletContext context, InputStream incomingData,
+			@PathParam("name") String name) throws JsonParseException, JsonMappingException, IOException {
+		String data = readIncomingData(incomingData);
+		JSONObject object = new JSONObject(data);
+		//System.out.println(data);
+		//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//Request request = mapper.readValue(data, Request.class);
+		 System.out.println(object);
+
+		try {
+			String artwork = object.getString("type_artwork");
+			Object numObject = object.get("number");
+			String media = object.getString("media");
+			String responseText =  processRequest(context, artwork, numObject, media, name);
+			return javax.ws.rs.core.Response.ok(responseText, MediaType.TEXT_PLAIN)
+					.build();
+		} catch (Exception e) {
+			return javax.ws.rs.core.Response.ok(e.getMessage(), MediaType.TEXT_PLAIN)
 					.build();
 		}
 	}
@@ -110,18 +143,22 @@ public class RestAccess {
 		return "Hello " + name + " dialogflow";
 	}
 
-	private String processRequest(ServletContext context, Request request, String mmodel)
+	private String processRequest(ServletContext context, String artwork, Object numObject, String media, String mmodel)
 			throws Exception {
 
-		String artwork = (String) request.getParameter("artwork");
+		
 		ArtworkPrices artworkPrices = ArtworkPrices.valueOf(artwork);
-		int num = (int) request.getParameter("num");
-		String media = (String) request.getParameter("media");
+		double num;
+		if (numObject instanceof Integer) {
+			num = ((int)numObject)*1.0;
+		}else {
+			num = (double)numObject;
+		}
 		MediaPrices mediaPrices = MediaPrices.getMedia(media);
 		
-		int price = artworkPrices.price * mediaPrices.price * num;
+		double price = artworkPrices.price * mediaPrices.price * num;
 
-		return "The price would be around" + price + ", but may depend on other factors, like the size of the artworks";
+		return "The price would be around " + price + ", but may depend on other factors, like the size of the artworks";
 
 	}
 
