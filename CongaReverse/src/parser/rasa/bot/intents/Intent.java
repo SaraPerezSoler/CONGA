@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import generator.Bot;
 import generator.GeneratorFactory;
 import generator.IntentLanguageInputs;
+import generator.TrainingPhrase;
 
 public class Intent {
 
@@ -91,9 +92,13 @@ public class Intent {
 		botIntent.setName(name);
 		IntentLanguageInputs languageInput = GeneratorFactory.eINSTANCE.createIntentLanguageInputs();
 		languageInput.setLanguage(bot.getLanguages().get(0));
-		botIntent.getInputs().add(languageInput);
 		for (Sentence sentence : getSentences()) {
-			languageInput.getInputs().add(sentence.createBotSentence(bot, botIntent));
+			TrainingPhrase tp = sentence.createBotSentence(bot, botIntent);
+			if (!tp.getTokens().isEmpty())
+				languageInput.getInputs().add(tp);
+		}
+		if (!languageInput.getInputs().isEmpty()) {
+			botIntent.getInputs().add(languageInput);
 		}
 		return botIntent;
 	}

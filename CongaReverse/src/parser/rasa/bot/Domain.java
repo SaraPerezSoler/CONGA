@@ -22,8 +22,8 @@ public class Domain {
 	private List<Object> intents = new ArrayList<>();
 	private List<String> entities = new ArrayList<>();
 	private List<String> actions = new ArrayList<>();
-	private Map<String, Form> forms;
-	private Map<String, Slot> slots;
+	private Object forms;
+	//private Map<String, Slot> slots;
 	private Map<String, List<Response>> responses;
 	public static Action defaultEmptyAction;
 
@@ -60,7 +60,7 @@ public class Domain {
 		this.actions = actions;
 	}
 
-	public Map<String, Form> getForms() {
+	public Object getForms() {
 		return forms;
 	}
 
@@ -79,17 +79,17 @@ public class Domain {
 		}
 	}*/
 	
-	public void setForm(Map<String, Form> form) {
+	public void setForm(Object form) {
 		this.forms = form;
 	}
 
-	public Map<String, Slot> getSlots() {
+	/*public Map<String, Slot> getSlots() {
 		return slots;
 	}
 
 	public void setSlots(Map<String, Slot> slots) {
 		this.slots = slots;
-	}
+	}*/
 
 	public Map<String, List<Response>> getResponses() {
 		return responses;
@@ -184,14 +184,22 @@ public class Domain {
 				
 			}
 		}
-
-		for (String formName : forms.keySet()) {
-			String name = formName + EMPTY_SUFIX;
-			Empty empty = GeneratorFactory.eINSTANCE.createEmpty();
-			empty.setName(name);
-//			empty.setDescription("RASA_FORM");
-			bot.getActions().add(empty);
-			num_forms++;
+		Iterable<String> formIterable = null;
+		if (forms instanceof Map<?, ?>) {
+			formIterable = ((Map<String, Form>)forms).keySet();
+		} else if (forms instanceof List<?>) {
+			formIterable = (List<String>)forms;
+		}
+		
+		if (formIterable != null) {
+			for (String formName : formIterable) {
+				String name = formName + EMPTY_SUFIX;
+				Empty empty = GeneratorFactory.eINSTANCE.createEmpty();
+				empty.setName(name);
+	//			empty.setDescription("RASA_FORM");
+				bot.getActions().add(empty);
+				num_forms++;
+			}
 		}
 	}
 

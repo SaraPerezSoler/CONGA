@@ -58,12 +58,15 @@ public class Nlu {
 
 	private void saveRegex(String name, Element ul) {
 		Iterator<Element> regexs = ul.getElementsByTag("li").iterator();
+		if (!regexs.hasNext()) {
+			regexs = ul.getElementsByTag("code").iterator();
+		}
 		List<String> regexsList = new ArrayList<>();
 		while (regexs.hasNext()) {
 			Element nextRegex = regexs.next();
 			try {
 				//Pattern.compile(nextRegex.text());
-				regexsList.add(nextRegex.text());
+				regexsList.add(nextRegex.text().replace("- ", ""));
 			} catch (PatternSyntaxException e) {
 				//System.out.println("Error:"+);
 			}

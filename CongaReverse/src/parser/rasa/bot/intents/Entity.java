@@ -26,7 +26,7 @@ public class Entity extends Token {
 		literalString = literalString.replace("["+this.literal+"]", "");
 		if (literalString.contains("(")&& literalString.contains(")")) {
 			this.entity = literalString.substring(literalString.indexOf("(")+1, literalString.indexOf(")"));
-		}else if (literalString.startsWith("{")&& literalString.endsWith("}")) {
+		}else if (literalString.contains("{")&& literalString.contains("}")) {
 			JSONObject object = new JSONObject(literalString); 
 			if (object.has("entity")) {
 				this.entity = object.getString("entity");

@@ -2,6 +2,8 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -14,6 +16,8 @@ import generator.Bot;
 import generator.GeneratorPackage;
 import parser.Chatbot;
 import parser.DialogflowReverse;
+import parser.Rasa2_0Reverse;
+import parser.Rasa3_0Reverse;
 import parser.RasaReverse;
 import parser.Reverse;
 
@@ -29,24 +33,23 @@ public class ReverseMain {
 			System.exit(-1);
 		}
 		Reverse parser = null;
-		String fileName = null;
-		String parserName = null;
-		if (args[0].toUpperCase().equals(DIALOGFLOW)) {
+		String fileName = args[0];
+		String parserName = args[1];
+		if (parserName.toUpperCase().equals(DIALOGFLOW)) {
 			parser = new DialogflowReverse();
-			parserName = args[0];
-			fileName = args[1];
-		} else if (args[0].toUpperCase().equals(RASA)) {
-			parser = new RasaReverse();
-			parserName = args[0];
-			fileName = args[1];
-		} else if (args[1].toUpperCase().equals(DIALOGFLOW)) {
-			parser = new DialogflowReverse();
-			parserName = args[1];
-			fileName = args[0];
-		} else if (args[1].toUpperCase().equals(RASA)) {
-			parser = new RasaReverse();
-			parserName = args[1];
-			fileName = args[0];
+		} else if (parserName.toUpperCase().equals(RASA)) {
+			if (args.length == 3) {
+				String version = args[2];
+				if (version.equals("2.0")) {
+					parser = new Rasa2_0Reverse();
+				}else if (version.equals("3.0")) {
+					parser = new Rasa3_0Reverse();
+				}else {
+					parser = new RasaReverse();
+				}
+			}else {
+				parser = new RasaReverse();
+			}
 		}else {
 			System.err.println("No tool name provided");
 			System.exit(-1);
@@ -54,27 +57,36 @@ public class ReverseMain {
 
 		File file = new File(fileName);
 		if (file.exists()) {
-			try {
-				Chatbot agent = parser.getChatbot(file);
-				Bot bot = agent.getBot();
-				
-				String resorcePath = fileName.replace(".zip", ".xmi");
-				Resource resource = getResourceSet().createResource(URI.createFileURI(resorcePath));
-				resource.getContents().add(bot);
-				try {
-					resource.save(null);
-				} catch (IOException e) {
-					System.err.println("Error saving the chatbot " + fileName + " using " + parserName);
-					System.exit(-1);
+			if (file.isDirectory()) {
+				for (File child: file.listFiles()) {
+					readFile(child, child.getAbsolutePath(), parser, parserName);
 				}
-				
-			} catch (Exception e) {
-				System.err.println("Error reading the chatbot " + fileName + " using " + parserName);
-				System.exit(-1);
+			}else {
+				readFile(file, fileName, parser, parserName);
 			}
+			
 		}else {
 			System.err.println("The file " + fileName + " does not exit");
 			System.exit(-1);
+		}
+	}
+	public static void readFile(File file, String fileName, Reverse parser, String parserName) {
+		try {
+			Chatbot agent = parser.getChatbot(file);
+			Bot bot = agent.getBot();
+			
+			String resorcePath = fileName.replace(".zip", ".xmi");
+			Resource resource = getResourceSet().createResource(URI.createFileURI(resorcePath));
+			resource.getContents().add(bot);
+			try {
+				resource.save(null);
+			} catch (IOException e) {
+				System.err.println("Error saving the chatbot " + fileName + " using " + parserName);
+			}
+			
+		} catch (Exception e) {
+			System.err.println("Error reading the chatbot " + fileName + " using " + parserName);
+			e.printStackTrace();
 		}
 	}
 	
